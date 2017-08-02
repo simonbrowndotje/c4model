@@ -6,6 +6,18 @@ body {
 .centered {
     text-align: center;
 }
+#header {
+  background-image:url('../img/header.jpg');
+  background-size:cover;
+  background-position: center;
+  color: white;
+  height: 340px;
+  text-align: center;
+  padding: 100px 10px 100px 10px;
+}
+#header .label {
+  font-size: 13px;
+}
 #footer {
     text-align: center;
     padding-top: 20px;
@@ -47,8 +59,18 @@ h1 {
     font-size: 50px;
     font-weight: bold;
 }
+#header h1 {
+    font-weight: bold;
+    font-size: 50px;
+    color: #ffffff;
+}
 h2 {
     font-weight: bold;
+}
+#header h2 {
+    font-weight: bold;
+    font-size: 20px;
+    color: #ffffff;
 }
 h3 {
     font-size: 20px;
