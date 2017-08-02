@@ -1,8 +1,6 @@
 body {
     font-family: "Open Sans", sans-serif;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 50px;
+    padding: 0;
     margin: 0;
 }
 .centered {
@@ -20,7 +18,7 @@ body {
     color: white;
 }
 #footer .container {
-    font-size: 11px;
+    font-size: 13px;
 }
 .container {
     font-size: 18px;
@@ -36,10 +34,10 @@ body {
     padding-left: 10px;
     padding-right: 10px;
 }
-.section:nth-child(odd) {
+.section:nth-child(even) {
     background: #ffffff;
 }
-.section:nth-child(even) {
+.section:nth-child(odd) {
     background: #eeeeee;
 }
 .row {
@@ -85,6 +83,10 @@ h5 {
 }
 a {
     color: #1168BD;
+    font-weight: normal;
+}
+a:hover {
+    color: #08427B;
 }
 .structurizrBackgroundDarker {
     background: #02172C;

@@ -9,13 +9,13 @@
     <link href="./css/c4model.css" rel="stylesheet" media="screen">
     <link href='./css/open-sans.css' rel='stylesheet' type='text/css' />
 
-    <script href="./js/bootstrap-3.3.2.min.js"></script>
     <script src="./js/jquery-2.0.3.min.js"></script>
+    <script src="./js/bootstrap-3.3.2.min.js"></script>
 </head>
 
 <body>
     <div id="content">
-        <div class="section">
+        <div class="section" style="background: #1168BD; color: #ffffff; padding: 80px 10px 80px 10px">
             <div class="container centered">
                 <h1>The C4 model for software architecture</h1>
                 <p>
@@ -57,6 +57,12 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <h2>Maps of your code</h2>
                 <p>
                     The C4 model was created as a way to help software development teams describe and communicate software architecture, both during up-front design sessions and when retrospectively documenting an existing codebase.
                     It's a way to create <b>maps of your code</b>, at various levels of detail, in the same way you would use something like Google Maps to zoom in and out of an area you are interested in. 
@@ -95,7 +101,7 @@
             <div class="container">
                 <h2>Abstractions</h2>
                 <p>
-                    In order to create these maps of our software, we first need a common set of abstractions to create a ubiquitous language that we can use to describe the static structure of a software system.
+                    In order to create these maps of your code, we first need a common set of abstractions to create a ubiquitous language that we can use to describe the static structure of a software system.
                     The C4 model considers the static structures of a <b>software system</b> in terms of <b>containers</b>, <b>components</b> and <b>classes</b> (or <b>code</b>).
                     And <b>people</b> use the software systems that we build.
                 </p>
@@ -293,7 +299,7 @@
                 <h2>Notation</h2>
                 <p>
                     The C4 model doesn't prescribe any particular notation. Any notation used should be as self-describing as possible,
-                    with a diagram key/legend used to make the notation explicit. A simple notation that works well on whiteboards, paper and a variety of diagraming tools is as follows.
+                    with a diagram key/legend used to make the notation explicit. A simple notation that works well on whiteboards, paper, sticky notes, index cards and a variety of diagraming tools is as follows.
                 </p>
 
                 <div class="row">
@@ -422,6 +428,15 @@
                         </ul>
                     </div>
                     <div class="col-xs-6">
+                        <h3>C4 vs UML, ArchiMate and SysML?</h3>
+                        <p>
+                            Although existing notations such as UML, ArchiMate and SysML already exist, many software development teams don't seem to use them.
+                            Often this is because teams don't know these notations well enough, perceive them to be too complicated, think they are not compatible with agile approaches or don't have the required tooling.
+                        </p>
+
+                        <p>
+                            If you are already successfully using one of these notations to communicate software architecture and it's working, stick with it. If not, try the C4 model.
+                        </p>
                     </div>
                 </div>
             </div>
