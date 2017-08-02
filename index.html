@@ -14,29 +14,52 @@
 </head>
 
 <body>
-    
-    <style>
-        body {
-            padding: 0;
-            margin: 0;
-        }
-        .container {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-    </style>
-
     <div id="content">
         <div class="section">
-            <div class="container">
-                <h1 class="centered">The C4 model for software architecture</h1>
+            <div class="container centered">
+                <h1>The C4 model for software architecture</h1>
+                <p>
+                    Context, Containers, Components and Classes (or Code)
+                </p>
             </div>
         </div>
 
         <div class="section">
             <div class="container">
+                <h2>Background and history</h2>
                 <p>
-                    The "C4 model" is a way to create maps of your code, at various levels of detail, in the same way you would use something like Google Maps to zoom in and out of an area you were interested in. 
+                    Creating software architecture diagrams is something of a lost art. <a href="http://simonbrown.je">Simon Brown</a> has been running software architecture training courses
+                    for a number of years, part of which is a simple architecture kata where groups of people are asked to design a software solution and draw some architecture diagrams to describe it.
+                    Based upon the anecdotal evidence from training over 10,000 people in more than 25 countries, software architects and developers struggle with how to communicate software architecture.
+                    Even today, the majority of the diagrams from the initial iteration of the architecture kata are typically created using an ad hoc “boxes and lines” notation with no clear notation or semantics.
+                </p>
+
+                <div class="row">
+                    <div class="col-xs-3 centered">
+                        <p>
+                            <img src="./img/sketch-1.jpg" alt="A software architecture sketch" class="img-thumbnail grayscale" />
+                        </p>
+                    </div>
+                    <div class="col-xs-3 centered">
+                        <p>
+                            <img src="./img/sketch-2.jpg" alt="A software architecture sketch" class="img-thumbnail grayscale" />
+                        </p>
+                    </div>
+                    <div class="col-xs-3 centered">
+                        <p>
+                            <img src="./img/sketch-3.jpg" alt="A software architecture sketch" class="img-thumbnail grayscale" />
+                        </p>
+                    </div>
+                    <div class="col-xs-3 centered">
+                        <p>
+                            <img src="./img/sketch-4.jpg" alt="A software architecture sketch" class="img-thumbnail grayscale" />
+                        </p>
+                    </div>
+                </div>
+
+                <p>
+                    The C4 model was created as a way to help software development teams describe and communicate software architecture, both during up-front design sessions and when retrospectively documenting an existing codebase.
+                    It's a way to create <b>maps of your code</b>, at various levels of detail, in the same way you would use something like Google Maps to zoom in and out of an area you are interested in. 
                 </p>
 
                 <div class="row">
@@ -72,18 +95,62 @@
             <div class="container">
                 <h2>Abstractions</h2>
                 <p>
-                    In order to create these maps of our software, we first need a common set of abstractions.
+                    In order to create these maps of our software, we first need a common set of abstractions to create a ubiquitous language that we can use to describe the static structure of a software system.
                     The C4 model considers the static structures of a <b>software system</b> in terms of <b>containers</b>, <b>components</b> and <b>classes</b> (or <b>code</b>).
+                    And <b>people</b> use the software systems that we build.
                 </p>
 
-                <p class="centered">
-                    <img src="./img/abstractions.png" alt="Abstractions" class="img-thumbnail" />
-                </p>
-                <p class="centered">
-                    <i>A <b>software system</b> is made up of one or more <b>containers</b> (web applications, mobile apps, desktop applications, databases, file systems, etc),
-                    each of which contains one or more <b>components</b>,
-                    which in turn are implemented by one or more <b>classes</b> (or <b>code</b>).</i>
-                </p>
+                <div class="row">
+                    <div class="col-xs-6 centered" style="margin-top: 20px">
+                        <img src="./img/abstractions.png" alt="Abstractions" class="img-thumbnail" />
+                        <p class="caption">
+                            <i>A <b>software system</b> is made up of one or more <b>containers</b> (web applications, mobile apps, desktop applications, databases, file systems, etc),
+                            each of which contains one or more <b>components</b>,
+                            which in turn are implemented by one or more <b>classes</b> (or <b>code</b>).</i>
+                        </p>
+                    </div>
+                    <div class="col-xs-6">
+                        <h4>Person</h4>
+                        <p class="small">
+                            However you think about your users (as actors, roles, personas, etc), people are the various human users of your software system.
+                        </p>
+
+                        <h4>Software System</h4>
+                        <p class="small">
+                            A software system is the highest level of abstraction and describes something that delivers value to its users, whether they are human or not. This includes the software system you are modelling, and the other software systems upon which your software system depends (or vice versa).
+                        </p>
+
+                        <h4>Container</h4>
+                        <p class="small">
+                            A container represents something that hosts code or data. A container is something that needs to
+                            be running in order for the overall software system to work. In real terms, a container is something like:
+                        </p>
+                        
+                        <ul class="small">
+                            <li><b>Server-side web application</b>: A Java EE web application running on Apache Tomcat, an ASP.NET MVC application running on Microsoft IIS, a Ruby on Rails application running on WEBrick, a Node.js application, etc.</li>
+                            <li><b>Client-side web application</b>: A JavaScript application running in a web browser using  Angular, Backbone.JS, jQuery, etc).</li>
+                            <li><b>Client-side desktop application</b>: A Windows desktop application written using WPF, an OS X desktop application written using Objective-C, a cross-platform desktop application written using JavaFX, etc.</li>
+                            <li><b>Mobile app</b>: An Apple iOS app, an Android app, a Microsoft Windows Phone app, etc.</li>
+                            <li><b>Server-side console application</b>: A standalone (e.g. "public static void main") application, a batch process, etc.</li>
+                            <li><b>Microservice</b>: A single microservice, hosted in anything from a traditional web server to something like Spring Boot, Dropwizard, etc.</li>
+                            <li><b>Database</b>: A schema or database in a relational database management system, document store, graph database, etc such as MySQL, Microsoft SQL Server, Oracle Database, MongoDB, Riak, Cassandra, Neo4j, etc.</li>
+                            <li><b>Blob or content store</b>: A blob store (e.g. Amazon S3, Microsoft Azure Blob Storage, etc) or content delivery network (e.g. Akamai, Amazon CloudFront, etc).</li>
+                            <li><b>File system</b>: A full local file system or a portion of a larger networked file system (e.g. SAN, NAS, etc).</li>
+                            <li><b>Shell script</b>: A single shell script written in Bash, etc.</li>
+                            <li><b>etc</b></li>
+                        </ul>
+
+                        <p class="small">
+                            A container is essentially a context or boundary inside which some code is executed or some data is stored.
+                            And each container is a separately deployable thing.
+                        </p>
+
+                        <h4>Component</h4>
+                        <p class="small">
+                            The word "component" is a hugely overloaded term in the software development industry, but in this context a component as simply being a grouping of related functionality encapsulated behind a well-defined interface. If you're using a language like Java or C#, the simplest way to think of a component is that it's a collection of implementation classes behind an interface. Aspects such as how those components are packaged (e.g. one component vs many components per JAR file, DLL, shared library, etc) is a separate and orthogonal concern.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -118,6 +185,11 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-xs-5 centered">
+                        <p style="margin-top: 20px">
+                            <a href="./img/diagram-containers.png"><img src="./img/diagram-containers.png" alt="A Container diagram" class="img-thumbnail" /></a>
+                        </p>
+                    </div>
                     <div class="col-xs-7">
                         <h3>Container diagram</h3>
                         <p>
@@ -130,11 +202,6 @@
                             are distributed across it. It also shows the major technology choices and how the containers communicate
                             with one another. It's a simple, high-level technology focussed diagram that is useful for
                             software developers and support/operations staff alike.
-                        </p>
-                    </div>
-                    <div class="col-xs-5 centered">
-                        <p style="margin-top: 20px">
-                            <a href="./img/diagram-containers.png"><img src="./img/diagram-containers.png" alt="A Container diagram" class="img-thumbnail" /></a>
                         </p>
                     </div>
                 </div>
@@ -187,6 +254,11 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-xs-5 centered">
+                        <p style="margin-top: 20px">
+                            <a href="./img/diagram-dynamic.png"><img src="./img/diagram-dynamic.png" alt="A dynamic diagram" class="img-thumbnail" /></a>
+                        </p>
+                    </div>
                     <div class="col-xs-7">
                         <h3>Dynamic diagram</h3>
                         <p>
@@ -194,11 +266,6 @@
                             This dynamic diagram is based upon a <a href="https://en.wikipedia.org/wiki/Communication_diagram">UML communication diagram</a>
                             (previously known as a "UML collaboration diagram"). It is similar to a <a href="https://en.wikipedia.org/wiki/Sequence_diagram">UML sequence diagram</a>
                             although it allows a free-form arrangement of diagram elements with numbered interactions to indicate ordering.
-                        </p>
-                    </div>
-                    <div class="col-xs-5 centered">
-                        <p style="margin-top: 20px">
-                            <a href="./img/diagram-dynamic.png"><img src="./img/diagram-dynamic.png" alt="A dynamic diagram" class="img-thumbnail" /></a>
                         </p>
                     </div>
                 </div>
@@ -223,45 +290,138 @@
 
         <div class="section">
             <div class="container">
-                <h2>C4 and UML</h2>
+                <h2>Notation</h2>
+                <p>
+                    The C4 model doesn't prescribe any particular notation. Any notation used should be as self-describing as possible,
+                    with a diagram key/legend used to make the notation explicit. A simple notation that works well on whiteboards, paper and a variety of diagraming tools is as follows.
+                </p>
+
+                <div class="row">
+                    <div class="col-xs-1">
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="./img/notation-person.png"><img src="./img/notation-person.png" alt="Person" class="img-thumbnail" /></a>
+                        <p class="caption">
+                            Person
+                        </p>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="./img/notation-software-system.png"><img src="./img/notation-software-system.png" alt="Software System" class="img-thumbnail" /></a>
+                        <p class="caption">
+                            Software System
+                        </p>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="./img/notation-container.png"><img src="./img/notation-container.png" alt="Container" class="img-thumbnail" /></a>
+                        <p class="caption">
+                            Container
+                        </p>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="./img/notation-component.png"><img src="./img/notation-component.png" alt="Component" class="img-thumbnail" /></a>
+                        <p class="caption">
+                            Component
+                        </p>
+                    </div>
+                    <div class="col-xs-2">
+                        <a href="./img/notation-relationship.png"><img src="./img/notation-relationship.png" alt="Relationship" class="img-thumbnail" /></a>
+                        <p class="caption">
+                            Relationship
+                        </p>
+                    </div>
+                    <div class="col-xs-1">
+                    </div>
+                </div>
+
+                <p>
+                    You can then use colour and shapes to supplement the diagram, either to add additional information or simply to make it more aesthetically pleasing.
+                </p>
+
+                <h3>C4 and UML</h3>
                 <p>
                     Although the example diagrams above are created using a "boxes and lines" notation,
-                    the core diagrams can be illustrated using UML with the appropriate use of packages, components and stereotypes.
+                    the core diagrams can be illustrated using UML with the appropriate use of packages, components and stereotypes. The resulting UML diagrams do tend to lack the same degree of descriptive text though.
                 </p>
 
                 <div class="row">
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-system-context.png"><img src="./img/spring-petclinic-system-context.png" alt="A system context diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-system-context.png"><img src="./img/spring-petclinic-system-context.png" alt="A system context diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-containers.png"><img src="./img/spring-petclinic-containers.png" alt="A container diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-containers.png"><img src="./img/spring-petclinic-containers.png" alt="A container diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-components.png"><img src="./img/spring-petclinic-components.png" alt="A component diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-components.png"><img src="./img/spring-petclinic-components.png" alt="A component diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-4 centered small">
-                        System Context
+                        System Context diagram
                     </div>
                     <div class="col-xs-4 centered small">
-                        Containers
+                        Container diagram
                     </div>
                     <div class="col-xs-4 centered small">
-                        Components
+                        Component diagram
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-system-context-uml.png"><img src="./img/spring-petclinic-system-context-uml.png" alt="A system context diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-system-context-uml.png"><img src="./img/spring-petclinic-system-context-uml.png" alt="A system context diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-containers-uml.png"><img src="./img/spring-petclinic-containers-uml.png" alt="A container diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-containers-uml.png"><img src="./img/spring-petclinic-containers-uml.png" alt="A container diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-components-uml.png"><img src="./img/spring-petclinic-components-uml.png" alt="A component diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-components-uml.png"><img src="./img/spring-petclinic-components-uml.png" alt="A component diagram" class="img-thumbnail grayscale" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <h2>Frequently asked questions</h2>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3>C4 and microservices?</h3>
+                        <p>
+                            Broadly speaking, there are two options for diagramming microservices when using the C4 model.
+                        </p>
+
+                        <ol>
+                          <li><b>Microservices as software systems</b>: If your software system has a dependency upon a number of microservices that are outside of your control (e.g. they are owned and/or operated by a separate team), model these microservices as external software systems that you can't see inside of.</li>
+                          <li><b>Microservices as containers</b>: On the other hand, if the microservices are a part of a software system that you are building (i.e. you own them), model them as containers, along with any data stores that those microservices use. In the same way that a modular monolithic application is a container with a number of components running inside it, a microservice is simply a container with a (smaller) number of components running inside it.</li>
+                        </ol>
+                    </div>
+                    <div class="col-xs-6">
+                        <h3>Large and complex software sytems?</h3>
+                        <p>
+                            Even with a relatively small software system, it's tempting to try and include the entire story on a single diagram. For example, if you have a web application, it seems logical to create a single component diagram that shows all of the components that make up that web application. Unless your software system really is that small, you're likely to run out of room on the diagram canvas or find it difficult to discover a layout that isn't cluttered by a myriad of overlapping lines. Using a larger diagram canvas can sometimes help, but large diagrams are usually hard to interpret and comprehend because the cognitive load is too high. And if nobody understands the diagram, nobody is going to look at it.
+                        </p>
+                        <p>
+                            Instead, don't be afraid to split that single complex diagram into a larger number of simpler diagrams, each with a specific focus around a business area, functional area, functional grouping, bounded context, use case, user interaction, feature set, etc. The key is to ensure that each of the separate diagrams tells a different part of the same overall story, at the same level of abstraction.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h3>C4 and arc42?</h3>
+                        <p>
+                            The C4 model is compatible with the <a href="http://arc42.org">arc42 documentation template</a> as follows.
+                        </p>
+
+                        <ul>
+                          <li>Context and Scope =&gt; System Context diagram</li>
+                          <li>Building Block View (level 1) =&gt; Container diagram</li>
+                          <li>Building Block View (level 2) =&gt; Component diagram</li>
+                          <li>Building Block View (level 3) =&gt; Class diagram</li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6">
                     </div>
                 </div>
             </div>
@@ -277,8 +437,8 @@
 
                 <div class="row">
                     <div class="col-xs-6 centered">
-                        <p class="embed-responsive embed-responsive-16by9">
-                            <iframe src="https://www.youtube.com/embed/aPtT2GNu8vM" frameborder="0" allowfullscreen class="img-polaroid"></iframe>
+                        <p class="embed-responsive embed-responsive-16by9 img-thumbnail">
+                            <iframe src="https://www.youtube.com/embed/aPtT2GNu8vM" allowfullscreen class="img-thumbnail"></iframe>
                         </p>
 
                         <p class="small">
@@ -291,7 +451,7 @@
                     </div>
                     <div class="col-xs-6 centered">
                         <p>
-                            <a href="https://structurizr.com"><img src="./img/structurizr.png" alt="Structurizr" class="img-responsive" /></a>
+                            <a href="https://structurizr.com"><img src="./img/structurizr.png" alt="Structurizr" class="img-thumbnail" /></a>
                         </p>
 
                         <p class="small">
@@ -323,7 +483,7 @@
                     </div>
                     <div class="col-xs-4 centered">
                         <p>
-                            <a href="/static/assets/visualising-software-architecture.pdf"><img src="./img/visualising-software-architecture.png" alt="A summary of the C4 model and tips for visualising software architecture" class="img-thumbnail" /></a>
+                            <a href="./assets/visualising-software-architecture.pdf"><img src="./img/visualising-software-architecture.png" alt="A summary of the C4 model and tips for visualising software architecture" class="img-thumbnail" /></a>
                         </p>
 
                         <p class="small">

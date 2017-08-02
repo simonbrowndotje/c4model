@@ -3,6 +3,7 @@ body {
     padding-left: 0;
     padding-right: 0;
     padding-top: 50px;
+    margin: 0;
 }
 .centered {
     text-align: center;
@@ -74,6 +75,11 @@ h5 {
     font-size: 11px;
     text-align: center;
 }
+.caption {
+    margin-top: 10px;
+    font-size: 13px;
+    text-align: center;
+}
 .img-thumbnail {
     color: #ddd;
 }
@@ -106,6 +112,10 @@ a {
 .grayscale {
     -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
     filter: grayscale(100%);
+}
+.grayscale:hover {
+    -webkit-filter: none; /* Chrome, Safari, Opera */
+    filter: none;
 }
 .small {
     font-size: 13px;
