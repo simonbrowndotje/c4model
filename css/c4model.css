@@ -1,0 +1,112 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 50px;
+}
+.centered {
+    text-align: center;
+}
+#footer {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    color: white;
+}
+#footer a, #footer a:hover {
+    color: white;
+}
+#footer .container {
+    font-size: 11px;
+}
+.container {
+    font-size: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.section {
+    border-bottom: 1px solid #f2f2f2;
+    margin-right: 0;
+    margin-left: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.section:nth-child(odd) {
+    background: #ffffff;
+}
+.section:nth-child(even) {
+    background: #eeeeee;
+}
+.row {
+    padding-bottom: 20px;
+}
+h1 {
+    font-size: 60px;
+    font-weight: bold;
+}
+h2 {
+    font-weight: bold;
+}
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+h4 {
+    font-size: 18px;
+    font-weight: bold;
+}
+h5 {
+    font-size: 16px;
+    font-weight: bold;
+}
+.c4MetaModel td {
+    font-size: 13px;
+}
+.c4MetaModel td ul {
+    padding: 0 0 0 20px;
+}
+.mapCaption {
+    margin-top: 10px;
+    font-size: 11px;
+    text-align: center;
+}
+.img-thumbnail {
+    color: #ddd;
+}
+a {
+    color: #1168BD;
+}
+.structurizrBackgroundDarker {
+    background: #02172C;
+    color: #ffffff;
+}
+.structurizrBackgroundDark {
+    background: #08427B;
+    color: #ffffff;
+}
+.structurizrBackgroundBase {
+    background: #1168BD;
+    color: #ffffff;
+}
+.structurizrBackgroundLight {
+    background: #438DD5;
+    color: #ffffff;
+}
+.structurizrBackgroundLighter {
+    background: #85BBF0;
+    color: #ffffff;
+}
+.structurizrBackgroundDarker a, .structurizrBackgroundDark a, .structurizrBackgroundBase a, .structurizrBackgroundLight a {
+    color: #85BBF0;
+}
+.grayscale {
+    -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+    filter: grayscale(100%);
+}
+.small {
+    font-size: 13px;
+}

@@ -1,1 +1,353 @@
-<h1>C4 model</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>The C4 model for software architecture</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="./css/bootstrap-3.3.2.min.css" rel="stylesheet" media="screen">
+    <link href="./css/bootstrap-theme-3.3.2.min.css" rel="stylesheet" media="screen">
+    <link href="./css/c4model.css" rel="stylesheet" media="screen">
+    <link href='./css/open-sans.css' rel='stylesheet' type='text/css' />
+
+    <script href="./js/bootstrap-3.3.2.min.js"></script>
+    <script src="./js/jquery-2.0.3.min.js"></script>
+</head>
+
+<body>
+    
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        .container {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
+
+    <div id="content">
+        <div class="section">
+            <div class="container">
+                <h1 class="centered">The C4 model for software architecture</h1>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <p>
+                    The "C4 model" is a way to create maps of your code, at various levels of detail, in the same way you would use something like Google Maps to zoom in and out of an area you were interested in. 
+                </p>
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src="./img/map-1.jpg" alt="Google Street View" class="img-thumbnail" />
+                        <p class="mapCaption">
+                            Like source code, Google Street View provides a very low-level and accurate view of a location.
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="./img/map-2.jpg" alt="Google Maps" class="img-thumbnail" />
+                        <p class="mapCaption">
+                            Navigating an unfamilar environment becomes easier if you zoom out though. 
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="./img/map-3.jpg" alt="Google Maps" class="img-thumbnail" />
+                        <p class="mapCaption">
+                            Zooming out further will provide additional context you might not have been aware of.
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <img src="./img/map-4.jpg" alt="Google Maps" class="img-thumbnail" />
+                        <p class="mapCaption">
+                            Different levels of zoom allow you to tell different stories to different audiences.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <h2>Abstractions</h2>
+                <p>
+                    In order to create these maps of our software, we first need a common set of abstractions.
+                    The C4 model considers the static structures of a <b>software system</b> in terms of <b>containers</b>, <b>components</b> and <b>classes</b> (or <b>code</b>).
+                </p>
+
+                <p class="centered">
+                    <img src="./img/abstractions.png" alt="Abstractions" class="img-thumbnail" />
+                </p>
+                <p class="centered">
+                    <i>A <b>software system</b> is made up of one or more <b>containers</b> (web applications, mobile apps, desktop applications, databases, file systems, etc),
+                    each of which contains one or more <b>components</b>,
+                    which in turn are implemented by one or more <b>classes</b> (or <b>code</b>).</i>
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <h2>Core diagrams</h2>
+                <p>
+                    Visualising this hierarchy of abstractions is then done by creating a collection of <b>Context</b>, <b>Container</b>, <b>Component</b> and (optionally) <b>Class</b> diagrams.
+                    This is where the C4 model gets its name from.
+                </p>
+
+                <div class="row">
+                    <div class="col-md-5 centered">
+                        <p style="margin-top: 20px">
+                            <a href="./img/diagram-system-context.png"><img src="./img/diagram-system-context.png" alt="A System Context diagram" class="img-thumbnail" /></a>
+                        </p>
+                    </div>
+                    <div class="col-md-7">
+                        <h3>System Context diagram</h3>
+                        <p>
+                            A System Context diagram is a good starting point for diagramming and documenting a software system,
+                            allowing you to step back and see the big picture. Draw a diagram showing your system
+                            as a box in the centre, surrounded by its users and the other systems that it interacts with.
+                        </p>
+
+                        <p>
+                            Detail isn't important here as this is your zoomed out view showing a big picture of the system landscape.
+                            The focus should be on people (actors, roles, personas, etc) and software systems rather than technologies,
+                            protocols and other low-level details. It's the sort of diagram that you could show to non-technical people.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <h3>Container diagram</h3>
+                        <p>
+                            Once you understand how your system fits in to the overall IT environment, a really useful next step is to zoom-in to the system boundary with a Container diagram.
+                            A "container" is something like a web application, desktop application, mobile app, database, file system, etc. Essentially, a container is a separately deployable unit that executes code or stores data.
+                        </p>
+
+                        <p>
+                            The Container diagram shows the high-level shape of the software architecture and how responsibilities
+                            are distributed across it. It also shows the major technology choices and how the containers communicate
+                            with one another. It's a simple, high-level technology focussed diagram that is useful for
+                            software developers and support/operations staff alike.
+                        </p>
+                    </div>
+                    <div class="col-md-5 centered">
+                        <p style="margin-top: 20px">
+                            <a href="./img/diagram-containers.png"><img src="./img/diagram-containers.png" alt="A Container diagram" class="img-thumbnail" /></a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5 centered">
+                        <p style="margin-top: 20px">
+                            <a href="./img/diagram-components.png"><img src="./img/diagram-components.png" alt="A Component diagram" class="img-thumbnail" /></a>
+                        </p>
+                    </div>
+                    <div class="col-md-7">
+                        <h3>Component diagram</h3>
+                        <p>
+                            Next you can zoom in and decompose each container further to identify the major structural building blocks and their interactions.                </p>
+
+                        <p>
+                            The Component diagram shows how a container is made up of a number of "components", what each of those
+                            components are, their responsibilities and the technology/implementation details.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <h2>Supplementary diagrams</h2>
+                <p>
+                    Once you have a good understanding of the static structure, you can supplement the C4 diagrams to show other aspects.
+                </p>
+
+                <div class="row">
+                    <div class="col-md-5 centered">
+                        <p style="margin-top: 20px">
+                            <a href="./img/diagram-enterprise-context.png"><img src="./img/diagram-enterprise-context.png" alt="An Enterprise Context diagram" class="img-thumbnail" /></a>
+                        </p>
+                    </div>
+                    <div class="col-md-7">
+                        <h3>Enterprise Context diagram</h3>
+                        <p>
+                            The C4 model provides a static view of a <b>single software</b> system but, in the real-world, software systems never live in isolation.
+                            For this reason, and particularly if you are responsible for a collection of software systems, it's often useful to understand how all of these software systems fit together within the bounds of an enterprise.
+                            To do this, simply add another diagram that sits on top of the C4 diagrams, to show the enterprise context from an IT perspective. C4 therefore becomes C5, with this extra enterprise context diagram showing
+                            the organisational boundary, internal/external users and internal/external systems.
+                        </p>
+                        <p>
+                            Essentially this is a high-level map of the software systems at the enterprise level, with a C4 drill-down for each software system of interest. From a practical perspective, an enterprise context diagram is really just a system context diagram without a specific focus on a particular software system.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <h3>Dynamic diagram</h3>
+                        <p>
+                            A simple dynamic diagram can be useful when you want to show how elements in a static model collaborate at runtime to implement a user story, use case, feature, etc.
+                            This dynamic diagram is based upon a <a href="https://en.wikipedia.org/wiki/Communication_diagram">UML communication diagram</a>
+                            (previously known as a "UML collaboration diagram"). It is similar to a <a href="https://en.wikipedia.org/wiki/Sequence_diagram">UML sequence diagram</a>
+                            although it allows a free-form arrangement of diagram elements with numbered interactions to indicate ordering.
+                        </p>
+                    </div>
+                    <div class="col-md-5 centered">
+                        <p style="margin-top: 20px">
+                            <a href="./img/diagram-dynamic.png"><img src="./img/diagram-dynamic.png" alt="A dynamic diagram" class="img-thumbnail" /></a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5 centered">
+                        <p style="margin-top: 20px">
+                            <a href="./img/diagram-deployment.png"><img src="./img/diagram-deployment.png" alt="A deployment diagram" class="img-thumbnail" /></a>
+                        </p>
+                    </div>
+                    <div class="col-md-7">
+                        <h3>Deployment diagram</h3>
+                        <p>
+                            A deployment diagram allows you to illustrate how containers in the static model are mapped to infrastructure.
+                            This deployment diagram is based upon a <a href="https://en.wikipedia.org/wiki/Deployment_diagram">UML deployment diagram</a>, although simplified slightly to show the mapping between <b>containers</b> and <b>deployment nodes</b>.
+                            A deployment node is something like physical infrastructure (e.g. a physical server or device), virtualised infrastructure (e.g. IaaS, PaaS, a virtual machine), containerised infrastructure (e.g. a Docker container), an execution environment (e.g. a database server, Java EE web/application server, Microsoft IIS, etc), etc. Deployment nodes can be nested.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <h2>C4 and UML</h2>
+                <p>
+                    Although the example diagrams above are created using a "boxes and lines" notation,
+                    the core diagrams can be illustrated using UML with the appropriate use of packages, components and stereotypes.
+                </p>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="./img/spring-petclinic-system-context.png"><img src="./img/spring-petclinic-system-context.png" alt="A system context diagram" class="img-thumbnail" /></a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="./img/spring-petclinic-containers.png"><img src="./img/spring-petclinic-containers.png" alt="A container diagram" class="img-thumbnail" /></a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="./img/spring-petclinic-components.png"><img src="./img/spring-petclinic-components.png" alt="A component diagram" class="img-thumbnail" /></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 centered">
+                        System Context
+                    </div>
+                    <div class="col-md-4 centered">
+                        Containers
+                    </div>
+                    <div class="col-md-4 centered">
+                        Components
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="./img/spring-petclinic-system-context-uml.png"><img src="./img/spring-petclinic-system-context-uml.png" alt="A system context diagram" class="img-thumbnail" /></a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="./img/spring-petclinic-containers-uml.png"><img src="./img/spring-petclinic-containers-uml.png" alt="A container diagram" class="img-thumbnail" /></a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="./img/spring-petclinic-components-uml.png"><img src="./img/spring-petclinic-components-uml.png" alt="A component diagram" class="img-thumbnail" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <h2>More information</h2>
+                <p>
+                    The following resources are recommended if you're looking for more information about
+                    visualising software architecture and the C4 model.
+                </p>
+
+                <div class="row">
+                    <div class="col-md-6 centered">
+                        <p class="embed-responsive embed-responsive-16by9">
+                            <iframe src="https://www.youtube.com/embed/aPtT2GNu8vM" frameborder="0" allowfullscreen class="img-polaroid"></iframe>
+                        </p>
+
+                        <p class="small">
+                            This is a recording of Simon Brown's keynote at the Voxxed Days conference in Athens, Greece during May 2017.
+                            This talk explores the visual communication of software architecture based upon his experience of working
+                            with software development teams across the globe.
+                            It looks at what is commonplace today, the importance of creating a shared vocabulary, diagram notation,
+                            the value of creating a model plus how to use tooling and static analysis techniques to automate diagram generation.
+                        </p>
+                    </div>
+                    <div class="col-md-6 centered">
+                        <p>
+                            <a href="https://structurizr.com"><img src="./img/structurizr.png" alt="Structurizr" class="img-responsive" /></a>
+                        </p>
+
+                        <p class="small">
+                            Structurizr is a collection of tooling to help you visualise, document and explore your software architecture.
+                            It's an implementation of the C4 model and allows you to create software architecture models using Java/C# and supplementary documentation using Markdown/AsciiDoc.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 centered">
+                        <p>
+                            <a href="https://leanpub.com/b/software-architecture"><img src="./img/sa4d-2.png" alt="Software Architecture for Developers: Volumes 1 & 2" class="img-thumbnail" /></a>
+                        </p>
+
+                        <p class="small">
+                            This is Simon Brown's <a href="https://leanpub.com/b/software-architecture">Software Architecture for Developers</a> (Volume 2) ebook,
+                            which is available to purchase from Leanpub as an ebook in PDF, EPUB and MOBI formats.
+                            It's a short guide to visualising, documenting and exploring your software architecture.
+                        </p>
+                    </div>
+                    <div class="col-md-4 centered">
+                        <p>
+                            <a href="https://www.voxxed.com/blog/2014/10/simple-sketches-for-diagramming-your-software-architecture/"><img src="./img/voxxed-simple-sketches.png" alt="Simple Sketches for Diagramming Your Software Architecture" class="img-thumbnail" /></a>
+                        </p>
+
+                        <p class="small">
+                            This is a short article written for Voxxed that summarises the C4 model.
+                        </p>
+                    </div>
+                    <div class="col-md-4 centered">
+                        <p>
+                            <a href="/static/assets/visualising-software-architecture.pdf"><img src="./img/visualising-software-architecture.png" alt="A summary of the C4 model and tips for visualising software architecture" class="img-thumbnail" /></a>
+                        </p>
+
+                        <p class="small">
+                            And here is a one-page cheat sheet (downloadable as an A3 poster in PDF format) that summarises how to visualise software architecture using the C4 model.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer" class="structurizrBackgroundDark">
+            <div class="container">
+            <p>
+                <a href="http://simonbrown.je"><img src="./img/simonbrown.jpg" width="40px" alt="Simon Brown" class="img-circle" style="margin-right: 5px;" /></a>
+                <a href="https://twitter.com/simonbrown">@simonbrown</a>
+                |
+                <a href="http://simonbrown.je">simonbrown.je</a>
+                |
+                <a href="mailto:simon.brown@codingthearchitecture.com" target="_blank">simon.brown@codingthearchitecture.com</a>
+            </p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
