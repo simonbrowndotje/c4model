@@ -7,10 +7,8 @@ body {
     text-align: center;
 }
 #header {
-  background-image:url('../img/header.jpg');
-  background-size:cover;
-  background-position: center;
-  color: white;
+  background: #08427B;
+  color: #ffffff;
   text-align: center;
   padding: 100px 10px 100px 10px;
 }
@@ -23,7 +21,8 @@ body {
     padding-bottom: 20px;
     padding-left: 0;
     padding-right: 0;
-    color: white;
+    color: #ffffff;
+    background: #02172C;
 }
 #footer a, #footer a:hover {
     color: white;
