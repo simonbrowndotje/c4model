@@ -166,7 +166,7 @@
                 <div class="row">
                     <div class="col-xs-5 centered">
                         <p style="margin-top: 20px">
-                            <a href="./img/diagram-containers.png"><img src="./img/diagram-containers.png" alt="A Container diagram" class="img-thumbnail" /></a>
+                            <a href="./img/diagram-container.png"><img src="./img/diagram-container.png" alt="A Container diagram" class="img-thumbnail" /></a>
                         </p>
                     </div>
                     <div class="col-xs-7">
@@ -189,7 +189,7 @@
                         <p class="small">
                             <b>Primary elements</b>: Containers within the software system in scope.
                             <br />
-                            <b>Supporying elements</b>: People and software systems directly connected to the containers.
+                            <b>Supporting elements</b>: People and software systems directly connected to the containers.
                         </p>
                         <p class="small">
                             <b>Intended audience</b>: Technical people inside and outside of the immediate software development team; including everybody from software developers through to operations and support staff.
@@ -200,7 +200,7 @@
                 <div class="row">
                     <div class="col-xs-5 centered">
                         <p style="margin-top: 20px">
-                            <a href="./img/diagram-components.png"><img src="./img/diagram-components.png" alt="A Component diagram" class="img-thumbnail" /></a>
+                            <a href="./img/diagram-component.png"><img src="./img/diagram-component.png" alt="A Component diagram" class="img-thumbnail" /></a>
                         </p>
                     </div>
                     <div class="col-xs-7">
@@ -349,13 +349,13 @@
 
                 <div class="row">
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-system-context.png"><img src="./img/spring-petclinic-system-context.png" alt="A system context diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-system-context.png"><img src="./img/spring-petclinic-system-context.png" alt="A system context diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-containers.png"><img src="./img/spring-petclinic-containers.png" alt="A container diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-containers.png"><img src="./img/spring-petclinic-containers.png" alt="A container diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-components.png"><img src="./img/spring-petclinic-components.png" alt="A component diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-components.png"><img src="./img/spring-petclinic-components.png" alt="A component diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                 </div>
 
@@ -373,19 +373,183 @@
 
                 <div class="row">
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-system-context-uml.png"><img src="./img/spring-petclinic-system-context-uml.png" alt="A system context diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-system-context-uml.png"><img src="./img/spring-petclinic-system-context-uml.png" alt="A system context diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-containers-uml.png"><img src="./img/spring-petclinic-containers-uml.png" alt="A container diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-containers-uml.png"><img src="./img/spring-petclinic-containers-uml.png" alt="A container diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                     <div class="col-xs-4">
-                        <a href="./img/spring-petclinic-components-uml.png"><img src="./img/spring-petclinic-components-uml.png" alt="A component diagram" class="img-thumbnail" /></a>
+                        <a href="./img/spring-petclinic-components-uml.png"><img src="./img/spring-petclinic-components-uml.png" alt="A component diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                 </div>
             </div>
         </div>
 
-                <div class="section">
+        <div class="section">
+            <div class="container">
+                <h2>Metamodel</h2>
+                <p>
+                    If you're interested in using the C4 model or building tooling to support it, here is some information about the basic metamodel.
+                </p>
+
+                <h3>Elements and relationships</h3>
+                <table class="table table-striped small">
+                    <tr>
+                        <th>Element type</th>
+                        <th>Parent</th>
+                        <th>Properties</th>
+                    </tr>
+        
+                    <tr>
+                        <td><b>Person</b></td>
+                        <td>None</td>
+                        <td>
+                            <ul>
+                                <li>Name<sup>*</sup></li>
+                                <li>Description</li>
+                                <li>Location (Internal or External)</li>
+                            </ul>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>Software System</b></td>
+                        <td>None</td>
+                        <td>
+                            <ul>
+                                <li>Name<sup>*</sup></li>
+                                <li>Description</li>
+                                <li>Location (Internal or External)</li>
+                                <li>The set of containers that make up the software system</li>
+                            </ul>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>Container</b></td>
+                        <td>A software system</td>
+                        <td>
+                            <ul>
+                                <li>Name<sup>*</sup></li>
+                                <li>Description</li>
+                                <li>Technology</li>
+                                <li>The set of components within the container</li>
+                            </ul>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>Component</b></td>
+                        <td>A container</td>
+                        <td>
+                            <ul>
+                                <li>Name<sup>*</sup></li>
+                                <li>Description</li>
+                                <li>Technology</li>
+                                <li>The set of code elements (e.g. classes, interfaces, etc) that the component is implemented by</li>
+                            </ul>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>Code Element</b></td>
+                        <td>A component</td>
+                        <td>
+                            <ul>
+                                <li>Name<sup>*</sup></li>
+                                <li>Description</li>
+                                <li>Fully qualified type</li>
+                            </ul>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>Relationship</b><sup>**</sup></td>
+                        <td></td>
+                        <td>
+                            <ul>
+                                <li>Description</li>
+                                <li>Technology</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            
+                <p class="small">
+                    <sup>*</sup> All elements in the model must have a name, and that name must be unique within the parent context.
+                    <br />
+                    <sup>**</sup> Relationships are permitted between any elements in the model, in either direction.
+                </p>
+
+                <h3>Views</h3>
+                <table class="table table-striped small">
+                    <tr>
+                        <th width="25%">View type</th>
+                        <th width="25%">Scope</th>
+                        <th width="25%">Permitted elements</th>
+                        <th width="25%"></th>
+                    </tr>
+        
+                    <tr>
+                        <td><b>1. System Context</b></td>
+                        <td>A software system.</td>
+                        <td>
+                            <ul>
+                                <li>Software systems</li>
+                                <li>People</li>
+                            </ul>
+                        </td>
+                        <td class="centered">
+                            <a href="./img/diagram-system-context.png"><img src="./img/diagram-system-context.png" alt="A System Context diagram" class="img-thumbnail" /></a>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>2. Container</b></td>
+                        <td>A software system</td>
+                        <td>
+                            <ul>
+                                <li>Software systems</li>
+                                <li>People</li>
+                                <li>Containers within the software system in scope</li>
+                            </ul>
+                        </td>
+                        <td class="centered">
+                            <a href="./img/diagram-container.png"><img src="./img/diagram-container.png" alt="A Container diagram" class="img-thumbnail" /></a>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>3. Component</b></td>
+                        <td>A container</td>
+                        <td>
+                            <ul>
+                                <li>Software systems</li>
+                                <li>People</li>
+                                <li>Other containers within the parent software system of the container in scope</li>
+                                <li>Components within the container in scope</li>
+                            </ul>
+                        </td>
+                        <td class="centered">
+                            <a href="./img/diagram-compnent.png"><img src="./img/diagram-component.png" alt="A Component diagram" class="img-thumbnail" /></a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>4. Code</b></td>
+                        <td>A component</span></td>
+                        <td>
+                            <ul>
+                                <li>Code elements (e.g. classes, interfaces, etc) that are used to implement the component in scope</li>
+                            </ul>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>            
+            </div>
+        </div>
+
+        <div class="section">
             <div class="container">
                 <h2>Background and history</h2>
                 <p>
