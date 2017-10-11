@@ -136,3 +136,15 @@ a:hover {
 .small {
     font-size: 13px;
 }
+#navigation {
+    background: #02172C;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 15px;
+    text-align: center;
+}
+#navigation a {
+    color: #ffffff;
+    margin-left: 10px;
+    margin-right: 10px;
+}
