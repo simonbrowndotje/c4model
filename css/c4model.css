@@ -136,6 +136,9 @@ a:hover {
 .small {
     font-size: 13px;
 }
+.smaller {
+    font-size: 11px;
+}
 #navigation {
     background: #02172C;
     color: #ffffff;
