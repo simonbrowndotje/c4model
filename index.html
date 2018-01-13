@@ -393,7 +393,7 @@
                 <h3>C4 and UML</h3>
                 <p>
                     Although the example diagrams above are created using a "boxes and lines" notation,
-                    the core diagrams can be illustrated using UML with the appropriate use of packages, components and stereotypes. The resulting UML diagrams do tend to lack the same degree of descriptive text though, because adding such text isn't possible with some UML tools.
+                    the core diagrams can be illustrated using UML with the appropriate use of packages, components and stereotypes. The resulting UML diagrams do tend to lack the same degree of descriptive text though, because adding such text isn't possible (or easy) with some UML tools.
                 </p>
 
                 <div class="row">
@@ -446,13 +446,52 @@
 
                 <h3>Diagram key/legend</h3>
                 <p>
-                    Any notation used should be as self-describing as possible, but all diagrams should have a key/legend to make the notation explicit.
-                    This applies to diagrams created with notations like UML, ArchiMate and SysML too.
+                    Any notation used should be as self-describing as possible, but <b>all diagrams should have a key/legend</b> to make the notation explicit.
+                    This applies to diagrams created with notations like UML, ArchiMate and SysML too, as not everybody will know the notation being used.
                 </p>
 
                 <p class="centered">
                     <a href="./img/diagram-key.png"><img src="./img/diagram-key.png" alt="Diagram key" class="img-thumbnail" style="width: 80%" /></a>                        
                 </p>
+
+                <h3>Notation, notation, notation</h3>
+                <p>
+                    Although the C4 model is an abstraction-first approach and notation independent, you still need to ensure that your diagram notation makes sense,
+                    and that the diagrams are comprehensible.
+                    A good way to think about this is to ask yourself whether each diagram can stand alone, and be
+                    (mostly) understood without a narrative. Here are some recommendations related to notation.
+                </p>                        
+                <div class="row">
+                    <div class="col-xs-4">
+                        <h4>Diagrams</h4>
+                        <ul style="line-height: 150%">
+                            <li>Every diagram should have a title describing the diagram type and scope (e.g. "System Context diagram for My Software System").</li>
+                            <li>Every diagram should have a key/legend explaining the notation being used (e.g. shapes, colours, border styles, line types, arrow heads, etc).</li>
+                            <li>Acronyms and abbreviations (business/domain or technology) should be understandable by all audiences, or explained in the diagram key/legend.</li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-4">
+                        <h4>Elements</h4>
+                        <ul style="line-height: 150%">
+                            <li>The type of every element should be explicitly specified (e.g. Person, Software System, Container or Component).</li>
+                            <li>Every element should have a short description, to provide an "at a glance" view of key responsibilities.</li>
+                            <li>Every container and component should have a technology explicitly specified.</li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-4">
+                        <h4>Lines</h4>
+                        <ul style="line-height: 150%">
+                                <li>Every line should represent a unidirectional relationship.</li>
+                                <li>Every line should be labelled, the label being consistent with the direction and intent (e.g. dependency or data flow) of the relationship.</li>
+                                <li>Relationships between containers (typically these represent inter-process communication) should have a technology/protocol explicitly labelled.</li>
+                            </ul>
+                        </div>
+                </div>
+
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    Remember, the notation you use can make or break a diagram!
+                </div>
 
             </div>
         </div>
