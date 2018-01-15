@@ -173,7 +173,7 @@
                 <a name="coreDiagrams"></a>        
                 <h2>Core diagrams</h2>
                 <p>
-                    Visualising this hierarchy of abstractions is then done by creating a collection of <b>Context</b>, <b>Container</b>, <b>Component</b> and (optionally) <b>Class</b> diagrams.
+                    Visualising this hierarchy of abstractions is then done by creating a collection of <b>Context</b>, <b>Container</b>, <b>Component</b> and (optionally) <b>Class</b> (or <b>Code</b>) diagrams.
                     This is where the C4 model gets its name from.
                 </p>
 
@@ -187,7 +187,7 @@
                         </p>
                     </div>
                     <div class="col-xs-7">
-                        <h3>System Context diagram</h3>
+                        <h3>Level 1: System Context diagram</h3>
                         <p>
                             A System Context diagram is a good starting point for diagramming and documenting a software system,
                             allowing you to step back and see the big picture. Draw a diagram showing your system
@@ -224,7 +224,7 @@
                         </p>
                     </div>
                     <div class="col-xs-7">
-                        <h3>Container diagram</h3>
+                        <h3>Level 2: Container diagram</h3>
                         <p>
                             Once you understand how your system fits in to the overall IT environment, a really useful next step is to zoom-in to the system boundary with a Container diagram.
                             A "container" is something like a web application, desktop application, mobile app, database, file system, etc. Essentially, a container is a separately deployable unit that executes code or stores data.
@@ -261,7 +261,7 @@
                         </p>
                     </div>
                     <div class="col-xs-7">
-                        <h3>Component diagram</h3>
+                        <h3>Level 3: Component diagram</h3>
                         <p>
                             Next you can zoom in and decompose each container further to identify the major structural building blocks and their interactions.
                         </p>
@@ -278,6 +278,35 @@
                             <b>Primary elements</b>: Components within the container in scope.
                             <br />
                             <b>Supporting elements</b>: Containers (within the software system in scope) plus people and software systems directly connected to the components.
+                        </p>
+                        <p class="small">
+                            <b>Intended audience</b>: Technical people within the software development team.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-5 centered">
+                        <p style="margin-top: 20px">
+                            <a href="./img/diagram-class.png"><img src="./img/diagram-class.png" alt="A UML class diagram" class="img-thumbnail" /></a>
+                        </p>
+                    </div>
+                    <div class="col-xs-7">
+                        <h3>Level 4: Code</h3>
+                        <p>
+                            Finally, you can zoom in to each component to show how it is implemented as code; using UML class diagrams, entity relationship diagrams or similar.
+                        </p>
+
+                        <p>
+                            This is an optional level of detail and is often available on-demand from tooling such as IDEs.
+                            This level of detail is not recommended for anything but the most important or complex components.
+                        </p>
+
+                        <p class="small">
+                            <b>Scope</b>: A single component.
+                        </p>
+                        <p class="small">
+                            <b>Primary elements</b>: Code elements (e.g. classes, interfaces, objects, functions, database tables, etc) within the component in scope.
                         </p>
                         <p class="small">
                             <b>Intended audience</b>: Technical people within the software development team.
