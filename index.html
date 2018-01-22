@@ -100,6 +100,15 @@
                         </p>
                     </div>
                 </div>
+
+                <h3>Benefits</h3>
+                <p>
+                    Although primarily aimed at software architects and developers, the C4 model provides a way for software development teams to efficiently and effectively communicate their
+                    software architecture, at different levels of detail, telling different stories to different types of audience.
+                    The C4 model is an "abstraction-first" approach to diagramming software architecture, based upon abstractions that reflect how
+                    software architects and developers think about and build software. The small set of abstractions and diagram types makes the C4 model
+                    easy to learn and use too.
+                </p>
             </div>
         </div>
 
@@ -209,7 +218,7 @@
                             <b>Supporting elements</b>: People and software systems directly connected to the software system in scope.
                         </p>
                         <p class="small">
-                            <b>Intended audience</b>: Technical and non-technical people, inside and outside of the immediate software development team.
+                            <b>Intended audience</b>: Everybody, both technical and non-technical people, inside and outside of the software development team.
                         </p>
                     </div>
                 </div>
@@ -246,7 +255,7 @@
                             <b>Supporting elements</b>: People and software systems directly connected to the containers.
                         </p>
                         <p class="small">
-                            <b>Intended audience</b>: Technical people inside and outside of the immediate software development team; including everybody from software developers through to operations and support staff.
+                            <b>Intended audience</b>: Technical people inside and outside of the software development team; including software architects, developers and operations/support staff.
                         </p>
                     </div>
                 </div>
@@ -280,7 +289,7 @@
                             <b>Supporting elements</b>: Containers (within the software system in scope) plus people and software systems directly connected to the components.
                         </p>
                         <p class="small">
-                            <b>Intended audience</b>: Technical people within the software development team.
+                            <b>Intended audience</b>: Software architects and developers.
                         </p>
                     </div>
                 </div>
@@ -309,7 +318,7 @@
                             <b>Primary elements</b>: Code elements (e.g. classes, interfaces, objects, functions, database tables, etc) within the component in scope.
                         </p>
                         <p class="small">
-                            <b>Intended audience</b>: Technical people within the software development team.
+                            <b>Intended audience</b>: Software architects and developers.
                         </p>
                     </div>
                 </div>
@@ -442,6 +451,9 @@
                     Although the example diagrams above are created using a "boxes and lines" notation,
                     the core diagrams can be illustrated using UML with the appropriate use of packages, components and stereotypes. The resulting UML diagrams do tend to lack the same degree of descriptive text though, because adding such text isn't possible (or easy) with some UML tools.
                 </p>
+                <p>
+                    Here are three examples of a System Context, Container and Component diagram for comparison.
+                </p>
 
                 <div class="row">
                     <div class="col-xs-4">
@@ -494,7 +506,7 @@
                 <h3>Diagram key/legend</h3>
                 <p>
                     Any notation used should be as self-describing as possible, but <b>all diagrams should have a key/legend</b> to make the notation explicit.
-                    This applies to diagrams created with notations like UML, ArchiMate and SysML too, as not everybody will know the notation being used.
+                    This applies to diagrams created with notations such as UML, ArchiMate and SysML too, as not everybody will know the notation being used.
                 </p>
 
                 <p class="centered">
@@ -529,7 +541,7 @@
                         <h4>Lines</h4>
                         <ul style="line-height: 150%">
                                 <li>Every line should represent a unidirectional relationship.</li>
-                                <li>Every line should be labelled, the label being consistent with the direction and intent (e.g. dependency or data flow) of the relationship.</li>
+                                <li>Every line should be labelled, the label being consistent with the direction and intent of the relationship (e.g. dependency or data flow).</li>
                                 <li>Relationships between containers (typically these represent inter-process communication) should have a technology/protocol explicitly labelled.</li>
                             </ul>
                         </div>
