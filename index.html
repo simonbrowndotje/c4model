@@ -107,7 +107,7 @@
                     software architecture, at different levels of detail, telling different stories to different types of audience.
                     The C4 model is an "abstraction-first" approach to diagramming software architecture, based upon abstractions that reflect how
                     software architects and developers think about and build software. The small set of abstractions and diagram types makes the C4 model
-                    easy to learn and use too.
+                    easy to learn and use.
                 </p>
             </div>
         </div>
@@ -353,6 +353,16 @@
                         <p>
                             Essentially this is a high-level map of the software systems at the enterprise level, with a C4 drill-down for each software system of interest. From a practical perspective, a system landscape diagram is really just a system context diagram without a specific focus on a particular software system.
                         </p>
+
+                        <p class="small">
+                            <b>Scope</b>: An enterprise.
+                        </p>
+                        <p class="small">
+                            <b>Primary elements</b>: People and software systems related to the enterprise in scope.
+                        </p>
+                        <p class="small">
+                            <b>Intended audience</b>: Technical and non-technical people, inside and outside of the software development team.
+                        </p>
                     </div>
                 </div>
 
@@ -373,6 +383,16 @@
                             (previously known as a "UML collaboration diagram"). It is similar to a <a href="https://en.wikipedia.org/wiki/Sequence_diagram">UML sequence diagram</a>
                             although it allows a free-form arrangement of diagram elements with numbered interactions to indicate ordering.
                         </p>
+
+                        <p class="small">
+                            <b>Scope</b>: An enterprise, software system or container.
+                        </p>
+                        <p class="small">
+                            <b>Primary and supporting elements</b>: Depends on the diagram scope; enterprise (see System Landscape diagram), software system (see System Context or Container diagrams), container (see Component diagram).
+                        </p>
+                        <p class="small">
+                            <b>Intended audience</b>: Technical and non-technical people, inside and outside of the software development team.
+                        </p>
                     </div>
                 </div>
 
@@ -391,6 +411,16 @@
                             A deployment diagram allows you to illustrate how containers in the static model are mapped to infrastructure.
                             This deployment diagram is based upon a <a href="https://en.wikipedia.org/wiki/Deployment_diagram">UML deployment diagram</a>, although simplified slightly to show the mapping between <b>containers</b> and <b>deployment nodes</b>.
                             A deployment node is something like physical infrastructure (e.g. a physical server or device), virtualised infrastructure (e.g. IaaS, PaaS, a virtual machine), containerised infrastructure (e.g. a Docker container), an execution environment (e.g. a database server, Java EE web/application server, Microsoft IIS), etc. Deployment nodes can be nested.
+                        </p>
+
+                        <p class="small">
+                            <b>Scope</b>: A single software system.
+                        </p>
+                        <p class="small">
+                            <b>Primary elements</b>: Deployment nodes and containers within the software system in scope.
+                        </p>
+                        <p class="small">
+                            <b>Intended audience</b>: Technical people inside and outside of the software development team; including software architects, developers and operations/support staff.
                         </p>
                     </div>
                 </div>
@@ -1133,12 +1163,19 @@
         <div id="footer">
             <div class="container">
             <p>
-                <a href="http://simonbrown.je"><img src="./img/simonbrown.jpg" width="40px" alt="Simon Brown" class="img-circle" style="margin-right: 5px;" /></a>
+                <img src="./img/simonbrown.jpg" width="40px" alt="Simon Brown" class="img-circle" style="margin-right: 5px;" />
+                The C4 model and this website were created by Simon Brown
+                -
                 <a href="https://twitter.com/simonbrown">@simonbrown</a>
                 |
                 <a href="http://simonbrown.je">simonbrown.je</a>
                 |
                 <a href="mailto:simon.brown@codingthearchitecture.com" target="_blank">simon.brown@codingthearchitecture.com</a>
+            </p>
+
+            <p>
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0; margin-right: 5px;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+                This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
             </p>
             </div>
         </div>
