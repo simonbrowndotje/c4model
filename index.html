@@ -25,6 +25,7 @@
             <a href="#coreDiagrams">Core diagrams</a>
             <a href="#supplementaryDiagrams">Supplementary diagrams</a>
             <a href="#notation">Notation</a>
+            <a href="#faq">FAQ</a>
             <a href="#examples">Examples</a>
             <a href="#training">Training</a>
             <a href="#tooling">Tooling</a>
@@ -751,13 +752,13 @@
         </div>
 
         <div class="section">
-            <div class="container">
+            <div class="container small">
                 <a name="faq"></a>
                 <h2>Frequently asked questions</h2>
 
                 <div class="row">
-                    <div class="col-xs-6">
-                        <h3>C4 and microservices?</h3>
+                    <div class="col-xs-4">
+                        <h3>Microservices and serverless?</h3>
                         <p>
                             Broadly speaking, there are two options for diagramming microservices when using the C4 model.
                         </p>
@@ -766,8 +767,12 @@
                           <li><b>Microservices as software systems</b>: If your software system has a dependency upon a number of microservices that are outside of your control (e.g. they are owned and/or operated by a separate team), model these microservices as external software systems that you can't see inside of.</li>
                           <li><b>Microservices as containers</b>: On the other hand, if the microservices are a part of a software system that you are building (i.e. you own them), model them as containers, along with any data stores that those microservices use. In the same way that a modular monolithic application is a container with a number of components running inside it, a microservice is simply a container with a (smaller) number of components running inside it.</li>
                         </ol>
+
+                        <p>
+                            The same is true for serverless functions/lambdas/etc; treat them as software systems or containers based upon ownership.
+                        </p>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-4">
                         <h3>Large and complex software sytems?</h3>
                         <p>
                             Even with a relatively small software system, it's tempting to try and include the entire story on a single diagram. For example, if you have a web application, it seems logical to create a single component diagram that shows all of the components that make up that web application. Unless your software system really is that small, you're likely to run out of room on the diagram canvas or find it difficult to discover a layout that isn't cluttered by a myriad of overlapping lines. Using a larger diagram canvas can sometimes help, but large diagrams are usually hard to interpret and comprehend because the cognitive load is too high. And if nobody understands the diagram, nobody is going to look at it.
@@ -776,9 +781,34 @@
                             Instead, don't be afraid to split that single complex diagram into a larger number of simpler diagrams, each with a specific focus around a business area, functional area, functional grouping, bounded context, use case, user interaction, feature set, etc. The key is to ensure that each of the separate diagrams tells a different part of the same overall story, at the same level of abstraction.
                         </p>
                     </div>
-                </div>
+                    <div class="col-xs-4">
+                            <h3>Will the diagrams become outdated quickly?</h3>
+                            <p>
+                                Due to the hierarchical nature of the C4 model, each diagram will change at a different rate.
+                            </p>
+                            
+                            <ul>
+                                <li><b>System Context diagram</b>: In most cases, the system context diagram will change very slowly, as this describes the landscape that the software system is operating within.</li>
+                                <li><b>Container diagram</b>: Unless you're building a software system that makes heavy use of microservices or serverless lambas/functions/etc, the container diagram will also change relatively slowly.</li>
+                                <li><b>Component diagram</b>: For any software system under active development, the component diagrams may change frequently as the team adds, removes or restructures the code into cohesive components. Automating the generation of this level of detail with tooling can help.</li>
+                                <li><b>Code diagram</b>: The level 4 code (e.g. class) diagrams will potentially become outdated very quickly if the codebase is under active development. For this reason, the recommendation is to (1) not create them at all or (2) generate them on-demand using tooling such as your IDE.</li>
+                            </ul>
+                        </div>
+                    </div>
                 <div class="row">
-                    <div class="col-xs-6">
+                        <div class="col-xs-4">
+                                <h3>C4 vs UML, ArchiMate and SysML?</h3>
+                                <p>
+                                    Although existing notations such as UML, ArchiMate and SysML already exist, many software development teams don't seem to use them.
+                                    Often this is because teams don't know these notations well enough, perceive them to be too complicated, think they are not compatible with agile approaches or don't have the required tooling.
+                                </p>
+        
+                                <p>
+                                    If you are already successfully using one of these notations to communicate software architecture and it's working, stick with it. If not, try the C4 model.
+                                    And don't be afraid to supplement the C4 diagrams with UML state diagrams, timing diagrams, etc if you need to.
+                                </p>
+                            </div>
+                            <div class="col-xs-4">
                         <h3>C4 and arc42?</h3>
                         <p>
                             The C4 model is compatible with the <a href="http://arc42.org">arc42 documentation template</a> as follows.
@@ -791,31 +821,28 @@
                           <li>Building Block View (level 3) =&gt; Class diagram</li>
                         </ul>
                     </div>
-                    <div class="col-xs-6">
-                        <h3>C4 vs UML, ArchiMate and SysML?</h3>
-                        <p>
-                            Although existing notations such as UML, ArchiMate and SysML already exist, many software development teams don't seem to use them.
-                            Often this is because teams don't know these notations well enough, perceive them to be too complicated, think they are not compatible with agile approaches or don't have the required tooling.
-                        </p>
-
-                        <p>
-                            If you are already successfully using one of these notations to communicate software architecture and it's working, stick with it. If not, try the C4 model.
-                            And don't be afraid to supplement the C4 diagrams with UML state diagrams, timing diagrams, etc if you need to.
-                        </p>
+                    <div class="col-xs-4">
+                            <h3>Change the terminology?</h3>
+                            <p>
+                                This terminology (context, containers, components and classes) works for many organisations and many types of software.
+                                However, sometimes an organisation will have an existing terminology that people are already familiar with.
+                                Or perhaps "components" and "classes" don't easily map on to the technology being used (e.g. functional languages often use the terms "module" and "function").
+                                Feel free to modify the terminology that you use to describe software architecture at different levels of abstraction.
+                                Just make sure that everybody explicitly understands it.
+                            </p>
+                        </div>
                     </div>
-                </div>
                 <div class="row">
-                    <div class="col-xs-6">
-                        <h3>Change the terminology?</h3>
+                    <div class="col-xs-4">
+                        <h3>Does the C4 model imply a design process or team structure?</h3>
                         <p>
-                            This terminology (context, containers, components and classes) works for many organisations and many types of software.
-                            However, sometimes an organisation will have an existing terminology that people are already familiar with.
-                            Or perhaps "components" and "classes" don't easily map on to the technology being used (e.g. functional languages often use the terms "module" and "function").
-                            Feel free to modify the terminology that you use to describe software architecture at different levels of abstraction.
-                            Just make sure that everybody explicitly understands it.
+                            A common misconception is that a team's design process should follow the levels in the C4 model hierachy, perhaps with different people on the team being responsible for different levels of diagrams.
+                            For example, a business analyst creates the system context diagram, the architect creates the container diagram, while the developers look after the remaining levels of detail.
                         </p>
-                    </div>
-                    <div class="col-xs-6">
+                        <p>
+                            Although you can certainly use the C4 model in this way, this is not the intended or recommended usage pattern.
+                            The C4 model is just a way to describe a software system, from different levels of abstraction, and it implies nothing about the process of delivering software.
+                        </p>
                     </div>
                 </div>
             </div>
