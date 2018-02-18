@@ -758,7 +758,7 @@
 
                 <div class="row">
                     <div class="col-xs-4">
-                        <h3>Microservices and serverless?</h3>
+                        <h3>How do you model microservices and serverless?</h3>
                         <p>
                             Broadly speaking, there are two options for diagramming microservices when using the C4 model.
                         </p>
@@ -773,7 +773,7 @@
                         </p>
                     </div>
                     <div class="col-xs-4">
-                        <h3>Large and complex software sytems?</h3>
+                        <h3>How do you diagram large and complex software sytems?</h3>
                         <p>
                             Even with a relatively small software system, it's tempting to try and include the entire story on a single diagram. For example, if you have a web application, it seems logical to create a single component diagram that shows all of the components that make up that web application. Unless your software system really is that small, you're likely to run out of room on the diagram canvas or find it difficult to discover a layout that isn't cluttered by a myriad of overlapping lines. Using a larger diagram canvas can sometimes help, but large diagrams are usually hard to interpret and comprehend because the cognitive load is too high. And if nobody understands the diagram, nobody is going to look at it.
                         </p>
@@ -797,7 +797,7 @@
                     </div>
                 <div class="row">
                         <div class="col-xs-4">
-                                <h3>C4 vs UML, ArchiMate and SysML?</h3>
+                                <h3>The C4 model vs UML, ArchiMate and SysML?</h3>
                                 <p>
                                     Although existing notations such as UML, ArchiMate and SysML already exist, many software development teams don't seem to use them.
                                     Often this is because teams don't know these notations well enough, perceive them to be too complicated, think they are not compatible with agile approaches or don't have the required tooling.
@@ -809,9 +809,9 @@
                                 </p>
                             </div>
                             <div class="col-xs-4">
-                        <h3>C4 and arc42?</h3>
+                        <h3>Can we combine C4 and arc42?</h3>
                         <p>
-                            The C4 model is compatible with the <a href="http://arc42.org">arc42 documentation template</a> as follows.
+                            Yes, many teams do, and the C4 model is compatible with the <a href="http://arc42.org">arc42 documentation template</a> as follows.
                         </p>
 
                         <ul>
@@ -822,7 +822,7 @@
                         </ul>
                     </div>
                     <div class="col-xs-4">
-                            <h3>Change the terminology?</h3>
+                            <h3>Can we change the terminology?</h3>
                             <p>
                                 This terminology (context, containers, components and code) works for many organisations and many types of software.
                                 However, sometimes an organisation will have an existing terminology that people are already familiar with.
@@ -847,15 +847,39 @@
                         </p>
                     </div>
                     <div class="col-xs-4">
-                            <h3>What's the inspiration behind the C4 model?</h3>
-                            <p>
-                                The C4 model was inspired by the <a href="https://en.wikipedia.org/wiki/Unified_Modeling_Language">Unified Modeling Language</a> and
-                                the <a href="https://en.wikipedia.org/wiki/4%2B1_architectural_view_model">4+1 model for software architecture</a>.
-                                In summary, you can think of the C4 model as a simplified version of the underlying concepts, designed to
-                                (1) make it easier for software developers to describe and understand how a software system works and
-                                (2) to minimise the gap between the software architecture model/description and the source code.
-                            </p>
-                        </div>
+                        <h3>What's the inspiration behind the C4 model?</h3>
+                        <p>
+                            The C4 model was inspired by the <a href="https://en.wikipedia.org/wiki/Unified_Modeling_Language">Unified Modeling Language</a> and
+                            the <a href="https://en.wikipedia.org/wiki/4%2B1_architectural_view_model">4+1 model for software architecture</a>.
+                            In summary, you can think of the C4 model as a simplified version of the underlying concepts, designed to
+                            (1) make it easier for software developers to describe and understand how a software system works and
+                            (2) to minimise the gap between the software architecture model/description and the source code.
+                        </p>
+                    </div>
+                    <div class="col-xs-4">
+                        <h3>Why doesn't the C4 model cover business processes, workflows, state machines, domain models, data models, etc?</h3>
+                        <p>
+                            The focus of the C4 model is the static structures that make up a software system, at different levels of abstraction.
+                            If you need to describe other aspects, feel free to supplement the C4 diagrams with UML diagrams, BPML diagrams, ArchiMate diagrams, entity relationship diagrams, etc.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <h3>Why "container"?</h3>
+                        <p>
+                            Terms like "process", "application", "app", "server", "deployable unit", etc all have associated implications,
+                            so the name "container" was chosen as a generic way to describe something in which components live.
+                            From one perspective, it's unfortunate that containerisation has become popular, because many software developers now associate the term "container" with Docker.
+                            From another perspective though, there is sometimes a nice parity between a container in the C4 model and an infrastructure (e.g. Docker) container.
+                        </p>
+                        <p>
+                            While many teams successfully use the C4 model as is, feel free to change the terminology if needed.
+                        </p>
+                    </div>
+                    <div class="col-xs-4">
+                    </div>
+                    <div class="col-xs-4">
                     </div>
                 </div>
             </div>
