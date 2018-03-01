@@ -151,3 +151,14 @@ a:hover {
     margin-left: 10px;
     margin-right: 10px;
 }
+.modal-dialog {
+    width: 95%;
+    height: 100%;
+    padding: 0;
+    margin: auto;
+}
+.modal-content {
+    height: 100%;
+    min-height: 100%;
+    height: auto;
+}
