@@ -223,7 +223,7 @@
                         </p>
                         <p class="centered">
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#systemContextDiagramModal">
-                                See example diagram, key and narrative
+                                See example diagram and narrative
                             </button>
                         </p>
                     </div>
@@ -268,7 +268,7 @@
                         </p>
                         <p class="centered">
                             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#containerDiagramModal">
-                                See example diagram, key and narrative
+                                See example diagram and narrative
                             </button>
                         </p>
                     </div>
@@ -305,6 +305,11 @@
                         <p class="small">
                             <b>Intended audience</b>: Software architects and developers.
                         </p>
+                        <p class="centered">
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#componentDiagramModal">
+                                See example diagram and narrative
+                            </button>
+                        </p>
                     </div>
                 </div>
 
@@ -322,6 +327,7 @@
 
                         <p>
                             This is an optional level of detail and is often available on-demand from tooling such as IDEs.
+                            Ideally this diagram would be automatically generated using tooling (e.g. an IDE or UML modelling tool), and you should consider showing only those attributes and methods that allow you to tell the story that you want to tell.
                             This level of detail is not recommended for anything but the most important or complex components.
                         </p>
 
@@ -333,6 +339,11 @@
                         </p>
                         <p class="small">
                             <b>Intended audience</b>: Software architects and developers.
+                        </p>
+                        <p class="centered">
+                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#classDiagramModal">
+                                See example diagram and narrative
+                            </button>
                         </p>
                     </div>
                 </div>
@@ -1290,7 +1301,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="containerDiagramModal" tabindex="-1" role="dialog" aria-labelledby="scontainerDiagramModalLabel">
+    <div class="modal fade" id="containerDiagramModal" tabindex="-1" role="dialog" aria-labelledby="containerDiagramModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -1328,5 +1339,57 @@
         </div>
     </div>
         
+    <div class="modal fade" id="componentDiagramModal" tabindex="-1" role="dialog" aria-labelledby="componentDiagramModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="componentDiagramModalLabel">Level 3: Component diagram</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    This is an example Component diagram for a fictional Internet Banking System, showing some (rather than all) of the components within the API Application.
+                    Here, there are two Spring MVC Rest Controllers providing access points for the JSON/HTTPS API, with each controller subsequently using other components to access data from the Database and Mainframe Banking System.
+                </p>       
+                <p>
+                    <img src="./img/bigbankplc-Components.png" alt="A Component diagram" class="img-thumbnail" />
+                </p>
+                <p>
+                    The dashed line represents the boundary of the API Application, showing the components (light blue) inside it.
+                </p>     
+                <p class="centered">
+                    <img src="./img/bigbankplc-Components-key.png" alt="A diagram key" class="img-thumbnail" style="width: 80%" />
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="classDiagramModal" tabindex="-1" role="dialog" aria-labelledby="classDiagramModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="classDiagramModalLabel">Level 4: Code</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    This is an example (and partial) UML class diagram for a fictional Internet Banking System, showing the code elements (interfaces and classes) that make up the MainframeBankingSystemFacade component.
+                    It shows that the component is made up of a number of classes, with the implementation details directly reflecting the code.
+                </p>       
+                <p>
+                    <img src="./img/bigbankplc-Classes.png" alt="A UML class diagram" class="img-thumbnail" />
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
