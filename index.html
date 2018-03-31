@@ -166,7 +166,8 @@
 
                         <p class="small">
                             A container is essentially a context or boundary inside which some code is executed or some data is stored.
-                            And each container is a separately deployable/runnable thing or runtime environment.
+                            And each container is a separately deployable/runnable thing or runtime environment, typically (but not always) running in its own process space.
+                            Because of this, communication between containers typically takes the form of an inter-process communication.
                         </p>
 
                         <h3>Component</h3>
@@ -246,7 +247,8 @@
                         <h3>Level 2: Container diagram</h3>
                         <p>
                             Once you understand how your system fits in to the overall IT environment, a really useful next step is to zoom-in to the system boundary with a Container diagram.
-                            A "container" is something like a web application, desktop application, mobile app, database, file system, etc. Essentially, a container is a separately runnable/deployable unit that executes code or stores data.
+                            A "container" is something like a server-side web application, single-page application, desktop application, mobile app, database schema, file system, etc.
+                            Essentially, a container is a separately runnable/deployable unit (e.g. a separate process space) that executes code or stores data.
                         </p>
 
                         <p>
