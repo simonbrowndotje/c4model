@@ -930,6 +930,16 @@
                         </p>
                     </div>
                     <div class="col-xs-4">
+                        <h3>Web applications; one container or two?</h3>
+                        <p>
+                            If you're building a server-side web application (e.g. Spring MVC, ASP.NET, Ruby on Rails, Django, etc) that is predominantly generating static HTML content, then that's a single container.
+                            If there's a significant quantity of JavaScript being delivered by the server-side web application (e.g. a single-page application built using Angular), then that's two containers.
+                            <a href="./img/bigbankplc-Containers.png">Here's an example</a>.
+                        </p>
+                        <p>
+                            Although, at deployment time, the server-side web application includes both the server-side and client-side code, treating the client and server as two separate containers makes it explicit that these are two separate process spaces, communicating via an inter-process/remote communication mechanism (e.g. JSON/HTTPS).
+                            It also provides a basis for zooming in to each container separately to show the components inside them.
+                        </p>
                     </div>
                 </div>
             </div>
