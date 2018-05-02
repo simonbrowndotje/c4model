@@ -25,8 +25,8 @@
             <a href="#coreDiagrams">Core diagrams</a>
             <a href="#supplementaryDiagrams">Supplementary diagrams</a>
             <a href="#notation">Notation</a>
-            <a href="#faq">FAQ</a>
             <a href="#examples">Examples</a>
+            <a href="#faq">FAQ</a>
             <br />
             <a href="#training">On-site training</a>
             <a href="https://www.safaribooksonline.com/live-training/courses/visualizing-software-architecture-with-the-c4-model/0636920174127/">Online training</a>
@@ -35,13 +35,11 @@
 
         <div class="section">
             <div class="container">
-                <a name="background"></a>
-                <h2>Background and history</h2>
+                <a name="introduction"></a>
+                <h2>Introduction</h2>
                 <p>
-                    Creating software architecture diagrams is something of a lost art. <a href="http://simonbrown.je">Simon Brown</a> has been running software architecture training courses
-                    for a number of years, part of which is a simple architecture kata where groups of people are asked to design a software solution and draw some architecture diagrams to describe it.
-                    Based upon the anecdotal evidence from training over 10,000 people in more than 30 countries, software architects and developers struggle with how to communicate software architecture.
-                    Even today, the majority of the diagrams from the initial iteration of the architecture kata are typically created using an ad hoc “boxes and lines” notation with no clear notation or semantics.
+                    Ask somebody in the building industry to visually communicate the architecture of a building and you'll be presented with site plans, floor plans, elevation views, cross-section views and detail drawings.
+                    In contrast, ask a software developer to communicate the software architecture of a software system using diagrams and you'll likely get a confused mess of boxes and lines.                </p>
                 </p>
 
                 <div class="row">
@@ -66,15 +64,17 @@
                         </p>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="section">
-            <div class="container">
-                <h2>Maps of your code</h2>
+                <p>
+                    As an industry, we do have the Unified Modeling Language (UML), ArchiMate and SysML,
+                    but asking whether these provide an effective way to communicate software architecture is often irrelevant because many teams have already thrown them out in favour of much simpler "boxes and lines" diagrams.
+                    Abandoning these modelling languages is one thing but, perhaps in the race for agility, many software development teams have lost the ability to communicate visually.
+                </p>
+
+                <h3>Maps of your code</h3>
                 <p>
                     The C4 model was created as a way to help software development teams describe and communicate software architecture, both during up-front design sessions and when retrospectively documenting an existing codebase.
-                    It's a way to create <b>maps of your code</b>, at various levels of detail, in the same way you would use something like Google Maps to zoom in and out of an area you are interested in. 
+                    It's a way to create maps of your code, at various levels of detail, in the same way you would use something like Google Maps to zoom in and out of an area you are interested in. 
                 </p>
 
                 <div class="row">
@@ -104,7 +104,6 @@
                     </div>
                 </div>
 
-                <h3>Benefits</h3>
                 <p>
                     Although primarily aimed at software architects and developers, the C4 model provides a way for software development teams to efficiently and effectively communicate their
                     software architecture, at different levels of detail, telling different stories to different types of audience.
@@ -633,171 +632,89 @@
 
         <div class="section">
             <div class="container">
-                <a name="metamodel"></a>
-                <h2>Metamodel</h2>
+                <a name="examples"></a>
+                <h2>Examples</h2>
                 <p>
-                    If you're interested in using the C4 model or building tooling to support it, here is some information about the basic metamodel.
+                    Here are some collections of example software architecture diagrams based upon the C4 model.
                 </p>
 
-                <h3>Elements and relationships</h3>
-                <table class="table table-striped small">
-                    <tr>
-                        <th>Element type</th>
-                        <th>Parent</th>
-                        <th>Properties</th>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Person</b></td>
-                        <td>None</td>
-                        <td>
-                            <ul>
-                                <li>Name<sup>*</sup></li>
-                                <li>Description</li>
-                                <li>Location (Internal or External)</li>
-                            </ul>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Software System</b></td>
-                        <td>None</td>
-                        <td>
-                            <ul>
-                                <li>Name<sup>*</sup></li>
-                                <li>Description</li>
-                                <li>Location (Internal or External)</li>
-                                <li>The set of containers that make up the software system</li>
-                            </ul>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Container</b></td>
-                        <td>A software system</td>
-                        <td>
-                            <ul>
-                                <li>Name<sup>*</sup></li>
-                                <li>Description</li>
-                                <li>Technology</li>
-                                <li>The set of components within the container</li>
-                            </ul>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Component</b></td>
-                        <td>A container</td>
-                        <td>
-                            <ul>
-                                <li>Name<sup>*</sup></li>
-                                <li>Description</li>
-                                <li>Technology</li>
-                                <li>The set of code elements (e.g. classes, interfaces, etc) that the component is implemented by</li>
-                            </ul>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Code Element</b></td>
-                        <td>A component</td>
-                        <td>
-                            <ul>
-                                <li>Name<sup>*</sup></li>
-                                <li>Description</li>
-                                <li>Fully qualified type</li>
-                            </ul>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Relationship</b><sup>**</sup></td>
-                        <td></td>
-                        <td>
-                            <ul>
-                                <li>Description</li>
-                                <li>Technology</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
-            
-                <p class="small">
-                    <sup>*</sup> All elements in the model must have a name, and that name must be unique within the parent context.
-                    <br />
-                    <sup>**</sup> Relationships are permitted between any elements in the model, in either direction.
-                </p>
-
-                <h3>Views</h3>
-                <table class="table table-striped small">
-                    <tr>
-                        <th width="25%">View type</th>
-                        <th width="25%">Scope</th>
-                        <th width="25%">Permitted elements</th>
-                        <th width="25%"></th>
-                    </tr>
-        
-                    <tr>
-                        <td><b>1. System Context</b></td>
-                        <td>A software system.</td>
-                        <td>
-                            <ul>
-                                <li>Software systems</li>
-                                <li>People</li>
-                            </ul>
-                        </td>
-                        <td class="centered">
-                            <a href="./img/bigbankplc-SystemContext.png"><img src="./img/bigbankplc-SystemContext.png" alt="A System Context diagram" class="img-thumbnail" /></a>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>2. Container</b></td>
-                        <td>A software system</td>
-                        <td>
-                            <ul>
-                                <li>Software systems</li>
-                                <li>People</li>
-                                <li>Containers within the software system in scope</li>
-                            </ul>
-                        </td>
-                        <td class="centered">
-                            <a href="./img/bigbankplc-Containers.png"><img src="./img/bigbankplc-Containers.png" alt="A Container diagram" class="img-thumbnail" /></a>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>3. Component</b></td>
-                        <td>A container</td>
-                        <td>
-                            <ul>
-                                <li>Software systems</li>
-                                <li>People</li>
-                                <li>Other containers within the parent software system of the container in scope</li>
-                                <li>Components within the container in scope</li>
-                            </ul>
-                        </td>
-                        <td class="centered">
-                            <a href="./img/bigbankplc-Components.png"><img src="./img/bigbankplc-Components.png" alt="A Component diagram" class="img-thumbnail" /></a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><b>4. Code</b></td>
-                        <td>A component</span></td>
-                        <td>
-                            <ul>
-                                <li>Code elements (e.g. classes, interfaces, etc) that are used to implement the component in scope</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <a href="./img/bigbankplc-Classes.png"><img src="./img/bigbankplc-Classes.png" alt="A UML class diagram" class="img-thumbnail" /></a>
-                        </td>
-                    </tr>
-                </table>            
+                <div class="row">
+                    <div class="col-sm-2">
+                        <p>
+                            <a href="https://structurizr.com/share/36141#SystemContext"><img src="./img/example-big-bank-plc.png" alt="Big Bank plc" class="img-thumbnail" /></a>
+                        </p>
+                        <p class="small centered">
+                            Big Bank plc
+                            <br />
+                            <span class="smaller centered">
+                            (System Landscape, System Context, Container, Component, Dynamic and Deployment)
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p>
+                            <a href="https://structurizr.com/share/31"><img src="./img/example-financial-risk-system.png" alt="Financial Risk System" class="img-thumbnail" /></a>
+                        </p>
+                        <p class="small centered">
+                            Financial Risk System
+                            <br />
+                            <span class="smaller centered">
+                            (System Context)
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p>
+                            <a href="https://structurizr.com/share/1#components"><img src="./img/example-spring-petclinic-home.png" alt="Spring PetClinic" class="img-thumbnail" /></a>
+                        </p>
+                        <p class="small centered">
+                            Spring PetClinic
+                            <br />
+                            <span class="smaller centered">
+                            (System Context, Container, Component, Dynamic and Deployment)
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p>
+                            <a href="https://structurizr.com/share/4241#CustomerUpdateEvent"><img src="./img/example-message-bus-and-microservices.png" alt="Message bus and microservices" class="img-thumbnail" /></a>
+                        </p>
+                        <p class="small centered">
+                            Message bus and microservices
+                            <br />
+                            <span class="smaller centered">
+                            (Container and Dynamic)
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p>
+                            <a href="https://structurizr.com/share/14471#SystemLandscape"><img src="./img/example-widgets-limited.png" alt="Widgets Limited" class="img-thumbnail" /></a>
+                        </p>
+                        <p class="small centered">
+                            Widgets Limited
+                            <br />
+                            <span class="smaller centered">
+                            (System Landscape, System Context and Dynamic)
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p>
+                            <a href="https://structurizr.com/share/9581#3"><img src="./img/example-contoso-university.png" alt="Contoso University" class="img-thumbnail" /></a>
+                        </p>
+                        <p class="small centered">
+                            Contoso University
+                            <br />
+                            <span class="smaller centered">
+                            (System Context, Container, Component and Dynamic)
+                            </span>
+                        </p>
+                    </div>
+                </div>            
             </div>
         </div>
-
+    
         <div class="section">
             <div class="container small">
                 <a name="faq"></a>
@@ -967,157 +884,168 @@
 
         <div class="section">
             <div class="container">
-                <a name="examples"></a>
-                <h2>Examples</h2>
+                <a name="metamodel"></a>
+                <h2>Metamodel</h2>
                 <p>
-                    Here are some collections of example software architecture diagrams based upon the C4 model.
+                    If you're interested in using the C4 model or building tooling to support it, here is some information about the basic metamodel.
                 </p>
 
-                <div class="row">
-                    <div class="col-sm-2">
-                        <p>
-                            <a href="https://structurizr.com/share/36141#LiveDeployment"><img src="./img/example-big-bank-plc.png" alt="Big Bank plc" class="img-thumbnail" /></a>
-                        </p>
-                        <p class="small centered">
-                            Big Bank plc
-                            <br />
-                            <span class="smaller centered">
-                            (System Landscape, System Context, Container, Component, Dynamic and Deployment)
-                            </span>
-                        </p>
-                    </div>
-                    <div class="col-sm-2">
-                        <p>
-                            <a href="https://structurizr.com/share/31"><img src="./img/example-financial-risk-system.png" alt="Financial Risk System" class="img-thumbnail" /></a>
-                        </p>
-                        <p class="small centered">
-                            Financial Risk System
-                            <br />
-                            <span class="smaller centered">
-                            (System Context)
-                            </span>
-                        </p>
-                    </div>
-                    <div class="col-sm-2">
-                        <p>
-                            <a href="https://structurizr.com/share/1#components"><img src="./img/example-spring-petclinic-home.png" alt="Spring PetClinic" class="img-thumbnail" /></a>
-                        </p>
-                        <p class="small centered">
-                            Spring PetClinic
-                            <br />
-                            <span class="smaller centered">
-                            (System Context, Container, Component, Dynamic and Deployment)
-                            </span>
-                        </p>
-                        </div>
-                    <div class="col-sm-2">
-                        <p>
-                            <a href="https://structurizr.com/share/4241#CustomerUpdateEvent"><img src="./img/example-message-bus-and-microservices.png" alt="Message bus and microservices" class="img-thumbnail" /></a>
-                        </p>
-                        <p class="small centered">
-                            Message bus and microservices
-                            <br />
-                            <span class="smaller centered">
-                            (Container and Dynamic)
-                            </span>
-                        </p>
-                        </div>
-                    <div class="col-sm-2">
-                        <p>
-                            <a href="https://structurizr.com/share/14471#SystemLandscape"><img src="./img/example-widgets-limited.png" alt="Widgets Limited" class="img-thumbnail" /></a>
-                        </p>
-                        <p class="small centered">
-                            Widgets Limited
-                            <br />
-                            <span class="smaller centered">
-                            (System Landscape, System Context and Dynamic)
-                            </span>
-                        </p>
-                        </div>
-                    <div class="col-sm-2">
-                        <p>
-                            <a href="https://structurizr.com/share/9581#3"><img src="./img/example-contoso-university.png" alt="Contoso University" class="img-thumbnail" /></a>
-                        </p>
-                        <p class="small centered">
-                            Contoso University
-                            <br />
-                            <span class="smaller centered">
-                            (System Context, Container, Component and Dynamic)
-                            </span>
-                        </p>
-                        </div>
-                </div>            
-            </div>
-        </div>
-    
-        <div class="section">
-            <div class="container">
-                <a name="moreInformation"></a>
-                <h2>More information</h2>
-                <p>
-                    The following resources are recommended if you're looking for more information about
-                    visualising software architecture and the C4 model.
-                    You can also <a href="https://join.slack.com/t/soft-arch-for-devs/shared_invite/enQtMzM4NDIzODM0MzI3LWIyZjViNzFhNTZmMjc0YzhlMmMyYjRhOTU5MjQ4MGY4NjA1Nzc5ZjllOGFmOWI4NGM1ZWUwYjkxMzM0OWU5NjI">join the "Software architecture for developers" Slack workspace</a> to chat with others, ask questions, etc.
-                </p>
-
-                <div class="row">
-                    <div class="col-xs-6 centered">
-                        <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
-                            <iframe src="https://www.youtube.com/embed/m76bR16EhrU" frameborder="0" allowfullscreen></iframe>
-                        </p>
+                <h3>Elements and relationships</h3>
+                <table class="table table-striped small">
+                    <tr>
+                        <th>Element type</th>
+                        <th>Parent</th>
+                        <th>Properties</th>
+                    </tr>
         
-                        <p class="small">
-                            This is a recording of Simon Brown's talk at the OpenSlava conference in Bratislava, Slovakia during October 2017 (35 minutes).
-                        </p>
-                    </div>
-                    <div class="col-xs-6 centered">
-                        <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
-                            <iframe src="https://www.youtube.com/embed/aPtT2GNu8vM" frameborder="0" allowfullscreen></iframe>
-                        </p>
+                    <tr>
+                        <td><b>Person</b></td>
+                        <td>None</td>
+                        <td>
+                            <ul>
+                                <li>Name<sup>*</sup></li>
+                                <li>Description</li>
+                                <li>Location (Internal or External)</li>
+                            </ul>
+                        </td>
+                    </tr>
         
-                        <p class="small">
-                            This is a recording of Simon Brown's keynote at the Voxxed Days conference in Athens, Greece during May 2017 (60 minutes).
-                        </p>
-                    </div>
-                </div>
- 
-                <div class="row">
-                    <div class="col-xs-4 centered">
-                        <p>
-                            <a href="https://leanpub.com/b/software-architecture"><img src="./img/sa4d-2.png" alt="Software Architecture for Developers: Volumes 1 & 2" class="img-thumbnail" /></a>
-                        </p>
-
-                        <p class="small">
-                            This is Simon Brown's <a href="https://leanpub.com/b/software-architecture">Software Architecture for Developers</a> (Volume 2) ebook,
-                            which is available to purchase from Leanpub as an ebook in PDF, EPUB and MOBI formats.
-                            It's a short guide to visualising, documenting and exploring your software architecture.
-                        </p>
-                    </div>
-                    <div class="col-xs-4 centered">
-                        <p>
-                            <a href="https://www.voxxed.com/blog/2014/10/simple-sketches-for-diagramming-your-software-architecture/"><img src="./img/voxxed-simple-sketches.png" alt="Simple Sketches for Diagramming Your Software Architecture" class="img-thumbnail" /></a>
-                        </p>
-
-                        <p class="small">
-                            This is a short article written for Voxxed that summarises the C4 model.
-                        </p>
-                    </div>
-                    <div class="col-xs-4 centered">
-                        <p>
-                            <a href="./assets/visualising-software-architecture.pdf"><img src="./img/visualising-software-architecture.png" alt="A summary of the C4 model and tips for visualising software architecture" class="img-thumbnail" /></a>
-                        </p>
-
-                        <p class="small">
-                            And here is a one-page cheat sheet (downloadable as an A3 poster in PDF format) that summarises how to visualise software architecture using the C4 model.
-                        </p>
-                    </div>
-                </div>
-
-                <p class="small centered">
-                    There are also some podcasts with Simon Brown, where he discusses the C4 model; including
-                    <a href="https://softwareengineeringdaily.com/2017/06/20/software-architecture-with-simon-brown/">Software Engineering Daily</a> and
-                    <a href="http://www.se-radio.net/2015/06/episode-228-software-architecture-sketches-with-simon-brown/">Software Engineering Radio</a>.
+                    <tr>
+                        <td><b>Software System</b></td>
+                        <td>None</td>
+                        <td>
+                            <ul>
+                                <li>Name<sup>*</sup></li>
+                                <li>Description</li>
+                                <li>Location (Internal or External)</li>
+                                <li>The set of containers that make up the software system</li>
+                            </ul>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>Container</b></td>
+                        <td>A software system</td>
+                        <td>
+                            <ul>
+                                <li>Name<sup>*</sup></li>
+                                <li>Description</li>
+                                <li>Technology</li>
+                                <li>The set of components within the container</li>
+                            </ul>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>Component</b></td>
+                        <td>A container</td>
+                        <td>
+                            <ul>
+                                <li>Name<sup>*</sup></li>
+                                <li>Description</li>
+                                <li>Technology</li>
+                                <li>The set of code elements (e.g. classes, interfaces, etc) that the component is implemented by</li>
+                            </ul>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>Code Element</b></td>
+                        <td>A component</td>
+                        <td>
+                            <ul>
+                                <li>Name<sup>*</sup></li>
+                                <li>Description</li>
+                                <li>Fully qualified type</li>
+                            </ul>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>Relationship</b><sup>**</sup></td>
+                        <td></td>
+                        <td>
+                            <ul>
+                                <li>Description</li>
+                                <li>Technology</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            
+                <p class="small">
+                    <sup>*</sup> All elements in the model must have a name, and that name must be unique within the parent context.
+                    <br />
+                    <sup>**</sup> Relationships are permitted between any elements in the model, in either direction.
                 </p>
+
+                <h3>Views</h3>
+                <table class="table table-striped small">
+                    <tr>
+                        <th width="25%">View type</th>
+                        <th width="25%">Scope</th>
+                        <th width="25%">Permitted elements</th>
+                        <th width="25%"></th>
+                    </tr>
+        
+                    <tr>
+                        <td><b>1. System Context</b></td>
+                        <td>A software system.</td>
+                        <td>
+                            <ul>
+                                <li>Software systems</li>
+                                <li>People</li>
+                            </ul>
+                        </td>
+                        <td class="centered">
+                            <a href="./img/bigbankplc-SystemContext.png"><img src="./img/bigbankplc-SystemContext.png" alt="A System Context diagram" class="img-thumbnail" /></a>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>2. Container</b></td>
+                        <td>A software system</td>
+                        <td>
+                            <ul>
+                                <li>Software systems</li>
+                                <li>People</li>
+                                <li>Containers within the software system in scope</li>
+                            </ul>
+                        </td>
+                        <td class="centered">
+                            <a href="./img/bigbankplc-Containers.png"><img src="./img/bigbankplc-Containers.png" alt="A Container diagram" class="img-thumbnail" /></a>
+                        </td>
+                    </tr>
+        
+                    <tr>
+                        <td><b>3. Component</b></td>
+                        <td>A container</td>
+                        <td>
+                            <ul>
+                                <li>Software systems</li>
+                                <li>People</li>
+                                <li>Other containers within the parent software system of the container in scope</li>
+                                <li>Components within the container in scope</li>
+                            </ul>
+                        </td>
+                        <td class="centered">
+                            <a href="./img/bigbankplc-Components.png"><img src="./img/bigbankplc-Components.png" alt="A Component diagram" class="img-thumbnail" /></a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><b>4. Code</b></td>
+                        <td>A component</span></td>
+                        <td>
+                            <ul>
+                                <li>Code elements (e.g. classes, interfaces, etc) that are used to implement the component in scope</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="./img/bigbankplc-Classes.png"><img src="./img/bigbankplc-Classes.png" alt="A UML class diagram" class="img-thumbnail" /></a>
+                        </td>
+                    </tr>
+                </table>            
             </div>
         </div>
 
@@ -1257,6 +1185,77 @@
                 </p>
             </div>
         </div>    
+
+        <div class="section">
+            <div class="container">
+                <a name="moreInformation"></a>
+                <h2>More information</h2>
+                <p>
+                    The following resources are recommended if you're looking for more information about
+                    visualising software architecture and the C4 model.
+                    You can also <a href="https://join.slack.com/t/soft-arch-for-devs/shared_invite/enQtMzM4NDIzODM0MzI3LWIyZjViNzFhNTZmMjc0YzhlMmMyYjRhOTU5MjQ4MGY4NjA1Nzc5ZjllOGFmOWI4NGM1ZWUwYjkxMzM0OWU5NjI">join the "Software architecture for developers" Slack workspace</a> to chat with others, ask questions, etc.
+                </p>
+
+                <div class="row">
+                    <div class="col-xs-6 centered">
+                        <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
+                            <iframe src="https://www.youtube.com/embed/m76bR16EhrU" frameborder="0" allowfullscreen></iframe>
+                        </p>
+        
+                        <p class="small">
+                            This is a recording of Simon Brown's talk at the OpenSlava conference in Bratislava, Slovakia during October 2017 (35 minutes).
+                        </p>
+                    </div>
+                    <div class="col-xs-6 centered">
+                        <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
+                            <iframe src="https://www.youtube.com/embed/aPtT2GNu8vM" frameborder="0" allowfullscreen></iframe>
+                        </p>
+        
+                        <p class="small">
+                            This is a recording of Simon Brown's keynote at the Voxxed Days conference in Athens, Greece during May 2017 (60 minutes).
+                        </p>
+                    </div>
+                </div>
+ 
+                <div class="row">
+                    <div class="col-xs-4 centered">
+                        <p>
+                            <a href="https://leanpub.com/b/software-architecture"><img src="./img/sa4d-2.png" alt="Software Architecture for Developers: Volumes 1 & 2" class="img-thumbnail" /></a>
+                        </p>
+
+                        <p class="small">
+                            This is Simon Brown's <a href="https://leanpub.com/b/software-architecture">Software Architecture for Developers</a> (Volume 2) ebook,
+                            which is available to purchase from Leanpub as an ebook in PDF, EPUB and MOBI formats.
+                            It's a short guide to visualising, documenting and exploring your software architecture.
+                        </p>
+                    </div>
+                    <div class="col-xs-4 centered">
+                        <p>
+                            <a href="https://www.voxxed.com/blog/2014/10/simple-sketches-for-diagramming-your-software-architecture/"><img src="./img/voxxed-simple-sketches.png" alt="Simple Sketches for Diagramming Your Software Architecture" class="img-thumbnail" /></a>
+                        </p>
+
+                        <p class="small">
+                            This is a short article written for Voxxed that summarises the C4 model.
+                        </p>
+                    </div>
+                    <div class="col-xs-4 centered">
+                        <p>
+                            <a href="./assets/visualising-software-architecture.pdf"><img src="./img/visualising-software-architecture.png" alt="A summary of the C4 model and tips for visualising software architecture" class="img-thumbnail" /></a>
+                        </p>
+
+                        <p class="small">
+                            And here is a one-page cheat sheet (downloadable as an A3 poster in PDF format) that summarises how to visualise software architecture using the C4 model.
+                        </p>
+                    </div>
+                </div>
+
+                <p class="small centered">
+                    There are also some podcasts with Simon Brown, where he discusses the C4 model; including
+                    <a href="https://softwareengineeringdaily.com/2017/06/20/software-architecture-with-simon-brown/">Software Engineering Daily</a> and
+                    <a href="http://www.se-radio.net/2015/06/episode-228-software-architecture-sketches-with-simon-brown/">Software Engineering Radio</a>.
+                </p>
+            </div>
+        </div>
 
         <div class="section">
             <div class="container">

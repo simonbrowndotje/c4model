@@ -45,10 +45,10 @@ body {
     padding-right: 10px;
 }
 .section:nth-child(even) {
-    background: #ffffff;
+    background: #eeeeee;
 }
 .section:nth-child(odd) {
-    background: #eeeeee;
+    background: #ffffff;
 }
 .row {
     padding-bottom: 20px;
