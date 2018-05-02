@@ -27,6 +27,7 @@
             <a href="#notation">Notation</a>
             <a href="#faq">FAQ</a>
             <a href="#examples">Examples</a>
+            <br />
             <a href="#training">On-site training</a>
             <a href="https://www.safaribooksonline.com/live-training/courses/visualizing-software-architecture-with-the-c4-model/0636920174127/">Online training</a>
             <a href="#tooling">Tooling</a>
@@ -39,7 +40,7 @@
                 <p>
                     Creating software architecture diagrams is something of a lost art. <a href="http://simonbrown.je">Simon Brown</a> has been running software architecture training courses
                     for a number of years, part of which is a simple architecture kata where groups of people are asked to design a software solution and draw some architecture diagrams to describe it.
-                    Based upon the anecdotal evidence from training over 10,000 people in more than 25 countries, software architects and developers struggle with how to communicate software architecture.
+                    Based upon the anecdotal evidence from training over 10,000 people in more than 30 countries, software architects and developers struggle with how to communicate software architecture.
                     Even today, the majority of the diagrams from the initial iteration of the architecture kata are typically created using an ad hoc “boxes and lines” notation with no clear notation or semantics.
                 </p>
 
@@ -942,6 +943,23 @@
                         </p>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <h3>Should the lines represent dependencies or data flow?</h3>
+                        <p>
+                            This is your choice. Sometimes diagrams work better showing dependency relationships (e.g. uses, reads from, etc),
+                            and sometimes data flow (e.g. customer update events) works better. Whichever you choose, make sure that the description of the line matches the direction of the arrow.
+                        </p>
+                        <p>
+                            It's also worth remembering that most relationships can be expressed either way, and the more explicit you can be, the better.
+                            For example, describing a relationship as "sends customer update events to" can be more descriptive than simply "customer update events".
+                        </p>
+                    </div>                            
+                    <div class="col-xs-4">
+                    </div>
+                    <div class="col-xs-4">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1407,7 +1425,7 @@
             </div>
             <div class="modal-body">
                 <p>
-                    This is an example Container diagram for a fictional Internet Banking System. It shows that the Internet Banking System is made up of five containers:
+                    This is an example Container diagram for a fictional Internet Banking System. It shows that the Internet Banking System (the dashed box) is made up of five containers:
                     a server-side Web Application, a Single-Page Application, a Mobile App, a server-side API Application, and a Database.
                     The Web Application is a Java/Spring MVC web application that simply serves static content (HTML, CSS and JavaScript), including the content that makes up the Single-Page Application.
                     The Single-Page Application is an Angular application that runs in the customer's web browser, providing all of the Internet banking features.
