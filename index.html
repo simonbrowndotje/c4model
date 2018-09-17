@@ -28,6 +28,7 @@
             <a href="#examples">Examples</a>
             <a href="#faq">FAQ</a>
             <br />
+            <a href="#modelling">Diagramming vs modelling</a>
             <a href="#training">On-site training</a>
             <a href="https://www.safaribooksonline.com/search/?query=Visualizing%20software%20architecture%20with%20the%20C4%20Model&extended_publisher_data=true&highlight=true&is_academic_institution_account=false&source=user&include_assessments=false&include_case_studies=true&include_courses=true&include_orioles=true&include_playlists=true&formats=live%20online%20training&sort=relevance&field=title">Online training</a>
             <a href="#tooling">Tooling</a>
@@ -820,6 +821,10 @@
                         <p>
                             Instead, don't be afraid to split that single complex diagram into a larger number of simpler diagrams, each with a specific focus around a business area, functional area, functional grouping, bounded context, use case, user interaction, feature set, etc. The key is to ensure that each of the separate diagrams tells a different part of the same overall story, at the same level of abstraction.
                         </p>
+
+                        <p>
+                            See also <a href="#modelling">Diagramming vs modelling</a> for an alternative approach.
+                        </p>
                     </div>
                     <div class="col-xs-4">
                         <h3>Will the diagrams become outdated quickly?</h3>
@@ -933,6 +938,81 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="container">
+                <a name="modelling"></a>
+                <h2>Diagramming vs modelling</h2>
+                <p>
+                    As an industry, we've tended to prefer diagramming over modelling, primarily because the barrier to entry is relatively low, and it's seen as a much simpler task.
+                    When you're diagramming, you're typically creating one or more separate diagrams, often with an ad hoc notation, using tools (e.g. Microsoft Visio or a whiteboard)
+                    that don't understand anything about the semantics of your diagrams. The domain language of diagramming tools is really just boxes and lines, so you can't ask them questions such as "what dependencies does component X have?".
+                    Additionally, reusing diagram elements across diagrams is usually done by duplication (i.e. copying and pasting), thereby putting the responsibility on you to keep diagrams in sync when you rename such elements.  
+                    It's worth noting here that the C4 model can be used irrespective of whether you are diagramming or modelling, but there are some interesting opportunities when you progress from diagramming to modelling.
+                </p>
+
+                <p>
+                    With modelling, you're building up a non-visual model of something (e.g. the software architecture of a software system), and then creating different views (e.g. diagrams) on top of that model.
+                    This requires a little more rigour, but the result is a single definition of all elements and the relationships between them.
+                    This, in turn, allows modelling tools to understand the semantics of what you're trying to do, and provide additional intelligence on top of the model.
+                    It also allows modelling tools to provide alternative visualisations, often automatically.
+                </p>
+
+                <p>
+                    One of the frequently asked questions (above) is about diagramming large and complex software systems.
+                    Once you start to have more than ~20 elements (plus the relationships between them) on a diagram, the resulting diagram starts to become cluttered very quickly.
+                    For example, image 1 (below) is a component diagram for a single container.
+                </p>
+                <p>
+                    One approach to dealing with this is to not show all of the components on a single diagram, and instead create multiple diagrams, one per "slice" through the container (image 2, below).
+                    This approach can certainly help, but it's worth asking whether the resulting diagrams are useful.
+                    Are you going to use them and, if so, what are you going to use them for?
+                    Although the System Context and Container diagrams are very useful, Component diagrams for large software systems often have less value because they are harder to keep up to date, and you might find that very few people look at them anyway, especially if they are not included in documentation or presentations.
+                </p>
+
+                <div class="row">
+                    <div class="col-xs-3 centered">
+                        <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
+                            <a href="./img/modelling-1.png"><img src="./img/modelling-1.png" alt="A large and cluttered diagram" class="img-responsive" /></a>
+                        </div>
+                        <p class="mapCaption">
+                            Once you have more than ~20 elements on a diagram, the diagram starts to become cluttered very quickly.
+                        </p>
+                    </div>
+                    <div class="col-xs-3 centered">
+                        <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
+                            <a href="./img/modelling-2.png"><img src="./img/modelling-2.png" alt="A smaller diagram showing an individual slice" class="img-responsive" /></a>
+                        </div>
+                        <p class="mapCaption">
+                            Creating multiple diagrams, one per "slice", can help, although the resulting diagrams tend to be very simple and increase the effort needed to keep them up to date.
+                        </p>
+                    </div>
+                    <div class="col-xs-3 centered">
+                        <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
+                            <a href="./img/modelling-3.png"><img src="./img/modelling-3.png" alt="An alternative visualisation" class="img-responsive" /></a>
+                        </div>
+                        <p class="mapCaption">
+                            Rather than creating a diagram, you can use alternative visualisations instead. This visualisation shows the dependencies between components inside a container.  
+                        </p>
+                    </div>
+                    <div class="col-xs-3 centered">
+                        <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
+                            <a href="./img/modelling-4.png"><img src="./img/modelling-4.png" alt="An alternative visualisation" class="img-responsive" /></a>
+                        </div>
+                        <p class="mapCaption">
+                            And this alternative visualisation shows all of the elements and relationships in the model, filtered to show a subset of the model.
+                        </p>
+                    </div>
+                </div>  
+                
+                <p>
+                    Often, the diagrams themselves aren't the end-goal, with teams using the diagrams to answer other questions that they have, such as, "what dependencies does component X have?".
+                    If this is the case, building a model will allow you to answer such questions, without the additional effort of creating a diagram.
+                    In other words, once you have a model, you can visualise it in a number of different ways (images 3 and 4, above), helping to answer the real questions that you are seeking to answer.
+                    Diagrams certainly are a fantastic way to communicate software architecture, but other visualisations can sometimes help answer the real underlying questions that you might have.
+                </p>
             </div>
         </div>
 
