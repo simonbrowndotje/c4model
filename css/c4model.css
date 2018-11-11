@@ -162,3 +162,22 @@ a:hover {
     min-height: 100%;
     height: auto;
 }
+
+.carousel-caption {
+    background: #02172C;
+    color: #ffffff;
+    text-shadow: none;
+    font-size: 18px;
+    opacity: 0.9;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.carousel-control {
+    color: #000000;
+    text-shadow: none;
+    opacity: 0.1;
+}
+.carousel-control:hover, .carousel-control:focus {
+    opacity: 0.1;
+}
