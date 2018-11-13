@@ -988,6 +988,24 @@
                         </p>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <h3>In a message-driven architecture, should you include the message bus?</h3>
+                        <p>
+                            If you have two services, A and B, that communicate by sending a message via a message bus (irrespective of topics, queues, p2p, pub/sub, etc), you have a couple of options.
+                            The first option is to show service A sending a message to the message bus, and the message bus subsequently forwarding that message to service B.
+                            While accurate, the "hub and spoke" nature of the diagram tends to obscure the notion that there's coupling between the message producer and consumer.
+                        </p>
+                        <p>
+                            The other approach is to omit the message bus, and instead use notation (e.g. a textual description, colour coding, line style, etc) to signify that the interaction between service A and B happens via a message bus.
+                            This approach tends to result in diagrams that tell a clearer story.
+                        </p>
+                    </div>                            
+                    <div class="col-xs-4">
+                    </div>
+                    <div class="col-xs-4">
+                    </div>
+                </div>
             </div>
         </div>
 
