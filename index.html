@@ -311,7 +311,7 @@
                         <p class="small">
                             <b>Primary elements</b>: The software system in scope.
                             <br />
-                            <b>Supporting elements</b>: People and software systems directly connected to the software system in scope.
+                            <b>Supporting elements</b>: People (e.g. users, actors, roles, or personas) and software systems (external dependencies) that are directly connected to the software system in scope. Typically these other software systems sit outside the scope or boundary of your own software system, and you don’t have responsibility or ownership of them.
                         </p>
                         <p class="small">
                             <b>Intended audience</b>: Everybody, both technical and non-technical people, inside and outside of the software development team.
@@ -1015,6 +1015,13 @@
                         </p>
                     </div>                            
                     <div class="col-xs-4">
+                        <h3>Should data storage services be shown as software systems or containers</h3>
+                        <p>
+                            A frequently asked question is whether services like Amazon S3, Amazon RDS, or Azure SQL Database should be shown as software systems or containers. After all, these are external services that most of us don’t own or run ourselves.
+                        </p>
+                        <p>
+                            If you’re building a software system that is using Amazon S3 for storing data, it’s true that you don’t run S3 yourself, but you do have ownership and responsbility for the buckets you are using. Similarly with Amazon RDS, you have (more or less) complete control over any database schemas that you create. For this reason, treat them as containers because they are an integral part of your software architecture, although they are hosted elsewhere.
+                        </p>
                     </div>
                     <div class="col-xs-4">
                     </div>
