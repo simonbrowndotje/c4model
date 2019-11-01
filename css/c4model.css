@@ -7,10 +7,11 @@ body {
     text-align: center;
 }
 #header {
-  background: #08427B;
-  color: #ffffff;
-  text-align: center;
-  padding: 100px 10px 100px 10px;
+    background: #ffffff;
+    color: #000000;
+    text-align: center;
+    padding: 50px 0px 60px 0px;
+    font-size: 20px;
 }
 #header .label {
   font-size: 13px;
@@ -31,7 +32,7 @@ body {
     font-size: 13px;
 }
 .container {
-    font-size: 18px;
+    font-size: 20px;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -58,25 +59,26 @@ h1 {
     font-weight: bold;
 }
 #header h1 {
-    font-weight: bold;
-    font-size: 50px;
-    color: #ffffff;
+    font-weight: normal;
+    font-size: 70px;
 }
 h2 {
-    font-weight: bold;
+    font-weight: normal;
+    font-size: 50px;
+    margin-bottom: 20px;
 }
 #header h2 {
-    font-weight: bold;
-    font-size: 20px;
-    color: #ffffff;
+    font-weight: normal;
+    font-size: 30px;
 }
 h3 {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 30px;
+    font-weight: normal;
+    margin-bottom: 15px;
 }
 h4 {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: normal;
 }
 h5 {
     font-size: 16px;
