@@ -183,3 +183,7 @@ a:hover {
 .carousel-control:hover, .carousel-control:focus {
     opacity: 0.1;
 }
+.glyphicon {
+    width: 20px;
+    height: 20px;
+}
