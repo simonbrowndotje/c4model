@@ -224,17 +224,18 @@
                     <div class="col-xs-6">
                         <h3>Person</h3>
                         <p class="small">
-                            However you think about your users (as actors, roles, personas, etc), people are the various human users of your software system.
+                            A person represents one of the human users of your software system (e.g. actors, roles, personas, etc).
                         </p>
 
                         <h3>Software System</h3>
                         <p class="small">
                             A software system is the highest level of abstraction and describes something that delivers value to its users, whether they are human or not. This includes the software system you are modelling, and the other software systems upon which your software system depends (or vice versa).
+                            In many cases, a software system is "owned by" a single software development team.
                         </p>
 
                         <h3>Container</h3>
                         <p class="small">
-                            A container represents something that hosts code or data. A container is something that needs to
+                            Not Docker! In the C4 model, a container represents an application or a data store. A container is something that needs to
                             be running in order for the overall software system to work. In real terms, a container is something like:
                         </p>
                         
@@ -261,11 +262,12 @@
 
                         <h3>Component</h3>
                         <p class="small">
-                            The word "component" is a hugely overloaded term in the software development industry, but in this context a component is simply a grouping of related functionality encapsulated behind a well-defined interface.
+                            The word "component" is a hugely overloaded term in the software development industry, but in this context a component is a grouping of related functionality encapsulated behind a well-defined interface.
                             If you're using a language like Java or C#, the simplest way to think of a component is that it's a collection of implementation classes behind an interface. Aspects such as how those components are packaged (e.g. one component vs many components per JAR file, DLL, shared library, etc) is a separate and orthogonal concern.
                         </p>
                         <p class="small">
                             An important point to note here is that all components inside a container typically execute in the same process space.
+                            <b>In the C4 model, components are not separately deployable units.</b>
                         </p>
                     </div>
                 </div>
