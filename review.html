@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Diagram review checklist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="./css/bootstrap-3.3.2.min.css" rel="stylesheet" media="screen">
+    <link href="./css/bootstrap-theme-3.3.2.min.css" rel="stylesheet" media="screen">
+    <link href="./css/c4model.css" rel="stylesheet" media="screen">
+    <link href='./css/open-sans.css' rel='stylesheet' type='text/css' />
+
+    <script src="./js/jquery-2.0.3.min.js"></script>
+    <script src="./js/bootstrap-3.3.2.min.js"></script>
+
+    <style>
+        .table>tbody>tr {
+            height: 100px;
+        }
+        .table>tbody>tr>td {
+            vertical-align: middle;
+        }
+        td:nth-child(1) {  
+            width: 70%;
+        }
+        td:nth-child(2) {  
+            width: 10%;
+        }
+        td:nth-child(3) {  
+            width: 10%;
+        }
+        td:nth-child(4) {  
+            font-size: 50px;
+            width: 10%;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="content">
+
+        <div id="header">
+            <div class="container">
+                <h1>Notation, notation, notation</h1>
+                <h2>A software architecture diagram review checklist</h2>
+                <p class="smaller">
+                        <a href="./assets/software-architecture-diagram-review-checklist.pdf">(printable PDF version)</a>
+                </p>
+            </div>
+        </div>
+
+        <div id="generalChecklist" class="section">
+            <div class="container">
+                <h2>General</h2>
+
+                <table width="100%" class="table table-striped">
+                    <tr>
+                        <td>Does the diagram have a title?</td>
+                        <td><div class="radio"><label><input id="diagramTitle" name="diagramTitle" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="diagramTitle" name="diagramTitle" type="radio" value="no" /> No</label></div></td>
+                        <td id="diagramTitleStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Do you understand what the diagram type is?</td>
+                        <td><div class="radio"><label><input id="diagramType" name="diagramType" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="diagramType" name="diagramType" type="radio" value="no" /> No</label></div></td>
+                        <td id="diagramTypeStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Do you understand what the diagram scope is?</td>
+                        <td><div class="radio"><label><input id="diagramScope" name="diagramScope" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="diagramScope" name="diagramScope" type="radio" value="no" /> No</label></div></td>
+                        <td id="diagramScopeStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Does the diagram have a key/legend?</td>
+                        <td><div class="radio"><label><input id="diagramKey" name="diagramKey" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="diagramKey" name="diagramKey" type="radio" value="no" /> No</label></div></td>
+                        <td id="diagramKeyStatus"></td>
+                    </tr>                                            
+                </table>
+            </div>
+        </div>
+
+        <div id="elementsChecklist" class="section">
+            <div class="container">
+                <h2>Elements</h2>
+
+                <table width="100%" class="table table-striped">
+                    <tr>
+                        <td>Does every element have a name?</td>
+                        <td><div class="radio"><label><input id="elementNames" name="elementNames" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="elementNames" name="elementNames" type="radio" value="no" /> No</label></div></td>
+                        <td id="elementNamesStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Do you understand the type of every element? (i.e. the level of abstraction; e.g. software system, container, etc)</td>
+                        <td><div class="radio"><label><input id="elementTypes" name="elementTypes" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="elementTypes" name="elementTypes" type="radio" value="no" /> No</label></div></td>
+                        <td id="elementTypesStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Do you understand what every element does?</td>
+                        <td><div class="radio"><label><input id="elementDescriptions" name="elementDescriptions" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="elementDescriptions" name="elementDescriptions" type="radio" value="no" /> No</label></div></td>
+                        <td id="elementDescriptionsStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Where applicable, do you understand the technology choices associated with every element?</td>
+                        <td><div class="radio"><label><input id="elementTechnologies" name="elementTechnologies" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="elementTechnologies" name="elementTechnologies" type="radio" value="no" /> No</label></div></td>
+                        <td id="elementTechnologiesStatus"></td>
+                    </tr>                                            
+
+                    <tr>
+                        <td>Do you understand the meaning of all acronyms and abbreviations used?</td>
+                        <td><div class="radio"><label><input id="elementAcronyms" name="elementAcronyms" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="elementAcronyms" name="elementAcronyms" type="radio" value="no" /> No</label></div></td>
+                        <td id="elementAcronymsStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Do you understand the meaning of all colours used?</td>
+                        <td><div class="radio"><label><input id="elementColours" name="elementColours" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="elementColours" name="elementColours" type="radio" value="no" /> No</label></div></td>
+                        <td id="elementColoursStatus"></td>
+                    </tr>                                            
+
+                    <tr>
+                        <td>Do you understand the meaning of all shapes used?</td>
+                        <td><div class="radio"><label><input id="elementShapes" name="elementShapes" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="elementShapes" name="elementShapes" type="radio" value="no" /> No</label></div></td>
+                        <td id="elementShapesStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Do you understand the meaning of all icons used?</td>
+                        <td><div class="radio"><label><input id="elementIcons" name="elementIcons" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="elementIcons" name="elementIcons" type="radio" value="no" /> No</label></div></td>
+                        <td id="elementIconsStatus"></td>
+                    </tr>                                            
+
+                    <tr>
+                        <td>Do you understand the meaning of all border styles used? (e.g. solid, dashed, etc)</td>
+                        <td><div class="radio"><label><input id="elementBorders" name="elementBorders" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="elementBorders" name="elementBorders" type="radio" value="no" /> No</label></div></td>
+                        <td id="elementBordersStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Do you understand the meaning of all element sizes used? (e.g. small vs large boxes)</td>
+                        <td><div class="radio"><label><input id="elementSizes" name="elementSizes" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="elementSizes" name="elementSizes" type="radio" value="no" /> No</label></div></td>
+                        <td id="elementSizesStatus"></td>
+                    </tr>                                            
+                </table>
+            </div>
+        </div>
+    
+        <div id="relationshipsChecklist" class="section">
+            <div class="container">
+                <h2>Relationships</h2>
+
+                <table width="100%" class="table table-striped">
+                    <tr>
+                        <td>Does every line have a label describing the intent of that relationship?</td>
+                        <td><div class="radio"><label><input id="relationshipDescriptions" name="relationshipDescriptions" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="relationshipDescriptions" name="relationshipDescriptions" type="radio" value="no" /> No</label></div></td>
+                        <td id="relationshipDescriptionsStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Where applicable, do you understand the technology choices associated with every relationship? (e.g. protocols for inter-process communication)</td>
+                        <td><div class="radio"><label><input id="relationshipTechnologies" name="relationshipTechnologies" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="relationshipTechnologies" name="relationshipTechnologies" type="radio" value="no" /> No</label></div></td>
+                        <td id="relationshipTechnologiesStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Do you understand the meaning of all acronyms and abbreviations used?</td>
+                        <td><div class="radio"><label><input id="relationshipAcronyms" name="relationshipAcronyms" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="relationshipAcronyms" name="relationshipAcronyms" type="radio" value="no" /> No</label></div></td>
+                        <td id="relationshipAcronymsStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Do you understand the meaning of all colours used?</td>
+                        <td><div class="radio"><label><input id="relationshipColours" name="relationshipColours" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="relationshipColours" name="relationshipColours" type="radio" value="no" /> No</label></div></td>
+                        <td id="relationshipColoursStatus"></td>
+                    </tr>                                            
+
+                    <tr>
+                        <td>Do you understand the meaning of all arrow heads used?</td>
+                        <td><div class="radio"><label><input id="relationshipArrows" name="relationshipArrows" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="relationshipArrows" name="relationshipArrows" type="radio" value="no" /> No</label></div></td>
+                        <td id="relationshipArrowsStatus"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Do you understand the meaning of all line styles used? (e.g. solid, dashed, etc)</td>
+                        <td><div class="radio"><label><input id="relationshipLineStyles" name="relationshipLineStyles" type="radio" value="yes" /> Yes</label></div></td>
+                        <td><div class="radio"><label><input id="relationshipLineStyles" name="relationshipLineStyles" type="radio" value="no" /> No</label></div></td>
+                        <td id="relationshipLineStylesStatus"></td>
+                    </tr>                                                                                    
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="emojiTest" class="centered hidden" style="font-size: 30px"></div>
+
+    <script>
+        var genders = [ '&#x2642', '&#x2640' ];
+        var skinTones = [ '&#x1F3FB', '&#x1F3FC', '&#x1F3FD', '&#x1F3FE', '&#x1F3FF' ];
+        var emojis = {
+            yes: [
+                { value: '&#x1F600', skinTone: false, gender: false }, // grinning face
+                { value: '&#x1F603', skinTone: false, gender: false }, // grinning face with big eyes
+                { value: '&#x1F604', skinTone: false, gender: false }, // grinning face with smiling eyes
+                { value: '&#x1F601', skinTone: false, gender: false }, // beaming face with smiling eyes
+                { value: '&#x1F642', skinTone: false, gender: false }, // slightly smiling face
+                { value: '&#x1F60A', skinTone: false, gender: false }, // smiling face with smiling eyes
+                { value: '&#x1F607', skinTone: false, gender: false }, // smiling face with halo
+                { value: '&#x1F44D', skinTone: true, gender: false }, // thumbs up
+                { value: '&#x1F44F', skinTone: true, gender: false }, // clapping hands
+                { value: '&#x1F64C', skinTone: true, gender: false }, // raising hands
+                { value: '&#x1F64F', skinTone: true, gender: false }, // folded hands
+                { value: '&#x1F4AA', skinTone: true, gender: false }, // flexed biceps
+                { value: '&#x1F44C', skinTone: true, gender: false } // OK hand
+            ],
+            no: [
+                { value: '&#x1F92D', skinTone: false, gender: false }, // face with hand over mouth
+                { value: '&#x1F914', skinTone: false, gender: false }, // thinking face
+                { value: '&#x1F610', skinTone: false, gender: false }, // neutral face
+                { value: '&#x1F928', skinTone: false, gender: false }, // face with raised eyebrow
+                { value: '&#x1F636', skinTone: false, gender: false }, // face without mouth
+                { value: '&#x1F612', skinTone: false, gender: false }, // unamused face
+                { value: '&#x1F644', skinTone: false, gender: false }, // face with rolling eyes
+                { value: '&#x1F62C', skinTone: false, gender: false }, // grimacing face
+                { value: '&#x1F910', skinTone: false, gender: false }, // zipper-mouth face
+                { value: '&#x1F614', skinTone: false, gender: false }, // pensive face
+                { value: '&#x1F615', skinTone: false, gender: false }, // confused face
+                { value: '&#x1F61F', skinTone: false, gender: false }, // worried face
+                { value: '&#x1F641', skinTone: false, gender: false }, // slightly frowning face
+                { value: '&#x1F62E', skinTone: false, gender: false }, // face with open mouth
+                { value: '&#x1F62F', skinTone: false, gender: false }, // hushed face
+                { value: '&#x1F632', skinTone: false, gender: false }, // astonished face
+                { value: '&#x1F633', skinTone: false, gender: false }, // flushed face
+                { value: '&#x1F622', skinTone: false, gender: false }, // crying face
+                { value: '&#x1F631', skinTone: false, gender: false }, // face screaming in fear
+                { value: '&#x1F44E', skinTone: true, gender: false }, // thumbs down
+                { value: '&#x1F937', skinTone: true, gender: true }, // shrugging
+                { value: '&#x1F645', skinTone: true, gender: true }, // person gesturing NO
+                { value: '&#x1F926', skinTone: true, gender: true } // person facepalming
+            ]
+        };
+        var joiner = '&#x200D';
+        var variant = '&#xFE0F';
+
+        $('input[type=radio]').change(function() {
+            var name = this.name;
+            var value = this.value;
+
+            var emojisForValue = emojis[value];
+            var emoji = emojisForValue[getRandomInt(emojisForValue.length)];
+            var html = renderEmoji(emoji);
+            $('#' + name + 'Status').html(html);
+        });
+
+        function getRandomInt(max) {
+            max--;
+            return Math.floor(Math.random() * (max + 1));
+        }
+
+        function renderEmoji(emoji) {
+            if (emoji.gender === true) {
+                var gender = genders[getRandomInt(genders.length)];
+                var skinTone = skinTones[getRandomInt(skinTones.length)];
+
+                return emoji.value + skinTone + joiner + gender + variant;
+            } else {
+                if (emoji.skinTone === true) {
+                    var skinTone = skinTones[getRandomInt(skinTones.length)];
+
+                    return emoji.value + skinTone;
+                } else {
+                    return emoji.value;
+                }
+            }
+        }
+
+        // var html = '';
+        // emojis.yes.forEach(function(emoji) {
+        //     html += renderEmoji(emoji);
+        //     html += ' ';
+        // });
+        // html += '<br />';
+        // emojis.no.forEach(function(emoji) {
+        //     html += renderEmoji(emoji);
+        //     html += ' ';
+        // });
+        // $('#emojiTest').html(html);
+    </script>
+
+</body>
+</html>
