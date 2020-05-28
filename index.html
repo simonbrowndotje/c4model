@@ -60,6 +60,7 @@
             <a href="#FAQ">FAQ</a>
             <a href="#Modelling">Diagramming vs modelling</a>
             <a href="https://architectis.je">Training</a>
+            <a href="#Adopting">Adopting</a>
             <a href="#Tooling">Tooling</a>
         </div>    
     
@@ -1049,6 +1050,15 @@
                         </p>
                     </div>
                     <div class="col-xs-4">
+                        <h3>Is the C4 model universally applicable?</h3>
+                        <p>
+                            The C4 model was designed to help describe, document, and diagram custom-built, bespoke software systems.
+                            From this perspective, the C4 model can be used to describe a variety of software architectures (monolithic or distributed), built in a variety of programming languages, deployed on a variety of platforms (on-premises or cloud).
+                        </p>
+                        <p>
+                            Solutions that are perhaps less suited to the C4 model include embedded systems/firmware, and solutions that reply on heavy customization rather than bespoke development (e.g. SAP and Salesforce).
+                            Even with these solutions, you still may find the System Context and Container diagrams useful.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1297,43 +1307,67 @@
         </div> 
 
         <div class="section">
-            <div class="container">
-                <a name="MoreInformation"></a>
-                <h2>More information</h2>
-                <p>
-                    The following resources are recommended if you're looking for more information about
-                    visualising software architecture and the C4 model.
-                    You can also <a href="https://join.slack.com/t/soft-arch-for-devs/shared_invite/enQtMzM4NDIzODM0MzI3LWIyZjViNzFhNTZmMjc0YzhlMmMyYjRhOTU5MjQ4MGY4NjA1Nzc5ZjllOGFmOWI4NGM1ZWUwYjkxMzM0OWU5NjI">join the "Software architecture for developers" Slack workspace</a> to chat with others, ask questions, etc.
-                </p>
-
-                <div class="row">
-                        <div class="col-xs-4 centered">
-                            <p>
-                                <a href="https://leanpub.com/b/software-architecture"><img src="./img/sa4d-2.png" alt="Software Architecture for Developers: Volumes 1 & 2" class="img-thumbnail" /></a>
-                            </p>
+                <div class="container">
+                    <a name="MoreInformation"></a>
+                    <h2>More information</h2>
+                    <p>
+                        The following resources are recommended if you're looking for more information about
+                        visualising software architecture and the C4 model.
+                        You can also <a href="https://join.slack.com/t/soft-arch-for-devs/shared_invite/enQtMzM4NDIzODM0MzI3LWIyZjViNzFhNTZmMjc0YzhlMmMyYjRhOTU5MjQ4MGY4NjA1Nzc5ZjllOGFmOWI4NGM1ZWUwYjkxMzM0OWU5NjI">join the "Software architecture for developers" Slack workspace</a> to chat with others, ask questions, etc.
+                    </p>
     
-                            <p class="small">
-                                This is Simon Brown's <a href="https://leanpub.com/b/software-architecture">Software Architecture for Developers</a> (Volume 2) ebook,
-                                which is available to purchase from Leanpub as an ebook in PDF, EPUB and MOBI formats.
-                                It's a short guide to visualising, documenting and exploring your software architecture.
+                    <div class="row">
+                            <div class="col-xs-4 centered">
+                                <p>
+                                    <a href="https://leanpub.com/b/software-architecture"><img src="./img/sa4d-2.png" alt="Software Architecture for Developers: Volumes 1 & 2" class="img-thumbnail" /></a>
+                                </p>
+        
+                                <p class="small">
+                                    This is Simon Brown's <a href="https://leanpub.com/b/software-architecture">Software Architecture for Developers</a> (Volume 2) ebook,
+                                    which is available to purchase from Leanpub as an ebook in PDF, EPUB and MOBI formats.
+                                    It's a short guide to visualising, documenting and exploring your software architecture.
+                                </p>
+                            </div>
+                            <div class="col-xs-8 centered">
+                            <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
+                                <iframe src="https://www.youtube.com/embed/x2-rSnhpw0g" frameborder="0" allowfullscreen></iframe>
+                            </p>
+                            <p style="font-size: 11px">
+                                <b>Visualising software architecture with the C4 model</b>
+                                <br />
+                                Agile on the Beach 2019 - Falmouth, England - July 2019
                             </p>
                         </div>
-                        <div class="col-xs-8 centered">
-                        <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
-                            <iframe src="https://www.youtube.com/embed/x2-rSnhpw0g" frameborder="0" allowfullscreen></iframe>
-                        </p>
-                        <p style="font-size: 11px">
-                            <b>Visualising software architecture with the C4 model</b>
-                            <br />
-                            Agile on the Beach 2019 - Falmouth, England - July 2019
-                        </p>
-                    </div>
-                </div>    
- 
-                <p class="small centered">
-                    There are also some podcasts with Simon Brown, where he discusses the C4 model; including
-                    <a href="https://softwareengineeringdaily.com/2017/06/20/software-architecture-with-simon-brown/">Software Engineering Daily</a> and
-                    <a href="http://www.se-radio.net/2015/06/episode-228-software-architecture-sketches-with-simon-brown/">Software Engineering Radio</a>.
+                    </div>    
+     
+                    <p class="small centered">
+                        There are also some podcasts with Simon Brown, where he discusses the C4 model; including
+                        <a href="https://softwareengineeringdaily.com/2017/06/20/software-architecture-with-simon-brown/">Software Engineering Daily</a> and
+                        <a href="http://www.se-radio.net/2015/06/episode-228-software-architecture-sketches-with-simon-brown/">Software Engineering Radio</a>.
+                    </p>
+                </div>
+            </div>
+    
+        <div class="section">
+            <div class="container">
+                <a name="Adopting"></a>
+                <h2>Adopting the C4 model</h2>
+                <p>
+                    If you're considering whether the C4 model is right for your team, the best approach is to <b>just try it</b>.
+                    Set aside an hour, grab a whiteboard, and draw a System Context diagram for whatever you're working on.
+                    If you find that useful, set aside another hour to draw a Container diagram for the same software system.
+                    For many teams, those two levels of detail are sufficient.
+                    If you think there's value in drawing Component diagrams, then try that out too.   
+                    Component diagrams tend to be more volatile though, so you should really start to look at automating this level of detail where possible, so that the diagrams always reflect the code.
+                </p>
+
+                <p>
+                    If you have retrospectives as a part of your working practices, don't forget to discuss the diagrams.
+                    Are they useful? Do people use them? Are they kept up to date? Could we use more detail? Or are our diagrams too detailed, and falling out of date quickly? Is the tooling sufficient? Does everybody have access to the diagrams when needed?
+                </p>
+
+                <p>
+                    <a href="https://architectis.je" target="_blank">In-person and online training is available</a> to help you introduce the C4 model, or scale C4 model knowledge, within your organisation.
                 </p>
             </div>
         </div>
