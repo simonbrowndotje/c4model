@@ -255,7 +255,6 @@
                             <li><b>Client-side desktop application</b>: A Windows desktop application written using WPF, an OS X desktop application written using Objective-C, a cross-platform desktop application written using JavaFX, etc.</li>
                             <li><b>Mobile app</b>: An Apple iOS app, an Android app, a Microsoft Windows Phone app, etc.</li>
                             <li><b>Server-side console application</b>: A standalone (e.g. "public static void main") application, a batch process, etc.</li>
-                            <li><b>Microservice</b>: A single microservice, hosted in anything from a traditional web server to something like Spring Boot, Dropwizard, etc.</li>
                             <li><b>Serverless function</b>: A single serverless function (e.g. Amazon Lambda, Azure Function, etc).</li>
                             <li><b>Database</b>: A schema or database in a relational database management system, document store, graph database, etc such as MySQL, Microsoft SQL Server, Oracle Database, MongoDB, Riak, Cassandra, Neo4j, etc.</li>
                             <li><b>Blob or content store</b>: A blob store (e.g. Amazon S3, Microsoft Azure Blob Storage, etc) or content delivery network (e.g. Akamai, Amazon CloudFront, etc).</li>
@@ -898,13 +897,24 @@
                     <div class="col-xs-4">
                         <h3>How do you model microservices and serverless?</h3>
                         <p>
-                            Broadly speaking, there are two options for diagramming microservices when using the C4 model.
+                            Broadly speaking, there are two options for diagramming microservices when using the C4 model, although it depends what you mean by "microservice".
                         </p>
 
-                        <ol>
-                          <li><b>Microservices as software systems</b>: If your software system has a dependency upon a number of microservices that are outside of your control (e.g. they are owned and/or operated by a separate team), model these microservices as external software systems that you can't see inside of.</li>
-                          <li><b>Microservices as containers</b>: On the other hand, if the microservices are a part of a software system that you are building (i.e. you own them), model them as containers, along with any data stores that those microservices use. In the same way that a modular monolithic application is a container with a number of components running inside it, a microservice is simply a container with a (smaller) number of components running inside it.</li>
-                        </ol>
+                        <p>
+                            <b>Approach 1: Each "microservice" is owned by a separate team</b>
+                            <br />
+                            If your software system has a dependency upon a number of microservices that are outside of your control (e.g. they are owned and/or operated by a separate team), model these microservices as external software systems, that you can't see inside of.
+                        </p>
+
+                        <p>
+                            <b>Approach 2: A single team owns multiple "microservices"</b>
+                        </p>
+                            Imagine that you have an API app (e.g. Spring Boot, ASP.NET MVC, etc) that reads/writes to a relational database schema.
+                            Regardless of whether you consider the term "microservice" to refer to just the API app, or the combination of the API app and database schema ...
+                            if the microservices are a part of a software system that you are building (i.e. you own them), model every deployable thing as a container.
+                            In other words, you'd show two containers: the API app, and the database schema.
+                            Feel free to draw a box around these two containers to indicate they are related/grouped.
+                        </p>
 
                         <p>
                             The same is true for serverless functions/lambdas/etc; treat them as software systems or containers based upon ownership.
