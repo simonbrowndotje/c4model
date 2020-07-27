@@ -23,11 +23,6 @@ body {
     padding-bottom: 20px;
     padding-left: 0;
     padding-right: 0;
-    color: #ffffff;
-    background: #02172C;
-}
-#footer a, #footer a:hover {
-    color: white;
 }
 #footer .container {
     font-size: 13px;
@@ -38,19 +33,13 @@ body {
     padding-right: 10px;
 }
 .section {
-    border-bottom: 1px solid #f2f2f2;
+    background: #ffffff;
     margin-right: 0;
     margin-left: 0;
     padding-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 100px;
     padding-left: 10px;
     padding-right: 10px;
-}
-.section:nth-child(even) {
-    background: #eeeeee;
-}
-.section:nth-child(odd) {
-    background: #ffffff;
 }
 .row {
     padding-bottom: 20px;
@@ -143,7 +132,7 @@ a:hover {
     font-size: 11px;
 }
 #navigation {
-    background: #02172C;
+    background: #438DD5;
     color: #ffffff;
     font-size: 20px;
     padding: 15px;
@@ -166,24 +155,6 @@ a:hover {
     height: auto;
 }
 
-.carousel-caption {
-    background: #02172C;
-    color: #ffffff;
-    text-shadow: none;
-    font-size: 18px;
-    opacity: 0.9;
-    padding: 20px;
-    border-radius: 5px;
-}
-
-.carousel-control {
-    color: #000000;
-    text-shadow: none;
-    opacity: 0.1;
-}
-.carousel-control:hover, .carousel-control:focus {
-    opacity: 0.1;
-}
 .glyphicon {
     width: 20px;
     height: 20px;
