@@ -25,7 +25,7 @@
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-xs-8 centered">
+                    <div class="col-sm-6 centered">
                         <p class="centered">
                             <span class="glyphicon glyphicon-time" aria-hidden="true"></span> In a hurry? Read the <a href="https://en.wikipedia.org/wiki/C4_model" target=_blank">Wikipedia page</a> and the 5 minute introduction to the C4 model at InfoQ
                             <br />
@@ -34,13 +34,13 @@
                             <a href="http://www.infoq.com/cn/articles/C4-architecture-model" target="_blank" class="small">用于软件架构的C4模型</a></span><br />
                             <a href="https://www.infoq.com/jp/articles/C4-architecture-model" target="_blank" class="small">ソフトウェアアーキテクチャのためのC4モデル</a></span>
                         </p>       
-                        
+                    </div>
+                    <div class="col-sm-6 centered" style="padding: 20px">
                         <p class="centered">
                             <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
                             Or watch "Visualising software architecture with the C4 model"
                         </p>
-                    </div>
-                    <div class="col-xs-4 centered">
+
                         <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
                             <iframe src="https://www.youtube.com/embed/x2-rSnhpw0g" frameborder="0" allowfullscreen></iframe>
                         </p>
@@ -56,7 +56,6 @@
             <a href="#Notation">Notation</a>
             <a href="review">Diagram review checklist</a>
             <br />
-            <a href="#Examples">Examples</a>
             <a href="#FAQ">FAQ</a>
             <a href="#Modelling">Diagramming vs modelling</a>
             <a href="https://architectis.je">Training</a>
@@ -76,22 +75,22 @@
                 </p>
 
                 <div class="row">
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <p>
                             <img src="./img/sketch-1.jpg" alt="A software architecture sketch" class="img-thumbnail" />
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <p>
                             <img src="./img/sketch-2.jpg" alt="A software architecture sketch" class="img-thumbnail" />
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <p>
                             <img src="./img/sketch-3.jpg" alt="A software architecture sketch" class="img-thumbnail" />
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <p>
                             <img src="./img/sketch-4.jpg" alt="A software architecture sketch" class="img-thumbnail" />
                         </p>
@@ -111,25 +110,25 @@
                 </p>
 
                 <div class="row">
-                    <div class="col-xs-3">
+                    <div class="col-sm-3">
                         <img src="./img/map-1.jpg" alt="Google Street View" class="img-thumbnail" />
                         <p class="mapCaption">
                             Like source code, Google Street View provides a very low-level and accurate view of a location.
                         </p>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-sm-3">
                         <img src="./img/map-2.jpg" alt="Google Maps" class="img-thumbnail" />
                         <p class="mapCaption">
                             Navigating an unfamiliar environment becomes easier if you zoom out though. 
                         </p>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-sm-3">
                         <img src="./img/map-3.jpg" alt="Google Maps" class="img-thumbnail" />
                         <p class="mapCaption">
                             Zooming out further will provide additional context you might not have been aware of.
                         </p>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-sm-3">
                         <img src="./img/map-4.jpg" alt="Google Maps" class="img-thumbnail" />
                         <p class="mapCaption">
                             Different levels of zoom allow you to tell different stories to different audiences.
@@ -143,7 +142,7 @@
                 </p>
 
                 <div class="row">
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <p>
                             <img src="./img/bigbankplc-SystemContext.png" class="img-thumbnail"  />
                         </p>
@@ -151,7 +150,7 @@
                             Level 1: A <b>System Context</b> diagram provides a starting point, showing how the software system in scope fits into the world around it.
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <p>
                             <img src="./img/bigbankplc-Containers.png" class="img-thumbnail"  />
                         </p>
@@ -159,7 +158,7 @@
                             Level 2: A <b>Container</b> diagram zooms into the software system in scope, showing the high-level technical building blocks.
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <p>
                             <img src="./img/bigbankplc-Components.png" class="img-thumbnail"  />
                         </p>
@@ -167,7 +166,7 @@
                             Level 3: A <b>Component</b> diagram zooms into an individual container, showing the components inside it.
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <p>
                             <img src="./img/bigbankplc-Classes.png" class="img-thumbnail"  />
                         </p>
@@ -178,7 +177,7 @@
                 </div>
 
                 <div class="centered">
-                    <div style="width: 66%; margin: auto">
+                    <div>
                         <a href="./img/c4-overview.png"><img src="./img/c4-overview.png" alt="An overview of the C4 model" class="img-thumbnail" /></a>
                         <p class="mapCaption">
                             Different levels of zoom allow you to tell different stories to different audiences.
@@ -213,7 +212,7 @@
                 </p>
 
                 <div class="row">
-                    <div class="col-xs-6 centered" style="margin-top: 20px">
+                    <div class="col-sm-6 centered" style="margin-top: 20px">
                         <p>
                             <a href="./img/abstractions.png"><img src="./img/abstractions.png" alt="Abstractions" class="img-thumbnail" /></a>
                         </p>
@@ -232,7 +231,7 @@
                             A visualisation of an example software architecture model, showing the hierarchical nature of the elements that make up the static structure.
                         </p>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-sm-6">
                         <h3>Person</h3>
                         <p class="small">
                             A person represents one of the human users of your software system (e.g. actors, roles, personas, etc).
@@ -294,7 +293,7 @@
                 </p>
 
                 <div class="row">
-                    <div class="col-xs-5 centered">
+                    <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
                             <a href="./img/bigbankplc-SystemContext.png"><img src="./img/bigbankplc-SystemContext.png" alt="A System Context diagram" class="img-thumbnail" /></a>
                         </p>
@@ -305,7 +304,7 @@
                             </button>
                         </p>
                     </div>
-                    <div class="col-xs-7">
+                    <div class="col-sm-7">
                         <a name="SystemContextDiagram"></a>        
                         <h3>Level 1: System Context diagram <a href="#SystemContextDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
@@ -335,7 +334,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-5 centered">
+                    <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
                             <a href="./img/bigbankplc-Containers.png"><img src="./img/bigbankplc-Containers.png" alt="A Container diagram" class="img-thumbnail" /></a>
                         </p>
@@ -346,7 +345,7 @@
                             </button>
                         </p>    
                     </div>
-                    <div class="col-xs-7">
+                    <div class="col-sm-7">
                         <a name="ContainerDiagram"></a>        
                         <h3>Level 2: Container diagram <a href="#ContainerDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
@@ -380,7 +379,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-5 centered">
+                    <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
                             <a href="./img/bigbankplc-Components.png"><img src="./img/bigbankplc-Components.png" alt="A Component diagram" class="img-thumbnail" /></a>
                         </p>
@@ -391,7 +390,7 @@
                             </button>
                         </p>    
                     </div>
-                    <div class="col-xs-7">
+                    <div class="col-sm-7">
                         <a name="ComponentDiagram"></a>        
                         <h3>Level 3: Component diagram <a href="#ComponentDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
@@ -418,7 +417,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-5 centered">
+                    <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
                             <a href="./img/bigbankplc-Classes.png"><img src="./img/bigbankplc-Classes.png" alt="A UML class diagram" class="img-thumbnail" /></a>
                         </p>
@@ -429,7 +428,7 @@
                             </button>
                         </p>    
                     </div>
-                    <div class="col-xs-7">
+                    <div class="col-sm-7">
                         <a name="CodeDiagram"></a>        
                         <h3>Level 4: Code <a href="#CodeDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
@@ -465,12 +464,12 @@
                 </p>
 
                 <div class="row">
-                    <div class="col-xs-5 centered">
+                    <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
                             <a href="./img/bigbankplc-SystemLandscape.png"><img src="./img/bigbankplc-SystemLandscape.png" alt="A System Landscape diagram" class="img-thumbnail" /></a>
                         </p>
                     </div>
-                    <div class="col-xs-7">
+                    <div class="col-sm-7">
                         <a name="SystemLandscapeDiagram"></a>        
                         <h3>System Landscape diagram <a href="#SystemLandscapeDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
@@ -496,12 +495,12 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-5 centered">
+                    <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
                             <a href="./img/bigbankplc-SignIn.png"><img src="./img/bigbankplc-SignIn.png" alt="A dynamic diagram" class="img-thumbnail" /></a>
                         </p>
                     </div>
-                    <div class="col-xs-7">
+                    <div class="col-sm-7">
                         <a name="DynamicDiagram"></a>        
                         <h3>Dynamic diagram <a href="#DynamicDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
@@ -524,12 +523,12 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-5 centered">
+                    <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
                             <a href="./img/bigbankplc-LiveDeployment.png"><img src="./img/bigbankplc-LiveDeployment.png" alt="A deployment diagram" class="img-thumbnail" /></a>
                         </p>
                     </div>
-                    <div class="col-xs-7">
+                    <div class="col-sm-7">
                         <a name="DeploymentDiagram"></a>        
                         <h3>Deployment diagram <a href="#DeploymentDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
@@ -567,39 +566,39 @@
                 </p>
 
                 <div class="row">
-                    <div class="col-xs-1">
+                    <div class="col-sm-1">
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <a href="./img/notation-person.png"><img src="./img/notation-person.png" alt="Person" class="img-thumbnail" /></a>
                         <p class="caption">
                             Person
                         </p>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <a href="./img/notation-software-system.png"><img src="./img/notation-software-system.png" alt="Software System" class="img-thumbnail" /></a>
                         <p class="caption">
                             Software System
                         </p>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <a href="./img/notation-container.png"><img src="./img/notation-container.png" alt="Container" class="img-thumbnail" /></a>
                         <p class="caption">
                             Container
                         </p>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <a href="./img/notation-component.png"><img src="./img/notation-component.png" alt="Component" class="img-thumbnail" /></a>
                         <p class="caption">
                             Component
                         </p>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <a href="./img/notation-relationship.png"><img src="./img/notation-relationship.png" alt="Relationship" class="img-thumbnail" /></a>
                         <p class="caption">
                             Relationship
                         </p>
                     </div>
-                    <div class="col-xs-1">
+                    <div class="col-sm-1">
                     </div>
                 </div>
 
@@ -617,49 +616,49 @@
                 </p>
 
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <a href="./img/spring-petclinic-system-context.png"><img src="./img/spring-petclinic-system-context.png" alt="A system context diagram" class="img-thumbnail grayscale" /></a>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <a href="./img/spring-petclinic-containers.png"><img src="./img/spring-petclinic-containers.png" alt="A container diagram" class="img-thumbnail grayscale" /></a>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <a href="./img/spring-petclinic-components.png"><img src="./img/spring-petclinic-components.png" alt="A component diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-4 centered small">
+                    <div class="col-sm-4 centered small">
                         System Context diagram
                     </div>
-                    <div class="col-xs-4 centered small">
+                    <div class="col-sm-4 centered small">
                         Container diagram
                     </div>
-                    <div class="col-xs-4 centered small">
+                    <div class="col-sm-4 centered small">
                         Component diagram
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <a href="./img/spring-petclinic-system-context-plantuml.png"><img src="./img/spring-petclinic-system-context-plantuml.png" alt="A system context diagram" class="img-thumbnail grayscale" /></a>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <a href="./img/spring-petclinic-containers-plantuml.png"><img src="./img/spring-petclinic-containers-plantuml.png" alt="A container diagram" class="img-thumbnail grayscale" /></a>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <a href="./img/spring-petclinic-components-plantuml.png"><img src="./img/spring-petclinic-components-plantuml.png" alt="A component diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <a href="./img/spring-petclinic-system-context-staruml.png"><img src="./img/spring-petclinic-system-context-staruml.png" alt="A system context diagram" class="img-thumbnail grayscale" /></a>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <a href="./img/spring-petclinic-containers-staruml.png"><img src="./img/spring-petclinic-containers-staruml.png" alt="A container diagram" class="img-thumbnail grayscale" /></a>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <a href="./img/spring-petclinic-components-staruml.png"><img src="./img/spring-petclinic-components-staruml.png" alt="A component diagram" class="img-thumbnail grayscale" /></a>
                     </div>
                 </div>
@@ -682,7 +681,7 @@
 
                 <h3>Notation, notation, notation</h3>
                 <div class="row">
-                    <div class="col-xs-9">
+                    <div class="col-sm-9">
                         <p>
                             Although the C4 model is an abstraction-first approach and notation independent, you still need to ensure that your diagram notation makes sense,
                             and that the diagrams are comprehensible.
@@ -690,7 +689,7 @@
                             You can use this short <a href="review">software architecture diagram review checklist</a> to help.
                         </p>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-sm-3">
                         <p class="centered">
                             <a href="review"><img src="./img/software-architecture-diagram-review-checklist.png" alt="Software architecture diagram review checklist" class="img-thumbnail" /></a>                        
                         </p>
@@ -702,7 +701,7 @@
                 </p>                        
 
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h4>Diagrams</h4>
                         <ul style="line-height: 150%">
                             <li>Every diagram should have a title describing the diagram type and scope (e.g. "System Context diagram for My Software System").</li>
@@ -710,7 +709,7 @@
                             <li>Acronyms and abbreviations (business/domain or technology) should be understandable by all audiences, or explained in the diagram key/legend.</li>
                         </ul>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h4>Elements</h4>
                         <ul style="line-height: 150%">
                             <li>The type of every element should be explicitly specified (e.g. Person, Software System, Container or Component).</li>
@@ -718,7 +717,7 @@
                             <li>Every container and component should have a technology explicitly specified.</li>
                         </ul>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h4>Relationships</h4>
                         <ul style="line-height: 150%">
                                 <li>Every line should represent a unidirectional relationship.</li>
@@ -731,73 +730,12 @@
         </div>
 
         <div class="section">
-            <div class="container">
-                <a name="Examples"></a>
-                <h2>Examples</h2>
-                <p>
-                    Here are some collections of example software architecture diagrams based upon the C4 model.
-                </p>
-
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p>
-                            <a href="https://structurizr.com/share/36141#SystemContext"><img src="./img/example-big-bank-plc.png" alt="Big Bank plc" class="img-thumbnail" /></a>
-                        </p>
-                        <p class="small centered">
-                            Big Bank plc
-                            <br />
-                            <span class="smaller centered">
-                            (System Landscape, System Context, Container, Component, Dynamic and Deployment)
-                            </span>
-                        </p>
-                    </div>
-                    <div class="col-sm-3">
-                        <p>
-                            <a href="https://structurizr.com/share/31"><img src="./img/example-financial-risk-system.png" alt="Financial Risk System" class="img-thumbnail" /></a>
-                        </p>
-                        <p class="small centered">
-                            Financial Risk System
-                            <br />
-                            <span class="smaller centered">
-                            (System Context)
-                            </span>
-                        </p>
-                    </div>
-                    <div class="col-sm-3">
-                        <p>
-                            <a href="https://structurizr.com/share/1#components"><img src="./img/example-spring-petclinic-home.png" alt="Spring PetClinic" class="img-thumbnail" /></a>
-                        </p>
-                        <p class="small centered">
-                            Spring PetClinic
-                            <br />
-                            <span class="smaller centered">
-                            (System Context, Container, Component, Dynamic and Deployment)
-                            </span>
-                        </p>
-                    </div>
-                    <div class="col-sm-3">
-                        <p>
-                            <a href="https://structurizr.com/share/4241#CustomerUpdateEvent"><img src="./img/example-message-bus-and-microservices.png" alt="Message bus and microservices" class="img-thumbnail" /></a>
-                        </p>
-                        <p class="small centered">
-                            Message bus and microservices
-                            <br />
-                            <span class="smaller centered">
-                            (Container and Dynamic)
-                            </span>
-                        </p>
-                    </div>
-                </div>            
-            </div>
-        </div>
-    
-        <div class="section">
             <div class="container small">
                 <a name="FAQ"></a>
                 <h2>Frequently asked questions</h2>
 
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>What's the background behind the C4 model?</h3>
                         <p>
                             The C4 model was created by <a href="http://simonbrown.je">Simon Brown</a>, who started teaching people about software architecture,
@@ -809,7 +747,7 @@
                             The C4 model is essentially a formalisation of how Simon used to visualise software architecture, which has evolved over the years.   
                         </p>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>What's the inspiration behind the C4 model?</h3>
                         <p>
                             The C4 model was inspired by the <a href="https://en.wikipedia.org/wiki/Unified_Modeling_Language">Unified Modeling Language</a> and
@@ -824,7 +762,7 @@
                             teams, influenced by the agile movement, were less than enthusiastic about using UML. 
                         </p>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Isn't the C4 model a step backwards? Why are you reinventing UML? Why not just use UML?</h3>
                         <p>
                             Whether you see the C4 model as a step forwards or a step backwards depends upon where you are.
@@ -836,7 +774,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>How many people use the C4 model?</h3>
                         <p>
                             The honest answer is that nobody knows. Simon has personally taught the C4 model to somewhere over 10,000 people in more than 30 countries;
@@ -845,7 +783,7 @@
                             It's definitely being used though, in organisations ranging from startups to global household names.
                         </p>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Why "container"?</h3>
                         <p>
                             Terms like "process", "application", "app", "server", "deployable unit", etc all have associated implications,
@@ -857,7 +795,7 @@
                             While many teams successfully use the C4 model as is, feel free to change the terminology if needed.
                         </p>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Can we change the terminology?</h3>
                         <p>
                             This terminology (context, containers, components and code) works for many organisations and many types of software.
@@ -871,7 +809,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>How do you model microservices and serverless?</h3>
                         <p>
                             Broadly speaking, there are two options for diagramming microservices when using the C4 model, although it depends what you mean by "microservice".
@@ -897,7 +835,7 @@
                             The same is true for serverless functions/lambdas/etc; treat them as software systems or containers based upon ownership.
                         </p>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>How do you diagram large and complex software systems?</h3>
                         <p>
                             Even with a relatively small software system, it's tempting to try and include the entire story on a single diagram. For example, if you have a web application, it seems logical to create a single component diagram that shows all of the components that make up that web application. Unless your software system really is that small, you're likely to run out of room on the diagram canvas or find it difficult to discover a layout that isn't cluttered by a myriad of overlapping lines. Using a larger diagram canvas can sometimes help, but large diagrams are usually hard to interpret and comprehend because the cognitive load is too high. And if nobody understands the diagram, nobody is going to look at it.
@@ -910,7 +848,7 @@
                             See also <a href="#Modelling">Diagramming vs modelling</a> for an alternative approach.
                         </p>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Will the diagrams become outdated quickly?</h3>
                         <p>
                             Due to the hierarchical nature of the C4 model, each diagram will change at a different rate.
@@ -925,14 +863,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Why doesn't the C4 model cover business processes, workflows, state machines, domain models, data models, etc?</h3>
                         <p>
                             The focus of the C4 model is the static structures that make up a software system, at different levels of abstraction.
                             If you need to describe other aspects, feel free to supplement the C4 diagrams with UML diagrams, BPML diagrams, ArchiMate diagrams, entity relationship diagrams, etc.
                         </p>
                     </div>                            
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>The C4 model vs UML, ArchiMate and SysML?</h3>
                         <p>
                             Although existing notations such as UML, ArchiMate and SysML already exist, many software development teams don't seem to use them.
@@ -944,7 +882,7 @@
                             And don't be afraid to supplement the C4 diagrams with UML state diagrams, timing diagrams, etc if you need to.
                         </p>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Can we combine C4 and arc42?</h3>
                         <p>
                             Yes, many teams do, and the C4 model is compatible with the <a href="http://arc42.org">arc42 documentation template</a> as follows.
@@ -959,7 +897,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Does the C4 model imply a design process or team structure?</h3>
                         <p>
                             A common misconception is that a team's design process should follow the levels in the C4 model hierarchy, perhaps with different people on the team being responsible for different levels of diagrams.
@@ -970,7 +908,7 @@
                             The C4 model is just a way to describe a software system, from different levels of abstraction, and it implies nothing about the process of delivering software.
                         </p>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Using C4 to describe libraries, frameworks and SDKs?</h3>
                         <p>
                             The C4 model is really designed to model a software system, at various levels of abstraction.
@@ -978,7 +916,7 @@
                             Alternatively, you could use the C4 model to describe a usage example of your framework, library or SDK; perhaps using colour coding to signify which parts of the software system are bespoke vs those provided for you. 
                         </p>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Web applications; one container or two?</h3>
                         <p>
                             If you're building a server-side web application (e.g. Spring MVC, ASP.NET, Ruby on Rails, Django, etc) that is predominantly generating static HTML content, then that's a single container.
@@ -992,7 +930,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Should the lines represent dependencies or data flow?</h3>
                         <p>
                             This is your choice. Sometimes diagrams work better showing dependency relationships (e.g. uses, reads from, etc),
@@ -1003,14 +941,14 @@
                             For example, describing a relationship as "sends customer update events to" can be more descriptive than simply "customer update events".
                         </p>
                     </div>                            
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Is a Java JAR, C# assembly, DLL, module, etc a container?</h3>
                         <p>
                             Typically not.
                             A container is a runtime construct, like an application; whereas Java JAR files, C# assemblies, DLLs, modules, etc are used to organise the code within those applications.
                         </p>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Is a Java JAR, C# assembly, DLL, module, package, namespace, folder etc a component?</h3>
                         <p>
                             Perhaps but, again, typically not.
@@ -1023,7 +961,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Should you include message buses, API gateways, service meshes, etc?</h3>
                         <p>
                             If you have two services, A and B, that communicate by sending a message via a message bus (irrespective of topics, queues, p2p, pub/sub, etc) or another intermediary (e.g. an API gateway or service mesh), you have a couple of options.
@@ -1035,7 +973,7 @@
                             This approach tends to result in diagrams that tell a clearer story.
                         </p>
                     </div>                            
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Should data storage services be shown as software systems or containers?</h3>
                         <p>
                             A frequently asked question is whether services like Amazon S3, Amazon RDS, Azure SQL Database, content delivery networks, etc should be shown as software systems or containers. After all, these are external services that most of us don’t own or run ourselves.
@@ -1044,7 +982,7 @@
                             If you’re building a software system that is using Amazon S3 for storing data, it’s true that you don’t run S3 yourself, but you do have ownership and responsbility for the buckets you are using. Similarly with Amazon RDS, you have (more or less) complete control over any database schemas that you create. For this reason, treat them as containers because they are an integral part of your software architecture, although they are hosted elsewhere.
                         </p>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-sm-4">
                         <h3>Is the C4 model universally applicable?</h3>
                         <p>
                             The C4 model was designed to help describe, document, and diagram custom-built, bespoke software systems.
@@ -1091,7 +1029,7 @@
                 </p>
 
                 <div class="row">
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
                             <a href="./img/modelling-1.png"><img src="./img/modelling-1.png" alt="A large and cluttered diagram" class="img-responsive" /></a>
                         </div>
@@ -1099,7 +1037,7 @@
                             Once you have more than ~20 elements on a diagram, the diagram starts to become cluttered very quickly.
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
                             <a href="./img/modelling-2.png"><img src="./img/modelling-2.png" alt="A smaller diagram showing an individual slice" class="img-responsive" /></a>
                         </div>
@@ -1107,7 +1045,7 @@
                             Creating multiple diagrams, one per "slice", can help, although the resulting diagrams tend to be very simple and increase the effort needed to keep them up to date.
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
                             <a href="./img/modelling-3.png"><img src="./img/modelling-3.png" alt="An alternative visualisation" class="img-responsive" /></a>
                         </div>
@@ -1115,7 +1053,7 @@
                             Rather than creating a diagram, you can use alternative visualisations instead. This visualisation shows the dependencies between components inside a container.  
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
                             <a href="./img/modelling-4.png"><img src="./img/modelling-4.png" alt="An alternative visualisation" class="img-responsive" /></a>
                         </div>
@@ -1143,6 +1081,7 @@
                 </p>
 
                 <h3>Elements and relationships</h3>
+                <div style="overflow-x:auto;">
                 <table class="table table-striped small">
                     <tr>
                         <th>Element type</th>
@@ -1224,6 +1163,7 @@
                         </td>
                     </tr>
                 </table>
+                </div>
             
                 <p class="small">
                     <sup>*</sup> All elements in the model must have a name, and that name must be unique within the parent context.
@@ -1232,6 +1172,7 @@
                 </p>
 
                 <h3>Views</h3>
+                <div style="overflow-x:auto;">
                 <table class="table table-striped small">
                     <tr>
                         <th width="25%">View type</th>
@@ -1297,7 +1238,8 @@
                             <a href="./img/bigbankplc-Classes.png"><img src="./img/bigbankplc-Classes.png" alt="A UML class diagram" class="img-thumbnail" /></a>
                         </td>
                     </tr>
-                </table>            
+                </table>   
+                </div>         
             </div>
         </div> 
 
@@ -1312,7 +1254,7 @@
                     </p>
     
                     <div class="row">
-                            <div class="col-xs-4 centered">
+                            <div class="col-sm-4 centered">
                                 <p>
                                     <a href="https://leanpub.com/b/software-architecture"><img src="./img/sa4d-2.png" alt="Software Architecture for Developers: Volumes 1 & 2" class="img-thumbnail" /></a>
                                 </p>
@@ -1323,7 +1265,7 @@
                                     It's a short guide to visualising, documenting and exploring your software architecture.
                                 </p>
                             </div>
-                            <div class="col-xs-8 centered">
+                            <div class="col-sm-8 centered">
                             <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
                                 <iframe src="https://www.youtube.com/embed/x2-rSnhpw0g" frameborder="0" allowfullscreen></iframe>
                             </p>
@@ -1383,7 +1325,7 @@
                 </div>
 
                 <div class="row" style="margin-bottom: 30px">
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <h3>Structurizr</h3>
                         <p class="small">
                             <a href="https://structurizr.org" target="_blank">Structurizr</a> is a collection of tooling to create software architecture diagrams and documentation based upon the
@@ -1406,7 +1348,7 @@
                             <span class="label structurizrBackgroundLighter smaller"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Free and paid</span>
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <h3>Archi</h3>
                         <p class="small">
                             <a href="https://www.archimatetool.com" target="_blank">Archi</a> provides a way for you to create C4 model diagrams with ArchiMate.
@@ -1421,7 +1363,7 @@
                             <span class="label structurizrBackgroundLighter smaller"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Free</span>
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <h3>Sparx Enterprise Architect</h3>
                         <p class="small">
                             LieberLieber Software has built an <a href="http://www.sparxsystems.eu/c4/" target="_blank">extension for the C4 model</a>, based upon the MDG Technology built into <a href="https://sparxsystems.com/products/ea/index.html" target="_blank">Sparx Enterprise Architect</a>.
@@ -1450,7 +1392,7 @@
                             <span class="label structurizrBackgroundLighter smaller"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Free</span>
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <h3>MooD</h3>
                         <p class="small">
                             <a href="https://www.moodsoftware.co.uk" target="_blank">MooD</a> has support for the C4 model via <a href="https://supportportal.moodinternational.com/hc/en-us/articles/360015465100-MooD-and-the-C4-model" target="_blank">a set of blueprints</a>.
@@ -1487,7 +1429,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <h3>PlantUML</h3>
                         <p class="small">
                             There are a number of extensions for <a href="https://plantuml.com" target="_blank">PlantUML</a> to asisst in the creation of C4 model diagrams:
@@ -1512,7 +1454,7 @@
                             <span class="label structurizrBackgroundLighter smaller"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Free</span>
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <h3>diagrams.net</h3>
                         <p class="small">
                             <a href="https://www.diagrams.net" target="_blank">diagrams.net</a> includes <a href="https://app.diagrams.net/?libs=c4" target="_blank">support for the C4 model</a>, and there are also a number of plugins that allow you to create diagrams using pre-built shapes:
@@ -1533,7 +1475,7 @@
                             <span class="label structurizrBackgroundLighter smaller"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Free</span>
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <h3>OmniGraffle</h3>
                         <p class="small">
                             Dennis Laumen has created a <a href="https://stenciltown.omnigroup.com/stencils/c4/" target="_blank">C4 model stencil</a> for <a href="https://www.omnigroup.com/omnigraffle/" target="_blank">OmniGraffle</a>, that allows you to create diagrams using pre-built shapes.
@@ -1547,7 +1489,7 @@
                             <span class="label structurizrBackgroundLighter smaller"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Paid</span>
                         </p>
                     </div>
-                    <div class="col-xs-3 centered">
+                    <div class="col-sm-3 centered">
                         <h3>Microsoft Visio</h3>
                         <p class="small">
                             "pihalve" has created a <a href="https://github.com/pihalve/c4model-visio-stencil" target="_blank">C4 model template</a> for <a href="https://www.microsoft.com/en-ww/microsoft-365/visio/flowchart-software" target="_blank">Microsoft Visio</a>, that allows you to create diagrams using pre-built shapes.

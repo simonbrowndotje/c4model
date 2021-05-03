@@ -29,8 +29,8 @@ body {
 }
 .container {
     font-size: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .section {
     background: #ffffff;
@@ -38,8 +38,6 @@ body {
     margin-left: 0;
     padding-top: 30px;
     padding-bottom: 100px;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 .row {
     padding-bottom: 20px;
@@ -50,7 +48,7 @@ h1 {
 }
 #header h1 {
     font-weight: normal;
-    font-size: 70px;
+    font-size: 50px;
 }
 h2 {
     font-weight: normal;
