@@ -92,36 +92,9 @@ a {
 a:hover {
     color: #08427B;
 }
-.structurizrBackgroundDarker {
-    background: #02172C;
-    color: #ffffff;
-}
-.structurizrBackgroundDark {
-    background: #08427B;
-    color: #ffffff;
-}
-.structurizrBackgroundBase {
-    background: #1168BD;
-    color: #ffffff;
-}
-.structurizrBackgroundLight {
-    background: #438DD5;
-    color: #ffffff;
-}
-.structurizrBackgroundLighter {
-    background: #85BBF0;
-    color: #ffffff;
-}
-.structurizrBackgroundDarker a, .structurizrBackgroundDark a, .structurizrBackgroundBase a, .structurizrBackgroundLight a {
-    color: #85BBF0;
-}
 .grayscale {
     -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
     filter: grayscale(100%);
-}
-.grayscale:hover {
-    -webkit-filter: none; /* Chrome, Safari, Opera */
-    filter: none;
 }
 .small {
     font-size: 13px;
@@ -130,7 +103,7 @@ a:hover {
     font-size: 11px;
 }
 #navigation {
-    background: #438DD5;
+    background: #000000;
     color: #ffffff;
     font-size: 20px;
     padding: 15px;
