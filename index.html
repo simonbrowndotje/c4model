@@ -298,13 +298,8 @@
 
         <div class="section">
             <div class="container">
-                <a name="CoreDiagrams"></a>        
-                <h2>Core diagrams</h2>
-                <p>
-                    Visualising this hierarchy of abstractions is then done by creating a collection of <b>Context</b>, <b>Container</b>, <b>Component</b> and (optionally) <b>Code</b> (e.g. UML class) diagrams.
-                    This is where the C4 model gets its name from.
-                </p>
-
+                <a name="SystemContextDiagram"></a>        
+                <h2>1. System Context diagram <a href="#SystemContextDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h2>
                 <div class="row">
                     <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
@@ -315,8 +310,6 @@
                         </p>
                     </div>
                     <div class="col-sm-7">
-                        <a name="SystemContextDiagram"></a>        
-                        <h3>Level 1: System Context diagram <a href="#SystemContextDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
                             A System Context diagram is a good starting point for diagramming and documenting a software system,
                             allowing you to step back and see the big picture. Draw a diagram showing your system
@@ -345,7 +338,13 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <div class="section">
+            <div class="container">
+                <a name="ContainerDiagram"></a>        
+                <h2>2. Container diagram <a href="#ContainerDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h2>
                 <div class="row">
                     <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
@@ -356,8 +355,6 @@
                         </p>
                     </div>
                     <div class="col-sm-7">
-                        <a name="ContainerDiagram"></a>        
-                        <h3>Level 2: Container diagram <a href="#ContainerDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
                             Once you understand how your system fits in to the overall IT environment, a really useful next step is to zoom-in to the system boundary with a Container diagram.
                             A "container" is something like a server-side web application, single-page application, desktop application, mobile app, database schema, file system, etc.
@@ -390,7 +387,13 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <div class="section">
+            <div class="container">
+                <a name="ComponentDiagram"></a>        
+                <h2>3. Component diagram <a href="#ComponentDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h2>
                 <div class="row">
                     <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
@@ -401,8 +404,6 @@
                         </p>    
                     </div>
                     <div class="col-sm-7">
-                        <a name="ComponentDiagram"></a>        
-                        <h3>Level 3: Component diagram <a href="#ComponentDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
                             Next you can zoom in and decompose each container further to identify the major structural building blocks and their interactions.
                         </p>
@@ -428,7 +429,13 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <div class="section">
+            <div class="container">
+                <a name="CodeDiagram"></a>        
+                <h2>4. Code diagram<a href="#CodeDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h2>
                 <div class="row">
                     <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
@@ -438,8 +445,6 @@
                         </p>    
                     </div>
                     <div class="col-sm-7">
-                        <a name="CodeDiagram"></a>        
-                        <h3>Level 4: Code diagram<a href="#CodeDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
                             Finally, you can zoom in to each component to show how it is implemented as code; using UML class diagrams, entity relationship diagrams or similar.
                         </p>
@@ -469,12 +474,8 @@
 
         <div class="section">
             <div class="container">
-                <a name="SupplementaryDiagrams"></a>
-                <h2>Supplementary diagrams</h2>
-                <p>
-                    Once you have a good understanding of the static structure, you can supplement the C4 diagrams to show other aspects.
-                </p>
-
+                <a name="SystemLandscapeDiagram"></a>        
+                <h2>System Landscape diagram <a href="#SystemLandscapeDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h2>
                 <div class="row">
                     <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
@@ -485,8 +486,6 @@
                         </p>    
                     </div>
                     <div class="col-sm-7">
-                        <a name="SystemLandscapeDiagram"></a>        
-                        <h3>System Landscape diagram <a href="#SystemLandscapeDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
                             The C4 model provides a static view of a <b>single software</b> system but, in the real-world, software systems never live in isolation.
                             For this reason, and particularly if you are responsible for a collection of software systems, it's often useful to understand how all of these software systems fit together within the bounds of an enterprise.
@@ -508,7 +507,13 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <div class="section">
+            <div class="container">
+                <a name="DynamicDiagram"></a>        
+                <h2>Dynamic diagram <a href="#DynamicDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h2>
                 <div class="row">
                     <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
@@ -519,8 +524,6 @@
                         </p>    
                     </div>
                     <div class="col-sm-7">
-                        <a name="DynamicDiagram"></a>        
-                        <h3>Dynamic diagram <a href="#DynamicDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
                             A dynamic diagram can be useful when you want to show how elements in a static model collaborate at runtime to implement a user story, use case, feature, etc.
                             This dynamic diagram is based upon a <a href="https://en.wikipedia.org/wiki/Communication_diagram">UML communication diagram</a>
@@ -539,7 +542,13 @@
                         </p>
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <div class="section">
+            <div class="container">
+                <a name="DeploymentDiagram"></a>        
+                <h2>Deployment diagram <a href="#DeploymentDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h2>
                 <div class="row">
                     <div class="col-sm-5 centered">
                         <p style="margin-top: 20px">
@@ -553,8 +562,6 @@
                         </p>
                     </div>
                     <div class="col-sm-7">
-                        <a name="DeploymentDiagram"></a>        
-                        <h3>Deployment diagram <a href="#DeploymentDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
                             A deployment diagram allows you to illustrate how software systems and/or containers in the static model are mapped to infrastructure.
                             This deployment diagram is based upon a <a href="https://en.wikipedia.org/wiki/Deployment_diagram">UML deployment diagram</a>, although simplified slightly to show the mapping between <b>containers</b> and <b>deployment nodes</b>.
@@ -698,6 +705,8 @@
                     See <a href="https://www.archimatetool.com/blog/2020/04/18/c4-model-architecture-viewpoint-and-archi-4-7/">C4 Model, Architecture Viewpoint and Archi 4.7</a> for details of how to create C4 model diagrams with ArchiMate.
                 </p>
 
+                <br /><br />
+
                 <h3>Diagram key/legend</h3>
                 <p>
                     Any notation used should be as self-describing as possible, but <b>all diagrams should have a key/legend</b> to make the notation explicit.
@@ -708,24 +717,14 @@
                     <a href="https://static.structurizr.com/workspace/36141/diagrams/Containers-key.png"><img src="https://static.structurizr.com/workspace/36141/diagrams/Containers-key.png" alt="Diagram key" class="img-thumbnail" style="width: 80%" /></a>                        
                 </p>
 
-                <h3>Notation, notation, notation</h3>
-                <div class="row">
-                    <div class="col-sm-9">
-                        <p>
-                            Although the C4 model is an abstraction-first approach and notation independent, you still need to ensure that your diagram notation makes sense,
-                            and that the diagrams are comprehensible.
-                            A good way to think about this is to ask yourself whether each diagram can stand alone, and be (mostly) understood without a narrative.
-                            You can use this short <a href="review">software architecture diagram review checklist</a> to help.
-                        </p>
-                    </div>
-                    <div class="col-sm-3">
-                        <p class="centered">
-                            <a href="review"><img src="./img/software-architecture-diagram-review-checklist.png" alt="Software architecture diagram review checklist" class="img-thumbnail" /></a>                        
-                        </p>
-                            </div>
-                </div>
+                <br /><br />
 
+                <h3>Notation, notation, notation</h3>
                 <p>
+                    Although the C4 model is an abstraction-first approach and notation independent, you still need to ensure that your diagram notation makes sense,
+                    and that the diagrams are comprehensible.
+                    A good way to think about this is to ask yourself whether each diagram can stand alone, and be (mostly) understood without a narrative.
+                    You can use this short <a href="review">software architecture diagram review checklist</a> to help.
                     And here are some recommendations related to notation.
                 </p>                        
 
