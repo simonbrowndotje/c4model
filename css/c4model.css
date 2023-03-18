@@ -143,9 +143,24 @@ a:hover {
     display: inline-block;
 }
 .toolingOption {
-    font-size: 30px;
+    font-size: 22px;
     display: inline-block;
-    margin: 20px;
+    margin: 10px;
+    border: solid 1px #1168BD;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+}
+.toolingOption:hover {
+    background: #1168BD;
+    color: #ffffff;
+}
+.toolingOption:hover a {
+    color: #ffffff;
+}
+.toolingOption a:hover {
+    background: #1168BD;
+    color: #ffffff;
+    text-decoration: none;
 }
 label {
     font-weight: normal;
