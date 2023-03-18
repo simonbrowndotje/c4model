@@ -11,6 +11,7 @@
 
     <script src="./js/jquery-2.0.3.min.js"></script>
     <script src="./js/bootstrap-3.3.2.min.js"></script>
+    <script type="text/javascript" src="https://static.structurizr.com/js/structurizr-embed.js"></script>
 </head>
 
 <body>
@@ -21,6 +22,25 @@
                 <h2>Context, Containers, Components, and Code</h2>
             </div>
         </div>
+
+        <div id="navigation">
+            <a href="#Abstractions">Abstractions</a>
+            <a href="#CoreDiagrams">Core diagrams</a>
+            <a href="#SupplementaryDiagrams">Supplementary diagrams</a>
+            <a href="#Notation">Notation</a>
+            <br />
+            <a href="#FAQ">FAQ</a>
+            <a href="#Modelling">Diagramming vs modelling</a>
+            <a href="https://architectis.je">Training</a>
+            <a href="#Adopting">Adopting</a>
+            <a href="#Tooling">Tooling</a>
+            <a href="#References">References</a>
+            <br />
+            <a href="review">Diagram review checklist</a>
+            <a href="bingo">Diagram bingo</a>
+        </div>    
+    
+        <br /><br />
 
         <div class="section">
             <div class="container">
@@ -69,23 +89,6 @@
             </div>
         </div>
 
-        <div id="navigation">
-            <a href="#Abstractions">Abstractions</a>
-            <a href="#CoreDiagrams">Core diagrams</a>
-            <a href="#SupplementaryDiagrams">Supplementary diagrams</a>
-            <a href="#Notation">Notation</a>
-            <br />
-            <a href="#FAQ">FAQ</a>
-            <a href="#Modelling">Diagramming vs modelling</a>
-            <a href="https://architectis.je">Training</a>
-            <a href="#Adopting">Adopting</a>
-            <a href="#Tooling">Tooling</a>
-            <a href="#References">References</a>
-            <br />
-            <a href="review">Diagram review checklist</a>
-            <a href="bingo">Diagram bingo</a>
-        </div>    
-    
         <div class="section">
             <div class="container">
                 <a name="Introduction"></a>
@@ -125,43 +128,15 @@
                     Abandoning these modelling languages is one thing but, perhaps in the race for agility, many software development teams have lost the ability to communicate visually.
                 </p>
 
+                <br /><br />
+
                 <h3>Maps of your code</h3>
                 <p>
                     The C4 model was created as a way to help software development teams describe and communicate software architecture, both during up-front design sessions and when retrospectively documenting an existing codebase.
                     It's a way to create maps of your code, at various levels of detail, in the same way you would use something like Google Maps to zoom in and out of an area you are interested in. 
                 </p>
 
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img src="./img/map-1.jpg" alt="Google Street View" class="img-thumbnail" />
-                        <p class="mapCaption">
-                            Like source code, Google Street View provides a very low-level and accurate view of a location.
-                        </p>
-                    </div>
-                    <div class="col-sm-3">
-                        <img src="./img/map-2.jpg" alt="Google Maps" class="img-thumbnail" />
-                        <p class="mapCaption">
-                            Navigating an unfamiliar environment becomes easier if you zoom out though. 
-                        </p>
-                    </div>
-                    <div class="col-sm-3">
-                        <img src="./img/map-3.jpg" alt="Google Maps" class="img-thumbnail" />
-                        <p class="mapCaption">
-                            Zooming out further will provide additional context you might not have been aware of.
-                        </p>
-                    </div>
-                    <div class="col-sm-3">
-                        <img src="./img/map-4.jpg" alt="Google Maps" class="img-thumbnail" />
-                        <p class="mapCaption">
-                            Different levels of zoom allow you to tell different stories to different audiences.
-                        </p>
-                    </div>
-                </div>
-
-                <p>
-                    Although primarily aimed at software architects and developers, the C4 model provides a way for software development teams to efficiently and effectively communicate their
-                    software architecture, at different levels of detail, telling different stories to different types of audience, when doing up front design or retrospectively documenting an existing codebase.
-                </p>
+                <br />
 
                 <div class="row">
                     <div class="col-sm-3">
@@ -215,21 +190,29 @@
 
                 <br /><br />
 
-                <div class="centered">
-                    <div>
-                        <a href="./img/c4-overview.png"><img src="./img/c4-overview.png" alt="An overview of the C4 model" class="img-thumbnail" /></a>
-                        <p class="mapCaption">
-                            Different levels of zoom allow you to tell different stories to different audiences.
-                        </p>
-                    </div>
-                </div>
-                
                 <p>
                     The C4 model is an "abstraction-first" approach to diagramming software architecture, based upon abstractions that reflect how
                     software architects and developers think about and build software. The small set of abstractions and diagram types makes the C4 model
                     easy to learn and use.
                     Please note that you don't need to use all 4 levels of diagram; only those that add value - the System Context and Container diagrams are sufficient for many software development teams.
                 </p>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="./img/c4-overview.png"><img src="./img/c4-overview.png" alt="An overview of the C4 model" class="img-thumbnail" /></a>
+                        <p class="mapCaption">
+                            Different levels of zoom allow you to tell different stories to different audiences.
+                        </p>
+                    </div>
+                    <div class="col-sm-6 centered">
+                        <iframe id="myEmbeddedDiagram" class="thumbnail" src="https://structurizr.com/embed/36141?diagram=SystemContext&diagramSelector=false&iframe=myEmbeddedDiagram" width="100%" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
+                        <p class="mapCaption">
+                            Hover your mouse over the diagram, find elements with a <img src="img/zoom-in.svg" width="10px" />, and double-click to zoom-in.
+                        </p>
+                    </div>
+                </div>                
             </div>
         </div>
 
@@ -239,18 +222,21 @@
                 <h2>Abstractions</h2>
                 <p>
                     In order to create these maps of your code, we first need a common set of abstractions to create a ubiquitous language that we can use to describe the static structure of a software system.
-                    The C4 model considers the static structures of a <b>software system</b> in terms of <b>containers</b>, <b>components</b> and <b>code</b>.
-                    And <b>people</b> use the software systems that we build.
+                    A <b>software system</b> is made up of one or more <b>containers</b> (applications and data stores),
+                    each of which contains one or more <b>components</b>,
+                    which in turn are implemented by one or more <b>code elements</b> (classes, interfaces, objects, functions, etc).
+                    And <b>people</b> may use the software systems that we build.
                 </p>
 
-                <p>
+                <br />
+
+                <p class="centered" style="width: 60%; margin-left: auto; margin-right: auto">
                     <a href="./img/abstractions.png"><img src="./img/abstractions.png" alt="Abstractions" class="img-thumbnail" /></a>
                 </p>
                 <p class="caption">
-                    <i>A <b>software system</b> is made up of one or more <b>containers</b> (web applications, mobile apps, desktop applications, databases, file systems, etc),
-                    each of which contains one or more <b>components</b>,
-                    which in turn are implemented by one or more <b>code elements</b> (e.g. classes, interfaces, objects, functions, etc).</i>
                 </p>
+
+                <br /><br />
 
                 <h3>Person</h3>
                 <p class="small">
@@ -1451,6 +1437,14 @@
     <script>
         var workspaceIds = [ 36141, 76748, 76749 ];
         var randomInteger = Math.floor(Math.random() * 3);
+
+        $('iframe').each(function() {
+            var src = $(this).attr('src');
+            if (src.indexOf(workspaceIds[0]) > -1) {
+                src = src.replace(workspaceIds[0], workspaceIds[randomInteger]);
+                $(this).attr('src', src);
+            }
+        });
 
         $('img').each(function() {
             var src = $(this).attr('src');
