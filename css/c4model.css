@@ -103,14 +103,22 @@ a:hover {
     font-size: 11px;
 }
 #navigation {
-    background: #000000;
-    color: #ffffff;
-    font-size: 20px;
+    background: #777777;
     padding: 15px;
     text-align: center;
 }
-#navigation a {
+.primaryNavigation a {
     color: #ffffff;
+    font-size: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.secondaryNavigation {
+    margin-top: 20px;
+}
+.secondaryNavigation a {
+    color: #ffffff;
+    font-size: 16px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -129,4 +137,19 @@ a:hover {
 .glyphicon {
     width: 20px;
     height: 20px;
+}
+.toolingOptionFilter {
+    margin: 10px 20px 20px 10px;
+    display: inline-block;
+}
+.toolingOption {
+    font-size: 30px;
+    display: inline-block;
+    margin: 20px;
+}
+label {
+    font-weight: normal;
+}
+.faded {
+    opacity: 0.2;
 }

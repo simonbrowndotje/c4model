@@ -24,20 +24,25 @@
         </div>
 
         <div id="navigation">
-            <a href="#Abstractions">Abstractions</a>
-            <a href="#CoreDiagrams">Core diagrams</a>
-            <a href="#SupplementaryDiagrams">Supplementary diagrams</a>
-            <a href="#Notation">Notation</a>
-            <br />
-            <a href="#FAQ">FAQ</a>
-            <a href="#Modelling">Diagramming vs modelling</a>
-            <a href="https://architectis.je">Training</a>
-            <a href="#Adopting">Adopting</a>
-            <a href="#Tooling">Tooling</a>
-            <a href="#References">References</a>
-            <br />
-            <a href="review">Diagram review checklist</a>
-            <a href="bingo">Diagram bingo</a>
+            <div class="primaryNavigation">
+                <a href="#SystemContextDiagram">1. System context diagram</a>
+                <a href="#ContainerDiagram">2. Container diagram</a>
+                <a href="#ComponentDiagram">3. Component diagram</a>
+                <a href="#CodeDiagram">4. Code diagram</a>
+            </div>
+            <div class="secondaryNavigation">
+                <a href="#SystemLandscapeDiagram">System landscape diagram</a>
+                <a href="#DynamicDiagram">Dynamic diagram</a>
+                <a href="#DeploymentDiagram">Deployment diagram</a>
+                <br />
+                <a href="#Abstractions">Abstractions</a>
+                <a href="#Notation">Notation</a>
+                <a href="#FAQ">FAQ</a>
+                <a href="https://architectis.je">Training</a>
+                <a href="#Tooling">Tooling</a>
+                <a href="review">Diagram review checklist</a>
+                <a href="bingo">Diagram bingo</a>
+            </div>
         </div>    
     
         <br /><br />
@@ -56,6 +61,8 @@
                             </p>
                         </div>       
 
+                        <br />
+
                         <div>
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Summary
                             <p class="small">
@@ -64,6 +71,8 @@
                                 3. Notation independent.<br />
                             </p>
                         </div>       
+
+                        <br />
 
                         <div>
                             <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Uses and benefits
@@ -326,7 +335,7 @@
                         <p class="small">
                             <b>Primary elements</b>: The software system in scope.
                             <br />
-                            <b>Supporting elements</b>: People (e.g. users, actors, roles, or personas) and software systems (external dependencies) that are directly connected to the software system in scope. Typically these other software systems sit outside the scope or boundary of your own software system, and you don’t have responsibility or ownership of them.
+                            <b>Supporting elements</b>: People (e.g. users, actors, roles, or personas) and software systems (external dependencies) that are directly connected to the software system in scope. Typically these other software systems sit outside the scope or boundary of your own software system, and you don't have responsibility or ownership of them.
                         </p>
                         <p class="small">
                             <b>Intended audience</b>: Everybody, both technical and non-technical people, inside and outside of the software development team.
@@ -430,7 +439,7 @@
                     </div>
                     <div class="col-sm-7">
                         <a name="CodeDiagram"></a>        
-                        <h3>Level 4: Code <a href="#CodeDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
+                        <h3>Level 4: Code diagram<a href="#CodeDiagram"><img src="./img/glyphicons-basic-351-link.svg" class="glyphicon" alt="Link" /></a></h3>
                         <p>
                             Finally, you can zoom in to each component to show how it is implemented as code; using UML class diagrams, entity relationship diagrams or similar.
                         </p>
@@ -756,7 +765,7 @@
 
                 <div class="row">
                     <div class="col-sm-4">
-                        <h3>What's the background behind the C4 model?</h3>
+                        <h4>What's the background behind the C4 model?</h4>
                         <p>
                             The C4 model was created by <a href="http://simonbrown.je">Simon Brown</a>, who started teaching people about software architecture,
                             while working as a software developer/architect in London. Part of Simon's training course was a design exercise, where groups of people
@@ -768,7 +777,7 @@
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <h3>What's the inspiration behind the C4 model?</h3>
+                        <h4>What's the inspiration behind the C4 model?</h4>
                         <p>
                             The C4 model was inspired by the <a href="https://en.wikipedia.org/wiki/Unified_Modeling_Language">Unified Modeling Language</a> and
                             the <a href="https://en.wikipedia.org/wiki/4%2B1_architectural_view_model">4+1 model for software architecture</a>.
@@ -783,7 +792,7 @@
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <h3>Isn't the C4 model a step backwards? Why are you reinventing UML? Why not just use UML?</h3>
+                        <h4>Isn't the C4 model a step backwards? Why are you reinventing UML? Why not just use UML?</h4>
                         <p>
                             Whether you see the C4 model as a step forwards or a step backwards depends upon where you are.
                             If you're using UML (or SysML, ArchiMate, etc) and it's working for you, stick with it.
@@ -795,7 +804,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <h3>How many people use the C4 model?</h3>
+                        <h4>How many people use the C4 model?</h4>
                         <p>
                             The honest answer is that nobody knows. Simon has personally taught the C4 model to somewhere over 10,000 people in more than 30 countries;
                             with conference talks, videos, books and articles reaching many more than this.
@@ -804,7 +813,7 @@
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <h3>Why "container"?</h3>
+                        <h4>Why "container"?</h4>
                         <p>
                             Terms like "process", "application", "app", "server", "deployable unit", etc all have associated implications,
                             so the name "container" was chosen as a generic way to describe something in which components live.
@@ -816,7 +825,7 @@
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <h3>Can we change the terminology?</h3>
+                        <h4>Can we change the terminology?</h4>
                         <p>
                             This terminology (context, containers, components and code) works for many organisations and many types of software.
                             However, sometimes an organisation will have an existing terminology that people are already familiar with.
@@ -830,7 +839,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <h3>How do you model microservices and serverless?</h3>
+                        <h4>How do you model microservices and serverless?</h4>
                         <p>
                             Broadly speaking, there are two options for diagramming microservices when using the C4 model, although it depends what you mean by "microservice".
                         </p>
@@ -856,20 +865,21 @@
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <h3>How do you diagram large and complex software systems?</h3>
+                        <h4>How do you diagram large and complex software systems?</h4>
                         <p>
                             Even with a relatively small software system, it's tempting to try and include the entire story on a single diagram. For example, if you have a web application, it seems logical to create a single component diagram that shows all of the components that make up that web application. Unless your software system really is that small, you're likely to run out of room on the diagram canvas or find it difficult to discover a layout that isn't cluttered by a myriad of overlapping lines. Using a larger diagram canvas can sometimes help, but large diagrams are usually hard to interpret and comprehend because the cognitive load is too high. And if nobody understands the diagram, nobody is going to look at it.
                         </p>
                         <p>
                             Instead, don't be afraid to split that single complex diagram into a larger number of simpler diagrams, each with a specific focus around a business area, functional area, functional grouping, bounded context, use case, user interaction, feature set, etc. The key is to ensure that each of the separate diagrams tells a different part of the same overall story, at the same level of abstraction.
+                            The following conference shows some examples.
                         </p>
 
-                        <p>
-                            See also <a href="#Modelling">Diagramming vs modelling</a> for an alternative approach.
+                        <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
+                            <iframe src="https://www.youtube.com/embed/0-gVFWONnQw?start=2176" frameborder="0" allowfullscreen></iframe>
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <h3>Will the diagrams become outdated quickly?</h3>
+                        <h4>Will the diagrams become outdated quickly?</h4>
                         <p>
                             Due to the hierarchical nature of the C4 model, each diagram will change at a different rate.
                         </p>
@@ -884,14 +894,14 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <h3>Why doesn't the C4 model cover business processes, workflows, state machines, domain models, data models, etc?</h3>
+                        <h4>Why doesn't the C4 model cover business processes, workflows, state machines, domain models, data models, etc?</h4>
                         <p>
                             The focus of the C4 model is the static structures that make up a software system, at different levels of abstraction.
                             If you need to describe other aspects, feel free to supplement the C4 diagrams with UML diagrams, BPML diagrams, ArchiMate diagrams, entity relationship diagrams, etc.
                         </p>
                     </div>                            
                     <div class="col-sm-4">
-                        <h3>The C4 model vs UML, ArchiMate and SysML?</h3>
+                        <h4>The C4 model vs UML, ArchiMate and SysML?</h4>
                         <p>
                             Although existing notations such as UML, ArchiMate and SysML already exist, many software development teams don't seem to use them.
                             Often this is because teams don't know these notations well enough, perceive them to be too complicated, think they are not compatible with agile approaches or don't have the required tooling.
@@ -903,7 +913,7 @@
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <h3>Can we combine C4 and arc42?</h3>
+                        <h4>Can we combine C4 and arc42?</h4>
                         <p>
                             Yes, many teams do, and the C4 model is compatible with the <a href="http://arc42.org">arc42 documentation template</a> as follows.
                         </p>
@@ -918,7 +928,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <h3>Does the C4 model imply a design process or team structure?</h3>
+                        <h4>Does the C4 model imply a design process or team structure?</h4>
                         <p>
                             A common misconception is that a team's design process should follow the levels in the C4 model hierarchy, perhaps with different people on the team being responsible for different levels of diagrams.
                             For example, a business analyst creates the system context diagram, the architect creates the container diagram, while the developers look after the remaining levels of detail.
@@ -929,7 +939,7 @@
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <h3>Using C4 to describe libraries, frameworks and SDKs?</h3>
+                        <h4>Using C4 to describe libraries, frameworks and SDKs?</h4>
                         <p>
                             The C4 model is really designed to model a software system, at various levels of abstraction.
                             To document a library, framework or SDK, you might be better off using something like UML.
@@ -937,7 +947,7 @@
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <h3>Web applications; one container or two?</h3>
+                        <h4>Web applications; one container or two?</h4>
                         <p>
                             If you're building a server-side web application (e.g. Spring MVC, ASP.NET, Ruby on Rails, Django, etc) that is predominantly generating static HTML content, then that's a single container.
                             If there's a significant quantity of JavaScript being delivered by the server-side web application (e.g. a single-page application built using Angular), then that's two containers.
@@ -951,7 +961,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <h3>Should the lines represent dependencies or data flow?</h3>
+                        <h4>Should the lines represent dependencies or data flow?</h4>
                         <p>
                             This is your choice. Sometimes diagrams work better showing dependency relationships (e.g. uses, reads from, etc),
                             and sometimes data flow (e.g. customer update events) works better. Whichever you choose, make sure that the description of the line matches the direction of the arrow.
@@ -962,14 +972,14 @@
                         </p>
                     </div>                            
                     <div class="col-sm-4">
-                        <h3>Is a Java JAR, C# assembly, DLL, module, etc a container?</h3>
+                        <h4>Is a Java JAR, C# assembly, DLL, module, etc a container?</h4>
                         <p>
                             Typically not.
                             A container is a runtime construct, like an application; whereas Java JAR files, C# assemblies, DLLs, modules, etc are used to organise the code within those applications.
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <h3>Is a Java JAR, C# assembly, DLL, module, package, namespace, folder etc a component?</h3>
+                        <h4>Is a Java JAR, C# assembly, DLL, module, package, namespace, folder etc a component?</h4>
                         <p>
                             Perhaps but, again, typically not.
                             The C4 model is about showing the runtime units (containers) and how functionality is partitioned across them (components), rather than organisational units such as Java JAR files, C# assemblies, DLLs, modules, packages, namespaces or folder structures. 
@@ -982,7 +992,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <h3>Should you include message buses, API gateways, service meshes, etc?</h3>
+                        <h4>Should you include message buses, API gateways, service meshes, etc?</h4>
                         <p>
                             If you have two services, A and B, that communicate by sending a message via a message bus (irrespective of topics, queues, p2p, pub/sub, etc) or another intermediary (e.g. an API gateway or service mesh), you have a couple of options.
                             The first option is to show service A sending a message to the intermediary, and the intermediary subsequently forwarding that message to service B.
@@ -994,16 +1004,16 @@
                         </p>
                     </div>                            
                     <div class="col-sm-4">
-                        <h3>Should data storage services be shown as software systems or containers?</h3>
+                        <h4>Should data storage services be shown as software systems or containers?</h4>
                         <p>
-                            A frequently asked question is whether services like Amazon S3, Amazon RDS, Azure SQL Database, content delivery networks, etc should be shown as software systems or containers. After all, these are external services that most of us don’t own or run ourselves.
+                            A frequently asked question is whether services like Amazon S3, Amazon RDS, Azure SQL Database, content delivery networks, etc should be shown as software systems or containers. After all, these are external services that most of us don't own or run ourselves.
                         </p>
                         <p>
-                            If you’re building a software system that is using Amazon S3 for storing data, it’s true that you don’t run S3 yourself, but you do have ownership and responsibility for the buckets you are using. Similarly with Amazon RDS, you have (more or less) complete control over any database schemas that you create. For this reason, treat them as containers because they are an integral part of your software architecture, although they are hosted elsewhere.
+                            If you're building a software system that is using Amazon S3 for storing data, it's true that you don't run S3 yourself, but you do have ownership and responsibility for the buckets you are using. Similarly with Amazon RDS, you have (more or less) complete control over any database schemas that you create. For this reason, treat them as containers because they are an integral part of your software architecture, although they are hosted elsewhere.
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <h3>Is the C4 model universally applicable?</h3>
+                        <h4>Is the C4 model universally applicable?</h4>
                         <p>
                             The C4 model was designed to help describe, document, and diagram custom-built, bespoke software systems.
                             From this perspective, the C4 model can be used to describe a variety of software architectures (monolithic or distributed), built in a variety of programming languages, deployed on a variety of platforms (on-premises or cloud).
@@ -1019,397 +1029,204 @@
 
         <div class="section">
             <div class="container">
-                <a name="Modelling"></a>
-                <h2>Diagramming vs modelling</h2>
-                <p>
-                    As an industry, we've tended to prefer diagramming over modelling, primarily because the barrier to entry is relatively low, and it's seen as a much simpler task.
-                    When you're diagramming, you're typically creating one or more separate diagrams, often with an ad hoc notation, using tools (e.g. Microsoft Visio or a whiteboard)
-                    that don't understand anything about the semantics of your diagrams. The domain language of diagramming tools is really just boxes and lines, so you can't ask them questions such as "what dependencies does component X have?".
-                    Additionally, reusing diagram elements across diagrams is usually done by duplication (i.e. copying and pasting), thereby putting the responsibility on you to keep diagrams in sync when you rename such elements.  
-                    It's worth noting here that the C4 model can be used irrespective of whether you are diagramming or modelling, but there are some interesting opportunities when you progress from diagramming to modelling.
-                </p>
-
-                <p>
-                    With modelling, you're building up a non-visual model of something (e.g. the software architecture of a software system), and then creating different views (e.g. diagrams) on top of that model.
-                    This requires a little more rigour, but the result is a single definition of all elements and the relationships between them.
-                    This, in turn, allows modelling tools to understand the semantics of what you're trying to do, and provide additional intelligence on top of the model.
-                    It also allows modelling tools to provide alternative visualisations, often automatically.
-                </p>
-
-                <p>
-                    One of the frequently asked questions (above) is about diagramming large and complex software systems.
-                    Once you start to have more than ~20 elements (plus the relationships between them) on a diagram, the resulting diagram starts to become cluttered very quickly.
-                    For example, image 1 (below) is a component diagram for a single container.
-                </p>
-                <p>
-                    One approach to dealing with this is to not show all of the components on a single diagram, and instead create multiple diagrams, one per "slice" through the container (image 2, below).
-                    This approach can certainly help, but it's worth asking whether the resulting diagrams are useful.
-                    Are you going to use them and, if so, what are you going to use them for?
-                    Although the System Context and Container diagrams are very useful, Component diagrams for large software systems often have less value because they are harder to keep up to date, and you might find that very few people look at them anyway, especially if they are not included in documentation or presentations.
-                </p>
-
-                <div class="row">
-                    <div class="col-sm-3 centered">
-                        <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
-                            <a href="./img/modelling-1.png"><img src="./img/modelling-1.png" alt="A large and cluttered diagram" class="img-responsive" /></a>
-                        </div>
-                        <p class="mapCaption">
-                            Once you have more than ~20 elements on a diagram, the diagram starts to become cluttered very quickly.
-                        </p>
-                    </div>
-                    <div class="col-sm-3 centered">
-                        <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
-                            <a href="./img/modelling-2.png"><img src="./img/modelling-2.png" alt="A smaller diagram showing an individual slice" class="img-responsive" /></a>
-                        </div>
-                        <p class="mapCaption">
-                            Creating multiple diagrams, one per "slice", can help, although the resulting diagrams tend to be very simple and increase the effort needed to keep them up to date.
-                        </p>
-                    </div>
-                    <div class="col-sm-3 centered">
-                        <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
-                            <a href="./img/modelling-3.png"><img src="./img/modelling-3.png" alt="An alternative visualisation" class="img-responsive" /></a>
-                        </div>
-                        <p class="mapCaption">
-                            Rather than creating a diagram, you can use alternative visualisations instead. This visualisation shows the dependencies between components inside a container.  
-                        </p>
-                    </div>
-                    <div class="col-sm-3 centered">
-                        <div class="img-thumbnail" style="height: 120px; overflow-y: hidden">
-                            <a href="./img/modelling-4.png"><img src="./img/modelling-4.png" alt="An alternative visualisation" class="img-responsive" /></a>
-                        </div>
-                        <p class="mapCaption">
-                            And this alternative visualisation shows all of the elements and relationships in the model, filtered to show a subset of the model.
-                        </p>
-                    </div>
-                </div>  
-                
-                <p>
-                    Often, the diagrams themselves aren't the end-goal, with teams using the diagrams to answer other questions that they have, such as, "what dependencies does component X have?".
-                    If this is the case, building a model will allow you to answer such questions, without the additional effort of creating a diagram.
-                    In other words, once you have a model, you can visualise it in a number of different ways (images 3 and 4, above), helping to answer the real questions that you are seeking to answer.
-                    Diagrams certainly are a fantastic way to communicate software architecture, but other visualisations can sometimes help answer the real underlying questions that you might have.
-                </p>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="container">
-                <a name="Metamodel"></a>
-                <h2>Metamodel</h2>
-                <p>
-                    If you're interested in using the C4 model or building tooling to support it, here is some information about the basic metamodel.
-                </p>
-
-                <h3>Elements and relationships</h3>
-                <div style="overflow-x:auto;">
-                <table class="table table-striped small">
-                    <tr>
-                        <th>Element type</th>
-                        <th>Parent</th>
-                        <th>Properties</th>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Person</b></td>
-                        <td>None</td>
-                        <td>
-                            <ul>
-                                <li>Name<sup>*</sup></li>
-                                <li>Description</li>
-                                <li>Location (Internal or External)</li>
-                            </ul>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Software System</b></td>
-                        <td>None</td>
-                        <td>
-                            <ul>
-                                <li>Name<sup>*</sup></li>
-                                <li>Description</li>
-                                <li>Location (Internal or External)</li>
-                                <li>The set of containers that make up the software system</li>
-                            </ul>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Container</b></td>
-                        <td>A software system</td>
-                        <td>
-                            <ul>
-                                <li>Name<sup>*</sup></li>
-                                <li>Description</li>
-                                <li>Technology</li>
-                                <li>The set of components within the container</li>
-                            </ul>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Component</b></td>
-                        <td>A container</td>
-                        <td>
-                            <ul>
-                                <li>Name<sup>*</sup></li>
-                                <li>Description</li>
-                                <li>Technology</li>
-                                <li>The set of code elements (e.g. classes, interfaces, etc) that the component is implemented by</li>
-                            </ul>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Code Element</b></td>
-                        <td>A component</td>
-                        <td>
-                            <ul>
-                                <li>Name<sup>*</sup></li>
-                                <li>Description</li>
-                                <li>Fully qualified type</li>
-                            </ul>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>Relationship</b><sup>**</sup></td>
-                        <td></td>
-                        <td>
-                            <ul>
-                                <li>Description</li>
-                                <li>Technology</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
-                </div>
-            
-                <p class="small">
-                    <sup>*</sup> All elements in the model must have a name, and that name should be unique within the parent context (tooling may or may not choose to enforce this uniqueness).
-                    <br />
-                    <sup>**</sup> Relationships are permitted between any elements in the model, in either direction.
-                </p>
-
-                <h3>Views</h3>
-                <div style="overflow-x:auto;">
-                <table class="table table-striped small">
-                    <tr>
-                        <th width="25%">View type</th>
-                        <th width="25%">Scope</th>
-                        <th width="25%">Permitted elements</th>
-                        <th width="25%"></th>
-                    </tr>
-        
-                    <tr>
-                        <td><b>1. System Context</b></td>
-                        <td>A software system.</td>
-                        <td>
-                            <ul>
-                                <li>Software systems</li>
-                                <li>People</li>
-                            </ul>
-                        </td>
-                        <td class="centered">
-                            <a href="https://static.structurizr.com/workspace/36141/diagrams/SystemContext.png"><img src="https://static.structurizr.com/workspace/36141/diagrams/SystemContext.png" alt="A System Context diagram" class="img-thumbnail grayscale" /></a>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>2. Container</b></td>
-                        <td>A software system</td>
-                        <td>
-                            <ul>
-                                <li>Software systems</li>
-                                <li>People</li>
-                                <li>Containers within the software system in scope</li>
-                            </ul>
-                        </td>
-                        <td class="centered">
-                            <a href="https://static.structurizr.com/workspace/36141/diagrams/Containers.png"><img src="https://static.structurizr.com/workspace/36141/diagrams/Containers.png" alt="A Container diagram" class="img-thumbnail grayscale" /></a>
-                        </td>
-                    </tr>
-        
-                    <tr>
-                        <td><b>3. Component</b></td>
-                        <td>A container</td>
-                        <td>
-                            <ul>
-                                <li>Software systems</li>
-                                <li>People</li>
-                                <li>Other containers within the parent software system of the container in scope</li>
-                                <li>Components within the container in scope</li>
-                            </ul>
-                        </td>
-                        <td class="centered">
-                            <a href="https://static.structurizr.com/workspace/36141/diagrams/Components.png"><img src="https://static.structurizr.com/workspace/36141/diagrams/Components.png" alt="A Component diagram" class="img-thumbnail grayscale" /></a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td><b>4. Code</b></td>
-                        <td>A component</span></td>
-                        <td>
-                            <ul>
-                                <li>Code elements (e.g. classes, interfaces, etc) that are used to implement the component in scope</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <a href="./img/class-diagram.png"><img src="./img/class-diagram.png" alt="A UML class diagram" class="img-thumbnail grayscale" /></a>
-                        </td>
-                    </tr>
-                </table>   
-                </div>         
-            </div>
-        </div> 
-
-        <div class="section">
-                <div class="container">
-                    <a name="MoreInformation"></a>
-                    <h2>More information</h2>
-                    <p>
-                        The following resources are recommended if you're looking for more information about
-                        visualising software architecture and the C4 model.
-                    </p>
-    
-                    <div class="row">
-                            <div class="col-sm-4 centered">
-                                <p>
-                                    <a href="https://leanpub.com/visualising-software-architecture"><img src="./img/book.png" alt="The C4 model for visualising software architecture" class="img-thumbnail" /></a>
-                                </p>
-        
-                                <p class="small">
-                                    This is Simon Brown's <a href="https://leanpub.com/visualising-software-architecture">The C4 model for visualising software architecture</a> ebook,
-                                    which is available to purchase from Leanpub as an ebook in PDF, EPUB and MOBI formats.
-                                    It's a short guide to visualising your software architecture with the C4 model.
-                                </p>
-                            </div>
-                            <div class="col-sm-8 centered">
-                            <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
-                                <iframe src="https://www.youtube.com/embed/x2-rSnhpw0g" frameborder="0" allowfullscreen></iframe>
-                            </p>
-                            <p style="font-size: 11px">
-                                <b>Visualising software architecture with the C4 model</b>
-                                <br />
-                                Agile on the Beach 2019 - Falmouth, England - July 2019
-                            </p>
-                        </div>
-                    </div>    
-     
-                    <p class="small centered">
-                        There are also some podcasts with Simon Brown, where he discusses the C4 model; including
-                        <a href="https://softwareengineeringdaily.com/2017/06/20/software-architecture-with-simon-brown/">Software Engineering Daily</a> and
-                        <a href="http://www.se-radio.net/2015/06/episode-228-software-architecture-sketches-with-simon-brown/">Software Engineering Radio</a>.
-                    </p>
-                </div>
-            </div>
-    
-        <div class="section">
-            <div class="container">
-                <a name="Adopting"></a>
-                <h2>Adopting the C4 model</h2>
-                <p>
-                    If you're considering whether the C4 model is right for your team, the best approach is to <b>just try it</b>.
-                    Set aside an hour, grab a whiteboard, and draw a System Context diagram for whatever you're working on.
-                    If you find that useful, set aside another hour to draw a Container diagram for the same software system.
-                    For many teams, those two levels of detail are sufficient.
-                    If you think there's value in drawing Component diagrams, then try that out too.   
-                    Component diagrams tend to be more volatile though, so you should really start to look at automating this level of detail where possible, so that the diagrams always reflect the code.
-                </p>
-
-                <p>
-                    If you have retrospectives as a part of your working practices, don't forget to discuss the diagrams.
-                    Are they useful? Do people use them? Are they kept up to date? Could we use more detail? Or are our diagrams too detailed, and falling out of date quickly? Is the tooling sufficient? Does everybody have access to the diagrams when needed?
-                </p>
-
-                <p>
-                    <a href="https://architectis.je" target="_blank">In-person and online training is available</a> to help you introduce the C4 model, or scale C4 model knowledge, within your organisation.
-                </p>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="container">
                 <a name="Tooling"></a>
                 <h2>Tooling</h2>
                 <p>
                     For design sessions, you might find a whiteboard or flip chart paper better for collaboration, and iterating quickly.
-                    For long-lived documentation, the following tools can help create software architecture diagrams based upon the C4 model.
+                    For long-lived documentation, there are a number of tools can help create software architecture diagrams based upon the C4 model.
                 </p>
 
                 <br />
 
-                <div class="row">
-                    <div class="col-sm-3 centered">
-                        <h3>Text-based modelling tools</h3>
-                        <ul style="padding-left: 0; list-style: none;">
-                            <li><a href="https://structurizr.com" target="_blank">Structurizr</a></li>
-                            <li><a href="https://github.com/lonely-lockley/archinsight" target="_blank">Archinsight</a></li>
-                        </ul>
+                <div class="centered">
+                    <div class="toolingOptionFilter">
+                        <label><input id="toolingOpenSourceFilter" type="checkbox"> Open source</label>
+                        <div class="smaller">(free, fork/customize, etc)</div>
                     </div>
-                    <div class="col-sm-3 centered">
-                        <h3>Visual modelling tools</h3>
-                        <ul style="padding-left: 0; list-style: none;">
-                            <li><a href="https://icepanel.io/c4-model" target="_blank">IcePanel</a></li>
-                            <li><a href="https://carbide.dev" target="_blank">Carbide</a></li>
-                            <li><a href="https://www.archimatetool.com/blog/2020/04/18/c4-model-architecture-viewpoint-and-archi-4-7/" target="_blank">Archi</a></li>
-                            <li><a href="http://www.sparxsystems.eu/c4/" target="_blank">Sparx Enterprise Architect</a></li>
-                            <li><a href="https://gaphor.org" target="_blank">Gaphor</a></li>
-                            <li><a href="https://supportportal.moodinternational.com/hc/en-us/articles/360015465100-MooD-and-the-C4-model" target="_blank">MooD</a></li>
-                            <li><a href="https://github.com/ChangeVision/astah-c4model-plugin" target="_blank">Astah</a></li>
-                            <li><a href="https://www.archipeg.com" target="_blank">Archipeg</a></li>
-                        </ul>
+                    <div class="toolingOptionFilter">
+                        <label><input id="toolingModelBasedFilter" type="checkbox"> Reuse elements across multiple diagrams</label>
+                        <div class="smaller">(to keep multiple diagrams in sync automatically when you rename elements)</div>
                     </div>
-                    <div class="col-sm-3 centered">
-                        <h3>Text-based diagramming tools</h3>
-                        <ul style="padding-left: 0; list-style: none;">
-                            <li><a href="https://github.com/plantuml-stdlib/C4-PlantUML" target="_blank">C4-PlantUML</a></li>
-                            <li><a href="https://adrianvlupu.github.io/C4-Builder" target="_blank">c4builder</a></li>
-                            <li><a href="https://github.com/8T4/c4sharp" target="_blank">C4Sharp</a></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
+                    <br />
+                    <div class="toolingOptionFilter">
+                        <label><input id="toolingAsCodeFilter" type="checkbox"> Diagrams as code</label>
+                        <div class="smaller">(for easy version control and integration into build pipelines/other tools)</div>
                     </div>
-                    <div class="col-sm-3 centered">
-                        <h3>Visual diagramming tools</h3>
-                        <ul style="padding-left: 0; list-style: none;">
-                            <li><a href="https://www.diagrams.net" target="_blank">diagrams.net</a></li>
-                            <li><a href="https://stenciltown.omnigroup.com/stencils/c4/" target="_blank">OmniGraffle</a></li>
-                            <li><a href="https://online.visual-paradigm.com/app/diagrams/#diagram:proj=0&type=C4Model&gallery=/repository/f8ca52e5-8e0f-45ec-a8fe-d2e2933518e4.xml" target="_blank">Visual Paradigm</a></li>
-                            <li><a href="https://github.com/pihalve/c4model-visio-stencil" target="_blank">Microsoft Visio</a></li>
-                            <li><a href="https://github.com/Ferhat67/C4-yEd" target="_blank">yEd</a></li>
-                            <li></li>
-                        </ul>
+                    <div class="toolingOptionFilter">
+                        <label><input id="toolingRenderingToolIndependentFilter" type="checkbox"> Rendering tool independent</label>
+                        <div class="smaller">(diagrams, graphs, etc; different visualisation formats for different use cases)</div>
                     </div>
                 </div>
+
+                <div class="centered">
+                    <div class="toolingOption toolingOpenSource toolingModelBased">
+                        <a href="https://www.archimatetool.com/blog/2020/04/18/c4-model-architecture-viewpoint-and-archi-4-7/" target="_blank">Archi</a>
+                    </div>
+                    <div class="toolingOption toolingOpenSource toolingAsCode">
+                        <a href="https://github.com/lonely-lockley/archinsight" target="_blank">Archinsight</a>
+                    </div>
+                    <div class="toolingOption toolingModelBased">
+                        <a href="https://www.archipeg.com" target="_blank">Archipeg</a>
+                    </div>
+                    <div class="toolingOption toolingModelBased">
+                        <a href="https://github.com/ChangeVision/astah-c4model-plugin" target="_blank">Astah</a>
+                    </div>
+                    <div class="toolingOption toolingOpenSource toolingAsCode">
+                        <a href="https://github.com/plantuml-stdlib/C4-PlantUML" target="_blank">C4-PlantUML</a>
+                    </div>
+                    <div class="toolingOption toolingOpenSource toolingAsCode">
+                        <a href="https://adrianvlupu.github.io/C4-Builder" target="_blank">c4builder</a>
+                    </div>
+                    <div class="toolingOption toolingOpenSource toolingAsCode">
+                        <a href="https://github.com/8T4/c4sharp" target="_blank">C4Sharp</a>
+                    </div>
+                    <div class="toolingOption toolingModelBased">
+                        <a href="https://carbide.dev" target="_blank">Carbide</a>
+                    </div>
+                    <div class="toolingOption toolingOpenSource">
+                        <a href="https://www.diagrams.net" target="_blank">diagrams.net</a>
+                    </div>
+                    <div class="toolingOption">
+                        <a href="https://libraries.excalidraw.com/#dmitry-burnyshev-c4-architecture" target="_blank">Excalidraw</a>
+                    </div>
+                    <div class="toolingOption">
+                        <a href="https://www.figma.com/templates/c4-model-examples/" target="_blank">Figma</a>
+                    </div>
+                    <div class="toolingOption toolingOpenSource toolingModelBased">
+                        <a href="https://gaphor.org" target="_blank">Gaphor</a>
+                    </div>
+                    <div class="toolingOption toolingModelBased">
+                        <a href="https://icepanel.io/c4-model" target="_blank">IcePanel</a>
+                    </div>
+                    <div class="toolingOption">
+                        <a href="https://github.com/pihalve/c4model-visio-stencil" target="_blank">Microsoft Visio</a>
+                    </div>
+                    <div class="toolingOption">
+                        <a href="https://miro.com/miroverse/c4-architecture/" target="_blank">Miro</a>
+                    </div>
+                    <div class="toolingOption toolingModelBased">
+                        <a href="https://supportportal.moodinternational.com/hc/en-us/articles/360015465100-MooD-and-the-C4-model" target="_blank">MooD</a>
+                    </div>
+                    <div class="toolingOption">
+                        <a href="https://stenciltown.omnigroup.com/stencils/c4/" target="_blank">OmniGraffle</a>
+                    </div>
+                    <div class="toolingOption toolingModelBased">
+                        <a href="http://www.sparxsystems.eu/c4/" target="_blank">Sparx Enterprise Architect</a>
+                    </div>
+                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingRenderingToolIndependent">
+                        <a href="https://structurizr.com" target="_blank">Structurizr</a>
+                    </div>
+                    <div class="toolingOption">
+                        <a href="https://online.visual-paradigm.com/diagrams/features/c4-model-tool/" target="_blank">Visual Paradigm</a>
+                    </div>
+                    <div class="toolingOption">
+                        <a href="https://github.com/Ferhat67/C4-yEd" target="_blank">yEd</a>
+                    </div>
+                </div>
+
+                <script>
+                    $('#toolingOpenSourceFilter, #toolingModelBasedFilter, #toolingAsCodeFilter, #toolingRenderingToolIndependentFilter').change(function() {
+                        filterToolingOptions();
+                    });
+
+                    function filterToolingOptions() {
+                        var classes = '';
+
+                        if ($('#toolingOpenSourceFilter').is(":checked")) {
+                            classes = classes + '.toolingOpenSource';
+                        }
+                        
+                        if ($('#toolingModelBasedFilter').is(":checked")) {
+                            classes = classes + '.toolingModelBased';
+                        }
+                        
+                        if ($('#toolingAsCodeFilter').is(":checked")) {
+                            classes = classes + '.toolingAsCode';
+                        }
+                        
+                        if ($('#toolingRenderingToolIndependentFilter').is(":checked")) {
+                            classes = classes + '.toolingRenderingToolIndependent';
+                        }
+                        
+                        if (classes.length === 0) {
+                            $('.toolingOption').removeClass('faded');
+                        } else {
+                            $('.toolingOption').addClass('faded');
+                            $('.toolingOption').filter(classes).removeClass('faded');
+                        }
+                    }
+                </script>
             </div>
         </div>
 
         <div class="section">
             <div class="container">
-                <a name="References"></a>
-                <h2>References</h2>
+                <a name="MoreInformation"></a>
+                <h2>More information</h2>
                 <p>
-                    Here are some of the significant resources that reference the C4 model:
+                    The following resources are recommended if you're looking for more information about
+                    visualising software architecture and the C4 model.
                 </p>
 
-                <ul>
-                    <li><a href="https://engineering.atspotify.com/2022/07/software-visualization-challenge-accepted/" target="_blank">Spotify Engineering: Software Visualization - Challenge, Accepted</a></li>
-                    <li><a href="https://www.theengineeringleader.com/1946930/10648894-a-moment-on-c4-architectural-design-with-amar-mehan" target="_blank">The Engineering Leader: A Moment on C4 Architectural Design with Amar Mehan</a></li>
-                    <li><a href="https://publications.opengroup.org/c208" target="_blank">Open Agile Architecture™, a Standard of The Open Group</a></li>
-                    <li><a href="https://publications.opengroup.org/g20e" target="_blank">Agile Architecture Modeling using the ArchiMate® Language</a></li>
-                    <li><a href="https://www.oreilly.com/library/view/fundamentals-of-software/9781492043447/" target="_blank">Fundamentals of Software Architecture</a> <span class="small">(Mark Richards, Neal Ford)</span></li>
-                    <li><a href="https://pragprog.com/titles/mkdsa/design-it/" target="_blank">Design It!</a> <span class="small">(Michael Keeling)</span></li>
-                    <li><a href="https://www.packtpub.com/free-ebook/software-architecture-with-spring-5-0/9781788992992" target="_blank">Software Architecture with Spring 5.0</a> <span class="small">(René Enríquez, Alberto Salazar)</span></li>
-                    <li><a href="https://leanpub.com/software-architecture" target="_blank">Software Architecture</a> <span class="small">(Cesare Pautasso)</span></li>
-                    <li><a href="https://martinfowler.com/articles/building-infrastructure-platform.html#CommunicateYourTechnicalVision" target="_blank">Martin Fowler: Building Infrastructure Platforms - Communicate your technical vision</a> <span class="small">(Poppy Rowse and Chris Shepherd)</span></li>
-                    <li><a href="https://en.wikipedia.org/wiki/C4_model" target="_blank">Wikipedia</a></li>
-                </ul>
+                <div class="row">
+                    <div class="col-sm-2 centered">
+                    </div>
+                    <div class="col-sm-4 centered">
+                        <p>
+                            <a href="https://leanpub.com/visualising-software-architecture"><img src="./img/book.png" alt="The C4 model for visualising software architecture" class="img-thumbnail" /></a>
+                        </p>
 
-                <p>
-                    The Structurizr DSL (designed to support the C4 model) has also appeared on the <a href="https://www.thoughtworks.com/radar/techniques/diagrams-as-code" target="_blank">ThoughtWorks Tech Radar - Techniques - Diagrams as code</a>.
-                </p>
+                        <p class="small">
+                            This is Simon Brown's <a href="https://leanpub.com/visualising-software-architecture">The C4 model for visualising software architecture</a> ebook,
+                            which is available to purchase from Leanpub as an ebook in PDF, EPUB and MOBI formats.
+                            It's a short guide to visualising your software architecture with the C4 model.
+                        </p>
+                    </div>
+                    <div class="col-sm-4 centered">
+                        <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
+                            <iframe src="https://www.youtube.com/embed/x2-rSnhpw0g" frameborder="0" allowfullscreen></iframe>
+                        </p>
+                        <p style="font-size: 11px">
+                            <b>Visualising software architecture with the C4 model</b>
+                            <br />
+                            Agile on the Beach 2019 - Falmouth, England - July 2019
+                        </p>
+
+                        <p class="embed-responsive embed-responsive-16by9 centered img-thumbnail">
+                            <iframe src="https://www.youtube.com/embed/0-gVFWONnQw" frameborder="0" allowfullscreen></iframe>
+                        </p>
+                        <p style="font-size: 11px">
+                            <b>Diagrams as code 2.0</b>
+                            <br />
+                            JBCNConf - Barcelona, Spain - July 2022
+                        </p>
+                    </div>
+                    <div class="col-sm-2 centered">
+                    </div>
+                </div>    
+
+                <div class="small">
+                    <p>
+                        And here are some of the significant resources that reference the C4 model:
+                    </p>
+
+                    <ul>
+                        <li><a href="https://engineering.atspotify.com/2022/07/software-visualization-challenge-accepted/" target="_blank">Spotify Engineering: Software Visualization - Challenge, Accepted</a></li>
+                        <li><a href="https://www.theengineeringleader.com/1946930/10648894-a-moment-on-c4-architectural-design-with-amar-mehan" target="_blank">The Engineering Leader: A Moment on C4 Architectural Design with Amar Mehan</a></li>
+                        <li><a href="https://publications.opengroup.org/c208" target="_blank">Open Agile Architecture™, a Standard of The Open Group</a></li>
+                        <li><a href="https://publications.opengroup.org/g20e" target="_blank">Agile Architecture Modeling using the ArchiMate® Language</a></li>
+                        <li><a href="https://www.oreilly.com/library/view/fundamentals-of-software/9781492043447/" target="_blank">Fundamentals of Software Architecture</a> <span class="small">(Mark Richards, Neal Ford)</span></li>
+                        <li><a href="https://pragprog.com/titles/mkdsa/design-it/" target="_blank">Design It!</a> <span class="small">(Michael Keeling)</span></li>
+                        <li><a href="https://www.packtpub.com/free-ebook/software-architecture-with-spring-5-0/9781788992992" target="_blank">Software Architecture with Spring 5.0</a> <span class="small">(René Enríquez, Alberto Salazar)</span></li>
+                        <li><a href="https://leanpub.com/software-architecture" target="_blank">Software Architecture</a> <span class="small">(Cesare Pautasso)</span></li>
+                        <li><a href="https://martinfowler.com/articles/building-infrastructure-platform.html#CommunicateYourTechnicalVision" target="_blank">Martin Fowler: Building Infrastructure Platforms - Communicate your technical vision</a> <span class="small">(Poppy Rowse and Chris Shepherd)</span></li>
+                        <li><a href="https://en.wikipedia.org/wiki/C4_model" target="_blank">Wikipedia</a></li>
+                    </ul>
+
+                    <p>
+                        The Structurizr DSL (designed to support the C4 model) has also appeared on the <a href="https://www.thoughtworks.com/radar/techniques/diagrams-as-code" target="_blank">ThoughtWorks Tech Radar - Techniques - Diagrams as code</a>.
+                    </p>
+                </div>
             </div>
         </div>
 
