@@ -368,7 +368,8 @@
                             <b>Recommended for most teams</b>: Yes.
                         </p>
                         <p class="small">
-                            <b>Notes</b>: This diagram says nothing about deployment scenarios, clustering, replication, failover, etc.
+                            <b>Notes</b>: This diagram says nothing about clustering, load balancers, replication, failover, etc because it will likely vary across different environments (e.g. production, staging, development, etc).
+                            This information is better captured via one or more <a href="#DeploymentDiagram">deployment diagrams</a>.
                         </p>
                     </div>
                 </div>
@@ -472,20 +473,21 @@
                     </div>
                     <div class="col-sm-7">
                         <p>
-                            The C4 model provides a static view of a <b>single software</b> system but, in the real-world, software systems never live in isolation.
-                            For this reason, and particularly if you are responsible for a collection of software systems, it's often useful to understand how all of these software systems fit together within the bounds of an enterprise.
-                            To do this, simply add another diagram that sits "on top" of the C4 diagrams, to show the system landscape from an IT perspective. Like the System Context diagram, this diagram can show
-                            the organisational boundary, internal/external users and internal/external systems.
+                            The C4 model provides a static view of a <b>single software system</b> but, in the real-world, software systems never live in isolation.
+                            For this reason, and particularly if you are responsible for a collection/portfolio of software systems,
+                            it's often useful to understand how all of these software systems fit together within a given enterprise/organisation/department/etc.
+                            Essentially this is a map of the software systems within the chosen scope,
+                            with a C4 drill-down for each software system of interest.
                         </p>
                         <p>
-                            Essentially this is a high-level map of the software systems at the enterprise level, with a C4 drill-down for each software system of interest. From a practical perspective, a system landscape diagram is really just a system context diagram without a specific focus on a particular software system.
+                            From a practical perspective, a system landscape diagram is really just a system context diagram without a specific focus on a particular software system.
                         </p>
 
                         <p class="small">
-                            <b>Scope</b>: An enterprise.
+                            <b>Scope</b>: An enterprise/organisation/department/etc.
                         </p>
                         <p class="small">
-                            <b>Primary elements</b>: People and software systems related to the enterprise in scope.
+                            <b>Primary elements</b>: People and software systems related to the chosen scope.
                         </p>
                         <p class="small">
                             <b>Intended audience</b>: Technical and non-technical people, inside and outside of the software development team.
@@ -510,20 +512,23 @@
                     </div>
                     <div class="col-sm-7">
                         <p>
-                            A dynamic diagram can be useful when you want to show how elements in a static model collaborate at runtime to implement a user story, use case, feature, etc.
+                            A dynamic diagram can be useful when you want to show how elements in the static model collaborate at runtime to implement a user story, use case, feature, etc.
                             This dynamic diagram is based upon a <a href="https://en.wikipedia.org/wiki/Communication_diagram">UML communication diagram</a>
                             (previously known as a "UML collaboration diagram"). It is similar to a <a href="https://en.wikipedia.org/wiki/Sequence_diagram">UML sequence diagram</a>
                             although it allows a free-form arrangement of diagram elements with numbered interactions to indicate ordering.
                         </p>
 
                         <p class="small">
-                            <b>Scope</b>: An enterprise, software system or container.
+                            <b>Scope</b>: A particular feature, story, use case, etc.
                         </p>
                         <p class="small">
-                            <b>Primary and supporting elements</b>: Depends on the diagram scope; enterprise (see System Landscape diagram), software system (see System Context or Container diagrams), container (see Component diagram).
+                            <b>Primary and supporting elements</b>: Your choice - you can show software systems, containers, or components interacting at runtime.
                         </p>
                         <p class="small">
                             <b>Intended audience</b>: Technical and non-technical people, inside and outside of the software development team.
+                        </p>
+                        <p class="small">
+                            <b>Notes</b>: Feel free to use a UML sequence diagram if you prefer that visual style.
                         </p>
                     </div>
                 </div>
@@ -548,9 +553,18 @@
                     </div>
                     <div class="col-sm-7">
                         <p>
-                            A deployment diagram allows you to illustrate how software systems and/or containers in the static model are mapped to infrastructure.
-                            This deployment diagram is based upon a <a href="https://en.wikipedia.org/wiki/Deployment_diagram">UML deployment diagram</a>, although simplified slightly to show the mapping between <b>containers</b> and <b>deployment nodes</b>.
-                            A deployment node is something like physical infrastructure (e.g. a physical server or device), virtualised infrastructure (e.g. IaaS, PaaS, a virtual machine), containerised infrastructure (e.g. a Docker container), an execution environment (e.g. a database server, Java EE web/application server, Microsoft IIS), etc. Deployment nodes can be nested.
+                            A deployment diagram allows you to illustrate how instances of software systems and/or containers in the static model are deployed on to the infrastructure within a given <b>deployment environment</b>
+                            (e.g. production, staging, development, etc).
+                            It's based upon a <a href="https://en.wikipedia.org/wiki/Deployment_diagram">UML deployment diagram</a>.
+                        </p>
+
+                        <p>
+                            A <b>deployment node</b> represents where an instance of a software system/container is running;
+                            perhaps physical infrastructure (e.g. a physical server or device),
+                            virtualised infrastructure (e.g. IaaS, PaaS, a virtual machine),
+                            containerised infrastructure (e.g. a Docker container),
+                            an execution environment (e.g. a database server, Java EE web/application server, Microsoft IIS), etc.
+                            Deployment nodes can be nested.
                         </p>
 
                         <p>
@@ -563,7 +577,7 @@
                         </p>
 
                         <p class="small">
-                            <b>Scope</b>: One or more software systems.
+                            <b>Scope</b>: One or more software systems within a single deployment environment (e.g. production, staging, development, etc).
                         </p>
                         <p class="small">
                             <b>Primary elements</b>: Deployment nodes, software system instances, and container instances.
