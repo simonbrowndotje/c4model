@@ -815,8 +815,9 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="toolingOptionFilter">
-                            <label><input id="toolingModelBasedFilter" type="checkbox"> Reuse elements across multiple diagrams</label>
+                            <label><input id="toolingModelBasedFilter" type="checkbox" checked="checked"> Reuse elements across multiple diagrams</label>
                             <div class="smaller">(to keep multiple diagrams in sync automatically when you rename elements)</div>
+                            <div class="label label-success smaller" style="font-weight: normal">Recommended</div>
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -948,6 +949,8 @@
                             $('.toolingOption').filter(classes).removeClass('faded');
                         }
                     }
+
+                    filterToolingOptions();
                 </script>
             </div>
         </div>
