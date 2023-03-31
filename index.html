@@ -807,125 +807,150 @@
                 <br />
 
                 <div class="row centered">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <div class="toolingOptionFilter">
                             <label><input id="toolingOpenSourceFilter" type="checkbox"> Open source</label>
                             <div class="smaller">(free, fork/customize, etc)</div>
                         </div>
-                    </div>
-                    <div class="col-sm-3">
+
                         <div class="toolingOptionFilter">
-                            <label><input id="toolingModelBasedFilter" type="checkbox" checked="checked"> Reuse elements across multiple diagrams</label>
-                            <div class="smaller">(to keep multiple diagrams in sync automatically when you rename elements)</div>
-                            <div class="label label-success smaller" style="font-weight: normal">Recommended</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="toolingOptionFilter">
-                            <label><input id="toolingAsCodeFilter" type="checkbox"> Diagrams/models as code</label>
+                            <label><input id="toolingAsCodeFilter" type="checkbox"> Diagrams and models as code</label>
                             <div class="smaller">(for easy version control and integration into build pipelines/other tools)</div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
+                        <div class="toolingOptionFilter">
+                            <label><input id="toolingModelBasedFilter" type="checkbox" checked="checked"> Reuse elements across multiple diagrams</label>
+                            <div class="smaller">(to keep multiple diagrams in sync automatically when you rename elements)</div>
+                            <div class="label smaller" style="font-weight: normal; background: #08427B;">Recommended</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
                         <div class="toolingOptionFilter">
                             <label><input id="toolingMultipleVisualisationsFilter" type="checkbox"> Multiple visualisations</label>
                             <div class="smaller">(<a href="#AlternativeVisualisations">diagrams, graphs, etc</a> - different visualisation formats for different use cases)</div>
+                        </div>
+
+                        <div class="toolingOptionFilter">
+                            <label><input id="toolingRenderingToolIndependentFilter" type="checkbox"> Rendering tool independent</label>
+                            <div class="smaller">(render diagrams using different tools, from the same source)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row centered">
+                    <div class="col-sm-4">
+                        <div class="toolingOptionFilter">
+                            <label><input id="toolingStaticDiagramsFilter" type="checkbox" checked="checked"> Static diagrams</label>
+                            <div class="smaller">(e.g. system context, container, and component diagrams)</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="toolingOptionFilter">
+                            <label><input id="toolingDynamicDiagramsFilter" type="checkbox"> Dynamic diagrams</label>
+                            <div class="smaller">(e.g. collaboration or sequence diagrams)</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="toolingOptionFilter">
+                            <label><input id="toolingDeploymentDiagramsFilter" type="checkbox"> Deployment diagrams</label>
+                            <div class="smaller">(e.g. diagrams showing deployment and infrastructure concerns)</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="centered">
-                    <div class="toolingOption toolingOpenSource toolingModelBased">
+                    <div class="toolingOption toolingOpenSource toolingModelBased toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://www.archimatetool.com/blog/2020/04/18/c4-model-architecture-viewpoint-and-archi-4-7/" target="_blank">Archi</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingAsCode">
+                    <div class="toolingOption toolingOpenSource toolingAsCode toolingStaticDiagrams">
                         <a href="https://github.com/lonely-lockley/archinsight" target="_blank">Archinsight</a>
                     </div>
-                    <div class="toolingOption toolingModelBased">
-                        <a href="https://www.archipeg.com" target="_blank">Archipeg</a>
+                    <div class="toolingOption toolingModelBased toolingStaticDiagrams toolingDeploymentDiagrams">
+                        <a href="https://www.archipeg.com/learn/c4-model-v1-metamodel" target="_blank">Archipeg</a>
                     </div>
-                    <div class="toolingOption toolingModelBased">
+                    <div class="toolingOption toolingModelBased toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://github.com/ChangeVision/astah-c4model-plugin" target="_blank">Astah</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingAsCode">
+                    <div class="toolingOption toolingOpenSource toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://github.com/plantuml-stdlib/C4-PlantUML" target="_blank">C4-PlantUML</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingAsCode">
+                    <div class="toolingOption toolingOpenSource toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://adrianvlupu.github.io/C4-Builder" target="_blank">c4builder</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingAsCode">
+                    <div class="toolingOption toolingOpenSource toolingAsCode toolingStaticDiagrams toolingDeploymentDiagrams">
                         <a href="https://github.com/8T4/c4sharp" target="_blank">C4Sharp</a>
                     </div>
-                    <div class="toolingOption toolingModelBased">
+                    <div class="toolingOption toolingModelBased toolingStaticDiagrams">
                         <a href="https://carbide.dev" target="_blank">Carbide</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingAsCode">
+                    <div class="toolingOption toolingOpenSource toolingAsCode toolingStaticDiagrams">
                         <a href="https://owulveryck.github.io/cue4puml4c4/" target="_blank">CUE4Puml4C4</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingAsCode">
+                    <div class="toolingOption toolingOpenSource toolingAsCode toolingStaticDiagrams">
                         <a href="https://diagrams.mingrammer.com/docs/nodes/c4" target="_blank">Diagrams</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource">
-                        <a href="https://www.diagrams.net" target="_blank">diagrams.net</a>
+                    <div class="toolingOption toolingOpenSource toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
+                        <a href="https://www.diagrams.net/blog/c4-modelling" target="_blank">diagrams.net</a>
                     </div>
-                    <div class="toolingOption">
+                    <div class="toolingOption toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://libraries.excalidraw.com/#dmitry-burnyshev-c4-architecture" target="_blank">Excalidraw</a>
                     </div>
-                    <div class="toolingOption">
+                    <div class="toolingOption toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://www.figma.com/templates/c4-model-examples/" target="_blank">Figma</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingModelBased">
+                    <div class="toolingOption toolingOpenSource toolingModelBased toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://gaphor.org" target="_blank">Gaphor</a>
                     </div>
-                    <div class="toolingOption">
+                    <div class="toolingOption toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://www.gliffy.com/blog/c4-model" target="_blank">Gliffy</a>
                     </div>
-                    <div class="toolingOption toolingModelBased">
+                    <div class="toolingOption toolingModelBased toolingStaticDiagrams toolingDynamicDiagrams">
                         <a href="https://icepanel.io/c4-model" target="_blank">IcePanel</a>
                     </div>
-                    <div class="toolingOption">
+                    <div class="toolingOption toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://www.lucidchart.com/pages/templates/c-4-model-example" target="_blank">Lucidchart</a>
                     </div>
-                    <div class="toolingOption">
+                    <div class="toolingOption toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://github.com/pihalve/c4model-visio-stencil" target="_blank">Microsoft Visio</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingAsCode">
+                    <div class="toolingOption toolingOpenSource toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://mermaid.js.org/syntax/c4c.html" target="_blank">Mermaid</a>
                     </div>
-                    <div class="toolingOption">
+                    <div class="toolingOption toolingStaticDiagrams toolingDynamicDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://miro.com/miroverse/c4-architecture/" target="_blank">Miro</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode">
+                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://github.com/goadesign/model" target="_blank">Model</a>
                     </div>
-                    <div class="toolingOption toolingModelBased">
+                    <div class="toolingOption toolingModelBased toolingStaticDiagrams">
                         <a href="https://supportportal.moodinternational.com/hc/en-us/articles/360015465100-MooD-and-the-C4-model" target="_blank">MooD</a>
                     </div>
-                    <div class="toolingOption">
+                    <div class="toolingOption toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://stenciltown.omnigroup.com/stencils/c4/" target="_blank">OmniGraffle</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode">
+                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://github.com/DrMarkusVoss/pumla/blob/main/test/examples/C4example/pumlaC4Example.md" target="_blank">pumla</a>
                     </div>
-                    <div class="toolingOption toolingModelBased">
+                    <div class="toolingOption toolingModelBased toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="http://www.sparxsystems.eu/c4/" target="_blank">Sparx Enterprise Architect</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode">
+                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingStaticDiagrams">
                         <a href="https://rdbmodel.github.io" target="_blank">RDB modeling</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingMultipleVisualisations">
-                        <a href="https://structurizr.com" target="_blank">Structurizr</a>
+                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingMultipleVisualisations toolingRenderingToolIndependent toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
+                        <a href="https://structurizr.org" target="_blank">Structurizr</a>
                     </div>
-                    <div class="toolingOption">
+                    <div class="toolingOption toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://online.visual-paradigm.com/diagrams/features/c4-model-tool/" target="_blank">Visual Paradigm</a>
                     </div>
-                    <div class="toolingOption">
+                    <div class="toolingOption toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://github.com/Ferhat67/C4-yEd" target="_blank">yEd</a>
                     </div>
                 </div>
 
                 <script>
-                    $('#toolingOpenSourceFilter, #toolingModelBasedFilter, #toolingAsCodeFilter, #toolingMultipleVisualisationsFilter').change(function() {
+                    $('#toolingOpenSourceFilter, #toolingModelBasedFilter, #toolingAsCodeFilter, #toolingMultipleVisualisationsFilter, #toolingRenderingToolIndependentFilter, #toolingStaticDiagramsFilter, #toolingDynamicDiagramsFilter, #toolingDeploymentDiagramsFilter').change(function() {
                         filterToolingOptions();
                     });
 
@@ -946,6 +971,22 @@
                         
                         if ($('#toolingMultipleVisualisationsFilter').is(":checked")) {
                             classes = classes + '.toolingMultipleVisualisations';
+                        }
+                        
+                        if ($('#toolingRenderingToolIndependentFilter').is(":checked")) {
+                            classes = classes + '.toolingRenderingToolIndependent';
+                        }
+                        
+                        if ($('#toolingStaticDiagramsFilter').is(":checked")) {
+                            classes = classes + '.toolingStaticDiagrams';
+                        }
+                        
+                        if ($('#toolingDynamicDiagramsFilter').is(":checked")) {
+                            classes = classes + '.toolingDynamicDiagrams';
+                        }
+                        
+                        if ($('#toolingDeploymentDiagramsFilter').is(":checked")) {
+                            classes = classes + '.toolingDeploymentDiagrams';
                         }
                         
                         if (classes.length === 0) {
