@@ -849,13 +849,8 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="toolingOptionFilter">
-                            <label><input id="toolingMultipleVisualisationsFilter" type="checkbox"> Multiple visualisations</label>
-                            <div class="smaller">(<a href="#AlternativeVisualisations">diagrams, graphs, etc</a> - different visualisation formats for different use cases)</div>
-                        </div>
-
-                        <div class="toolingOptionFilter">
                             <label><input id="toolingRenderingToolIndependentFilter" type="checkbox"> Rendering tool independent</label>
-                            <div class="smaller">(render diagrams using different tools, from the same source)</div>
+                            <div class="smaller">(to render diagrams with different tools or visualisation formats such as <a href="#AlternativeVisualisations">diagrams, graphs, etc</a>)</div>
                         </div>
                     </div>
                 </div>
@@ -931,6 +926,9 @@
                         <a href="https://stenciltown.omnigroup.com/stencils/c4/" target="_blank">OmniGraffle</a>
                     </div>
                     <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
+                        <a href="https://github.com/soulspace-org/overarch" target="_blank">Overarch</a>
+                    </div>
+                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://github.com/DrMarkusVoss/pumla/blob/main/test/examples/C4example/pumlaC4Example.md" target="_blank">pumla</a>
                     </div>
                     <div class="toolingOption toolingModelBased toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
@@ -939,7 +937,7 @@
                     <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingStaticDiagrams">
                         <a href="https://rdbmodel.github.io" target="_blank">RDB modeling</a>
                     </div>
-                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingMultipleVisualisations toolingRenderingToolIndependent toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
+                    <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingRenderingToolIndependent toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
                         <a href="https://structurizr.org" target="_blank">Structurizr</a>
                     </div>
                     <div class="toolingOption toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
@@ -951,7 +949,7 @@
                 </div>
 
                 <script>
-                    $('#toolingOpenSourceFilter, #toolingModelBasedFilter, #toolingAsCodeFilter, #toolingMultipleVisualisationsFilter, #toolingRenderingToolIndependentFilter, #toolingStaticDiagramsFilter, #toolingDynamicDiagramsFilter, #toolingDeploymentDiagramsFilter').change(function() {
+                    $('#toolingOpenSourceFilter, #toolingModelBasedFilter, #toolingAsCodeFilter, #toolingRenderingToolIndependentFilter, #toolingStaticDiagramsFilter, #toolingDynamicDiagramsFilter, #toolingDeploymentDiagramsFilter').change(function() {
                         filterToolingOptions();
                     });
 
@@ -968,10 +966,6 @@
                         
                         if ($('#toolingAsCodeFilter').is(":checked")) {
                             classes = classes + '.toolingAsCode';
-                        }
-                        
-                        if ($('#toolingMultipleVisualisationsFilter').is(":checked")) {
-                            classes = classes + '.toolingMultipleVisualisations';
                         }
                         
                         if ($('#toolingRenderingToolIndependentFilter').is(":checked")) {
