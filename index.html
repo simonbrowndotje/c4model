@@ -234,23 +234,36 @@
                 <br /><br />
 
                 <h3>Person</h3>
-                <p class="small">
+                <p>
                     A person represents one of the human users of your software system (e.g. actors, roles, personas, etc).
                 </p>
 
+                <br />
+
                 <h3>Software System</h3>
-                <p class="small">
-                    A software system is the highest level of abstraction and describes something that delivers value to its users, whether they are human or not. This includes the software system you are modelling, and the other software systems upon which your software system depends (or vice versa).
-                    In many cases, a software system is "owned by" a single software development team.
+                <p>
+                    A software system is the highest level of abstraction and describes something that delivers value to its users, whether they are human or not.
+                    This includes the software system you are modelling, and the other software systems upon which your software system depends (or vice versa).
                 </p>
 
+                <p>
+                    Unfortunately the term "software system" is the hardest of the C4 model abstractions to define,
+                    and this isn't helped by the fact that each organisation will also have their own terminology for describing the same thing, typically using terms such as "application", "product", "service", etc.
+                    One way to think about it is that a software system is something a single software development team is building, owns, has responsibility for, and can see the internal implementation details of.
+                    Perhaps the code for that software system resides in a single source code repository, and anybody on the team is entitled to modify it.
+                    In many cases, the boundary of a software system will correspond to the boundary of a single team.
+                    It may also be the case that everything inside the boundary of a software system is deployed at the same time.
+                </p>
+
+                <br />
+
                 <h3>Container <span class="smaller">(applications and data stores)</span></h3>
-                <p class="small">
+                <p >
                     Not Docker! In the C4 model, a container represents an <b>application</b> or a <b>data store</b>. A container is something that needs to
                     be running in order for the overall software system to work. In real terms, a container is something like:
                 </p>
                 
-                <ul class="small">
+                <ul>
                     <li><b>Server-side web application</b>: A Java EE web application running on Apache Tomcat, an ASP.NET MVC application running on Microsoft IIS, a Ruby on Rails application running on WEBrick, a Node.js application, etc.</li>
                     <li><b>Client-side web application</b>: A JavaScript application running in a web browser using Angular, Backbone.JS, jQuery, etc.</li>
                     <li><b>Client-side desktop application</b>: A Windows desktop application written using WPF, an OS X desktop application written using Objective-C, a cross-platform desktop application written using JavaFX, etc.</li>
@@ -264,18 +277,20 @@
                     <li><b>etc</b></li>
                 </ul>
 
-                <p class="small">
+                <p>
                     A container is essentially a context or boundary inside which some code is executed or some data is stored.
                     And each container is a separately deployable/runnable thing or runtime environment, typically (but not always) running in its own process space.
                     Because of this, communication between containers typically takes the form of an inter-process communication.
                 </p>
 
+                <br />
+
                 <h3>Component</h3>
-                <p class="small">
+                <p>
                     The word "component" is a hugely overloaded term in the software development industry, but in this context a component is a grouping of related functionality encapsulated behind a well-defined interface.
                     If you're using a language like Java or C#, the simplest way to think of a component is that it's a collection of implementation classes behind an interface. Aspects such as how those components are packaged (e.g. one component vs many components per JAR file, DLL, shared library, etc) is a separate and orthogonal concern.
                 </p>
-                <p class="small">
+                <p>
                     An important point to note here is that all components inside a container typically execute in the same process space.
                     <b>In the C4 model, components are not separately deployable units.</b>
                 </p>
