@@ -1,0 +1,16 @@
+title: C4 model
+description: The C4 model for visualising software architecture
+theme: just-the-docs
+color_scheme: c4model
+
+url: https://c4model.com
+
+nav_external_links:
+  - title: Training/workshops
+    url: https://simonbrown.je/#workshops
+
+gh_edit_link: true
+gh_edit_link_text: "Edit this page on GitHub."
+gh_edit_repository: "https://github.com/simonbrowndotje/c4model"
+gh_edit_branch: "master"
+gh_edit_view_mode: "tree"
