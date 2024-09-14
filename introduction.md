@@ -22,7 +22,6 @@ perhaps in the race for agility, many software development teams have lost the a
 
 ## Maps of your code
 
-Maps of your code
 The C4 model was created as a way to help software development teams describe and communicate software architecture,
 both during up-front design sessions and when retrospectively documenting an existing codebase. It's a way to create
 maps of your code, at various levels of detail, in the same way you would use something like Google Maps to zoom in
