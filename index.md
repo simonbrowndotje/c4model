@@ -29,7 +29,7 @@ threat modelling, etc.
 <script>
     const links = {
         'abstractions': '/abstractions',
-        'systemContextdiagram': '/diagrams/system-context',
+        'systemcontextdiagram': '/diagrams/system-context',
         'containerdiagram': '/diagrams/containers',
         'componentdiagram': '/diagrams/components',
         'codediagram': '/diagrams/code',
@@ -45,6 +45,7 @@ threat modelling, etc.
     if (hash && hash.length > 0) {
         hash = hash.substring(1).toLowerCase();
         const link = links[hash];
+
         if (link) {
             window.location.href = link;
         }
