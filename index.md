@@ -30,8 +30,8 @@ threat modelling, etc.
     const links = {
         'abstractions': '/abstractions',
         'systemcontextdiagram': '/diagrams/system-context',
-        'containerdiagram': '/diagrams/containers',
-        'componentdiagram': '/diagrams/components',
+        'containerdiagram': '/diagrams/container',
+        'componentdiagram': '/diagrams/component',
         'codediagram': '/diagrams/code',
         'systemlandscapediagram': '/diagrams/system-landscape',
         'dynamicdiagram': '/diagrams/dynamic',
