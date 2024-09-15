@@ -2,7 +2,7 @@
 layout: default
 title: Deployment diagram
 parent: Diagrams
-nav_order: 6
+nav_order: 7
 permalink: /diagrams/deployment
 ---
 

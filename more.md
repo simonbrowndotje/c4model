@@ -10,25 +10,31 @@ permalink: /more
 ## Books
 
 This is Simon Brown's [The C4 model for visualising software architecture](https://leanpub.com/visualising-software-architecture) 
-ebook, which is available to purchase from  Leanpub as an ebook in PDF, EPUB and MOBI formats.
-It's a short guide to visualising your software architecture with the C4 model.
+ebook, which is available to purchase from Leanpub in PDF, EPUB and MOBI formats.
+It forms the basis for his [workshop](https://simonbrown.je#workshop3) and includes a number of more advanced C4 model topics.
 
 [![The C4 model for visualising software architecture book](/images/book-small.png)](https://leanpub.com/visualising-software-architecture)
 
 
-## Videos
+## Presentations
 
-### Visualising software architecture with the C4 model
-
-Recorded at "Agile on the Beach 2019", July 2019.
-
+<table style="text-align: center">
+<tr>
+<td>
 <iframe src="https://www.youtube-nocookie.com/embed/x2-rSnhpw0g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-### Diagrams as code 2.0
-
-Recorded at "JBCNConf", July 2022
-
-<iframe src="https://www.youtube-nocookie.com/embed/0-gVFWONnQw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<br />
+<b>Visualising software architecture with the C4 model</b>
+<br />
+Recorded at "Agile on the Beach 2019", July 2019
+</td>
+<td>
+<iframe src="https://www.youtube-nocookie.com/embed/LYzOc7vI-Uo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<br />
+<b>C4 models as code</b>
+<br />Recorded at "Devoxx Belgium", October 2023
+</td>
+</tr>
+</table>
 
 ## Other
 

@@ -9,30 +9,24 @@ has_toc: false
 
 # Diagrams
 
-The C4 model is named after the core set of static structure diagrams as follows, with the different levels of
-zoom allowing you to tell different stories to different audiences:
+## Static structure diagrams
 
-1. [System context diagram](/diagrams/system-context)
-2. [Container diagram](/diagrams/container)
-3. [Component diagram](/diagrams/component)
-4. [Code diagram](/diagrams/code)
+The C4 model is named after the core set of static structure diagrams:
+(system) context, containers, components, and code.
 
-[![An overview of the C4 model for visualising software architecture](/images/c4-overview.png)](/images/c4-overview.png)
+| ![](https://static.structurizr.com/workspace/36141/diagrams/SystemContext.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/Containers.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/Components.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/MainframeBankingSystemFacade.png) |
+| [1. System context diagram](/diagrams/system-context) | [2. Container diagram](/diagrams/container) | [3. Component diagram](/diagrams/component) | [4. Code diagram](/diagrams/code) |
 
-Please note that you don't need to use all 4 levels of diagram; only those that add value -
-the [system context](/diagrams/system-context) and [container](/diagrams/container) diagrams
-are sufficient for many software development teams.
+The different levels of zoom allow you to tell different stories to different audiences.
+That said, __you don't need to use all 4 levels of diagram__; only those that add value -
+the [system context](/diagrams/system-context) and [container](/diagrams/container) diagrams are sufficient for most software development teams.
+
+## Supplementary diagrams
 
 In addition, there are 3 supplementary diagram types:
 
-1. [System landscape diagram](/diagrams/system-landscape)
-2. [Dynamic diagram](/diagrams/dynamic)
-3. [Deployment diagram](/diagrams/deployment)
+| ![A system landscape diagram](https://static.structurizr.com/workspace/28201/diagrams/SystemLandscape.png) | ![A dynamic diagram](https://static.structurizr.com/workspace/36141/diagrams/SignIn.png) | ![A deployment diagram](https://static.structurizr.com/workspace/36141/diagrams/LiveDeployment.png) |
+| [System landscape diagram](/diagrams/system-landscape) | [Dynamic diagram](/diagrams/dynamic) | [Deployment diagram](/diagrams/deployment) |
 
-## Examples
-
-Hover your mouse over the diagram below, find elements with a ![zoom-in symbol](/images/zoom-in.svg) and 
-double-click to zoom-in.
-
-<script type="text/javascript" src="https://static.structurizr.com/js/structurizr-embed.js"></script>
-<iframe id="myEmbeddedDiagram" class="thumbnail" src="https://structurizr.com/embed/36141?diagram=SystemContext&diagramSelector=true&iframe=myEmbeddedDiagram" width="100%" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
+<script type="application/javascript" src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+<script type="application/javascript" src="/assets/c4model.js"></script>

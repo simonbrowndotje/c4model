@@ -24,12 +24,12 @@ perhaps in the race for agility, many software development teams have lost the a
 
 The C4 model was created as a way to help software development teams describe and communicate software architecture,
 both during up-front design sessions and when retrospectively documenting an existing codebase. It's a way to create
-maps of your code, at various levels of detail, in the same way you would use something like Google Maps to zoom in
+"maps of your code", at various levels of detail, in the same way you would use something like Google Maps to zoom in
 and out of an area you are interested in.
 
 | ![](/images/map-4.jpg) | ![](/images/map-3.jpg) | ![](/images/map-2.jpg) | ![](/images/map-1.jpg) |
 | ![](https://static.structurizr.com/workspace/36141/diagrams/SystemContext.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/Containers.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/Components.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/MainframeBankingSystemFacade.png) |
-| Level 1: A __System Context__ diagram provides a starting point, showing how the software system in scope fits into the world around it. | Level 2: A __Container__ diagram zooms into the software system in scope, showing the high-level technical building blocks. | Level 3: A __Component__ diagram zooms into an individual container, showing the components inside it. | Level 4: A __code__ (e.g. UML class) diagram can be used to zoom into an individual component, showing how that component is implemented. |
+| Level 1: A __System Context__ diagram provides a starting point, showing how the software system in scope fits into the world around it. | Level 2: A __Container__ diagram zooms into the software system in scope, showing the applications and data stores inside it. | Level 3: A __Component__ diagram zooms into an individual container, showing the components inside it. | Level 4: A __code__ (e.g. UML class) diagram can be used to zoom into an individual component, showing how that component is implemented at the code level. |
 
 ## Improving diagramming maturity
 

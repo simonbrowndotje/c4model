@@ -220,7 +220,7 @@ Don't forget to ask yourself some questions when looking at tooling, to understa
         <a href="https://rdbmodel.github.io" target="_blank">RDB modeling</a>
     </div>
     <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingRenderingToolIndependent toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
-        <a href="https://structurizr.org" target="_blank">Structurizr</a>
+        <a href="https://structurizr.com" target="_blank">Structurizr</a>
     </div>
     <div class="toolingOption toolingWithUI toolingDiagramming toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
         <a href="https://online.visual-paradigm.com/diagrams/features/c4-model-tool/" target="_blank">Visual Paradigm</a>

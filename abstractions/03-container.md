@@ -22,3 +22,18 @@ that needs to be running in order for the overall software system to work. In re
 - __File system__: A full local file system or a portion of a larger networked file system (e.g. SAN, NAS, etc).
 - __Shell script__: A single shell script written in Bash, etc.
 - etc
+
+A container is essentially a runtime boundary around some code that is being executed or some data that is being stored.
+The name "container" was chosen because I wanted a name that didn't imply anything about the physical nature of how
+that container is executed. For example, a single Java EE server like Apache Tomcat can run multiple web
+applications inside a single Java Virtual Machine, although each of those web applications is essentially isolated
+from the others. At development time I might have three web applications running on a single Apache Tomcat server,
+while each web application may be deployed onto a dedicated Apache Tomcat server in a live environment.
+In this situation, each web application is a "C4 container", with the deployment being a seperate concern.
+
+## FAQ
+
+- [Why “container”?](/faq#why-container)
+- [Web applications; one container or two?](/faq#web-applications-one-container-or-two)
+- [Is a Java JAR, C# assembly, DLL, module, etc a container?](/faq#is-a-java-jar-c-assembly-dll-module-etc-a-container)
+- [Should data storage services be shown as software systems or containers?](/faq#should-data-storage-services-be-shown-as-software-systems-or-containers)
