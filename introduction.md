@@ -13,7 +13,8 @@ developer to communicate the software architecture of a software system using di
 confused mess of boxes and lines ... inconsistent notation (colour coding, shapes, line styles, etc), ambiguous naming,
 unlabelled relationships, generic terminology, missing technology choices, mixed abstractions, etc.
 
-| ![A software architecture sketch](/images/sketch-1.jpg) | ![A software architecture sketch](/images/sketch-2.jpg) | ![A software architecture sketch](/images/sketch-3.jpg) | ![A software architecture sketch](/images/sketch-4.jpg) |
+| ![A software architecture sketch](/images/sketch-1.jpg) | ![A software architecture sketch](/images/sketch-2.jpg) |
+| ![A software architecture sketch](/images/sketch-3.jpg) | ![A software architecture sketch](/images/sketch-4.jpg) |
 
 As an industry, we do have the Unified Modeling Language (UML), ArchiMate and SysML, but asking whether these provide
 an effective way to communicate software architecture is often irrelevant because many teams have already thrown them
@@ -29,7 +30,7 @@ and out of an area you are interested in.
 
 | ![](/images/map-4.jpg) | ![](/images/map-3.jpg) | ![](/images/map-2.jpg) | ![](/images/map-1.jpg) |
 | ![](https://static.structurizr.com/workspace/36141/diagrams/SystemContext.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/Containers.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/Components.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/MainframeBankingSystemFacade.png) |
-| Level 1: A __System Context__ diagram provides a starting point, showing how the software system in scope fits into the world around it. | Level 2: A __Container__ diagram zooms into the software system in scope, showing the applications and data stores inside it. | Level 3: A __Component__ diagram zooms into an individual container, showing the components inside it. | Level 4: A __code__ (e.g. UML class) diagram can be used to zoom into an individual component, showing how that component is implemented at the code level. |
+| Level 1: A [system context diagram](/diagrams/system-context) provides a starting point, showing how the software system in scope fits into the world around it. | Level 2: A [container diagram](/diagrams/container) zooms into the software system in scope, showing the applications and data stores inside it. | Level 3: A [component diagram](/diagrams/component) zooms into an individual container, showing the components inside it. | Level 4: A [code diagram](/diagrams/code) (e.g. UML class) can be used to zoom into an individual component, showing how that component is implemented at the code level. |
 
 ## Improving diagramming maturity
 
