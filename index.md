@@ -52,7 +52,7 @@ Recorded at "Agile on the Beach 2019", July 2019
         'systemlandscapediagram': '/diagrams/system-landscape',
         'dynamicdiagram': '/diagrams/dynamic',
         'deploymentdiagram': '/diagrams/deployment',
-        'notation': '/notation',
+        'notation': '/diagrams/notation',
         'tooling': '/tooling',
         'faq': '/faq',
     };

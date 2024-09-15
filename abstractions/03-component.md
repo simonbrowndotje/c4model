@@ -1,12 +1,24 @@
 ---
 layout: default
-title: Components vs code?
+title: 3. Component
 parent: Abstractions
-nav_order: 6
-permalink: /abstractions/components-vs-code
+nav_order: 3
+permalink: /abstractions/component
 ---
 
-# Components vs code?
+# Component
+
+The word "component" is a hugely overloaded term in the software development industry but, in the C4 model,
+a component is a grouping of related functionality encapsulated behind a well-defined interface.
+If you're using a language like Java or C#, the simplest way to think of a component is that it's a collection
+of implementation classes behind an interface.
+
+With the C4 model, components are *not* separately deployable units. Instead, it's the container that's the
+deployable unit. In other words, all components inside a container execute in the same process space.
+Aspects such as how components are packaged (e.g. one component vs many components per JAR file, DLL,
+shared library, etc) is an orthogonal concern.
+
+## Components vs code?
 
 A component is a way to step up one level of abstraction from the code-level building blocks that you have in the
 programming language that you're using. For example:
@@ -45,31 +57,45 @@ perspective. In concrete terms, for this specific codebase, it means excluding t
 
 [![](/images/components-vs-classes-2.png)](/images/components-vs-classes-2.png)
 
-After a little rearranging, we now have a simpler diagram with which to reason about the software architecture. 
+After a little rearranging, we now have a simpler diagram with which to reason about the software architecture.
 We can also see the architectural layers again (controllers, services and repositories). But this diagram is still
 showing _code-level elements_ (i.e. classes and interfaces). In order to zoom up one level, we need to identify which
-of these code-level elements can be grouped together to form "components". The strategy for grouping code-level elements 
-into components will vary from codebase to codebase but, for this codebase, 
+of these code-level elements can be grouped together to form "components". The strategy for grouping code-level elements
+into components will vary from codebase to codebase but, for this codebase,
 the strategy might look like this.
 
 [![](/images/components-vs-classes-3.png)](/images/components-vs-classes-3.png)
 
-Each of the blue boxes represents a "component" in this codebase. In summary, each of the 
-web controllers is a separate component, along with the result of combining the remaining interfaces and their 
+Each of the blue boxes represents a "component" in this codebase. In summary, each of the
+web controllers is a separate component, along with the result of combining the remaining interfaces and their
 implementation classes. If we remove the code level noise, we get a picture like this.
 
 [![](/images/components-vs-classes-4.png)](/images/components-vs-classes-4.png)
 
-In essence, we're grouping the classes and interfaces into components to form units of related functionality. 
-You will likely have shared code (e.g. abstract base classes, supporting classes, helper classes, utility classes, etc) 
-that are used across many components, such as the ```JdbcPetVisitExtractor``` in this example. Some can be refactored 
+In essence, we're grouping the classes and interfaces into components to form units of related functionality.
+You will likely have shared code (e.g. abstract base classes, supporting classes, helper classes, utility classes, etc)
+that are used across many components, such as the ```JdbcPetVisitExtractor``` in this example. Some can be refactored
 and moved "inside" a particular component, but some of them are inevitable.
 
-Although this example illustrates a traditional layered architecture, the same principles are applicable regardless of 
-how you package your code (e.g. by layer, feature or component) or the architectural style in use (e.g. layered, 
+Although this example illustrates a traditional layered architecture, the same principles are applicable regardless of
+how you package your code (e.g. by layer, feature or component) or the architectural style in use (e.g. layered,
 hexagonal, ports and adapters, etc). If your codebase is small enough, you can go through this process manually.
 For larger codebases though, you'll likely want to consider automatic generation of component diagrams by
 reverse-engineering your codebase ([example](https://github.com/structurizr/java/blob/master/structurizr-dsl/src/test/resources/dsl/spring-petclinic/workspace.dsl)).
 
 - <sup>1</sup> the diagrams shown here do not reflect the latest version of the Spring PetClinic, but are sufficient for the discussion
 - <sup>2</sup> `git checkout 95de1d9f8bf63560915331664b27a4a75ce1f1f6` is the version these diagrams were based upon
+
+## FAQ
+
+### Is a Java JAR, C# assembly, DLL, module, package, namespace, folder etc a component?
+
+Perhaps but, again, typically not. The C4 model is about showing the runtime units (containers) and how
+functionality is partitioned across them (components), rather than organisational units such as Java JAR files,
+C# assemblies, DLLs, modules, packages, namespaces or folder structures.
+
+Of course, there may be a one-to-one mapping between these constructs and a component; e.g. if you're building
+a hexagonal architecture, you may create a single Java JAR file or C# assembly per component. On the other hand,
+a single component might be implemented using code from a number of JAR files, which is typically what happens
+when you start to consider third-party frameworks/libraries, and how they become embedded in your codebase.
+

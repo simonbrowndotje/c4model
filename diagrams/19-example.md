@@ -2,7 +2,7 @@
 layout: default
 title: Example
 parent: Diagrams
-nav_order: 8
+nav_order: 19
 permalink: /diagrams/example
 ---
 

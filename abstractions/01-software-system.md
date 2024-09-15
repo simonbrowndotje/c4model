@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Software system
+title: 1. Software system
 parent: Abstractions
-nav_order: 2
+nav_order: 1
 permalink: /abstractions/software-system
 ---
 

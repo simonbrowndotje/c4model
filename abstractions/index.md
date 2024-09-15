@@ -16,7 +16,7 @@ that we can use to describe the static structure of a software system. In the C4
 > is made up of one or  more [containers](/abstractions/container) (applications and data stores),
 > each of which contains one or more [components](/abstractions/component),  which in turn are implemented by one or
 > more [code](/abstractions/code) elements (classes, interfaces, objects, functions, etc).
-> And [people](/abstractions/person) may use the software systems that we build.
+> And people (actors, roles, personas, named individuals, etc) use the software systems that we build.
 
 ![The abstractions behind the C4 model](/images/abstractions.png)
 

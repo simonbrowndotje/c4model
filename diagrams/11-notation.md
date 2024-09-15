@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Notation
-nav_order: 5
-permalink: /notation
+parent: Diagrams
+nav_order: 11
+permalink: /diagrams/notation
 ---
 
 # Notation
