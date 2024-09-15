@@ -52,7 +52,7 @@ now looks like this:
 
 As we're still a single engineering team, transitioning to a microservices architecture is an implementation detail
 that is only apparent inside the team boundary. This is why all seven containers are shown inside the software system 
-boundary, with each "microservice" being a combination of an API container and a database schema container.
+boundary, with each "microservice" being a combination of an API container (hexagon) and a database schema container (cylinder).
 As a result, you will notice that this container diagram doesn't show microservices as explicit boxes.
 Instead, this version of the diagram uses colour coding the show the relationship between pairs of API and database
 schema containers. If you wanted to be more explicit about this pairing, you could draw a box around each pair to
