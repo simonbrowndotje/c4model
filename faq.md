@@ -68,26 +68,6 @@ terms "module" and "function").
 Feel free to modify the terminology that you use to describe software architecture at different levels of abstraction. 
 Just make sure that everybody explicitly understands it.
 
-## How do you model microservices and serverless?
-
-Broadly speaking, there are two options for diagramming microservices when using the C4 model, although it depends 
-what you mean by "microservice".
-
-### Approach 1: Each "microservice" is owned by a separate team
-
-If your software system has a dependency upon a number of microservices that are outside your control (e.g. 
-they are owned and/or operated by a separate team), model these microservices as external software systems, that 
-you can't see inside.
-
-### Approach 2: A single team owns multiple "microservices"
-
-Imagine that you have an API app (e.g. Spring Boot, ASP.NET MVC, etc) that reads/writes to a relational database schema. 
-Regardless of whether you consider the term "microservice" to refer to just the API app, or the combination of the API 
-app and database schema ... if the microservices are a part of a software system that you are building 
-(i.e. you own them), model every deployable thing as a container. In other words, you'd show two containers: the API 
-app, and the database schema. Feel free to draw a box around these two containers to indicate they are related/grouped.
-The same is true for serverless functions/lambdas/etc; treat them as software systems or containers based upon ownership.
-
 ## How do you diagram large and complex software systems?
 
 Even with a relatively small software system, it's tempting to try and include the entire story on a single diagram. 
