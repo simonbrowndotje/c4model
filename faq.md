@@ -94,3 +94,29 @@ built in a variety of programming languages, deployed on a variety of platforms 
 Solutions that are perhaps less suited to the C4 model include embedded systems/firmware, and solutions that rely on 
 heavy customization rather than bespoke development (e.g. SAP and Salesforce). Even with these solutions, you still may 
 find the System Context and Container diagrams useful.
+
+## Does the C4 model scale?
+
+The example diagrams conveniently consist of a small number of boxes and arrows, but you might be asking how the C4 model
+can be used with real-world software systems, where you have 600 components rather than 6.
+The answer is that the tooling you choose can either help or hinder you.
+
+Here's an example of a container diagram showing a software system comprised of a number of microservices:
+
+[![](/images/scale-1.png)](/images/scale-1.png)
+
+This diagram works at the moment, but will quickly become cluttered as we add more services. As an alternative approach,
+rather than creating a single diagram showing 8 services, we could create 8 diagrams that each focus on a single service,
+showing the nearest afferent (inbound) and efferent (outbound) dependencies:
+
+| [![](/images/scale-2.png)](/images/scale-2.png) | [![](/images/scale-3.png)](/images/scale-3.png) | [![](/images/scale-4.png)](/images/scale-4.png) |
+| Service 1 | Service 2 | Service 3 |
+
+This is difficult to do with a diagramming tool, but trivial with a modelling tool -
+see [Diagramming vs modelling](/tooling#diagramming-vs-modelling) for more details.
+The trade-off here is that we lose the "big picture". So another option is to create some
+alternative visualisations that are not as verbose as the traditional "boxes and lines" diagrams.
+Again, this is relatively straightforward when you use a modelling tool, and think about the software architecture
+model as being a data structure that you can visualise in different ways.
+
+| [![](/images/scale-5.png)](/images/scale-5.png) | [![](/images/scale-6.png)](/images/scale-6.png) |
