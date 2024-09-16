@@ -18,22 +18,6 @@ It's also worth remembering that most relationships can be expressed either way,
 the better. For example, describing a relationship as "sends customer update events to" can be more descriptive
 than simply "customer update events".
 
-## How do you diagram large and complex software systems?
-
-Even with a relatively small software system, it's tempting to try and include the entire story on a single diagram. 
-For example, if you have a web application, it seems logical to create a single component diagram that shows all
-the components that make up that web application. Unless your software system really is that small, you're likely to 
-run out of room on the diagram canvas or find it difficult to discover a layout that isn't cluttered by a myriad of
-overlapping lines. Using a larger diagram canvas can sometimes help, but large diagrams are usually hard to interpret 
-and comprehend because the cognitive load is too high. And if nobody understands the diagram, nobody is going to look 
-at it.
-
-Instead, don't be afraid to split that single complex diagram into a larger number of simpler diagrams, each with a 
-specific focus around a business area, functional area, functional grouping, bounded context, use case, user 
-interaction, feature set, etc. The key is to ensure that each of the separate diagrams tells a different part of the 
-same overall story, at the same level of abstraction. 
-You can also use an [alternative visualisation](/notation#alternative-visualisations).
-
 ## Will the diagrams become outdated quickly?
 
 Due to the hierarchical nature of the C4 model, each diagram will change at a different rate.

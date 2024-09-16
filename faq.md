@@ -101,6 +101,19 @@ The example diagrams conveniently consist of a small number of boxes and arrows,
 can be used with real-world software systems, where you have 600 components rather than 6.
 The answer is that the tooling you choose can either help or hinder you.
 
+Even with a relatively small software system, it's tempting to try and include the entire story on a single diagram.
+For example, if you have a web application, it seems logical to create a single component diagram that shows all
+the components that make up that web application. Unless your software system really is that small, you're likely to
+run out of room on the diagram canvas or find it difficult to discover a layout that isn't cluttered by a myriad of
+overlapping lines. Using a larger diagram canvas can sometimes help, but large diagrams are usually hard to interpret
+and comprehend because the cognitive load is too high. And if nobody understands the diagram, nobody is going to look
+at it.
+
+Instead, don't be afraid to split that single complex diagram into a larger number of simpler diagrams, each with a
+specific focus around a business area, functional area, functional grouping, bounded context, use case, user
+interaction, feature set, etc. The key is to ensure that each of the separate diagrams tells a different part of the
+same overall story, at the same level of abstraction.
+
 Here's an example of a container diagram showing a software system comprised of a number of microservices:
 
 [![](/images/scale-1.png)](/images/scale-1.png)
