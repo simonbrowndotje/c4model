@@ -12,7 +12,7 @@ The C4 model is:
 
 1. A set of [hierarchical abstractions](/abstractions) (software systems, containers, components, and code).
 2. A set of [hierarchical diagrams](/diagrams) (system context, containers, components, and code).
-3. [Notation independent](/notation).
+3. [Notation independent](/diagrams/notation).
 4. [Tooling independent](/tooling).
 
 [![An overview of the C4 model for visualising software architecture](/images/c4-overview.png)](/images/c4-overview.png)
