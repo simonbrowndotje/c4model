@@ -80,7 +80,7 @@ Here are three examples of a system context, container and component diagram for
 
 ## C4 and ArchiMate
 
-See [C4 Model, Architecture Viewpoint and Archi 4.7](https://www.archimatetool.com/blog/2020/04/18/c4-model-architecture-viewpoint-and-archi-4-7/)for details of how to create C4 model diagrams with ArchiMate.
+See [C4 Model, Architecture Viewpoint and Archi 4.7](https://www.archimatetool.com/blog/2020/04/18/c4-model-architecture-viewpoint-and-archi-4-7/) for details of how to create C4 model diagrams with ArchiMate.
 
 ## Alternative visualisations
 
