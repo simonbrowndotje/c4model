@@ -42,12 +42,6 @@ want to use UML (for various reasons), the C4 model helps introduce some structu
 architecture is communicated. For many teams, the C4 model is sufficient. And for others, perhaps it's a stepping stone 
 to UML.
 
-## How many people use the C4 model?
-The honest answer is that nobody knows. Simon has personally taught the C4 model to somewhere over 10,000 people in 
-more than 30 countries; with conference talks, videos, books and articles reaching many more than this. Other people 
-are also teaching, speaking and writing about the C4 model too. It's definitely being used though, in organisations 
-ranging from startups to global household names.
-
 ## Why doesn't the C4 model cover business processes, workflows, state machines, domain models, data models, etc?
 
 The focus of the C4 model is the static structures that make up a software system, at different levels of abstraction. 
