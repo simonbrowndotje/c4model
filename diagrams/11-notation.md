@@ -42,7 +42,7 @@ as not everybody will know the notation being used.
 Although the C4 model is an abstraction-first approach and notation independent, you still need to ensure that your
 diagram notation makes sense, and that the diagrams are comprehensible. A good way to think about this is to ask
 yourself whether each diagram can stand alone, and be (mostly) understood without a narrative. You can use this short
-[software architecture diagram review checklist](/assets/software-architecture-diagram-review-checklist.pdf) to help.
+[software architecture diagram review checklist](/diagrams/checklist) to help.
 
 Here are some general recommendations related to notation.
 
