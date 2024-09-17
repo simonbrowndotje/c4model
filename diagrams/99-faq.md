@@ -22,16 +22,24 @@ than simply "customer update events".
 
 Due to the hierarchical nature of the C4 model, each diagram will change at a different rate.
 
-- __System Context diagram__: In most cases, the system context diagram will change very slowly, as this describes the 
+- __System context diagram__: In most cases, the system context diagram will change very slowly, as this describes the 
 landscape that the software system is operating within.
 - __Container diagram__: Unless you're building a software system that makes heavy use of microservices or serverless 
 lambdas/functions/etc, the container diagram will also change relatively slowly.
 - __Component diagram__: For any software system under active development, the component diagrams may change frequently 
-as the team adds, removes or restructures the code into cohesive components. Automating the generation of this level 
-of detail with tooling can help.
+as the team adds, removes or restructures the code into cohesive components.
 - __Code diagram__: The level 4 code (e.g. class) diagrams will potentially become outdated very quickly if the codebase is
 under active development. For this reason, the recommendation is to (1) not create them at all or (2) generate them 
 on-demand using tooling such as your IDE.
+
+Of course, the above only applies when you are creating your C4 diagrams by hand.
+Automatically generating your diagrams will ensure they are kept up to date and reflect reality at all times.
+Possible approaches to do this include:
+
+- __System landscape/context diagrams__: Using existing system/service catalogs (e.g. Backstage, ServiceNow, etc) as a source of data for identifying software systems and relationships.
+- __Container diagrams__: Parsing log files or using OpenTelemetry data as a source of data for identifying microservices and relationships.
+- __Component diagrams__: Static analysis/reverse-engineering of code as a source of data for identifying components and their relationships.
+- __Deployment diagrams__: Parsing "infrastructure as code" definitions (e.g. Terraform, CloudFormation, etc) or reverse-engineering cloud environment configuration as a source of data for identifying deployment elements.
 
 ## The C4 model vs UML, ArchiMate and SysML?
 
