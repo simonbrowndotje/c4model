@@ -47,7 +47,7 @@ complicated set of interactions.
 ## Notes
 
 The collaboration and sequence styles show the same information in a different way,
-so feel free to use a whichever you prefer.
+so feel free to use whichever you prefer.
 
 <script type="application/javascript" src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
 <script type="application/javascript" src="/assets/c4model.js"></script>

@@ -46,14 +46,14 @@ software architecture diagrams:
 
 ### Modelling
 
-With a modelling tool, you're building up a non-visual model your software architecture
+With a modelling tool, you're building up a non-visual model of your software architecture
 (a single definition of all elements and the relationships between them), and then creating different views
 (that become diagrams) on top of that model. This requires a little more rigour, but the problems can be resolved - 
 modelling tools can understand the semantics of what you're trying to do, provide additional assistance,
 and renaming elements/relationships is easy.
 
 Software architecture models are essentially just [directed graphs](https://en.wikipedia.org/wiki/Directed_graph),
-consisting of nodes and edges, with diagrams being showing a subset of the graph. Once you see the separation of the model
+consisting of nodes and edges, with diagrams showing a subset of the graph. Once you see the separation of the model
 (which is just structured data) and the views (which are rendered as diagrams), you quickly see there are a number of
 interesting opportunities that arise:
 
