@@ -59,19 +59,6 @@ Although you can certainly use the C4 model in this way, this is not the intende
 C4 model is just a way to describe a software system, from different levels of abstraction, and it implies nothing 
 about the process of delivering software.
 
-## Should you include message buses, API gateways, service meshes, etc?
-
-If you have two services, A and B, that communicate by sending a message via a message bus (irrespective of topics, 
-queues, p2p, pub/sub, etc) or another intermediary (e.g. an API gateway or service mesh), you have a couple of options. 
-
-1. The first option is to show service A sending a message to the intermediary, and the intermediary subsequently forwarding 
-that message to service B. While accurate, the "hub and spoke" nature of the diagram tends to obscure the notion that 
-there's coupling between the message producer and consumer.
-
-2. The other approach is to omit the intermediary, and instead use notation (e.g. a textual description, colour coding, 
-line style, etc) to signify that the interaction between service A and B happens via an intermediary. This approach 
-3. tends to result in diagrams that tell a clearer story.
-
 ## Using C4 to describe libraries, frameworks and SDKs?
 
 The C4 model is really designed to model a software system, at various levels of abstraction. To document a library,
