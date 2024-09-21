@@ -222,7 +222,7 @@ Here's a collection of tooling that provides some degree of specific support for
     <div class="toolingOption toolingWithUI toolingModelBased toolingStaticDiagrams toolingDynamicDiagrams">
         <a href="https://icepanel.io/c4-model" target="_blank">IcePanel</a>
     </div>
-    <div class="toolingOption toolingOpenSource toolingDiagramming toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
+    <div class="toolingOption toolingOpenSource toolingWithUI toolingModelBased toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
         <a href="https://keadex.dev/en/projects/keadex-mina" target="_blank">Keadex Mina</a>
     </div>
     <div class="toolingOption toolingWithUI toolingDiagramming toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
