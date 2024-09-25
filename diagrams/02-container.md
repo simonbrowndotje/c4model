@@ -44,7 +44,7 @@ developers and operations/support staff.
 
 ## Recommended?
 
-Yes, a system context diagram is recommended for all software development teams.
+Yes, a container diagram is recommended for all software development teams.
 
 ## Notes
 
