@@ -135,7 +135,7 @@ Here's a collection of tooling that provides some degree of specific support for
     <h4>Diagramming vs modelling</h4>
     <div class="toolingOptionFilter">
         <label><input id="toolingDiagrammingFilter" name="diagramVsModel" type="radio"> Diagramming tool</label>
-        <div class="smaller">(i.e. a modelling tool - to keep multiple diagrams in sync automatically when you rename elements)</div>
+        <div class="smaller">(boxes and arrows are reused via copy and paste, no assistance, no validation rules, etc)</div>
     </div>
 
     <div class="toolingOptionFilter">
