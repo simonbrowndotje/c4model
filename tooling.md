@@ -264,6 +264,9 @@ Here's a collection of tooling that provides some degree of specific support for
     <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingStaticDiagrams">
         <a href="https://rdbmodel.github.io" target="_blank">RDB modeling</a>
     </div>
+    <div class="toolingOption toolingModelBased toolingWithUI toolingStaticDiagrams">
+        <a href="https://revision.app/c4-model" target="_blank">Revision</a>
+    </div>
     <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingRenderingToolIndependent toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
         <a href="https://structurizr.com" target="_blank">Structurizr</a>
     </div>
