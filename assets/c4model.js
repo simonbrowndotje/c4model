@@ -1,5 +1,5 @@
 var workspaceIds = [ 36141, 76748, 76749 ];
-var randomInteger = Math.floor(Math.random() * 3);
+var randomInteger = new Date().getDate() % 3;
 
 $('iframe').each(function() {
     var src = $(this).attr('src');
