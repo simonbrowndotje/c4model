@@ -226,7 +226,7 @@ Here's a collection of tooling that provides some degree of specific support for
         <a href="https://keadex.dev/en/projects/keadex-mina" target="_blank">Keadex Mina</a>
     </div>
     <div class="toolingOption toolingWithUI toolingDiagramming toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
-        <a href="https://www.lucidchart.com/pages/templates/c-4-model-example" target="_blank">Lucidchart</a>
+        <a href="https://www.lucidchart.com/pages/templates/c4-model-example" target="_blank">Lucidchart</a>
     </div>
     <div class="toolingOption toolingWithUI toolingDiagramming toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
         <a href="https://github.com/pihalve/c4model-visio-stencil" target="_blank">Microsoft Visio</a>
