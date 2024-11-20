@@ -20,3 +20,6 @@ implementation details of. Perhaps the code for that software system resides in 
 and anybody on the team is entitled to modify it. In many cases, the boundary of a software system will correspond to
 the boundary of a single team. It may also be the case that everything inside the boundary of a software system is
 deployed at the same time.
+
+Things that are not usually software systems in the C4 model include product domains, bounded contexts,
+business capabilities, feature teams, tribes, or squads.
