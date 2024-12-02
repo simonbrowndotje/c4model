@@ -240,9 +240,6 @@ Here's a collection of tooling that provides some degree of specific support for
     <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
         <a href="https://github.com/goadesign/model" target="_blank">Model</a>
     </div>
-    <div class="toolingOption toolingWithUI toolingModelBased toolingStaticDiagrams">
-        <a href="https://supportportal.moodinternational.com/hc/en-us/articles/360015465100-MooD-and-the-C4-model" target="_blank">MooD</a>
-    </div>
     <div class="toolingOption toolingOpenSource toolingWithUI toolingDiagramming toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
         <a href="https://architecture.models.nasdanika.org/references/eSubpackages/c4/index.html" target="_blank">Nasdanika Architecture</a>
     </div>
