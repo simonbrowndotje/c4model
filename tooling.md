@@ -225,6 +225,9 @@ Here's a collection of tooling that provides some degree of specific support for
     <div class="toolingOption toolingOpenSource toolingDiagramming toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
         <a href="https://keadex.dev/en/projects/keadex-mina" target="_blank">Keadex Mina</a>
     </div>
+    <div class="toolingOption toolingAsCode toolingRenderingToolIndependent toolingModelBased toolingOpenSource toolingWithUI toolingDiagramming toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
+        <a href="https://likec4.dev/" target="_blank">LikeC4</a>
+    </div>
     <div class="toolingOption toolingWithUI toolingDiagramming toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
         <a href="https://www.lucidchart.com/pages/templates/c4-model-example" target="_blank">Lucidchart</a>
     </div>
