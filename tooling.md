@@ -195,6 +195,9 @@ Here's a collection of tooling that provides some degree of specific support for
     <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingStaticDiagrams">
         <a href="https://github.com/SlavaVedernikov/C4InterFlow" target="_blank">C4InterFlow</a>
     </div>
+    <div class="toolingOption toolingOpenSource toolingWithUI toolingDiagramming toolingStaticDiagrams">
+        <a href="https://github.com/archivisio/c4_modelizer" target="_blank">C4 Modelizer</a>
+    </div>
     <div class="toolingOption toolingOpenSource toolingDiagramming toolingAsCode toolingStaticDiagrams toolingDeploymentDiagrams">
         <a href="https://github.com/8T4/c4sharp" target="_blank">C4Sharp</a>
     </div>
