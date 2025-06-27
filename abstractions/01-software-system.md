@@ -9,7 +9,7 @@ permalink: /abstractions/software-system
 # Software system
 
 A software system is the highest level of abstraction and describes something that delivers value to its users,
-whether they are human or not. This includes the software system you are modelling, and the other software systems
+whether they are human or not. This includes the software system you are modeling, and the other software systems
 upon which your software system depends (or vice versa).
 
 Unfortunately the term "software system" is the hardest of the C4 model abstractions to define, and this isn't helped
