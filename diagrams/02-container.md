@@ -8,10 +8,10 @@ permalink: /diagrams/container
 
 # Container diagram
 
-Once you understand how your system fits in to the overall IT environment, a really useful next step is to zoom-in to
-the system boundary with a Container diagram. A "container" is something like a server-side web application, 
-single-page application, desktop application, mobile app, database schema, file system, etc. Essentially,
-a container is a separately runnable/deployable unit (e.g. a separate process space) that executes code or stores data.
+Once you understand how your system fits in to the overall IT environment, a useful next step is to zoom in to
+the system boundary with a Container diagram. In C4, a [container](/abstractions/container) is an application or a data store.
+For example, a server-side web application, a client-side single-page application, a desktop application,
+a mobile app, a database schema, a folder on a file system, an Amazon Web Services S3 bucket, etc.
 
 The Container diagram shows the high-level shape of the software architecture and how responsibilities are distributed
 across it. It also shows the major technology choices and how the containers communicate with one another. It's a
@@ -48,9 +48,9 @@ Yes, a container diagram is recommended for all software development teams.
 
 ## Notes
 
-This diagram says nothing about clustering, load balancers, replication, failover, etc because it will likely vary
-across different environments (e.g. production, staging, development, etc). This information is better captured
-via one or more [deployment diagrams](/diagrams/deployment).
+This diagram says very little about deployment aspects such as clustering, load balancers, replication, failover, etc
+because it will likely vary across different environments (e.g. production, staging, development, etc).
+Deployment information is better captured via one or more [deployment diagrams](/diagrams/deployment), one per environment.
 
 <script type="application/javascript" src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
 <script type="application/javascript" src="/assets/c4model.js"></script>

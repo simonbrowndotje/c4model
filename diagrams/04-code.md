@@ -8,10 +8,10 @@ permalink: /diagrams/code
 
 # Code diagram
 
-Finally, you can zoom in to each component to show how it is implemented as code; using UML class diagrams, entity
+Finally, you can zoom in to a component to show how it is implemented as code; using UML class diagrams, entity
 relationship diagrams or similar.
 
-This is an optional level of detail and is often available on-demand from tooling such as IDEs. Ideally this
+This is very much an optional level of detail and is often available on-demand from tooling such as IDEs. Ideally this
 diagram would be automatically generated using tooling (e.g. an IDE or UML modelling tool), and you should consider
 showing only those attributes and methods that allow you to tell the story that you want to tell. This level of detail
 is not recommended for anything but the most important or complex components.

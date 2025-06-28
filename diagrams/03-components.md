@@ -8,11 +8,8 @@ permalink: /diagrams/component
 
 # Component diagram
 
-Next you can zoom in and decompose each container further to identify the major structural building blocks and their
-interactions.
-
-The Component diagram shows how a container is made up of a number of "components", what each of those components are,
-their responsibilities and the technology/implementation details.
+Next you can zoom in and decompose a container to describe the [components](/abstractions/components)
+that reside inside it; including their responsibilities and the technology/implementation details.
 
 ## Example
 

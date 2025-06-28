@@ -14,14 +14,14 @@ has_toc: false
 The C4 model is named after the core set of static structure diagrams:
 (system) context, containers, components, and code.
 
-| ![](https://static.structurizr.com/workspace/36141/diagrams/SystemContext.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/Containers.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/Components.png) | ![](https://static.structurizr.com/workspace/36141/diagrams/MainframeBankingSystemFacade.png) |
+| ![](/images/examples/SystemContext.png) | ![](/images/examples/Containers.png) | ![](/images/examples/Components_Backend.png) | ![](/images/examples/Code_CoreBankingSystemAdapter.png) |
 | [1. System context diagram](/diagrams/system-context) | [2. Container diagram](/diagrams/container) | [3. Component diagram](/diagrams/component) | [4. Code diagram](/diagrams/code) |
 
 The different levels of zoom allow you to tell different stories to different audiences.
 That said, __you don't need to use all 4 levels of diagram__; only those that add value -
 the [system context](/diagrams/system-context) and [container](/diagrams/container) diagrams are sufficient for most software development teams.
 
-## Supplementary diagrams
+## Supporting diagrams
 
 In addition, there are 3 supplementary diagram types:
 
