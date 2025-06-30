@@ -23,7 +23,7 @@ degree of coupling may exist between the message producers and consumers.
 
 The problem here is being caused by us representing the message bus as a C4 container, which arguably isn't correct.
 A better approach is to think about each separate queue and topic as being a "data store".
-A message queue is essentially a data store - it's a bucket for storing data (messages),
+A message queue is essentially a __data store__ - it's a bucket for storing data (messages),
 with producers adding data, and consumers taking it away.
 The implication here is that the queues and topics are C4 containers, rather than the message bus itself.
 
@@ -44,7 +44,7 @@ the queues, and moving the queue names to the arrows instead.
 
 The result is a visually simpler and less cluttered diagram, but the queues are no
 longer as explicitly evident on the diagram. Since the C4 model is notation independent, you could additionally use a
-different line style (solid vs dashed) or colour to highlight message-based relationships.
+different line style (solid vs dashed) or colour to highlight message-based relationships vs API calls, for example.
 Neither version of the diagrams is "better" than the other, they are just telling the same story in a different way.
 It's all trade-offs.
 
