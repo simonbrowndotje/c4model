@@ -8,7 +8,7 @@ permalink: /diagrams/component
 
 # Component diagram
 
-Next you can zoom in and decompose a container to describe the [components](/abstractions/components)
+Next you can zoom in and decompose a container to describe the [components](/abstractions/component)
 that reside inside it; including their responsibilities and the technology/implementation details.
 
 ## Example
