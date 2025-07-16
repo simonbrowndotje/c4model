@@ -12,7 +12,7 @@ The C4 model is:
 
 1. A set of [hierarchical abstractions](/abstractions) - [software systems](/abstractions/software-system), [containers](/abstractions/container), [components](/abstractions/component), and [code](/abstractions/code).
 2. A set of [hierarchical diagrams](/diagrams) - [system context](/diagrams/system-context), [containers](/diagrams/container), [components](/diagrams/component), and [code](/diagrams/code).
-3. An additional set of supprting diagrams - [system landscape](/diagrams/system-landscape), [dynamic](/diagrams/dynamic), and [deployment](/diagrams/deployment).
+3. An additional set of supporting diagrams - [system landscape](/diagrams/system-landscape), [dynamic](/diagrams/dynamic), and [deployment](/diagrams/deployment).
 4. [Notation independent](/diagrams/notation).
 5. [Tooling independent](/tooling).
 
