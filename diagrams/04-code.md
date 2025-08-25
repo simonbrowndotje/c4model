@@ -18,7 +18,7 @@ is not recommended for anything but the most important or complex components.
 
 ## Example
 
-[![A code diagram](https://static.structurizr.com/workspace/36141/diagrams/MainframeBankingSystemFacade.png)](https://static.structurizr.com/workspace/36141/diagrams/MainframeBankingSystemFacade.png)
+[![A code diagram](/images/examples/Code.png)](/images/examples/Code.png)
 
 ## Scope
 

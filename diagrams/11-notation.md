@@ -14,7 +14,7 @@ diagramming tools is as follows.
 
 You can then use colour and shapes to supplement the diagram, either to add additional information
 or to make the diagram more aesthetically pleasing. Although you may see many example diagrams and tools that make
-use of blue and grey boxes<sup>1</sup>, this __isn't__ something that is dictated by the C4 model, and you are free to use whatever
+use of blue and grey boxes, this __isn't__ something that is dictated by the C4 model, and you are free to use whatever
 colours you like!
 
 ## Elements
@@ -35,7 +35,7 @@ Any notation used should be as self-describing as possible, but all diagrams sho
 notation explicit. This applies to diagrams created with notations such as UML, ArchiMate and SysML too,
 as not everybody will know the notation being used.
 
-[![A diagram key](https://static.structurizr.com/workspace/36141/diagrams/Containers-key.png)](https://static.structurizr.com/workspace/36141/diagrams/Containers-key.png)
+[![A diagram key](/images/examples/Containers-key.png)](/images/examples/Containers-key.png)
 
 ## Notation, notation, notation
 
@@ -90,8 +90,3 @@ used to show the same C4 model abstractions in very different ways.
 
 | [![](/images/alternative-1.png)](https://structurizr.com/dsl?example=microservices) |  [![](/images/alternative-2.png)](https://structurizr.com/dsl?example=microservices&renderer=graph) |  [![](/images/alternative-3.png)](https://structurizr.com/dsl?example=microservices&renderer=ilograph) |
 | Traditional "boxes and arrows" diagrams are the default approach for documentation and presentations. | A D3.js force-directed graph is a very concise way to visualise larger software architectures, also providing an easy way to explore dependencies. | Ilograph's interactive diagrams provide a way to selectively zoom in and out, allowing you to explore your entire software architecture model. |
-
-- <sup>1</sup> "C4 = blue and grey boxes" is a common misconception, which is why the example diagrams presented on this website now cycle between blue, green, and red versions!
-
-<script type="application/javascript" src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-<script type="application/javascript" src="/assets/c4model.js"></script>

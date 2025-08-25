@@ -20,11 +20,11 @@ specific focus on a particular software system.
 
 ## Example
 
-[![A system landscape diagram](https://static.structurizr.com/workspace/28201/diagrams/SystemLandscape.png)](https://static.structurizr.com/workspace/28201/diagrams/SystemLandscape.png)
+[![A system landscape diagram](/images/examples/SystemLandscape.png)](/images/examples/SystemLandscape.png)
 
 ### Diagram key
 
-[![A diagram key](https://static.structurizr.com/workspace/28201/diagrams/SystemLandscape-key.png)](https://static.structurizr.com/workspace/28201/diagrams/SystemLandscape-key.png)
+[![A diagram key](/images/examples/SystemLandscape-key.png)](/images/examples/SystemLandscape-key.png)
 
 ## Scope
 

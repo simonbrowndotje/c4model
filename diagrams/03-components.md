@@ -8,16 +8,16 @@ permalink: /diagrams/component
 
 # Component diagram
 
-Next you can zoom in and decompose a container to describe the [components](/abstractions/components)
+Next you can zoom in and decompose a container to describe the [components](/abstractions/component)
 that reside inside it; including their responsibilities and the technology/implementation details.
 
 ## Example
 
-[![A component diagram](https://static.structurizr.com/workspace/36141/diagrams/Components.png)](https://static.structurizr.com/workspace/36141/diagrams/Components.png)
+[![A component diagram](/images/examples/Components.png)](/images/examples/Components.png)
 
 ### Diagram key
 
-[![A diagram key](https://static.structurizr.com/workspace/36141/diagrams/Components-key.png)](https://static.structurizr.com/workspace/36141/diagrams/Components-key.png)
+[![A diagram key](/images/examples/Components-key.png)](/images/examples/Components-key.png)
 
 ## Scope
 
@@ -39,6 +39,3 @@ Software architects and developers.
 
 No, only create component diagrams if you feel they add value, and consider automating their creation
 for long-lived documentation.
-
-<script type="application/javascript" src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-<script type="application/javascript" src="/assets/c4model.js"></script>

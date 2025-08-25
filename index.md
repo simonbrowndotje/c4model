@@ -16,7 +16,7 @@ The C4 model is:
 4. [Notation independent](/diagrams/notation).
 5. [Tooling independent](/tooling).
 
-[![An overview of the C4 model for visualising software architecture](/images/c4-overview.png)](/images/c4-overview.png)
+[![C4 model - static structure diagrams](/images/c4-static.png)](/images/c4-static.png)
 
 ## Uses and benefits
 

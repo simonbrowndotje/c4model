@@ -26,19 +26,27 @@ just make sure any icons you use are included in your diagram key/legend.
 
 ## Example 1
 
-[![A deployment diagram](https://static.structurizr.com/workspace/36141/diagrams/LiveDeployment.png)](https://static.structurizr.com/workspace/36141/diagrams/LiveDeployment.png)
+[![A deployment diagram](/images/examples/Deployment-Development.png)](/images/examples/Deployment-Development.png)
 
 ### Diagram key
 
-[![A diagram key](https://static.structurizr.com/workspace/36141/diagrams/LiveDeployment-key.png)](https://static.structurizr.com/workspace/36141/diagrams/LiveDeployment-key.png)
+[![A diagram key](/images/examples/Deployment-Development-key.png)](/images/examples/Deployment-Development-key.png)
 
 ## Example 2
 
-[![A deployment diagram](https://static.structurizr.com/workspace/54915/diagrams/AmazonWebServicesDeployment.png)](https://static.structurizr.com/workspace/54915/diagrams/AmazonWebServicesDeployment.png)
+[![A deployment diagram](/images/examples/Deployment-Live.png)](/images/examples/Deployment-Live.png)
 
 ### Diagram key
 
-[![A diagram key](https://static.structurizr.com/workspace/54915/diagrams/AmazonWebServicesDeployment-key.png)](https://static.structurizr.com/workspace/54915/diagrams/AmazonWebServicesDeployment-key.png)
+[![A diagram key](/images/examples/Deployment-Live-key.png)](/images/examples/Deployment-Live-key.png)
+
+## Example 3
+
+[![A deployment diagram](/images/examples/Deployment-AmazonWebServices.png)](/images/examples/Deployment-AmazonWebServices.png)
+
+### Diagram key
+
+[![A diagram key](/images/examples/Deployment-AmazonWebServices-key.png)](/images/examples/Deployment-AmazonWebServices-key.png)
 
 ## Scope
 
@@ -60,6 +68,3 @@ infrastructure architects, and operations/support staff.
 ## Recommended?
 
 Yes.
-
-<script type="application/javascript" src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-<script type="application/javascript" src="/assets/c4model.js"></script>

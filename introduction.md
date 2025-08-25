@@ -29,14 +29,11 @@ both during up-front design sessions and when retrospectively documenting an exi
 and out of an area you are interested in.
 
 | [![](/images/map-4.jpg)](/images/map-4.jpg) | [![](/images/map-3.jpg)](/images/map-3.jpg) | [![](/images/map-2.jpg)](/images/map-2.jpg) | [![](/images/map-1.jpg)](/images/map-1.jpg) |
-| [![](https://static.structurizr.com/workspace/36141/diagrams/SystemContext.png)](/diagrams/system-context) | [![](https://static.structurizr.com/workspace/36141/diagrams/Containers.png)](/diagrams/container) | [![](https://static.structurizr.com/workspace/36141/diagrams/Components.png)](/diagrams/component) | [![](https://static.structurizr.com/workspace/36141/diagrams/MainframeBankingSystemFacade.png)](/diagrams/code) |
-| Level 1: A [system context diagram](/diagrams/system-context) provides a starting point, showing how the software system in scope fits into the world around it. | Level 2: A [container diagram](/diagrams/container) zooms into the software system in scope, showing the applications and data stores inside it. | Level 3: A [component diagram](/diagrams/component) zooms into an individual container, showing the components inside it. | Level 4: A [code diagram](/diagrams/code) (e.g. UML class) can be used to zoom into an individual component, showing how that component is implemented at the code level. |
+| [![](/images/examples/SystemContext.png)](/diagrams/system-context) | [![](/images/examples/Containers.png)](/diagrams/container) | [![](/images/examples/Components.png)](/diagrams/component) | [![](/images/examples/Code.png)](/diagrams/code) |
+| A [system context diagram](/diagrams/system-context) provides a starting point, showing how the software system in scope fits into the world around it. | A [container diagram](/diagrams/container) zooms into the software system in scope, showing the applications and data stores inside it. | A [component diagram](/diagrams/component) zooms into an individual container, showing the components inside it. | A [code diagram](/diagrams/code) (e.g. UML class) can be used to zoom into an individual component, showing how that component is implemented at the code level. |
 
 ## Improving diagramming maturity
 
 The goal of the C4 model is to raise the level of maturity associated with software architecture diagrams.
 
 [![](/images/software-architecture-diagramming-maturity-model.png)](/images/software-architecture-diagramming-maturity-model.png)
-
-<script type="application/javascript" src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-<script type="application/javascript" src="/assets/c4model.js"></script>

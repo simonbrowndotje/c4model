@@ -17,15 +17,15 @@ a free-form arrangement of diagram elements with numbered interactions to indica
 
 ## Example (collaboration style)
 
-[![A dynamic diagram](https://static.structurizr.com/workspace/36141/diagrams/SignIn.png)](https://static.structurizr.com/workspace/36141/diagrams/SignIn.png)
+[![A dynamic diagram](/images/examples/Dynamic-Collaboration.png)](/images/examples/Dynamic-Collaboration.png)
 
 ### Diagram key
 
-[![A diagram key](https://static.structurizr.com/workspace/36141/diagrams/SignIn-key.png)](https://static.structurizr.com/workspace/36141/diagrams/SignIn-key.png)
+[![A diagram key](/images/examples/Dynamic-Collaboration-key.png)](/images/examples/Dynamic-Collaboration-key.png)
 
 ## Example (sequence style)
 
-[![A dynamic diagram](/images/bigbankplc-SignIn-sequence.png)](/images/bigbankplc-SignIn-sequence.png)
+[![A dynamic diagram](/images/examples/Dynamic-Sequence.png)](/images/examples/Dynamic-Sequence.png)
 
 ## Scope
 
@@ -48,6 +48,3 @@ complicated set of interactions.
 
 The collaboration and sequence styles show the same information in a different way,
 so feel free to use whichever you prefer.
-
-<script type="application/javascript" src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-<script type="application/javascript" src="/assets/c4model.js"></script>

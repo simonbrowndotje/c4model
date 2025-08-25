@@ -8,7 +8,7 @@ permalink: /diagrams/system-context
 
 # System context diagram
 
-A System Context diagram is a good starting point for diagramming and documenting a software system, allowing you to
+A system context diagram is a good starting point for diagramming and documenting a software system, allowing you to
 step back and see the big picture. Draw a diagram showing your system as a box in the centre, surrounded by its users
 and the other systems that it interacts with.
 
@@ -18,11 +18,11 @@ low-level details. It's the sort of diagram that you could show to non-technical
 
 ## Example
 
-[![A System Context diagram](https://static.structurizr.com/workspace/36141/diagrams/SystemContext.png)](https://static.structurizr.com/workspace/36141/diagrams/SystemContext.png)
+[![A system context diagram](/images/examples/SystemContext.png)](/images/examples/SystemContext.png)
 
 ### Diagram key
 
-[![A diagram key](https://static.structurizr.com/workspace/36141/diagrams/SystemContext-key.png)](https://static.structurizr.com/workspace/36141/diagrams/SystemContext-key.png)
+[![A diagram key](/images/examples/SystemContext-key.png)](/images/examples/SystemContext-key.png)
 
 ## Scope
 
@@ -45,6 +45,3 @@ Everybody, both technical and non-technical people, inside and outside the softw
 ## Recommended?
 
 Yes, a system context diagram is recommended for all software development teams.
-
-<script type="application/javascript" src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-<script type="application/javascript" src="/assets/c4model.js"></script>
