@@ -1,0 +1,68 @@
+body {
+    background: #111111;
+    color: #dddddd;
+}
+
+.icon-xs {
+    filter: invert(1.0);
+}
+
+.icon-sm {
+    filter: invert(1.0);
+}
+
+.icon-md {
+    filter: invert(1.0);
+}
+
+.icon-lg {
+    filter: invert(1.0);
+}
+
+.icon-xl {
+    filter: invert(1.0);
+}
+
+.icon-xxl {
+    filter: invert(1.0);
+}
+
+.icon-h1 {
+    filter: invert(1.0);
+}
+
+.icon-h2 {
+    filter: invert(1.0);
+}
+
+.modal-content {
+    background: #333333;
+}
+
+.modal-header {
+    border-bottom: 1px solid #333333;
+}
+
+.modal-header .close {
+    color: #eeeeee;
+}
+
+.modal-footer {
+    border-top: 1px solid #333333;
+}
+
+#diagramViewport {
+    background: #333333;
+}
+
+.btn-default {
+    background-image: linear-gradient(to bottom, #ccc 0, #ddd 100%);
+}
+
+.btn-default.disabled, .btn-default:disabled, .btn-default[disabled] {
+    background-color: #777777;
+    background-image: none;
+}
+.structurizrDiagramViewport {
+    background: #111111;
+}

@@ -1,0 +1,76 @@
+#diagram {
+    background: gray;
+    margin: 0;
+    padding: 0;
+    border-style: none;
+}
+
+.diagramThumbnail {
+    cursor: pointer;
+    margin: 0 0 40px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.diagramThumbnail img {
+    max-height: 160px;
+}
+
+.diagramThumbnailActive {
+    background: #aaaaaa;
+    color: #ffffff;
+}
+
+.structurizrDiagramViewport {
+    text-align: center;
+    margin: 0 auto 0 auto;
+    padding: 0;
+    border-style: none;
+    overflow: scroll;
+}
+
+.structurizrDiagramCanvas {
+    border-style: none;
+    background: white;
+    padding: 0;
+    margin: auto;
+}
+
+.structurizrElement .highlightedElement {
+    stroke-width: 5px;
+    stroke: #777777;
+    stroke-dasharray: 10 10;
+}
+
+.joint-element * {
+    vector-effect: none;
+}
+
+.joint-link.joint-theme-default .marker-vertex {
+    fill: #1168BD;
+    r: 25px;
+}
+
+.joint-link.joint-theme-default .marker-vertex:hover {
+    fill: #08427B;
+    r: 25px;
+}
+
+.joint-link.joint-theme-default .connection-wrap:hover + .labels rect {
+    fill: #d6d6d6;
+}
+
+#navigationModal option {
+    padding: 5px;
+}
+
+@media (prefers-color-scheme: dark) {
+    .structurizrDiagramViewport {
+        background: #333333;
+    }
+
+    .diagramThumbnailActive {
+        background: #333333;
+        color: #ffffff;
+    }
+}
