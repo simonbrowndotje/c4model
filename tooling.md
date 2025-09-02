@@ -201,6 +201,9 @@ Here's a collection of tooling that provides some degree of specific support for
     <div class="toolingOption toolingOpenSource toolingDiagramming toolingAsCode toolingStaticDiagrams toolingDeploymentDiagrams">
         <a href="https://github.com/8T4/c4sharp" target="_blank">C4Sharp</a>
     </div>
+   <div class="toolingOption toolingOpenSource toolingModelBased toolingAsCode toolingStaticDiagrams toolingDynamicDiagrams">
+        <a href="https://www.knowis.com/" target="_blank">Cloud Solution Workbench</a>
+    </div>
     <div class="toolingOption toolingOpenSource toolingDiagramming toolingAsCode toolingStaticDiagrams">
         <a href="https://owulveryck.github.io/cue4puml4c4/" target="_blank">CUE4Puml4C4</a>
     </div>
