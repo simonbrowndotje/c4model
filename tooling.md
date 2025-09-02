@@ -208,7 +208,7 @@ Here's a collection of tooling that provides some degree of specific support for
         <a href="https://diagrams.mingrammer.com/docs/nodes/c4" target="_blank">Diagrams</a>
     </div>
     <div class="toolingOption toolingOpenSource toolingDiagramming toolingWithUI toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
-        <a href="https://www.diagrams.net/blog/c4-modelling" target="_blank">diagrams.net</a>
+        <a href="https://www.drawio.com/blog/c4-modelling" target="_blank">draw.io</a>
     </div>
     <div class="toolingOption toolingWithUI toolingDiagramming toolingStaticDiagrams toolingDynamicDiagrams toolingDeploymentDiagrams">
         <a href="https://libraries.excalidraw.com/#dmitry-burnyshev-c4-architecture" target="_blank">Excalidraw</a>
