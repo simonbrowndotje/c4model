@@ -3,28 +3,10 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     const self = this;
     const font = structurizr.ui.getBranding().font;
     const gridSize = 5;
-    const nameFontSizeDifference = +10;
-    const metaDataFontSizeDifference = -7;
+    const nameFontSizeDifferenceRatio = 1.4;
+    const metadataFontSizeDifferenceRatio = 0.7;
 
     const darkenPercentage = -10;
-    const borderStyles = {
-        Solid: '',
-        Dashed: '10,10',
-        Dotted: '2,2'
-    };
-    const borderStylesForKey = {
-        Solid: '',
-        Dashed: '15,15',
-        Dotted: '4,4'
-    };
-    const defaultBoundaryColoursLight = {
-        'Enterprise': structurizr.ui.LIGHT_MODE_DEFAULTS.color,
-        'Group': structurizr.ui.LIGHT_MODE_DEFAULTS.color
-    };
-    const defaultBoundaryColoursDark = {
-        'Enterprise': structurizr.ui.DARK_MODE_DEFAULTS.color,
-        'Group': structurizr.ui.DARK_MODE_DEFAULTS.color
-    };
 
     var scale = 0.5;
     var minZoomScale = 0.1;
@@ -83,6 +65,12 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     var highlightedElement = undefined;
     var highlightedLink = undefined;
 
+    var elementStylesInUse = [];
+    var elementStylesInUseMap = {};
+
+    var relationshipStylesInUse = [];
+    var relationshipStylesInUseMap = {};
+
     var currentX;
     var currentY;
 
@@ -116,6 +104,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     var onKeyDownEventHandler;
     var onKeyPressEventHandler;
 
+    //var taintedCanvasErrorImageAsDataUri;
     var imageMetadata = undefined;
     var imagePreloadAttempts = 0;
     var diagramRendered = false;
@@ -153,7 +142,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 }
             }
         }),
-        linkConnectionPoint: (editable ? undefined : shapePerimeterConnectionPoint),
+        linkConnectionPoint: undefined,
         clickThreshold: 1,
         sorting: joint.dia.Paper.sorting.APPROX
     });
@@ -222,6 +211,18 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     }
 
     function preloadImages() {
+        // const taintedCanvasErrorImage = new Image();
+        // taintedCanvasErrorImage.onload = function() {
+        //     const canvas = document.createElement('canvas');
+        //     canvas.width = this.naturalWidth;
+        //     canvas.height = this.naturalHeight;
+        //     const ctx = canvas.getContext('2d');
+        //     ctx.drawImage(this, 0, 0);
+        //
+        //     taintedCanvasErrorImageAsDataUri = canvas.toDataURL(structurizr.constants.CONTENT_TYPE_IMAGE_PNG);
+        // };
+        // taintedCanvasErrorImage.src = '/static/img/tainted-canvas-error.png';
+
         if (imageMetadata === undefined) {
             imageMetadata = [];
 
@@ -237,7 +238,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
             imageMetadata.forEach(function(im) {
                 const image = new Image();
-                image.setAttribute('crossorigin', 'anonymous');
+                image.crossOrigin = 'anonymous';
                 image.addEventListener('load', function () {
                     im.width = this.naturalWidth;
                     im.height = this.naturalHeight;
@@ -305,49 +306,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     this.setLasso = function(l) {
         lasso = l;
     };
-
-    function shapePerimeterConnectionPoint(linkView, view, magnet, reference) {
-        var bbox;
-        var spot;
-
-        // orthogonal routing already snaps to the compass points, so we're only interested in links without a routing algorithm set
-        if (linkView.model.get('router') === undefined) {
-            var type = view.model.get('type');
-            if (type === 'structurizr.box' || type === 'structurizr.ellipse' || type === 'structurizr.hexagon' || type === 'structurizr.webBrowser' || type === 'structurizr.window' || type === 'structurizr.mobileDevice') {
-                magnet = view.$('.structurizrHighlightableElement')[0];
-            } else if (type === 'structurizr.person' || type === 'structurizr.robot') {
-                // calculate the angle from the centre point of the shape to the reference point, and prefer the head if the angle is too steep
-                var shapeBBox = view.model.getBBox();
-                var centrePointX = shapeBBox.x + (shapeBBox.width/2);
-                var centrePointY = shapeBBox.y + (shapeBBox.height/2);
-
-                var radians = Math.atan2(centrePointY - reference.y, reference.x - centrePointX);
-                var degrees = radians * 180 / Math.PI;
-
-                if (degrees > 45 && degrees < 135) {
-                    if (type === 'structurizr.person') {
-                        magnet = view.$('.structurizrPersonHead')[0];
-                    } else {
-                        magnet = view.$('.structurizrRobotHead')[0];
-                    }
-                } else {
-                    // do nothing
-                }
-            }
-        }
-
-        if (magnet) {
-            spot = V(magnet).findIntersection(reference, linkView.paper.viewport);
-            if (!spot) {
-                bbox = g.rect(V(magnet).bbox(false, linkView.paper.viewport));
-            }
-        } else {
-            bbox = view.model.getBBox();
-            spot = bbox.intersectionWithLineFromCenterToPoint(reference);
-        }
-
-        return spot || bbox.center();
-    }
 
     function fireWorkspaceChangedEvent() {
         if (workspaceChangedEventHandler !== undefined) {
@@ -419,8 +377,14 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         mapOfIdToBox = {};
         cells = [];
         cellsByElementId = {};
+        elementStylesInUse = [];
+        elementStylesInUseMap = {};
+
         lines = [];
         linesByRelationshipId = {};
+        relationshipStylesInUse = [];
+        relationshipStylesInUseMap = {};
+
         diagramMetadataWidth = 0;
         diagramMetadataHeight = 0;
         selectedElements = [];
@@ -541,8 +505,8 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
             if (imageMetadata.contentType === structurizr.constants.CONTENT_TYPE_IMAGE_SVG) {
                 // scale smaller SVGs, otherwise the diagram title becomes too large
-                const minimumWidth = self.getPossibleViewportWidth() * 2;
-                const minimumHeight = self.getPossibleViewportHeight() * 1;
+                const minimumWidth = self.getPossibleViewportWidth() * 3;
+                const minimumHeight = self.getPossibleViewportHeight() * 2;
 
                 if (imageMetadata.ratio >= 1 && imageWidth < minimumWidth) {
                     // landscape image
@@ -580,10 +544,11 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
             view.dimensions = {
                 width: imageWidth,
-                height: imageHeight
+                height: imageHeight + (diagramMetadataHeight * 1.5)
             }
 
             self.setPaperSize(view);
+            centreCellHorizontally(image);
 
             if (embedded) {
                 self.zoomFitWidth();
@@ -617,6 +582,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 }
 
                 var elementStyle = structurizr.ui.findElementStyle(element, darkMode);
+                registerElementStyle(elementStyle);
 
                 var box;
 
@@ -817,7 +783,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
                     if (element.type === structurizr.constants.DEPLOYMENT_NODE_ELEMENT_TYPE) {
                         var deploymentNodeCell = createDeploymentNode(element);
-                        deploymentNodeCell.elementInView = elementView;
+                        deploymentNodeCell.elementInView = element;
                         deploymentNodeCell.positionCalculated = true;
                         unusedDeploymentNodeCells.push(deploymentNodeCell);
 
@@ -1121,7 +1087,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
             if (includeParentBoundary && boundaryElement.parentId) {
                 var parentBoundary = boundariesByElementId[boundaryElement.parentId];
-                var parentBoundary = boundariesByElementId[boundaryElement.parentId];
                 if (parentBoundary === undefined) {
                     var parentBoundaryElement = structurizr.workspace.findElementById(boundaryElement.parentId);
                     if (parentBoundaryElement) {
@@ -1250,7 +1215,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
         if (element.type === structurizr.constants.SOFTWARE_SYSTEM_ELEMENT_TYPE) {
             if (currentView.type === structurizr.constants.SYSTEM_LANDSCAPE_VIEW_TYPE || currentView.softwareSystemId !== element.id) {
-                views = structurizr.workspace.findSystemContextViewsForSoftwareSystem(element.id);
+                views = structurizr.workspace.findSystemContextViewsForSoftwareSystem(element.id).concat(structurizr.workspace.findContainerViewsForSoftwareSystem(element.id));
             } else if (currentView.type === structurizr.constants.SYSTEM_CONTEXT_VIEW_TYPE) {
                 views = structurizr.workspace.findContainerViewsForSoftwareSystem(element.id);
             }
@@ -1733,10 +1698,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         return diagramHeight;
     };
 
-    function calculateElementPadding(configuration) {
-        return configuration.width * 0.07;
-    }
-
     function renderElementInternals(element, cell, configuration, width, horizontalOffset, height, verticalOffset) {
         const defaultIconWidth = 60;
         const defaultIconHeight = 60;
@@ -1774,9 +1735,9 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         }
 
         const name = formatName(element, configuration, maxWidth);
-        const nameHeight = calculateHeight(name, configuration.fontSize, nameFontSizeDifference);
+        const nameHeight = calculateHeight(name, configuration.fontSize * nameFontSizeDifferenceRatio, 0);
         const metadata = formatMetaData(element, configuration, maxWidth);
-        const metadataHeight = calculateHeight(metadata, configuration.fontSize, metaDataFontSizeDifference);
+        const metadataHeight = calculateHeight(metadata, configuration.fontSize * metadataFontSizeDifferenceRatio, 0);
         const description = formatDescription(element, configuration, maxWidth);
         const descriptionHeight = calculateHeight(description, configuration.fontSize, 0);
 
@@ -1856,7 +1817,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         cell.attributes.attrs['.structurizrName']['font-family'] = font.name;
         cell.attributes.attrs['.structurizrName']['fill'] = color;
         cell.attributes.attrs['.structurizrName']['dominant-baseline'] = 'hanging';
-        cell.attributes.attrs['.structurizrName']['font-size'] = configuration.fontSize+nameFontSizeDifference;
+        cell.attributes.attrs['.structurizrName']['font-size'] = (configuration.fontSize*nameFontSizeDifferenceRatio) + 'px';
         cell.attributes.attrs['.structurizrName']['ref-y'] = undefined;
         cell.attributes.attrs['.structurizrName']['y'] = nameY;
         cell.attributes.attrs['.structurizrName']['lineHeight'] = lineHeight;
@@ -1865,7 +1826,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         cell.attributes.attrs['.structurizrMetaData']['font-family'] = font.name;
         cell.attributes.attrs['.structurizrMetaData']['fill'] = color;
         cell.attributes.attrs['.structurizrMetaData']['dominant-baseline'] = 'hanging';
-        cell.attributes.attrs['.structurizrMetaData']['font-size'] = configuration.fontSize+metaDataFontSizeDifference;
+        cell.attributes.attrs['.structurizrMetaData']['font-size'] = (configuration.fontSize*metadataFontSizeDifferenceRatio) + 'px';
         cell.attributes.attrs['.structurizrMetaData']['ref-y'] = undefined;
         cell.attributes.attrs['.structurizrMetaData']['y'] = metadataY;
         cell.attributes.attrs['.structurizrMetaData']['lineHeight'] = lineHeight;
@@ -1874,7 +1835,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         cell.attributes.attrs['.structurizrDescription']['font-family'] = font.name;
         cell.attributes.attrs['.structurizrDescription']['fill'] = color;
         cell.attributes.attrs['.structurizrDescription']['dominant-baseline'] = 'hanging';
-        cell.attributes.attrs['.structurizrDescription']['font-size'] = configuration.fontSize;
+        cell.attributes.attrs['.structurizrDescription']['font-size'] = (configuration.fontSize) + 'px';
         cell.attributes.attrs['.structurizrDescription']['ref-y'] = undefined;
         cell.attributes.attrs['.structurizrDescription']['y'] = descriptionY;
         cell.attributes.attrs['.structurizrDescription']['lineHeight'] = lineHeight;
@@ -1942,6 +1903,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     width: configuration.width,
                     height: height,
                     rx: cornerRadius,
@@ -1950,10 +1912,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrBox']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, 0, height, 0);
 
@@ -1988,6 +1946,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     cx: configuration.width/2,
                     cy: configuration.height/2,
                     rx: configuration.width/2,
@@ -1996,10 +1955,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrEllipse']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, 0, height, 0);
 
@@ -2037,15 +1992,12 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     points: points
                 }
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrHexagon']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, 0, height, 0);
 
@@ -2082,15 +2034,12 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     points: points
                 }
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrDiamond']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, 0, height, 0);
 
@@ -2121,6 +2070,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     cx: configuration.width/2,
                     cy: configuration.width/4.5,
                     r: configuration.width/4.5
@@ -2129,6 +2079,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x: 0,
                     y: configuration.width/2.5,
                     width: configuration.width,
@@ -2137,6 +2088,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 '.structurizrPersonRightArm': {
                     stroke: stroke,
                     'stroke-width': 1,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x1: configuration.width/5,
                     y1: configuration.width/1.5,
                     x2: configuration.width/5,
@@ -2145,6 +2097,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 '.structurizrPersonLeftArm': {
                     stroke: stroke,
                     'stroke-width': 1,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x1: configuration.width-(configuration.width/5),
                     y1: configuration.width/1.5,
                     x2: configuration.width-(configuration.width/5),
@@ -2153,13 +2106,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrPersonHead']['stroke-dasharray'] = borderStyles[configuration.border];
-            cell.attributes.attrs['.structurizrPersonBody']['stroke-dasharray'] = borderStyles[configuration.border];
-            cell.attributes.attrs['.structurizrPersonRightArm']['stroke-dasharray'] = borderStyles[configuration.border];
-            cell.attributes.attrs['.structurizrPersonLeftArm']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, 0, height, configuration.width/2.5);
 
@@ -2190,6 +2136,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x: (configuration.width - configuration.width/2.25)/2,
                     y: 0,
                     width: configuration.width/2.25,
@@ -2199,6 +2146,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x: (configuration.width - configuration.width/1.8)/2,
                     y: (configuration.width/2.25 - configuration.width/10)/2,
                     width: configuration.width/1.8,
@@ -2208,6 +2156,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x: 0,
                     y: configuration.width/2.5,
                     width: configuration.width,
@@ -2216,6 +2165,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 '.structurizrRobotRightArm': {
                     stroke: stroke,
                     'stroke-width': 1,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x1: configuration.width/5,
                     y1: configuration.width/1.5,
                     x2: configuration.width/5,
@@ -2224,6 +2174,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 '.structurizrRobotLeftArm': {
                     stroke: stroke,
                     'stroke-width': 1,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x1: configuration.width-(configuration.width/5),
                     y1: configuration.width/1.5,
                     x2: configuration.width-(configuration.width/5),
@@ -2232,13 +2183,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrRobotHead']['stroke-dasharray'] = borderStyles[configuration.border];
-            cell.attributes.attrs['.structurizrRobotBody']['stroke-dasharray'] = borderStyles[configuration.border];
-            cell.attributes.attrs['.structurizrRobotRightArm']['stroke-dasharray'] = borderStyles[configuration.border];
-            cell.attributes.attrs['.structurizrRobotLeftArm']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, 0, height, configuration.width/2.5);
 
@@ -2283,6 +2227,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     d: path
                 },
                 '.structurizrCylinderFace': {
@@ -2296,10 +2241,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrCylinderPath']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, 0, height, 30);
 
@@ -2338,6 +2279,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     d: path
                 },
                 '.structurizrCylinderFace': {
@@ -2351,10 +2293,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrCylinderPath']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, 0, height, 30);
 
@@ -2399,6 +2337,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     d: path
                 },
                 '.structurizrPipeFace': {
@@ -2412,10 +2351,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrPipePath']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, rx, height, 0);
 
@@ -2448,6 +2383,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x: 10,
                     y: 0,
                     width: tabWidth,
@@ -2459,6 +2395,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x: 0,
                     y: tabHeight,
                     width: configuration.width,
@@ -2469,11 +2406,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrFolderTab']['stroke-dasharray'] = borderStyles[configuration.border];
-            cell.attributes.attrs['.structurizrFolder']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, 0, height, tabHeight);
 
@@ -2506,6 +2438,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x: (blockWidth / 2),
                     width: configuration.width - (blockWidth / 2),
                     height: height,
@@ -2516,6 +2449,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x: 0,
                     y: blockHeight * 0.6,
                     width: blockWidth,
@@ -2527,6 +2461,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     x: 0,
                     y: blockHeight * 2,
                     width: blockWidth,
@@ -2537,12 +2472,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrComponent']['stroke-dasharray'] = borderStyles[configuration.border];
-            cell.attributes.attrs['.structurizrComponentBlockTop']['stroke-dasharray'] = borderStyles[configuration.border];
-            cell.attributes.attrs['.structurizrComponentBlockBottom']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, blockWidth, height, 0);
 
@@ -2575,6 +2504,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 '.structurizrWebBrowser': {
                     fill: stroke,
                     stroke: stroke,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     width: configuration.width,
                     height: height,
                     rx: 10,
@@ -2624,10 +2554,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             element: element
         });
 
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrWebBrowser']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
-
         renderElementInternals(element, cell, configuration, webBrowserPanelWidth, 0, webBrowserPanelHeight, 40);
 
         graph.addCell(cell);
@@ -2659,6 +2585,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 '.structurizrWindow': {
                     fill: stroke,
                     stroke: stroke,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     width: configuration.width,
                     height: height,
                     rx: 10,
@@ -2699,10 +2626,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             element: element
         });
 
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrWindow']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
-
         renderElementInternals(element, cell, configuration, windowPanelWidth, 0, windowPanelHeight, 40);
 
         graph.addCell(cell);
@@ -2734,6 +2657,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 '.structurizrTerminal': {
                     fill: stroke,
                     stroke: stroke,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     width: configuration.width,
                     height: height,
                     rx: 10,
@@ -2779,10 +2703,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             element: element
         });
 
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrTerminal']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
-
         renderElementInternals(element, cell, configuration, windowPanelWidth, 0, windowPanelHeight, 40);
 
         graph.addCell(cell);
@@ -2812,6 +2732,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     fill: fill,
                     stroke: stroke,
                     'stroke-width': configuration.strokeWidth,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     width: configuration.width,
                     height: height,
                     rx: 10,
@@ -2825,10 +2746,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrShell']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, 0, height, 0);
 
@@ -2860,6 +2777,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 '.structurizrMobileDevice': {
                     fill: stroke,
                     stroke: stroke,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     width: configuration.width,
                     height: height,
                     rx: 20,
@@ -2893,10 +2811,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             element: element
         });
 
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrMobileDevice']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
-
         renderElementInternals(element, cell, configuration, width, 0, height, 0);
 
         graph.addCell(cell);
@@ -2927,6 +2841,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 '.structurizrMobileDevice': {
                     fill: stroke,
                     stroke: stroke,
+                    'stroke-dasharray': dashArrayForElement(configuration),
                     width: configuration.width,
                     height: height,
                     rx: 20,
@@ -2959,10 +2874,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             },
             element: element
         });
-
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrMobileDevice']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
 
         renderElementInternals(element, cell, configuration, width, 0, height, 0);
 
@@ -3212,7 +3123,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     }
 
     function formatName(element, configuration, width) {
-        return breakText(element.name ? element.name : "", Math.max(0, width), font.name, (configuration.fontSize + nameFontSizeDifference));
+        return breakText(element.name ? element.name : "", Math.max(0, width), font.name, (configuration.fontSize * nameFontSizeDifferenceRatio));
     }
 
     function formatDescription(element, configuration, width) {
@@ -3231,7 +3142,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         if (configuration.metadata !== undefined && configuration.metadata === false) {
             return '';
         } else {
-            var metadata = breakText(structurizr.ui.getMetadataForElement(element, true), width, font.name, (configuration.fontSize + metaDataFontSizeDifference));
+            var metadata = breakText(structurizr.ui.getMetadataForElement(element, true), width, font.name, (configuration.fontSize * metadataFontSizeDifferenceRatio));
 
             if (currentView.type === 'Deployment') {
                 if (element.type === 'ContainerInstance') {
@@ -3271,12 +3182,42 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         }
     }
 
-    function calculateStrokeDashArray(thickness) {
-        return "30 30";
+    function dashArrayForElement(elementStyle) {
+        var dasharray;
+
+        switch(elementStyle.border) {
+            case 'Dashed':
+                dasharray = (elementStyle.strokeWidth * 4) + ',' + (elementStyle.strokeWidth * 4);
+
+                break;
+            case 'Dotted':
+                dasharray = (elementStyle.strokeWidth) + ',' + (elementStyle.strokeWidth * 2);
+
+                break;
+            default:
+                dasharray = '';
+        }
+
+        return dasharray;
     }
 
-    function calculateStrokeDottedArray(thickness) {
-        return "5 5";
+    function dashArrayForRelationship(relationshipStyle) {
+        var dasharray;
+
+        switch(relationshipStyle.style) {
+            case 'Dashed':
+                dasharray = (relationshipStyle.thickness * 4) + ' ' + (relationshipStyle.thickness * 4);
+
+                break;
+            case 'Dotted':
+                dasharray = (relationshipStyle.thickness) + ' ' + (relationshipStyle.thickness * 2);
+
+                break;
+            default:
+                dasharray = '';
+        }
+
+        return dasharray;
     }
 
     function calculateArrowHead(thickness) {
@@ -3416,6 +3357,8 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 configuration = structurizr.ui.findRelationshipStyle(relationship, darkMode);
             }
 
+            registerRelationshipStyle(configuration);
+
             var triangle = calculateArrowHead(configuration.thickness);
 
             var description = "";
@@ -3439,8 +3382,8 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             const heightOfDescription = calculateHeight(description, configuration.fontSize, 0);
 
             var technology = formatTechnologyForRelationship(relationship);
-            technology = breakText(technology, configuration.width, font.name, configuration.fontSize + metaDataFontSizeDifference);
-            const heightOfTechnology = calculateHeight(technology, configuration.fontSize, metaDataFontSizeDifference);
+            technology = breakText(technology, configuration.width, font.name, configuration.fontSize * metadataFontSizeDifferenceRatio);
+            const heightOfTechnology = calculateHeight(technology, configuration.fontSize * metadataFontSizeDifferenceRatio, 0);
 
             var totalHeight = heightOfDescription;
             if (heightOfTechnology > 0) {
@@ -3453,6 +3396,11 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             var routing = configuration.routing;
             if (relationshipInView.routing !== undefined) {
                 routing = relationshipInView.routing;
+            }
+
+            var jump = configuration.jump;
+            if (relationshipInView.jump !== undefined) {
+                jump = relationshipInView.jump;
             }
 
             var position = configuration.position;
@@ -3515,7 +3463,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                             fill: fill,
                             'font-family': font.name,
                             'font-weight': 'normal',
-                            'font-size': configuration.fontSize + metaDataFontSizeDifference + 'px',
+                            'font-size': (configuration.fontSize * metadataFontSizeDifferenceRatio) + 'px',
                             'pointer-events': 'none',
                             'lineHeight': lineHeight
                         }
@@ -3546,37 +3494,21 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 labels: labels
             });
 
-            if (configuration.style === undefined || configuration.style === 'Dashed' || configuration.style === 'Dotted') {
-                var strokeDashArray;
-                if (configuration.style === 'Dashed') {
-                    strokeDashArray = calculateStrokeDashArray(configuration.thickness);
-                } else if (configuration.style === 'Dotted') {
-                    strokeDashArray = calculateStrokeDottedArray(configuration.thickness);
-                }
+            link.attr({
+                '.connection': {
+                    stroke: fill,
+                    'stroke-width': configuration.thickness,
+                    'stroke-dasharray': dashArrayForRelationship(configuration),
+                    'fill': 'none'
+                },
+                '.connection-wrap': {fill: 'none'},
+                '.marker-target': {stroke: fill, fill: fill, d: triangle},
+                '.link-tools': {display: 'none'},
+                '.marker-arrowheads': {display: 'none'}
+            });
 
-                link.attr({
-                    '.connection': {
-                        stroke: fill,
-                        'stroke-width': configuration.thickness,
-                        'stroke-dasharray': strokeDashArray,
-                        'fill': 'none'
-                    },
-                    '.connection-wrap': {fill: 'none'},
-                    '.marker-target': {stroke: fill, fill: fill, d: triangle},
-                    '.link-tools': {display: 'none'},
-                    '.marker-arrowheads': {display: 'none'}
-                });
-            } else {
-                link.attr({
-                    '.connection': { stroke: fill, 'stroke-width': configuration.thickness, 'fill': 'none' },
-                    '.connection-wrap': { fill: 'none' },
-                    '.marker-target': { stroke: fill, fill: fill, d: triangle },
-                    '.link-tools': { display: 'none' },
-                    '.marker-arrowheads': { display: 'none' }
-                });
-            }
-
-            setRoutingAndConnector(link, routing);
+            setRouting(link, routing);
+            setJump(link, jump, configuration.thickness);
 
             link.relationshipInView = relationshipInView;
 
@@ -3614,16 +3546,26 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         }
     }
 
-    function setRoutingAndConnector(link, routing) {
+    function setRouting(link, routing) {
         if (routing === undefined || routing === 'Direct') {
             link.unset('router');
-            link.set('connector', { name: 'rounded' });
+            link.connector('rounded');
         } else if (routing === 'Orthogonal') {
             link.set('router', { name: 'orthogonal' });
-            link.set('connector', { name: 'rounded' });
+            link.connector('rounded');
         } else if (routing === 'Curved') {
             link.unset('router');
-            link.set('connector', { name: 'smooth' });
+            link.connector('smooth');
+        }
+    }
+
+    function setJump(link, jump, thickness) {
+        if (jump !== undefined) {
+            if (jump === true) {
+                link.connector('jumpover', { size: 5 * thickness, radius: 5 * thickness } );
+            } else {
+                link.connector('rounded');
+            }
         }
     }
 
@@ -3708,22 +3650,22 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
     function createBoundary(name, metadata, type, element) {
         var elementStyle;
-
-        var defaultColours = defaultBoundaryColoursLight;
-        if (darkMode === true) {
-            defaultColours = defaultBoundaryColoursDark;
-        }
         var textColor;
         var stroke;
+        var fill;
         var icon;
         var strokeWidth = 2;
-        var dashArray = '20,20';
         var nameText = name;
 
-        if (type === 'Group') {
-            dashArray = '5,5'; // dotted line
-            elementStyle = structurizr.ui.findElementStyle( { type: 'Boundary', tags: 'Group, Group:' + name }, darkMode);
+        if (type === structurizr.constants.GROUP_ELEMENT_TYPE) {
+            elementStyle = structurizr.ui.findElementStyle( {
+                type: structurizr.constants.GROUP_ELEMENT_TYPE,
+                tags: 'Group, Group:' + name
+            }, darkMode);
+
             icon = elementStyle.icon;
+            stroke = elementStyle.stroke;
+            textColor = elementStyle.color;
             strokeWidth = elementStyle.strokeWidth;
 
             if (useNestedGroups()) {
@@ -3731,74 +3673,101 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 nameText = name.substring(name.lastIndexOf(separator) + separator.length);
             }
 
-            stroke = elementStyle.stroke;
-            if (stroke === undefined) {
-                // fallback to the colour property
-                stroke = elementStyle.color;
-            }
-            if (stroke === undefined) {
-                // use the default colour for groups
-                stroke = defaultColours[type];
-            }
-
-            textColor = elementStyle.color;
-            if (textColor === undefined) {
-                // use the default colour for groups
-                textColor = defaultColours[type];
-            }
-
             // and apply opacity
             textColor = structurizr.util.shadeColor(textColor, 100 - elementStyle.opacity, darkMode);
             stroke = structurizr.util.shadeColor(stroke, 100-elementStyle.opacity, darkMode);
-        } else if (type === 'Enterprise') {
-            elementStyle = structurizr.ui.findElementStyle({type: 'Boundary', tags: 'Boundary, Boundary:Enterprise'}, darkMode);
+            fill = structurizr.util.shadeColor(elementStyle.background, 100-elementStyle.opacity, darkMode);
+
+            if (elementStyle.shape === 'RoundedBox') {
+                // do nothing, this is permitted
+            } else {
+                // default to a regular box
+                elementStyle.shape = 'Box';
+            }
+            registerElementStyle(elementStyle);
+        } else if (type === 'Enterprise') { // for backwards compatibility with older workspaces
+            elementStyle = structurizr.ui.findElementStyle( {
+                type: structurizr.constants.GROUP_ELEMENT_TYPE,
+                tags: 'Boundary, Boundary:Enterprise'
+            }, darkMode);
+
             icon = elementStyle.icon;
-            strokeWidth = elementStyle.strokeWidth;
-
             stroke = elementStyle.stroke;
-            if (stroke === undefined) {
-                stroke = elementStyle.color;
-            }
-            if (stroke === undefined) {
-                stroke = defaultColours[type];
-            }
-
             textColor = elementStyle.color;
-            if (textColor === undefined) {
-                textColor = defaultColours[type];
-            }
+            strokeWidth = elementStyle.strokeWidth;
+            elementStyle.shape = 'Box';
 
             textColor = structurizr.util.shadeColor(textColor, 100 - elementStyle.opacity, darkMode);
             stroke = structurizr.util.shadeColor(stroke, 100 - elementStyle.opacity, darkMode);
+            fill = structurizr.util.shadeColor(elementStyle.background, 100-elementStyle.opacity, darkMode);
         } else if (element !== undefined) {
-            elementStyle = structurizr.ui.findElementStyle({
-                type: 'Boundary',
+            elementStyle = structurizr.ui.findElementStyle(element, darkMode);
+
+            // use this as an override
+            const elementStyleForBoundary = structurizr.ui.findElementStyle({
+                type: structurizr.constants.BOUNDARY_ELEMENT_TYPE,
                 tags: 'Boundary, Boundary:' + element.type
             }, darkMode);
-            const elementStyleForBoundaryElement = structurizr.ui.findElementStyle(element, darkMode);
+
+            if (elementStyleForBoundary.icon !== undefined) {
+                elementStyle.icon = elementStyleForBoundary.icon;
+            }
+            icon = elementStyle.icon;
+
+            if (elementStyleForBoundary.background !== undefined) {
+                elementStyle.background = elementStyleForBoundary.background;
+            }
+            fill = elementStyle.background;
+
+            if (elementStyleForBoundary.stroke !== undefined) {
+                elementStyle.stroke = elementStyleForBoundary.color;
+            }
+            stroke = elementStyle.stroke;
+
+            if (elementStyleForBoundary.strokeWidth !== undefined) {
+                elementStyle.strokeWidth = elementStyleForBoundary.strokeWidth;
+            }
             strokeWidth = elementStyle.strokeWidth;
 
-            icon = elementStyle.icon;
-            if (icon === undefined) {
-                icon = elementStyleForBoundaryElement.icon;
+            if (elementStyleForBoundary.color !== undefined) {
+                elementStyle.color = elementStyleForBoundary.color;
+            } else {
+                // check the default color isn't the same as the background
+                if (elementStyle.color === elementStyle.background) {
+                    // use the stroke instead
+                    elementStyle.color = elementStyle.stroke;
+                }
             }
-
-            stroke = elementStyle.stroke;
-            if (stroke === undefined) {
-                stroke = elementStyle.color;
-            }
-            if (stroke === undefined) {
-                stroke = elementStyleForBoundaryElement.stroke;
-            }
-
             textColor = elementStyle.color;
-            if (textColor === undefined) {
-                textColor = elementStyleForBoundaryElement.stroke;
+
+            if (elementStyleForBoundary.shape !== undefined) {
+                elementStyle.shape = elementStyleForBoundary.shape;
             }
+            if (shapeHasRoundedCorners(elementStyle.shape)) {
+                elementStyle.shape = 'RoundedBox';
+            } else {
+                // default to a regular box
+                elementStyle.shape = 'Box';
+            }
+
+            if (elementStyleForBoundary.border !== undefined) {
+                elementStyle.border = elementStyleForBoundary.border;
+            }
+            fill = elementStyle.background;
+
+            if (elementStyleForBoundary.fontSize !== undefined) {
+                elementStyle.fontSize = elementStyleForBoundary.fontSize;
+            }
+
+            elementStyle.tags = [ 'Boundary' ].concat(elementStyle.tags);
+            registerElementStyle(elementStyle);
 
             textColor = structurizr.util.shadeColor(textColor, 100 - elementStyle.opacity, darkMode);
             stroke = structurizr.util.shadeColor(stroke, 100 - elementStyle.opacity, darkMode);
+            fill = structurizr.util.shadeColor(fill, 100-elementStyle.opacity, darkMode);
         }
+
+        const cornerRadius = (elementStyle.shape === 'Box' ? 0 : 20);
 
         var heightOfIcon = elementStyle.fontSize;
         if (metadata !== undefined) {
@@ -3810,24 +3779,27 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             metadata = '';
         }
 
-        var boundary = new structurizr.shapes.Boundary({
+        const boundary = new structurizr.shapes.Boundary({
             attrs: {
                 '.structurizrBoundary': {
                     stroke: stroke,
-                    fill: canvasColor,
+                    fill: fill,
                     'stroke-width': strokeWidth,
-                    'stroke-dasharray': dashArray
+                    'stroke-dasharray': dashArrayForElement(elementStyle),
+                    rx: cornerRadius,
+                    ry: cornerRadius
                 },
                 '.structurizrName': {
                     text: nameText,
                     'font-family': font.name,
-                    'font-size': elementStyle.fontSize + 'px',
+                    'font-weight': 'bold',
+                    'font-size': (elementStyle.fontSize * nameFontSizeDifferenceRatio) + 'px',
                     fill: textColor
                 },
                 '.structurizrMetaData': {
                     text: metadata,
                     'font-family': font.name,
-                    'font-size': elementStyle.fontSize + metaDataFontSizeDifference + 'px',
+                    'font-size': (elementStyle.fontSize * metadataFontSizeDifferenceRatio) + 'px',
                     fill: textColor
                 }
             }
@@ -3838,9 +3810,9 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         boundary.on('change:position', moveLinksBetweenElementsContainedWithin);
 
         boundary._computedStyle = {};
-        boundary._computedStyle.background = canvasColor;
+        boundary._computedStyle.background = fill;
         boundary._computedStyle.color = textColor;
-        boundary._computedStyle.borderStyle = 'Dashed';
+        boundary._computedStyle.borderStyle = elementStyle.border;
         boundary._computedStyle.stroke = stroke;
         boundary._computedStyle.fontSize = elementStyle.fontSize;
 
@@ -3861,12 +3833,29 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         return boundary;
     }
 
+    function shapeHasRoundedCorners(shape) {
+        return [
+            'RoundedBox',
+            'Folder',
+            'WebBrowser',
+            'Window',
+            'Terminal',
+            'Shell',
+            'MobileDevicePortrait',
+            'MobileDeviceLandscape',
+            'Component'
+        ].indexOf(shape) > -1;
+    }
+
     function createDeploymentNode(element) {
         var configuration = structurizr.ui.findElementStyle(element, darkMode);
+        configuration.shape = 'Box';
+        registerElementStyle(configuration);
 
         var textColor = structurizr.util.shadeColor(configuration.color, 100-configuration.opacity, darkMode);
         var stroke = structurizr.util.shadeColor(configuration.stroke, 100-configuration.opacity, darkMode);
         var strokeWidth = configuration.strokeWidth;
+        var fill = structurizr.util.shadeColor(configuration.background, 100-configuration.opacity, darkMode);
 
         var instanceCount = '';
         if (element.instances && element.instances !== '1') {
@@ -3888,18 +3877,20 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 '.structurizrDeploymentNode': {
                     stroke: stroke,
                     'stroke-width': strokeWidth,
-                    fill: canvasColor
+                    'stroke-dasharray': dashArrayForElement(configuration),
+                    fill: fill
                 },
                 '.structurizrName': {
                     text: element.name,
                     'font-family': font.name,
-                    'font-size': configuration.fontSize + 'px',
+                    'font-weight': 'bold',
+                    'font-size': (configuration.fontSize * nameFontSizeDifferenceRatio) + 'px',
                     'fill': textColor
                 },
                 '.structurizrMetaData': {
                     text: metadata,
                     'font-family': font.name,
-                    'font-size': configuration.fontSize + metaDataFontSizeDifference + 'px',
+                    'font-size': (configuration.fontSize * metadataFontSizeDifferenceRatio) + 'px',
                     'fill': textColor
                 },
                 '.structurizrInstanceCount': {
@@ -3912,16 +3903,12 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             }
         });
 
-        if (configuration.border !== 'Solid') {
-            cell.attributes.attrs['.structurizrDeploymentNode']['stroke-dasharray'] = borderStyles[configuration.border];
-        }
-
         graph.addCell(cell);
         cell.toBack();
         mapOfIdToBox[element.id] = cell;
 
         cell._computedStyle = {};
-        cell._computedStyle.background = canvasColor;
+        cell._computedStyle.background = configuration.background;
         cell._computedStyle.color = textColor;
         cell._computedStyle.borderStyle = configuration.border;
         cell._computedStyle.stroke = stroke;
@@ -3976,10 +3963,18 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     }
 
     function centreCell(cell) {
-        var width = cell.get('size').width;
-        var height = cell.get('size').height;
-        var x = (diagramWidth - width) / 2;
-        var y = (diagramHeight - height) / 2;
+        const width = cell.get('size').width;
+        const height = cell.get('size').height;
+        const x = (diagramWidth - width) / 2;
+        const y = (diagramHeight - height) / 2;
+
+        cell.set({ position: { x: x, y: y }});
+    }
+
+    function centreCellHorizontally(cell) {
+        const width = cell.get('size').width;
+        const x = (diagramWidth - width) / 2;
+        const y = cell.get('position').y;
 
         cell.set({ position: { x: x, y: y }});
     }
@@ -4017,29 +4012,34 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     };
 
     function reposition(parentCell) {
-        var padding;
-        var metadataText;
-        var fontSize;
-
         if (parentCell && parentCell.getEmbeddedCells().length > 0) {
-            metadataText = parentCell.attr('.structurizrMetaData').text;
-            fontSize = parentCell._computedStyle.fontSize;
+            const viewOrFilter = (currentFilter !== undefined ? currentFilter : currentView);
+            const metadataText = parentCell.attr('.structurizrMetaData').text;
+            const fontSize = parentCell._computedStyle.fontSize;
 
-            if (parentCell.elementInView && parentCell.positionCalculated === false) {
-                // this is an element from the model
-                var element = structurizr.workspace.findElementById(parentCell.elementInView.id);
-                if (element.type === 'DeploymentNode') {
-                    padding = { top: 50, right: 50, bottom: 50, left: 50 };
-                }
+            var defaultInternalPadding = '20';
+            var internalPadding;
+            var margin = 15;
+
+            if (parentCell.elementInView === undefined) {
+                internalPadding = parseInt(getViewOrViewSetProperty(viewOrFilter, 'structurizr.groupPadding', defaultInternalPadding));
             } else {
-                // this is a boundary box
-                padding = { top: 20, right: 20, bottom: 50, left: 20 };
+                if (parentCell.elementInView.type === structurizr.constants.DEPLOYMENT_NODE_ELEMENT_TYPE) {
+                    internalPadding = parseInt(getViewOrViewSetProperty(viewOrFilter, 'structurizr.deploymentNodePadding', defaultInternalPadding));
+                } else {
+                    internalPadding = parseInt(getViewOrViewSetProperty(viewOrFilter, 'structurizr.boundaryPadding', defaultInternalPadding));
+                }
             }
 
+            const padding = { top: internalPadding, right: internalPadding, bottom: internalPadding + margin, left: internalPadding };
+
+            var nameFontSize = parseInt(parentCell.attr('.structurizrName')['font-size']);
+            var metadataFontSize = parseInt(parentCell.attr('.structurizrMetaData')['font-size']);
+
             if (metadataText && metadataText.length > 0) {
-                padding.bottom = padding.bottom + fontSize + fontSize + metaDataFontSizeDifference;
+                padding.bottom = padding.bottom + nameFontSize + metadataFontSize + margin;
             } else {
-                padding.bottom = padding.bottom + fontSize;
+                padding.bottom = padding.bottom + nameFontSize + margin;
             }
 
             var minX = Number.MAX_VALUE;
@@ -4063,19 +4063,11 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 // }
             }
 
-            padding = {
-                top: padding.top,
-                right: padding.right,
-                bottom: padding.bottom,
-                left: padding.left
-            };
-
             var newWidth = maxX - minX + padding.left + padding.right;
             var newHeight = maxY - minY + padding.top + padding.bottom;
             var newX = minX - padding.left;
             var newY = minY - padding.top;
 
-            var margin = 15;
             var refX = (margin / newWidth);
 
             if (parentCell._computedStyle.icon !== undefined) {
@@ -4483,61 +4475,42 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         })[0];
     }
 
+    function registerElementStyle(elementStyle) {
+        const elementStyleIdentifier = createTagsList(elementStyle, "Element");
+        elementStyle.id = elementStyleIdentifier;
+
+        if (elementStylesInUse.indexOf(elementStyleIdentifier) === -1) {
+            elementStylesInUse.push(elementStyleIdentifier);
+            elementStylesInUseMap[elementStyleIdentifier] = elementStyle;
+        }
+    }
+
+    function registerRelationshipStyle(relationshipStyle) {
+        const relationshipStyleIdentifier = createTagsList(relationshipStyle, "Relationship");
+        relationshipStyle.id = relationshipStyleIdentifier;
+
+        if (relationshipStylesInUse.indexOf(relationshipStyleIdentifier) === -1) {
+            relationshipStylesInUse.push(relationshipStyleIdentifier);
+            relationshipStylesInUseMap[relationshipStyleIdentifier] = relationshipStyle;
+        }
+    }
+
     function createDiagramKey() {
         var keyElementWidth = 450;
         var keyElementHeight = 300;
         var fontSize = "30px";
 
-        var elementStylesInUse = [];
-        var elementStylesInUseMap = {};
-        var elementsInView = currentView.elements.map(function(element) { return structurizr.workspace.findElementById(element.id); });
-        for (var i = 0; i < elementsInView.length; i++) {
-            var elementInView = elementsInView[i];
-            if (elementInView.type === "DeploymentNode") {
-                var elementStyle = structurizr.ui.findElementStyle(elementInView, darkMode);
-                elementStyle.background = canvasColor;
-                elementStyle.shape = 'Box';
-
-                var elementStyleIdentifier = createTagsList(elementStyle, "Deployment Node");
-                if (elementStylesInUse.indexOf(elementStyleIdentifier) === -1) {
-                    elementStylesInUse.push(elementStyleIdentifier);
-                    elementStylesInUseMap[elementStyleIdentifier] = elementStyle;
-                }
-            } else {
-                var elementStyle = structurizr.ui.findElementStyle(elementInView, darkMode);
-                var elementStyleIdentifier = createTagsList(elementStyle, "Element");
-                if (elementStylesInUse.indexOf(elementStyleIdentifier) === -1) {
-                    elementStylesInUse.push(elementStyleIdentifier);
-                    elementStylesInUseMap[elementStyleIdentifier] = elementStyle;
-                }
-            }
-        }
-
         elementStylesInUse.sort(function(a, b){ return a.localeCompare(b); });
-
-        var relationshipStylesInUse = [];
-        var relationshipStylesInUseMap = {};
-        var relationshipsInView = currentView.relationships.map(function(relationship) { return structurizr.workspace.findRelationshipById(relationship.id); });
-        for (var i = 0; i < relationshipsInView.length; i++) {
-            var relationshipInView = relationshipsInView[i];
-            var relationshipStyle = structurizr.ui.findRelationshipStyle(relationshipInView, darkMode);
-            var relationshipStyleIdentifier = createTagsList(relationshipStyle, "Relationship");
-            if (relationshipStylesInUse.indexOf(relationshipStyleIdentifier) === -1) {
-                relationshipStylesInUse.push(relationshipStyleIdentifier);
-                relationshipStylesInUseMap[relationshipStyleIdentifier] = relationshipStyle;
-            }
-        }
-
         relationshipStylesInUse.sort(function(a, b){ return a.localeCompare(b); });
 
         var numberOfItemsInKey = elementStylesInUse.length + relationshipStylesInUse.length;
         if (currentView.type === "Deployment") {
             numberOfItemsInKey++;
         }
-        var columns = 5;
-        var columnWidth = 500;
-        var rowHeight = 500;
-        var rows = Math.ceil(numberOfItemsInKey / columns);
+        const columns = 5;
+        const columnWidth = 500;
+        const rowHeight = 500;
+        const rows = Math.ceil(numberOfItemsInKey / columns);
         totalWidthOfKey = columns * columnWidth;
         totalHeightOfKey = rows * rowHeight;
         var counter = 1;
@@ -4549,6 +4522,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             var fill = structurizr.util.shadeColor(elementStyle.background, 100-elementStyle.opacity, darkMode);
             var stroke = (elementStyle.stroke !== undefined ? structurizr.util.shadeColor(elementStyle.stroke, 100-elementStyle.opacity, darkMode) : structurizr.util.shadeColor(fill, darkenPercentage, darkMode));
             var strokeWidth = elementStyle.strokeWidth;
+            const strokeDashArray = dashArrayForElement(elementStyle);
 
             var textColor = structurizr.util.shadeColor(elementStyle.color, 100-elementStyle.opacity, darkMode);
 
@@ -4557,8 +4531,8 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 var height = keyElementHeight;
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect width="' + width + '" height="' + height + '" rx="20" ry="20" x="0" y="0" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += createTextForKey(width, height, 0, 0, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<rect width="' + width + '" height="' + height + '" rx="20" ry="20" x="0" y="0" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += createTextForKey(width, height, 0, 0, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Cylinder") {
                 var lidRadius = 45;
@@ -4574,8 +4548,8 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 path += ' l 0,-' + (height - lidRadius);
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<path id="' + uniqueKey.concat("Path") + '" d="' + path + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '></path>';
-                svg += createTextForKey(width, height, 0, lidRadius, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<path id="' + uniqueKey.concat("Path") + '" d="' + path + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"></path>';
+                svg += createTextForKey(width, height, 0, lidRadius, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Bucket") {
                 var lidRadius = 45;
@@ -4591,8 +4565,8 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 path += ' l ' + (width/10) + ',-' + (height - lidRadius);
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<path id="' + uniqueKey.concat("Path") + '" d="' + path + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '></path>';
-                svg += createTextForKey(width, height, 0, lidRadius, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<path id="' + uniqueKey.concat("Path") + '" d="' + path + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"></path>';
+                svg += createTextForKey(width, height, 0, lidRadius, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Pipe") {
                 var lidRadius = 45;
@@ -4608,38 +4582,38 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 path += ' l -' + (width - lidRadius) + ',0';
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<path id="' + uniqueKey.concat("Path") + '" d="' + path + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '></path>';
-                svg += createTextForKey(width, height, 0, 0, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<path id="' + uniqueKey.concat("Path") + '" d="' + path + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"></path>';
+                svg += createTextForKey(width, height, 0, 0, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Person") {
                 var width = keyElementWidth;
                 var height = keyElementWidth;
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect x="0" y="' + height/2.5 + '" width="' + width + '" height="' + (height - (height/2.5)) + '" rx="90" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += '<circle cx="' + width/2 + '" cy="' + height/4.5 + '" r="' + height/4.5 + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += '<line x1="' + width/5 + '" y1="' + height/1.5 + '" x2="' + width/5 + '" y2="' + height + '" stroke-width="1" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += '<line x1="' + (width-(width/5)) + '" y1="' + height/1.5 + '" x2="' + (width-(width/5)) + '" y2="' + height + '" stroke-width="1" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += createTextForKey(width, height, 0, (height/4.5 * 2), createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<rect x="0" y="' + height/2.5 + '" width="' + width + '" height="' + (height - (height/2.5)) + '" rx="90" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += '<circle cx="' + width/2 + '" cy="' + height/4.5 + '" r="' + height/4.5 + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += '<line x1="' + width/5 + '" y1="' + height/1.5 + '" x2="' + width/5 + '" y2="' + height + '" stroke-width="1" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += '<line x1="' + (width-(width/5)) + '" y1="' + height/1.5 + '" x2="' + (width-(width/5)) + '" y2="' + height + '" stroke-width="1" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += createTextForKey(width, height, 0, height/2.5, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Robot") {
                 var width = keyElementWidth;
                 var height = keyElementWidth;
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect x="0" y="' + height/2.5 + '" width="' + width + '" height="' + (height - (height/2.5)) + '" rx="40" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += '<rect x="' + (width - width/1.8)/2 + '" y="' + (width/2.25 - width/10)/2 + '" width="' + width/1.8 + '" height="' + height/10 + '" rx="10" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += '<rect x="' + (height - height/2.25)/2 + '" y="0" width="' + width/2.25 + '" height="' + height/2.25 + '" rx="40" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += '<line x1="' + width/5 + '" y1="' + height/1.5 + '" x2="' + width/5 + '" y2="' + height + '" stroke-width="1" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += '<line x1="' + (width-(width/5)) + '" y1="' + height/1.5 + '" x2="' + (width-(width/5)) + '" y2="' + height + '" stroke-width="1" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += createTextForKey(width, height, 0, (height/4.5 * 2), createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<rect x="0" y="' + height/2.5 + '" width="' + width + '" height="' + (height - (height/2.5)) + '" rx="40" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += '<rect x="' + (width - width/1.8)/2 + '" y="' + (width/2.25 - width/10)/2 + '" width="' + width/1.8 + '" height="' + height/10 + '" rx="10" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += '<rect x="' + (height - height/2.25)/2 + '" y="0" width="' + width/2.25 + '" height="' + height/2.25 + '" rx="40" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += '<line x1="' + width/5 + '" y1="' + height/1.5 + '" x2="' + width/5 + '" y2="' + height + '" stroke-width="1" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += '<line x1="' + (width-(width/5)) + '" y1="' + height/1.5 + '" x2="' + (width-(width/5)) + '" y2="' + height + '" stroke-width="1" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += createTextForKey(width, height, 0, height/2.5, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Folder") {
                 var width = keyElementWidth;
                 var height = keyElementWidth * (elementStyle.height / elementStyle.width);
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect width="' + (width / 3) + '" height="' + (height / 4) + '" rx="15" ry="15" x="15" y="0" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += '<rect width="' + width + '" height="' + (height - (height / 8)) + '" rx="6" ry="6" x="0" y="' + (height / 8) + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += createTextForKey(width, height, 0, height / 4, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<rect width="' + (width / 3) + '" height="' + (height / 4) + '" rx="15" ry="15" x="15" y="0" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += '<rect width="' + width + '" height="' + (height - (height / 8)) + '" rx="6" ry="6" x="0" y="' + (height / 8) + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += createTextForKey(width, height, 0, height / 8, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Component") {
                 var width = keyElementWidth;
@@ -4647,26 +4621,26 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 var blockWidth = keyElementWidth / 6;
                 var blockHeight = keyElementHeight / 8;
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect width="' + (width - (blockWidth / 2)) + '" height="' + height + '" rx="10" ry="10" x="' + (blockWidth / 2) + '" y="0" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += '<rect width="' + blockWidth + '" height="' + blockHeight + '" rx="5" ry="5" x="0" y="' + (blockHeight * 0.6) + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += '<rect width="' + blockWidth + '" height="' + blockHeight + '" rx="5" ry="5" x="0" y="' + (blockHeight * 2) + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += createTextForKey((width - (blockWidth / 2)), height, (blockWidth / 2), 0, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<rect width="' + (width - (blockWidth / 2)) + '" height="' + height + '" rx="10" ry="10" x="' + (blockWidth / 2) + '" y="0" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += '<rect width="' + blockWidth + '" height="' + blockHeight + '" rx="5" ry="5" x="0" y="' + (blockHeight * 0.6) + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += '<rect width="' + blockWidth + '" height="' + blockHeight + '" rx="5" ry="5" x="0" y="' + (blockHeight * 2) + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += createTextForKey((width - (blockWidth / 2)), height, (blockWidth / 2), 0, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Circle") {
                 var width = keyElementWidth;
                 var height = keyElementWidth;
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<ellipse cx="' + width/2 + '" cy="' + height/2 + '" rx="' + width/2 + '" ry="' + height/2 + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += createTextForKey(width, height, 0, 0, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<ellipse cx="' + width/2 + '" cy="' + height/2 + '" rx="' + width/2 + '" ry="' + height/2 + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += createTextForKey(width, height, 0, 0, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Ellipse") {
                 var width = keyElementWidth;
                 var height = keyElementWidth * (elementStyle.height / elementStyle.width);
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<ellipse cx="' + width/2 + '" cy="' + height/2 + '" rx="' + width/2 + '" ry="' + height/2 + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += createTextForKey(width, height, 0, 0, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<ellipse cx="' + width/2 + '" cy="' + height/2 + '" rx="' + width/2 + '" ry="' + height/2 + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += createTextForKey(width, height, 0, 0, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Hexagon") {
                 var width = keyElementWidth;
@@ -4679,8 +4653,8 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     "0," + (height/2);
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<polygon points="' + points + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += createTextForKey(width, height, 0, 0, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<polygon points="' + points + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += createTextForKey(width, height, 0, 0, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Diamond") {
                 var width = keyElementWidth;
@@ -4691,40 +4665,40 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     "0," + (height/2);
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<polygon points="' + points + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += createTextForKey(width, height, 0, 0, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<polygon points="' + points + '" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += createTextForKey(width, height, 0, 0, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "WebBrowser") {
                 var width = keyElementWidth;
                 var height = keyElementHeight;
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect width="' + width + '" height="' + height + '" rx="10" ry="10" x="0" y="0" fill="' + stroke + '" stroke-width="0" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
+                svg += '<rect width="' + width + '" height="' + height + '" rx="10" ry="10" x="0" y="0" fill="' + stroke + '" stroke-width="0" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
                 svg += '<rect width="' + (width-strokeWidth*2) + '" height="' + (height-40-strokeWidth) + '" rx="10" ry="10" x="' + strokeWidth + '" y="40" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<rect width="' + (width-110) + '" height="20" rx="10" ry="10" x="100" y="10" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<ellipse cx="20" cy="20" rx="10" ry="10" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<ellipse cx="50" cy="20" rx="10" ry="10" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<ellipse cx="80" cy="20" rx="10" ry="10" fill="' + fill + '" stroke-width="0"/>';
-                svg += createTextForKey(width, height, 0, 40, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += createTextForKey(width, height, 0, 40, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Window") {
                 var width = keyElementWidth;
                 var height = keyElementHeight;
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect width="' + width + '" height="' + height + '" rx="10" ry="10" x="0" y="0" fill="' + stroke + '" stroke-width="0" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
+                svg += '<rect width="' + width + '" height="' + height + '" rx="10" ry="10" x="0" y="0" fill="' + stroke + '" stroke-width="0" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
                 svg += '<rect width="' + (width-strokeWidth*2) + '" height="' + (height-40-strokeWidth) + '" rx="10" ry="10" x="' + strokeWidth + '" y="40" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<ellipse cx="20" cy="20" rx="10" ry="10" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<ellipse cx="50" cy="20" rx="10" ry="10" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<ellipse cx="80" cy="20" rx="10" ry="10" fill="' + fill + '" stroke-width="0"/>';
-                svg += createTextForKey(width, height, 0, 40, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += createTextForKey(width, height, 0, 40, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Terminal") {
                 var width = keyElementWidth;
                 var height = keyElementHeight;
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect width="' + width + '" height="' + height + '" rx="10" ry="10" x="0" y="0" fill="' + stroke + '" stroke-width="0" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
+                svg += '<rect width="' + width + '" height="' + height + '" rx="10" ry="10" x="0" y="0" fill="' + stroke + '" stroke-width="0" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
                 svg += '<rect width="' + (width-strokeWidth*2) + '" height="' + (height-40-strokeWidth) + '" rx="10" ry="10" x="' + strokeWidth + '" y="40" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<text x="50" y="90" text-anchor="middle" fill="' + stroke + '" font-size="50px" font-family="Courier New, Arial" font-weight="bold">';
                 svg += '<tspan>>_</tspan>';
@@ -4732,54 +4706,53 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                 svg += '<ellipse cx="20" cy="20" rx="10" ry="10" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<ellipse cx="50" cy="20" rx="10" ry="10" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<ellipse cx="80" cy="20" rx="10" ry="10" fill="' + fill + '" stroke-width="0"/>';
-                svg += createTextForKey(width, height, 0, 40, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += createTextForKey(width, height, 0, 40, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "Shell") {
                 var width = keyElementWidth;
                 var height = keyElementHeight;
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect width="' + width + '" height="' + height + '" rx="10" ry="10" x="0" y="0" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
+                svg += '<rect width="' + width + '" height="' + height + '" rx="10" ry="10" x="0" y="0" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
                 svg += '<text x="50" y="50" text-anchor="middle" fill="' + stroke + '" font-size="50px" font-family="Courier New, Arial" font-weight="bold">';
                 svg += '<tspan>>_</tspan>';
                 svg += '</text>';
-                svg += createTextForKey(width, height, 0, 0, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += createTextForKey(width, height, 0, 0, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "MobileDevicePortrait") {
                 var width = keyElementHeight;
                 var height = keyElementWidth;
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect width="' + width + '" height="' + height + '" rx="20" ry="20" x="0" y="0" fill="' + stroke + '" stroke-width="5" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
+                svg += '<rect width="' + width + '" height="' + height + '" rx="20" ry="20" x="0" y="0" fill="' + stroke + '" stroke-width="5" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
                 svg += '<rect width="' + (width-20) + '" height="' + (height-80) + '" rx="5" ry="5" x="10" y="40" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<ellipse cx="' + (width/2) + '" cy="' + (height-20) + '" rx="10" ry="10" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<line x1="' + ((width-50)/2) + '" y1="20" x2="' + (width-((width-50)/2)) + '" y2="20" stroke-width="5" stroke="' + fill + '"/>';
-                svg += createTextForKey(width, height, 0, 0, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += createTextForKey(width, height, 0, 0, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else if (elementStyle.shape === "MobileDeviceLandscape") {
                 var width = keyElementWidth;
                 var height = keyElementHeight;
 
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect width="' + width + '" height="' + height + '" rx="20" ry="20" x="0" y="0" fill="' + stroke + '" stroke-width="5" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
+                svg += '<rect width="' + width + '" height="' + height + '" rx="20" ry="20" x="0" y="0" fill="' + stroke + '" stroke-width="5" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
                 svg += '<rect width="' + (width-80) + '" height="' + (height-20) + '" rx="5" ry="5" x="40" y="10" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<ellipse cx="20" cy="' + (height/2) + '" rx="10" ry="10" fill="' + fill + '" stroke-width="0"/>';
                 svg += '<line x1="' + (width-20) + '" y1="' + ((height-50)/2) + '" x2="' + (width-20) + '" y2="' + (height - ((height-50)/2)) + '" stroke-width="5" stroke="' + fill + '"/>';
-                svg += createTextForKey(width, height, 0, 0, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += createTextForKey(width, height, 0, 0, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             } else {
                 var cornerRadius = 3;
 
                 if (elementStyle.tags.indexOf('Deployment Node') > -1) {
                     cornerRadius = 15;
-                    fill = canvasColor;
                 }
 
                 var width = keyElementWidth;
                 var height = keyElementHeight;
                 svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-                svg += '<rect width="' + width + '" height="' + height + '" rx="' + cornerRadius + '" ry="' + cornerRadius + '" x="0" y="0" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '"' + (elementStyle.border !== 'Solid' ? ' stroke-dasharray="' + borderStylesForKey[elementStyle.border] + '"' : '') + '/>';
-                svg += createTextForKey(width, height, 0, 0, createTagsList(elementStyle, "Element"), undefined, textColor, elementStyle.icon, elementStyle.opacity);
+                svg += '<rect width="' + width + '" height="' + height + '" rx="' + cornerRadius + '" ry="' + cornerRadius + '" x="0" y="0" fill="' + fill + '" stroke-width="' + strokeWidth + '" stroke="' + stroke + '" stroke-dasharray="' + strokeDashArray + '"/>';
+                svg += createTextForKey(width, height, 0, 0, elementStyle.id, undefined, textColor, elementStyle.icon, elementStyle.opacity);
                 svg += '</g>';
             }
 
@@ -4788,25 +4761,17 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
         for (var i = 0; i < relationshipStylesInUse.length; i++) {
             relationshipStyle = relationshipStylesInUseMap[relationshipStylesInUse[i]];
-            var strokeDashArray;
-            if (relationshipStyle.style === 'Dashed') {
-                strokeDashArray = calculateStrokeDashArray(relationshipStyle.thickness);
-            } else if (relationshipStyle.style === 'Dotted') {
-                strokeDashArray = calculateStrokeDottedArray(relationshipStyle.thickness);
-            }
+            const strokeDashArray = dashArrayForRelationship(relationshipStyle);
 
             var fill = structurizr.util.shadeColor(relationshipStyle.color, 100-relationshipStyle.opacity, darkMode);
 
             var width = keyElementWidth;
             var height = 160;
+            const arrowSize = 20 + (relationshipStyle.thickness * 4);
             svg += createSvgGroup(counter, columns, columnWidth, rowHeight, width, height);
-            svg += '<path d="M' + (width-60) + ',0 L' + (width-60) + ',60 L' + width + ',30 L ' + (width-60) + ',0" style="fill:' + fill + '" stroke-dasharray="" />';
-            if (relationshipStyle.style === 'Dashed' || relationshipStyle.style === 'Dotted') {
-                svg += '<path d="M0,30 L' + (width-60) + ',30" style="stroke:' + fill + '; stroke-width: ' + (relationshipStyle.thickness*3) + '; fill: none; stroke-dasharray: ' + strokeDashArray + ';" />';
-            } else {
-                svg += '<path d="M0,30 L' + (width-60) + ',30" style="stroke:' + fill + '; stroke-width: ' + (relationshipStyle.thickness*3) + '; fill: none;" />';
-            }
-            svg += createTextForKey(width, height, 0, 60, createTagsList(relationshipStyle, "Relationship"), undefined, fill);
+            svg += '<path d="M' + (width-arrowSize) + ',0 L' + (width-arrowSize) + ',' + (30 + (arrowSize/2)) + ' L' + width + ',30 L ' + (width-arrowSize) + ',' + (30 - (arrowSize/2)) + '" style="fill:' + fill + '" />';
+            svg += '<path d="M0,30 L' + (width-arrowSize) + ',30" style="stroke:' + fill + '; stroke-width: ' + relationshipStyle.thickness + '; fill: none; stroke-dasharray: ' + strokeDashArray + ';" />';
+            svg += createTextForKey(width, height, 0, 60, relationshipStyle.id, undefined, fill);
             svg += '</g>';
 
             counter++;
@@ -4829,23 +4794,22 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     function createTextForKey(width, height, offsetX, offsetY, tag, stereotype, textColor, icon, opacity) {
         var fontSize = 30;
         var heightOfIcon = 60;
+        const paddingBetweenTextAndIcon = fontSize;
         var text = breakText(structurizr.util.escapeHtml(tag), width * 0.8, font.name, fontSize);
 
         var heightOfText = calculateHeight(text, fontSize, 0);
 
-        offsetY = offsetY / 2;
-
         var textX = (offsetX + (width / 2));
         var textY;
+        var iconY;
 
         if (icon === undefined) {
-            textY = ((height - offsetY)/2) - (heightOfText/2);
+            textY = ((height - offsetY - heightOfText)/2) + offsetY;
         } else {
-            heightOfText += 10;
-            textY = ((height - offsetY)/2) - ((heightOfText + heightOfIcon)/2);
+            textY = ((height - offsetY - heightOfText - paddingBetweenTextAndIcon - heightOfIcon)/2) + offsetY;
+            iconY = textY + heightOfText + paddingBetweenTextAndIcon;
         }
 
-        textY += offsetY;
         textY -= (fontSize + 10);
 
         var svg = "";
@@ -4859,7 +4823,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
         if (icon) {
             var iconWidth = (getImageRatio(icon) * heightOfIcon);
-            svg += '<image xlink:href="' + icon + '" x="' + (offsetX + ((width-iconWidth)/2)) + '" y="' + (textY + heightOfText + 10) + '" width="' + iconWidth + '" height="' + heightOfIcon + '" opacity="' + (opacity ? (opacity/100) : 1) + '"/>';
+            svg += '<image xlink:href="' + icon + '" x="' + (offsetX + ((width-iconWidth)/2)) + '" y="' + iconY + '" width="' + iconWidth + '" height="' + heightOfIcon + '" opacity="' + (opacity ? (opacity/100) : 1) + '"/>';
         }
 
         return svg;
@@ -4960,33 +4924,54 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         // remove any control characters (these shouldn't be there anyway, but...)
         svgMarkup = svgMarkup.replace(/[\x00-\x19]+/g, "");
 
-        var myCanvas = document.createElement("canvas");
-        myCanvas.width = canvas.outerWidth();
-        myCanvas.height = canvas.outerHeight();
+        return svgToPng(svgMarkup, canvas.outerWidth(), canvas.outerHeight(), callback);
+    }
 
-        var canvasContext = myCanvas.getContext("2d");
+    function svgToPng(svgMarkup, width, height, callback) {
+        const taintedCanvasMessage = 'tainted canvases may not be exported';
+
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+
+        const canvasContext = canvas.getContext("2d");
 
         if (callback) {
-            canvg(myCanvas,
+            canvg(canvas,
                 svgMarkup,
                 {
-                    useCORS: true,
+                    useCORS: false,
                     renderCallback: function () {
                         canvasContext.globalCompositeOperation = "destination-over";
                         canvasContext.fillStyle = canvasColor;
-                        canvasContext.fillRect(0, 0, myCanvas.width, myCanvas.height);
+                        canvasContext.fillRect(0, 0, canvas.width, canvas.height);
 
-                        callback(myCanvas.toDataURL(structurizr.constants.CONTENT_TYPE_IMAGE_PNG));
+                        try {
+                            const png = canvas.toDataURL(structurizr.constants.CONTENT_TYPE_IMAGE_PNG);
+                            callback(png);
+                        } catch (e) {
+                            console.log(e);
+                            if (e.message.toLowerCase().indexOf(taintedCanvasMessage) > 0) {
+                                //callback(taintedCanvasErrorImageAsDataUri);
+                            }
+                        }
                     }
                 });
         } else {
-            canvg(myCanvas, svgMarkup);
+            canvg(canvas, svgMarkup, { useCORS: false });
 
             canvasContext.globalCompositeOperation = "destination-over";
             canvasContext.fillStyle = canvasColor;
-            canvasContext.fillRect(0, 0, myCanvas.width, myCanvas.height);
+            canvasContext.fillRect(0, 0, canvas.width, canvas.height);
 
-            return myCanvas.toDataURL(structurizr.constants.CONTENT_TYPE_IMAGE_PNG);
+            try {
+                return canvas.toDataURL(structurizr.constants.CONTENT_TYPE_IMAGE_PNG);
+            } catch (e) {
+                console.log(e);
+                if (e.message.toLowerCase().indexOf(taintedCanvasMessage) > 0) {
+                    //return taintedCanvasErrorImageAsDataUri;
+                }
+            }
         }
     }
 
@@ -5094,36 +5079,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             return callback(undefined);
         }
 
-        var svgMarkup = diagramKey;
-
-        var myCanvas = document.createElement("canvas");
-        myCanvas.width = totalWidthOfKey;
-        myCanvas.height = totalHeightOfKey;
-
-        var canvasContext = myCanvas.getContext("2d");
-
-        if (callback) {
-            canvg(myCanvas,
-                svgMarkup,
-                {
-                    useCORS: true,
-                    renderCallback: function () {
-                        canvasContext.globalCompositeOperation = "destination-over";
-                        canvasContext.fillStyle = canvasColor;
-                        canvasContext.fillRect(0, 0, myCanvas.width, myCanvas.height);
-
-                        callback(myCanvas.toDataURL(structurizr.constants.CONTENT_TYPE_IMAGE_PNG));
-                    }
-                });
-        } else {
-            canvg(myCanvas, svgMarkup);
-
-            canvasContext.globalCompositeOperation = "destination-over";
-            canvasContext.fillStyle = canvasColor;
-            canvasContext.fillRect(0, 0, myCanvas.width, myCanvas.height);
-
-            return myCanvas.toDataURL(structurizr.constants.CONTENT_TYPE_IMAGE_PNG);
-        }
+        return svgToPng(diagramKey, totalWidthOfKey, totalHeightOfKey, callback);
     };
 
     this.exportCurrentThumbnailToPNG = function(callback) {
@@ -5632,28 +5588,50 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     this.toggleRoutingOfHighlightedLink = function() {
         if (highlightedLink.model.relationshipInView.routing === undefined) {
             highlightedLink.model.relationshipInView.routing = 'Direct';
-            setRoutingAndConnector(highlightedLink.model, 'Direct');
+            setRouting(highlightedLink.model, 'Direct');
 
         } else if (highlightedLink.model.relationshipInView.routing === 'Direct') {
             highlightedLink.model.relationshipInView.routing = 'Curved';
-            setRoutingAndConnector(highlightedLink.model, 'Curved');
+            setRouting(highlightedLink.model, 'Curved');
 
         } else if (highlightedLink.model.relationshipInView.routing === 'Curved') {
             highlightedLink.model.set('vertices', []);
             highlightedLink.model.relationshipInView.routing = 'Orthogonal';
-            setRoutingAndConnector(highlightedLink.model, 'Orthogonal');
+            setRouting(highlightedLink.model, 'Orthogonal');
 
         } else if (highlightedLink.model.relationshipInView.routing === 'Orthogonal') {
             var relationship = structurizr.workspace.findRelationshipById(highlightedLink.model.relationshipInView.id);
             if (relationship) {
-                var configuration = structurizr.ui.findRelationshipStyle(relationship, darkMode);
+                const configuration = structurizr.ui.findRelationshipStyle(relationship, darkMode);
                 highlightedLink.model.relationshipInView.routing = undefined;
-                setRoutingAndConnector(highlightedLink.model, configuration.routing);
+                setRouting(highlightedLink.model, configuration.routing);
             }
         }
 
         fireWorkspaceChangedEvent();
     };
+
+    this.toggleJumpOfHighlightedLink = function() {
+        var relationship = structurizr.workspace.findRelationshipById(highlightedLink.model.relationshipInView.id);
+        if (relationship) {
+            const configuration = structurizr.ui.findRelationshipStyle(relationship, darkMode);
+
+            if (highlightedLink.model.relationshipInView.jump === undefined) {
+                highlightedLink.model.relationshipInView.jump = true;
+                setJump(highlightedLink.model, true, configuration.thickness);
+
+            } else if (highlightedLink.model.relationshipInView.jump === true) {
+                highlightedLink.model.relationshipInView.jump = false;
+                setJump(highlightedLink.model, false, configuration.thickness);
+
+            } else if (highlightedLink.model.relationshipInView.jump === false) {
+                highlightedLink.model.relationshipInView.jump = undefined;
+                setJump(highlightedLink.model, configuration.jump, configuration.thickness);
+            }
+
+            fireWorkspaceChangedEvent();
+        }
+    }
 
     this.addVertex = function() {
         if (editable) {
@@ -6770,7 +6748,6 @@ structurizr.shapes.Boundary = joint.dia.Element.extend({
             },
             '.structurizrBoundary': {
                 'stroke-width': '2',
-                'stroke-dasharray': '20,20',
                 'pointer-events': 'none'
             },
             '.structurizrName': {
