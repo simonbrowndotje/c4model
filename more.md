@@ -44,10 +44,11 @@ Recorded at "Agile on the Beach 2019", July 2019
 
 ## Who is using C4?
 
-Simon has personally taught the C4 model to 10,000+ people in 30+ countries;
+Simon has personally taught the C4 model to 10,000+ people in ~40 countries;
 with conference talks, videos, books, and articles reaching many more than this.
 Other people are also teaching, speaking, and writing about the C4 model,
-plus it's been [integrated into a number of tools](/tooling).
+plus it's been integrated into a number of tools.
+
 Here are some case studies:
 
 - Spotify: [Spotify Engineering: Software Visualization - Challenge, Accepted](https://engineering.atspotify.com/2022/07/software-visualization-challenge-accepted/)
@@ -67,5 +68,3 @@ And here are some other resources that reference the C4 model:
 - [Open Agile Architecture™, a Standard of The Open Group](https://publications.opengroup.org/c208)
 - [Agile Architecture Modeling using the ArchiMate® Language](https://publications.opengroup.org/g20e)
 - [Martin Fowler: Building Infrastructure Platforms - Communicate your technical vision](https://martinfowler.com/articles/building-infrastructure-platform.html#CommunicateYourTechnicalVision) (Poppy Rowse and Chris Shepherd)
-- [ThoughtWorks Tech Radar - Techniques - Diagrams as code](https://www.thoughtworks.com/radar/techniques/diagrams-as-code) (includes the Structurizr DSL)
-- [ThoughtWorks Tech Radar - Platforms - IcePanel](https://www.thoughtworks.com/radar/platforms/icepanel)
