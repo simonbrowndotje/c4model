@@ -36,15 +36,18 @@ body {
 }
 
 .modal-content {
-    background: #333333;
+    background: #111111;
+    border: #dddddd 1px solid;
+    color: #dddddd;
+    font-size: 15px;
 }
 
 .modal-header {
-    border-bottom: 1px solid #333333;
+    border-bottom: 1px solid #111111;
 }
 
-.modal-header .close {
-    color: #eeeeee;
+.modal-header .btn-close {
+    filter: invert(1.0);
 }
 
 .modal-footer {
@@ -63,6 +66,20 @@ body {
     background-color: #777777;
     background-image: none;
 }
+
 .structurizrDiagramViewport {
     background: #111111;
+}
+
+code {
+    color: #dddddd;
+    background: #111111;
+    font-weight: bold;
+}
+
+.structurizrBannerLight {
+    display: none;
+}
+.structurizrBannerDark {
+    display: block;
 }
