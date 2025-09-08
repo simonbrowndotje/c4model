@@ -33,7 +33,6 @@
                     <div class="modal-header">
                         <img src="./img/structurizr-banner-light.png" width="200" class="structurizrBannerLight" />
                         <img src="./img/structurizr-banner-dark.png" width="200" class="structurizrBannerDark" />
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <p>
@@ -52,6 +51,15 @@
                             <li>Quick navigation (<code>Space</code>).</li>
                             <li>Full screen (<code>f</code>).</li>
                         </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <input class="form-check-input" type="checkbox" id="hideIntroductionModalCheckbox">
+                            <label class="form-check-label" for="hideIntroductionModalCheckbox">
+                                Don't show again
+                            </label>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -115,6 +123,8 @@
 <script type="text/javascript" src="./js/structurizr-tooltip.js"></script>
 
 <script>
+    const INTRODUCTION_MODAL_COOKIE_NAME = 'structurizr.static.introductionModal';
+
     structurizr.workspace = new structurizr.Workspace(JSON.parse(decodeBase64(jsonAsString)));
     structurizr.ui.applyBranding();
     structurizr.ui.loadThemes('https://static.structurizr.com/themes/', function() {
@@ -276,7 +286,18 @@
             structurizr.diagram.setDarkMode(structurizr.ui.isDarkMode());
         });
 
-        $('#introductionModal').modal('show');
+        const hideIntroductionModal = document.cookie.indexOf(INTRODUCTION_MODAL_COOKIE_NAME + '=false') > -1;
+        if (!hideIntroductionModal) {
+            $('#introductionModal').modal('show');
+
+            var modal = document.getElementById('introductionModal')
+            modal.addEventListener('hidden.bs.modal', function (event) {
+                const checked = $('#hideIntroductionModalCheckbox').is(':checked');
+                if (checked) {
+                    document.cookie = INTRODUCTION_MODAL_COOKIE_NAME + '=false'
+                }
+            })
+        }
     }
 
     function postDiagramAspectRatioToParentWindow() {
