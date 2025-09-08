@@ -33,6 +33,28 @@ In summary, you can think of the C4 model as a simplified version of the underly
 (1) make it easier for software developers to describe and understand how a software system works and
 (2) to minimise the gap between the software architecture model/description and the source code.
 
+## Who is using C4?
+
+Simon has personally taught the C4 model to 10,000+ people in ~40 countries;
+with conference talks, videos, books, and articles reaching many more than this.
+Other people are also teaching, speaking, and writing about the C4 model,
+plus it's been integrated into a number of tools. Here are some case studies:
+
+- Spotify: [Spotify Engineering: Software Visualization - Challenge, Accepted](https://engineering.atspotify.com/2022/07/software-visualization-challenge-accepted/)
+- Decathlon: [Navigating Software Architecture at Scale: Insights from Decathlon’s Architecture Process](https://www.infoq.com/news/2024/07/decathlon-architecture-process/)
+- Co-op: [LinkedIn post](https://www.linkedin.com/posts/popovdenys_diagramming-platforms-architecture-activity-7220039863813763073-1XQ3/)
+
+And here are some other resources that reference the C4 model:
+
+- [Wikipedia](https://en.wikipedia.org/wiki/C4_model)
+- [InfoQ: The C4 model for software architecture](https://www.infoq.com/articles/C4-architecture-model)
+- [InfoQ: O modelo C4 de documentação para Arquitetura de Software](https://www.infoq.com/br/articles/C4-architecture-model)
+- [InfoQ: 用于软件架构的C4模型](https://www.infoq.com/cn/articles/C4-architecture-model)
+- [InfoQ: ソフトウェアアーキテクチャのためのC4モデル](https://www.infoq.com/jp/articles/C4-architecture-model)
+- [Open Agile Architecture™, a Standard of The Open Group](https://publications.opengroup.org/c208)
+- [Agile Architecture Modeling using the ArchiMate® Language](https://publications.opengroup.org/g20e)
+- [Martin Fowler: Building Infrastructure Platforms - Communicate your technical vision](https://martinfowler.com/articles/building-infrastructure-platform.html#CommunicateYourTechnicalVision) (Poppy Rowse and Chris Shepherd)
+
 ## Isn't the C4 model a step backwards? Why are you reinventing UML? Why not just use UML?
 
 Whether you see the C4 model as a step forwards or a step backwards depends upon where you are. If you're using UML
@@ -42,11 +64,30 @@ want to use UML (for various reasons), the C4 model helps introduce some structu
 architecture is communicated. For many teams, the C4 model is sufficient. And for others, perhaps it's a stepping stone 
 to UML.
 
+## The C4 model vs UML, ArchiMate and SysML?
+
+Although existing notations such as UML, ArchiMate and SysML already exist, many software development teams don't
+seem to use them. Often this is because teams don't know these notations well enough, perceive them to be too
+complicated, think they are not compatible with agile approaches or don't have the required tooling.
+
+If you are already successfully using one of these notations to communicate software architecture, and it's working,
+stick with it. If not, try the C4 model. And don't be afraid to supplement the C4 diagrams with UML state diagrams,
+timing diagrams, etc if you need to.
+
 ## Why doesn't the C4 model cover business processes, workflows, state machines, domain models, data models, etc?
 
 The focus of the C4 model is the static structures that make up a software system, at different levels of abstraction. 
 If you need to describe other aspects, feel free to supplement the C4 diagrams with UML diagrams, BPML diagrams, 
 ArchiMate diagrams, entity relationship diagrams, etc.
+
+## Can we combine C4 and arc42?
+
+Yes, many teams do, and the C4 model is compatible with the [arc42 documentation template](http://arc42.org) as follows.
+
+- Context and Scope => System Context diagram
+- Building Block View (level 1) => Container diagram
+- Building Block View (level 2) => Component diagram
+- Building Block View (level 3) => Code (e.g. class) diagram
 
 ## Does the C4 model imply a design process or team structure?
 

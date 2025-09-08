@@ -6,11 +6,15 @@ color_scheme: c4model
 url: https://c4model.com
 
 nav_external_links:
+  - title: Interactive example
+    url: /example
   - title: Patreon
     url: https://www.patreon.com/c4model
   - title: Discord
     url: https://www.patreon.com/c4model
-  - title: Training/workshops
+  - title: Book
+    url: https://leanpub.com/visualising-software-architecture
+  - title: Training & workshops
     url: https://simonbrown.je/#workshops
 
 gh_edit_link: false
