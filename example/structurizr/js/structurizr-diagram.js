@@ -1712,12 +1712,12 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         var maxWidth;
         if (configuration.iconPosition === 'Left') {
             if (configuration.icon !== undefined) {
-                maxWidth = configuration.width - (horizontalOffset + horizontalPadding + horizontalPadding + defaultIconWidth + horizontalIconPadding);
+                maxWidth = width - (horizontalOffset + horizontalPadding + horizontalPadding + defaultIconWidth + horizontalIconPadding);
             } else {
-                maxWidth = configuration.width - (horizontalOffset + horizontalPadding + horizontalPadding);
+                maxWidth = width - (horizontalOffset + horizontalPadding + horizontalPadding);
             }
         } else {
-            maxWidth = configuration.width - (horizontalOffset + horizontalPadding + horizontalPadding);
+            maxWidth = width - (horizontalOffset + horizontalPadding + horizontalPadding);
         }
 
         var widthOfIcon = 0;
@@ -1956,7 +1956,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             element: element
         });
 
-        renderElementInternals(element, cell, configuration, width, 0, height, 0);
+        renderElementInternals(element, cell, configuration, (width*0.9), 0, height, 0);
 
         graph.addCell(cell);
         mapOfIdToBox[element.id] = cell;
@@ -2294,7 +2294,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             element: element
         });
 
-        renderElementInternals(element, cell, configuration, width, 0, height, 30);
+        renderElementInternals(element, cell, configuration, (width*0.9), 0, height, 30);
 
         graph.addCell(cell);
         mapOfIdToBox[element.id] = cell;
@@ -2473,7 +2473,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             element: element
         });
 
-        renderElementInternals(element, cell, configuration, width, blockWidth, height, 0);
+        renderElementInternals(element, cell, configuration, width-20, blockWidth, height, 0);
 
         graph.addCell(cell);
         mapOfIdToBox[element.id] = cell;
@@ -4232,6 +4232,66 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         this.scrollToPoint(centreX, centreY, clientTarget.x, clientTarget.y);
     };
 
+    function zoomFitElements(elements) {
+        const contentArea = {
+            minX: Number.MAX_VALUE,
+            minY: Number.MAX_VALUE,
+            maxX: 0,
+            maxY: 0
+        };
+
+        const crop = true;
+        const margin = 50;
+
+        elements.forEach(function(elementId) {
+            const cell = mapOfIdToBox[elementId];
+            if (cell) {
+                const bbox = paper.findViewByModel(cell).getBBox();
+                contentArea.minX = Math.min(contentArea.minX, bbox.x);
+                contentArea.minY = Math.min(contentArea.minY, bbox.y);
+
+                contentArea.maxX = Math.max(contentArea.maxX, bbox.x + bbox.width);
+                contentArea.maxY = Math.max(contentArea.maxY, bbox.y + bbox.height);
+            }
+        });
+
+        contentArea.minX = contentArea.minX / scale;
+        contentArea.maxX = contentArea.maxX / scale;
+        contentArea.minY = contentArea.minY / scale;
+        contentArea.maxY = contentArea.maxY / scale;
+
+        if (crop === true) {
+            contentArea.minX = Math.max(contentArea.minX - margin, 0);
+            contentArea.maxX = Math.min(contentArea.maxX + margin, diagramWidth);
+            contentArea.minY = Math.max(contentArea.minY - margin, 0);
+            contentArea.maxY = Math.min(contentArea.maxY + margin, diagramHeight);
+        }
+
+        var contentWidth = contentArea.maxX - contentArea.minX;
+        var contentHeight = contentArea.maxY - contentArea.minY;
+
+        var viewportRatio = viewport.width() / viewport.height();
+        var contentRatio = contentWidth / contentHeight;
+
+        if (viewportRatio > contentRatio) {
+            self.zoomTo(viewport.height() / contentHeight);
+        } else {
+            self.zoomTo(viewport.width() / contentWidth);
+        }
+
+        var viewportWidth = viewport.innerWidth();
+        var viewportHeight = viewport.innerHeight();
+
+        var viewpointCentreX = viewport.offset().left + (viewportWidth/2);
+        var viewpointCentreY = viewport.offset().top + (viewportHeight/2);
+        var clientTarget = { x: viewpointCentreX, y: viewpointCentreY };
+
+        var centreX = contentArea.minX + ((contentArea.maxX - contentArea.minX)/2);
+        var centreY = contentArea.minY + ((contentArea.maxY - contentArea.minY)/2);
+
+        self.scrollToPointSmooth(centreX, centreY, clientTarget.x, clientTarget.y);
+    }
+
     this.zoomIn = function(evt) {
         zoomToAndScroll(Math.min(scale + zoomDelta, maxZoomScale), evt);
     };
@@ -4274,23 +4334,27 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     }
 
     this.scrollToPoint = function(paperX, paperY, clientX, clientY) {
-        var clientPoint = paper.localToClientPoint(paperX, paperY);
+        const clientPoint = paper.localToClientPoint(paperX, paperY);
+        const diffX = clientPoint.x - clientX;
+        const diffY = clientPoint.y - clientY;
 
-        if (clientPoint.x > clientX) {
-            var diff = clientPoint.x - clientX;
-            viewport.scrollLeft(viewport.scrollLeft() + diff);
-        } else {
-            var diff = clientX - clientPoint.x;
-            viewport.scrollLeft(viewport.scrollLeft() - diff);
-        }
+        viewport[0].scrollBy({
+            top: diffY,
+            left: diffX,
+            behavior: 'instant'
+        });
+    };
 
-        if (clientPoint.y > clientY) {
-            var diff = clientPoint.y - clientY;
-            viewport.scrollTop(viewport.scrollTop() + diff);
-        } else {
-            var diff = clientY - clientPoint.y;
-            viewport.scrollTop(viewport.scrollTop() - diff);
-        }
+    this.scrollToPointSmooth = function(paperX, paperY, clientX, clientY) {
+        const clientPoint = paper.localToClientPoint(paperX, paperY);
+        const diffX = clientPoint.x - clientX;
+        const diffY = clientPoint.y - clientY;
+
+        viewport[0].scrollBy({
+            top: diffY,
+            left: diffX,
+            behavior: 'smooth'
+        });
     };
 
     this.zoomTo = function(zoomScale) {
@@ -5235,6 +5299,11 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     }
                 } else {
                     this.stopAnimation();
+                    const viewOrFilter = (currentFilter !== undefined ? currentFilter : currentView);
+                    const animate = getViewOrViewSetProperty(viewOrFilter, 'structurizr.zoomOnAnimation', 'false') === 'true';
+                    if (animate) {
+                        this.zoomToWidthOrHeight();
+                    }
                 }
             }
         } else if (this.currentViewHasAnimation()) {
@@ -5525,6 +5594,10 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     };
 
     function highlightLinesWithOrder(order) {
+        const viewOrFilter = (currentFilter !== undefined ? currentFilter : currentView);
+        const zoom = getViewOrViewSetProperty(viewOrFilter, 'structurizr.zoomOnAnimation', 'false') === 'true';
+        const elementsInStep = [];
+
         var line = linesToAnimate[animationIndex];
         while (animationIndex < linesToAnimate.length && line.relationshipInView.order === order) {
             showLine(line.relationshipInView.id, line.relationshipInView.order);
@@ -5534,8 +5607,15 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             unfadeElement(relationship.sourceId);
             unfadeElement(relationship.destinationId);
 
+            elementsInStep.push(relationship.sourceId);
+            elementsInStep.push(relationship.destinationId);
+
             animationIndex++;
             line = linesToAnimate[animationIndex];
+        }
+
+        if (zoom) {
+            zoomFitElements(elementsInStep);
         }
     }
 

@@ -13,7 +13,7 @@ nav_external_links:
   - title: Training/workshops
     url: https://simonbrown.je/#workshops
 
-gh_edit_link: true
+gh_edit_link: false
 gh_edit_link_text: "Edit this page on GitHub."
 gh_edit_repository: "https://github.com/simonbrowndotje/c4model"
 gh_edit_branch: "master"
