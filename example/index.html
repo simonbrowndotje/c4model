@@ -31,8 +31,8 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <img src="./img/structurizr-banner-light.png" width="200" class="structurizrBannerLight" />
-                        <img src="./img/structurizr-banner-dark.png" width="200" class="structurizrBannerDark" />
+                        <img src="./img/structurizr-banner-light.png" width="200" class="img-light" />
+                        <img src="./img/structurizr-banner-dark.png" width="200" class="img-dark" />
                     </div>
                     <div class="modal-body">
                         <p>
@@ -371,6 +371,7 @@
                 views = structurizr.workspace.findComponentViewsForContainer(element.containerId);
             }
 
+            views = views.concat(structurizr.workspace.findDynamicViewsForElement(element.id));
             views = views.concat(structurizr.workspace.findImageViewsForElement(element.id));
 
             views.forEach(function(view) {
@@ -545,7 +546,7 @@
     function initQuickNavigation() {
         structurizr.workspace.getViews().forEach(function(view) {
             const title = structurizr.util.escapeHtml(structurizr.ui.getTitleForView(view));
-            quickNavigation.addItem(title + ' (#' + structurizr.util.escapeHtml(view.key) + ')', '#' + structurizr.util.escapeHtml(view.key));
+            quickNavigation.addItem(title + ' <span class="viewKey">(#' + structurizr.util.escapeHtml(view.key) + ')</span>', '#' + structurizr.util.escapeHtml(view.key));
         });
 
         quickNavigation.onOpen(function() {

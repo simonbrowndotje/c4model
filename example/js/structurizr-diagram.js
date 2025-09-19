@@ -204,7 +204,17 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         }
 
         structurizr.workspace.views.imageViews.forEach(function(view) {
-            images.push(view.content);
+            if (view.content) {
+                images.push(view.content);
+            }
+
+            if (view.contentLight) {
+                images.push(view.contentLight);
+            }
+
+            if (view.contentDark) {
+                images.push(view.contentDark);
+            }
         })
 
         return images;
@@ -346,7 +356,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             return;
         }
 
-        if (view.type === "Filtered") {
+        if (view.type === structurizr.constants.FILTERED_VIEW_TYPE) {
             currentFilter = view;
             currentView = structurizr.workspace.findViewByKey(view.baseViewKey);
         } else {
@@ -486,7 +496,26 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         createDiagramMetadata();
 
         if (view.type === structurizr.constants.IMAGE_VIEW_TYPE) {
-            var content = view.content;
+            var content;
+
+            if (structurizr.ui.isDarkMode()) {
+                if (view.contentDark !== undefined) {
+                    content = view.contentDark;
+                } else if (view.content !== undefined) {
+                    content = view.content;
+                } else {
+                    content = view.contentLight;
+                }
+            } else {
+                if (view.contentLight !== undefined) {
+                    content = view.contentLight;
+                } else if (view.content !== undefined) {
+                    content = view.content;
+                } else {
+                    content = view.contentDark;
+                }
+            }
+
             editable = false;
             const imageMetadata = getImageMetadata(content);
 
@@ -505,7 +534,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
             if (imageMetadata.contentType === structurizr.constants.CONTENT_TYPE_IMAGE_SVG) {
                 // scale smaller SVGs, otherwise the diagram title becomes too large
-                const minimumWidth = self.getPossibleViewportWidth() * 3;
+                const minimumWidth = self.getPossibleViewportWidth() * 2;
                 const minimumHeight = self.getPossibleViewportHeight() * 2;
 
                 if (imageMetadata.ratio >= 1 && imageWidth < minimumWidth) {
@@ -891,17 +920,19 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     var element = structurizr.workspace.findElementById(elementView.id);
                     var cell = cellsByElementId[element.id];
 
-                    if (element.type === structurizr.constants.SOFTWARE_SYSTEM_INSTANCE_ELEMENT_TYPE || element.type === structurizr.constants.CONTAINER_INSTANCE_ELEMENT_TYPE || element.type === structurizr.constants.INFRASTRUCTURE_NODE_ELEMENT_TYPE) {
-                        var parentId = cell.get('parent');
-                        while (parentId) {
-                            var parentCell = graph.getCell(parentId);
+                    if (cell !== undefined) {
+                        if (element.type === structurizr.constants.SOFTWARE_SYSTEM_INSTANCE_ELEMENT_TYPE || element.type === structurizr.constants.CONTAINER_INSTANCE_ELEMENT_TYPE || element.type === structurizr.constants.INFRASTRUCTURE_NODE_ELEMENT_TYPE) {
+                            var parentId = cell.get('parent');
+                            while (parentId) {
+                                var parentCell = graph.getCell(parentId);
 
-                            var index = unusedDeploymentNodeCells.indexOf(parentCell);
-                            if (index > -1) {
-                                unusedDeploymentNodeCells.splice(index, 1);
+                                var index = unusedDeploymentNodeCells.indexOf(parentCell);
+                                if (index > -1) {
+                                    unusedDeploymentNodeCells.splice(index, 1);
+                                }
+
+                                parentId = parentCell.get('parent');
                             }
-
-                            parentId = parentCell.get('parent');
                         }
                     }
                 });
@@ -1574,7 +1605,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     };
 
     this.hasTags = function() {
-        return currentTags !== undefined;
+        return currentTags.length > 0;
     }
 
     this.isEditable = function() {

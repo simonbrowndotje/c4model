@@ -828,6 +828,20 @@ structurizr.Workspace = class Workspace {
         return views;
     };
 
+    findDynamicViewsForElement(elementId) {
+        const views = [];
+
+        for (var i = 0; i < this.views.dynamicViews.length; i++) {
+            var view = this.views.dynamicViews[i];
+
+            if (view.elementId === elementId) {
+                views.push(view);
+            }
+        }
+
+        return views;
+    };
+
     findImageViewsForElement(elementId) {
         const views = [];
 

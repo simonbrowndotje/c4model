@@ -14,6 +14,9 @@
 
 .diagramThumbnail img {
     max-height: 160px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
 }
 
 .diagramThumbnailActive {
@@ -73,4 +76,8 @@
         background: #333333;
         color: #ffffff;
     }
+}
+
+#quickFindModal .viewKey {
+    font-size: 75%;
 }

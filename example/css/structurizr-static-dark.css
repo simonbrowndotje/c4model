@@ -77,9 +77,9 @@ code {
     font-weight: bold;
 }
 
-.structurizrBannerLight {
+.img-light {
     display: none;
 }
-.structurizrBannerDark {
+.img-dark {
     display: block;
 }

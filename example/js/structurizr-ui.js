@@ -335,14 +335,6 @@ structurizr.ui.findElementStyle = function(element, darkMode) {
     if (style.stroke === undefined) {
         if (element.type === structurizr.constants.BOUNDARY_ELEMENT_TYPE) {
             // do nothing - stroke is taken from the element the boundary represents
-        } else if (element.type === structurizr.constants.GROUP_ELEMENT_TYPE) {
-            if (style.color !== undefined) {
-                // fallback to the colour property
-                style.stroke = style.color;
-            } else {
-                // use the default colour for groups
-                style.stroke = defaults.color;
-            }
         } else {
             style.stroke = defaults.color;
         }
@@ -523,6 +515,12 @@ structurizr.ui.getTitleForView = function(view) {
         return this.getTitleForView(baseView);
     }
 
+    // if the view name has been set, use that
+    if (view && view.name && view.name.trim().length > 0) {
+        return view.name;
+    }
+
+    // fallback
     return this.getDefaultViewName(view);
 };
 
@@ -532,24 +530,24 @@ structurizr.ui.getDefaultViewName = function(view) {
     }
 
     if (view.type === structurizr.constants.CUSTOM_VIEW_TYPE) {
-        return '[Custom] ' + ((view.title && view.title.trim().length > 0) ? view.title : 'Untitled');
+        return 'Custom View: ' + ((view.title && view.title.trim().length > 0) ? view.title : 'Untitled');
 
     } else if (view.type === structurizr.constants.SYSTEM_LANDSCAPE_VIEW_TYPE) {
         const enterprise = structurizr.workspace.model.enterprise;
-        return '[System Landscape]' + (enterprise ? ' ' + enterprise.name : '');
+        return 'System Landscape View' + (enterprise ? ' :' + enterprise.name : '');
 
     } else if (view.type === structurizr.constants.SYSTEM_CONTEXT_VIEW_TYPE) {
         const softwareSystem = structurizr.workspace.findElementById(view.softwareSystemId);
-        return '[System Context] ' + softwareSystem.name;
+        return 'System Context View: ' + softwareSystem.name;
 
     } else if (view.type === structurizr.constants.CONTAINER_VIEW_TYPE) {
         const softwareSystem = structurizr.workspace.findElementById(view.softwareSystemId);
-        return '[Container] ' + softwareSystem.name;
+        return 'Container View: ' + softwareSystem.name;
 
     } else if (view.type === structurizr.constants.COMPONENT_VIEW_TYPE) {
         const container = structurizr.workspace.findElementById(view.containerId);
         const softwareSystem = structurizr.workspace.findElementById(container.parentId);
-        return '[Component] ' + softwareSystem.name + ' - ' + container.name;
+        return 'Component View: ' + softwareSystem.name + ' - ' + container.name;
 
     } else if (view.type === structurizr.constants.DYNAMIC_VIEW_TYPE) {
         var element = structurizr.workspace.findElementById(view.elementId);
@@ -558,24 +556,24 @@ structurizr.ui.getDefaultViewName = function(view) {
         }
         if (element) {
             if (element.type === structurizr.constants.SOFTWARE_SYSTEM_ELEMENT_TYPE) {
-                return '[Dynamic] ' + element.name;
+                return 'Dynamic View: ' + element.name;
             } else if (element.type === structurizr.constants.CONTAINER_ELEMENT_TYPE) {
                 const softwareSystem = structurizr.workspace.findElementById(element.parentId);
-                return '[Dynamic] ' + softwareSystem.name + ' - ' + element.name;
+                return 'Dynamic View: ' + softwareSystem.name + ' - ' + element.name;
             }
         } else {
-            return '[Dynamic]';
+            return 'Dynamic View';
         }
 
     } else if (view.type === structurizr.constants.DEPLOYMENT_VIEW_TYPE) {
         if (view.softwareSystemId) {
             const softwareSystem = structurizr.workspace.findElementById(view.softwareSystemId);
-            return '[Deployment] ' + softwareSystem.name + ' - ' + view.environment;
+            return 'Deployment View: ' + softwareSystem.name + ' - ' + view.environment;
         } else {
-            return '[Deployment] ' + view.environment;
+            return 'Deployment View: ' + view.environment;
         }
     } else if (view.type === structurizr.constants.IMAGE_VIEW_TYPE) {
-        return '[Image] ' + view.key;
+        return 'Image View: ' + view.key;
     }
 
     return '';
