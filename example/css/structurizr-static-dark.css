@@ -83,3 +83,15 @@ code {
 .img-dark {
     display: block;
 }
+
+.form-control {
+    background: #333333;
+    color: #cccccc;
+}
+.form-control::placeholder {
+    color: #cccccc;
+}
+.form-control:focus {
+    background: #333333;
+    color: #cccccc;
+}
