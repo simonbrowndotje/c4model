@@ -43,6 +43,11 @@ Recorded at "Agile on the Beach 2019", July 2019
 </tr>
 </table>
 
+## About this website
+
+This is the official website for the "C4 model for visualising software architecture",
+written by its creator [Simon Brown](https://simonbrown.je).
+
 <script>
     const links = {
         'abstractions': '/abstractions',
