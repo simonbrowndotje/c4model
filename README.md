@@ -1,4 +1,4 @@
-# Structurizr documentation
+# c4model.com
 
 This repo contains the source for the GitHub Pages/Jekyll website published at https://c4model.com
 
