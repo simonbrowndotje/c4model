@@ -43,4 +43,4 @@ Here are some modelling tools that support the C4 model.
 | [pumla](https://github.com/DrMarkusVoss/pumla/blob/main/test/examples/C4example/pumlaC4Example.md) | pumla - systematic re-use of model elements described with PlantUML. |
 | [PyStructurizr](https://github.com/nielsvanspauwen/pystructurizr) | A Python DSL inspired by Structurizr, intended for generating C4 diagrams. |
 | [RDB modeling](https://rdbmodel.github.io) | This application allows to create and visualize software architecture using a simplified version of the C4 model and YAML. |
-| [Structurizr](https://docs.structurizr.com) | Structurizr builds upon “diagrams as code”, allowing you to create multiple software architecture diagrams using the C4 model, in a variety of rendering tools, from a single model. |
+| <a href="https://docs.structurizr.com"><img src="/tooling/logos/structurizr.png" alt="Structurizr" class="toolingLogo" /></a> | Structurizr builds upon “diagrams as code”, allowing you to create multiple software architecture diagrams using the C4 model, in a variety of rendering tools, from a single model. |
