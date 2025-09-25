@@ -218,7 +218,7 @@ structurizr.ui.findElementStyle = function(element, darkMode) {
     }
 
     const defaults = darkMode ? structurizr.ui.DARK_MODE_DEFAULTS : structurizr.ui.LIGHT_MODE_DEFAULTS;
-    var defaultStyle = new structurizr.ui.ElementStyle(450, 300, undefined, undefined, 24, undefined, undefined, undefined, undefined, undefined, 100, true, true);
+    var defaultStyle = new structurizr.ui.ElementStyle(450, 300, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 100, true, true);
     var defaultSizeInUse = true;
 
     var elementStylesMap = {};
@@ -405,6 +405,18 @@ structurizr.ui.findElementStyle = function(element, darkMode) {
 
     if (style.icon && structurizr.ui.ignoredImages.indexOf(style.icon) > -1) {
         style.icon = undefined;
+    }
+
+    if (style.fontSize === undefined) {
+        if (element.tags === 'Diagram:Title') {
+            style.fontSize = 36;
+        } else if (element.tags === 'Diagram:Description') {
+            style.fontSize = 24;
+        } else if (element.tags === 'Diagram:Metadata') {
+            style.fontSize = 24;
+        } else {
+            style.fontSize = 24;
+        }
     }
 
     return style;

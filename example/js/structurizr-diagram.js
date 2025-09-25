@@ -156,12 +156,13 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         // start with all tags used on elements/relationships
         const tags = structurizr.workspace.getTags();
 
-        // then add the boundary and group tags, which this renderer uses
+        // then add the boundary and group tags, plus the diagram icon tag
         tags.push('Boundary');
         tags.push('Boundary:Enterprise');
         tags.push('Boundary:SoftwareSystem');
         tags.push('Boundary:Container');
         tags.push('Group');
+        tags.push('Diagram:Icon');
         structurizr.workspace.views.configuration.styles.elements.forEach(function(elementStyle) {
             if (elementStyle.tag.indexOf('Group:') > -1) {
                 tags.push(elementStyle.tag);
@@ -182,20 +183,20 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             structurizr.ui.themes.forEach(function(theme) {
                 theme.elements.forEach(function(elementStyle) {
                     if (elementStyle.tag === tag && elementStyle.icon) {
-                        icon = elementStyle.icon;
+                        if (elementStyle.icon) {
+                            images.push(elementStyle.icon);
+                        }
                     }
                 })
             });
 
             structurizr.workspace.views.configuration.styles.elements.forEach(function(elementStyle) {
                 if (elementStyle.tag === tag && elementStyle.icon) {
-                    icon = elementStyle.icon;
+                    if (elementStyle.icon) {
+                        images.push(elementStyle.icon);
+                    }
                 }
             })
-
-            if (icon !== undefined) {
-                images.push(icon);
-            }
         });
 
         const branding = structurizr.ui.getBranding();
@@ -432,66 +433,20 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             tooltip.hide();
         }
 
-        if (darkMode === true) {
-            elementStyleForDiagramTitle = {
-                color: structurizr.ui.DARK_MODE_DEFAULTS.color,
-                fontSize: 36
-            };
-            elementStyleForDiagramDescription = {
-                color: structurizr.ui.DARK_MODE_DEFAULTS.color,
-                fontSize: 22
-            };
-            elementStyleForDiagramMetadata = {
-                color: structurizr.ui.DARK_MODE_DEFAULTS.color,
-                fontSize: 22
-            }
-        } else {
-            elementStyleForDiagramTitle = {
-                color: structurizr.ui.LIGHT_MODE_DEFAULTS.color,
-                fontSize: 36
-            };
-            elementStyleForDiagramDescription = {
-                color: structurizr.ui.LIGHT_MODE_DEFAULTS.color,
-                fontSize: 22
-            };
-            elementStyleForDiagramMetadata = {
-                color: structurizr.ui.LIGHT_MODE_DEFAULTS.color,
-                fontSize: 22
-            }
-        }
+        elementStyleForDiagramTitle = structurizr.ui.findElementStyle( {
+            type: undefined,
+            tags: 'Diagram:Title'
+        }, darkMode);
 
-        structurizr.workspace.views.configuration.styles.elements.forEach(function(elementStyle) {
-            if (elementStyle.tag === 'Diagram:Title') {
-                if (elementStyle.color) {
-                    elementStyleForDiagramTitle.color = elementStyle.color;
-                }
-                if (elementStyle.fontSize) {
-                    elementStyleForDiagramTitle.fontSize = elementStyle.fontSize;
-                }
-            }
-        });
+        elementStyleForDiagramDescription = structurizr.ui.findElementStyle( {
+            type: undefined,
+            tags: 'Diagram:Description'
+        }, darkMode);
 
-        structurizr.workspace.views.configuration.styles.elements.forEach(function(elementStyle) {
-            if (elementStyle.tag === 'Diagram:Description') {
-                if (elementStyle.color) {
-                    elementStyleForDiagramDescription.color = elementStyle.color;
-                }
-                if (elementStyle.fontSize) {
-                    elementStyleForDiagramDescription.fontSize = elementStyle.fontSize;
-                }
-            }
-        });
-
-        structurizr.workspace.views.configuration.styles.elements.forEach(function(elementStyle) {
-            if (elementStyle.tag === 'Diagram:Metadata') {
-                if (elementStyle.color) {
-                    elementStyleForDiagramMetadata.color = elementStyle.color;
-                }
-                if (elementStyle.fontSize) {
-                    elementStyleForDiagramMetadata.fontSize = elementStyle.fontSize;
-                }
-            }
-        });
+        elementStyleForDiagramMetadata = structurizr.ui.findElementStyle( {
+            type: undefined,
+            tags: 'Diagram:Metadata'
+        }, darkMode);
 
         createDiagramMetadata();
 
@@ -3037,14 +2992,22 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             diagramMetadataHeight += titleHeight;
         }
 
-        const branding = structurizr.ui.getBranding();
-        if (branding.logo) {
+        var icon = structurizr.ui.findElementStyle( {
+            type: undefined,
+            tags: 'Diagram:Icon'
+        }, darkMode).icon;
+
+        if (icon === undefined) {
+            icon = structurizr.ui.getBranding().logo;
+        }
+
+        if (icon) {
             brandingLogo = new structurizr.shapes.BrandingImage({
-                size: { width: getImageRatio(branding.logo) * diagramMetadataHeight, height: diagramMetadataHeight },
+                size: { width: getImageRatio(icon) * diagramMetadataHeight, height: diagramMetadataHeight },
                 attrs: {
                     image: {
-                        'xlink:href': branding.logo,
-                        width: getImageRatio(branding.logo) * diagramMetadataHeight,
+                        'xlink:href': icon,
+                        width: getImageRatio(icon) * diagramMetadataHeight,
                         height: diagramMetadataHeight
                     }
                 }
@@ -4232,7 +4195,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     };
 
     this.zoomFitContent = function() {
-        if (!currentView.elements) {
+        if (currentView.type !== structurizr.constants.IMAGE_VIEW_TYPE && !currentView.elements) {
             this.zoomFitHeight();
             return;
         }
@@ -4932,24 +4895,15 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     }
 
     function findContentArea(crop, margin) {
-        if (currentView && (currentView.elements === undefined || currentView.elements.length === 0)) {
-            return {
-                minX: 0,
-                maxX: 0,
-                minY: 0,
-                maxY: 0
-            };
-        }
-
-        var minX = Number.MAX_VALUE;
+        var minX = diagramWidth;
         var maxX = 0;
-        var minY = Number.MAX_VALUE;
+        var minY = diagramHeight;
         var maxY = 0;
 
         for (var i = 0; i < graph.getElements().length; i++) {
             var cell = graph.getElements()[i];
 
-            if (cell.elementInView !== undefined || cell.attributes.type === 'structurizr.boundary') {
+            if (cell.elementInView !== undefined || cell.attributes.type === 'structurizr.boundary' || cell.attributes.type === 'structurizr.image') {
                 var bbox = paper.findViewByModel(cell).getBBox();
                 minX = Math.min(minX, bbox.x);
                 minY = Math.min(minY, bbox.y);
