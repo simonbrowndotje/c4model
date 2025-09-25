@@ -37,4 +37,7 @@ your tool to these lists, with the following information:
 - Name
 - Short description
 - URL
-- Open source (include link to repo) or closed source?
+- Open source (include link to repo) or closed source? 
+
+If your tool doesn't support the C4 model natively "out of the box", please provide a link to a guide that
+describes how to use your tool in conjunction with the C4 model.
