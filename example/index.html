@@ -45,6 +45,7 @@
                             <li>Zoom to width (<code>w</code>), height (<code>h</code>), and content (<code>c</code>).</li>
                             <li>Diagram key (<code>i</code>).</li>
                             <li>Tooltips (<code>t</code>).</li>
+                            <li>Perspective (<code>p</code>).</li>
                             <li>Animation (<code>,</code> and <code>.</code>).</li>
                             <li>Toggle element descriptions (<code>d</code>).</li>
                             <li>Toggle element metadata (<code>m</code>).</li>
@@ -212,6 +213,7 @@
             const h = 104;
             const i = 105;
             const m = 109;
+            const p = 112;
             const t = 116;
             const w = 119;
 
@@ -230,6 +232,9 @@
                 e.preventDefault();
             } else if (e.which === m) {
                 structurizr.diagram.toggleMetadata();
+                e.preventDefault();
+            } else if (e.which === p) {
+                openPerspectivesModal();
                 e.preventDefault();
             } else if (e.which === plus || e.which === equals) {
                 structurizr.diagram.zoomIn();
@@ -376,7 +381,7 @@
 
             views.forEach(function(view) {
                 options.push({
-                    url: '#' + view.key,
+                    value: '#' + view.key,
                     label: structurizr.ui.getTitleForView(view) + ' (#' + view.key + ')'
                 });
             });
@@ -391,7 +396,7 @@
                     }
                 }
                 options.push({
-                    url: elementUrl,
+                    value: elementUrl,
                     label: label
                 });
             }
@@ -401,7 +406,7 @@
                     const value = element.properties[name];
                     if (value.indexOf('http://') === 0 || value.indexOf('https://') === 0) {
                         options.push({
-                            url: value,
+                            value: value,
                             label: name
                         })
                     }
@@ -409,7 +414,7 @@
             }
 
             if (options.length === 1) {
-                navigateTo(options[0].url);
+                navigateTo(options[0].value);
             } else {
                 openNavigationModal(options);
             }
@@ -451,7 +456,7 @@
 
             if (relationship.url !== undefined) {
                 options.push({
-                    url: relationship.url,
+                    value: relationship.url,
                     label: relationship.url
                 });
             }
@@ -461,7 +466,7 @@
                     const value = relationship.properties[name];
                     if (value.indexOf('http://') === 0 || value.indexOf('https://') === 0) {
                         options.push({
-                            url: value,
+                            value: value,
                             label: name
                         })
                     }
@@ -472,7 +477,7 @@
                 const linkedRelationship = structurizr.workspace.findRelationshipById(relationship.linkedRelationshipId);
                 if (linkedRelationship.url !== undefined) {
                     options.push({
-                        url: linkedRelationship.url,
+                        value: linkedRelationship.url,
                         label: linkedRelationship.url
                     });
                 }
@@ -482,7 +487,7 @@
                         const value = linkedRelationship.properties[name];
                         if (value.indexOf('http://') === 0 || value.indexOf('https://') === 0) {
                             options.push({
-                                url: value,
+                                value: value,
                                 label: name
                             })
                         }
@@ -491,7 +496,7 @@
             }
 
             if (options.length === 1) {
-                navigateTo(options[0].url);
+                navigateTo(options[0].value);
             } else {
                 openNavigationModal(options);
             }
@@ -555,5 +560,37 @@
         quickNavigation.onClose(function() {
             structurizr.diagram.setKeyboardShortcutsEnabled(true);
         });
+    }
+
+    function openPerspectivesModal() {
+        const perspectiveNames = structurizr.workspace.getPerspectiveNames();
+
+        if (perspectiveNames.length > 0) {
+            const options = [
+                {
+                    label: '(none)',
+                    value: ''
+                }
+            ].concat(perspectiveNames.map(function(name) {
+                return {
+                    label: name,
+                    value: name
+                };
+            }));
+
+            openNavigationModal(options, function(perspective) {
+                if (perspective.length > 0) {
+                    structurizr.diagram.changePerspective(perspective);
+                    structurizr.diagram.renderPerspectiveOrTagsFilter();
+                    tooltip.disable();
+                    toggleTooltip();
+                } else {
+                    structurizr.diagram.clearPerspective();
+                    structurizr.diagram.renderPerspectiveOrTagsFilter();
+                    tooltip.enable();
+                    toggleTooltip();
+                }
+            });
+        }
     }
 </script>

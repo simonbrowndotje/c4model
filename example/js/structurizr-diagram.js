@@ -6501,58 +6501,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             return;
         }
 
-        var additionalContent = '';
-        if (currentPerspective !== undefined) {
-            var perspectiveDetails = undefined;
-
-            if (element.perspectives) {
-                element.perspectives.forEach(function(perspective) {
-                    if (perspective.name === currentPerspective) {
-                        perspectiveDetails = perspective;
-                    }
-                });
-            }
-
-            if (perspectiveDetails === undefined) {
-                if (element.type === 'SoftwareSystemInstance') {
-                    var softwareSystem = structurizr.workspace.findElementById(element.softwareSystemId);
-                    if (softwareSystem.perspectives) {
-                        softwareSystem.perspectives.forEach(function (perspective) {
-                            if (perspective.name === currentPerspective) {
-                                perspectiveDetails = perspective;
-                            }
-                        });
-                    }
-                } else if (element.type === 'ContainerInstance') {
-                    var container = structurizr.workspace.findElementById(element.containerId);
-                    if (container.perspectives) {
-                        container.perspectives.forEach(function (perspective) {
-                            if (perspective.name === currentPerspective) {
-                                perspectiveDetails = perspective;
-                            }
-                        });
-                    }
-                }
-            }
-
-            if (perspectiveDetails !== undefined) {
-                var perspectiveDescription = perspectiveDetails.description;
-                if (perspectiveDescription === undefined) {
-                    perspectiveDescription = '';
-                }
-                perspectiveDescription = structurizr.util.escapeHtml(perspectiveDescription).replaceAll('\n', '<br />');
-
-                additionalContent += '<hr' + ' style="border-color:' + style.stroke + '" />';
-                additionalContent += '<p><b>Perspective: ';
-                additionalContent += structurizr.util.escapeHtml(perspectiveDetails.name);
-                additionalContent += '</b></p>';
-                additionalContent += '<p>';
-                additionalContent += perspectiveDescription;
-                additionalContent += '</p>';
-            }
-        }
-
-        tooltip.showTooltipForElement(element, style, x, y, additionalContent);
+        tooltip.showTooltipForElement(element, style, x, y, false, currentPerspective);
     }
 
     function showTooltipForRelationship(relationship, relationshipInView, style, x, y) {
@@ -6564,49 +6513,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             return;
         }
 
-        var additionalContent = '';
-        if (currentPerspective !== undefined) {
-            var perspectiveDetails = undefined;
-
-            if (relationship.perspectives) {
-                relationship.perspectives.forEach(function(perspective) {
-                    if (perspective.name === currentPerspective) {
-                        perspectiveDetails = perspective;
-                    }
-                });
-            }
-
-            if (perspectiveDetails === undefined) {
-                if (relationship.linkedRelationshipId) {
-                    var linkedRelationship = structurizr.workspace.findRelationshipById(relationship.linkedRelationshipId);
-                    if (linkedRelationship && linkedRelationship.perspectives) {
-                        linkedRelationship.perspectives.forEach(function (perspective) {
-                            if (perspective.name === currentPerspective) {
-                                perspectiveDetails = perspective;
-                            }
-                        });
-                    }
-                }
-            }
-
-            if (perspectiveDetails !== undefined) {
-                var perspectiveDescription = perspectiveDetails.description;
-                if (perspectiveDescription === undefined) {
-                    perspectiveDescription = '';
-                }
-                perspectiveDescription = structurizr.util.escapeHtml(perspectiveDescription).replaceAll('\n', '<br />');
-
-                additionalContent += '<hr' + ' style="border-color:' + style.color + '" />';
-                additionalContent += '<p><b>Perspective: ';
-                additionalContent += structurizr.util.escapeHtml(perspectiveDetails.name);
-                additionalContent += '</b></p>';
-                additionalContent += '<p>';
-                additionalContent += perspectiveDescription;
-                additionalContent += '</p>';
-            }
-        }
-
-        tooltip.showTooltipForRelationship(relationship, relationshipInView, style, x, y, additionalContent, darkMode);
+        tooltip.showTooltipForRelationship(relationship, relationshipInView, style, x, y, false, currentPerspective);
     }
 
     this.toggleMetadata = function() {

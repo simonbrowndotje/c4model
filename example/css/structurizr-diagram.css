@@ -59,8 +59,9 @@
     r: 25px;
 }
 
-.joint-link.joint-theme-default .connection-wrap:hover + .labels rect {
-    fill: #d6d6d6;
+.joint-link.joint-theme-default .connection-wrap:hover {
+    opacity: 0;
+    stroke-opacity: 0;
 }
 
 #navigationModal option {

@@ -3,9 +3,10 @@ structurizr.ui.Tooltip = function() {
     var enabled = false;
 
     var tooltip = $('#tooltip');
+    var tooltipHeader = $('#tooltipHeader');
     var tooltipName = $('#tooltipName');
     var tooltipParent = $('#tooltipParent');
-    var tooltipType = $('#tooltipType');
+    const tooltipHr = $('#tooltip hr');
     var tooltipDescription = $('#tooltipDescription');
     var tooltipMetadata = $('#tooltipMetadata');
     var tooltipTags = $('#tooltipTags');
@@ -71,55 +72,113 @@ structurizr.ui.Tooltip = function() {
         this.reposition(0, 0);
     };
 
-    this.showTooltipForElement = function(element, style, x, y, additionalContent) {
+    this.showTooltipForElement = function(element, style, x, y, header, perspective) {
         if (element === undefined) {
             return;
         }
 
-        tooltipName.html(structurizr.util.escapeHtml(element.name));
-        tooltipDescription.html(element.description ? structurizr.util.escapeHtml(element.description).replaceAll('\n', '<br />') : '');
-        tooltipMetadata.text(structurizr.ui.getMetadataForElement(element, true));
+        if (header) {
+            tooltipName.html(structurizr.util.escapeHtml(element.name));
+            tooltipMetadata.text(structurizr.ui.getMetadataForElement(element, true));
 
-        if (element.parentId) {
-            var parentElement = structurizr.workspace.findElementById(element.parentId);
-            tooltipParent.text('from ' + parentElement.name + ' [' + structurizr.workspace.getTerminologyFor(parentElement) + ']');
+            if (element.parentId) {
+                var parentElement = structurizr.workspace.findElementById(element.parentId);
+                tooltipParent.text('from ' + parentElement.name + ' [' + structurizr.workspace.getTerminologyFor(parentElement) + ']');
+            } else {
+                tooltipParent.text('');
+            }
+
+            tooltipDescription.html(element.description ? structurizr.util.escapeHtml(element.description).replaceAll('\n', '<br />') : '');
+
+            tooltipHeader.removeClass('hidden');
         } else {
-            tooltipParent.text('');
+            tooltipHeader.addClass('hidden');
         }
 
-        var tagsHtml = '';
-        var tags = structurizr.workspace.getAllTagsForElement(element);
-        tagsHtml += '<div class="smaller">';
-        tags.forEach(function(tag) {
-            if (tag !== undefined) {
-                tag = tag.trim();
-                if (tag.length > 0) {
-                    tagsHtml += '<span class="tag">';
-                    tagsHtml += structurizr.util.escapeHtml(tag);
-                    tagsHtml += '</span>';
+        if (perspective === undefined) {
+            var tagsHtml = '';
+            var tags = structurizr.workspace.getAllTagsForElement(element);
+            tagsHtml += '<div class="smaller">';
+            tags.forEach(function (tag) {
+                if (tag !== undefined) {
+                    tag = tag.trim();
+                    if (tag.length > 0) {
+                        tagsHtml += '<span class="tag">';
+                        tagsHtml += structurizr.util.escapeHtml(tag);
+                        tagsHtml += '</span>';
+                    }
+                }
+            });
+            tagsHtml += '</div>';
+            tooltipTags.html(tagsHtml);
+
+            renderProperties(structurizr.workspace.getAllPropertiesForElement(element));
+
+            var urlHtml = '';
+            var url = element.url;
+            if (url && url.trim().length > 0) {
+                urlHtml += '<div class="smaller">';
+                urlHtml += '<p>URL: ';
+                urlHtml += '<a href="' + structurizr.util.escapeHtml(url) + '" target="_blank">' + structurizr.util.escapeHtml(url) + '</a>';
+                urlHtml += '</p>';
+                urlHtml += '</div>';
+            }
+            tooltipUrl.html(urlHtml);
+            tooltipAdditionalContent.html('');
+        } else {
+            tooltipTags.html('');
+            tooltipUrl.html('');
+            tooltipProperties.html('');
+
+            var perspectiveDetails = undefined;
+
+            if (element.perspectives) {
+                element.perspectives.forEach(function(p) {
+                    if (p.name === perspective) {
+                        perspectiveDetails = p;
+                    }
+                });
+            }
+
+            if (perspectiveDetails === undefined) {
+                if (element.type === 'SoftwareSystemInstance') {
+                    var softwareSystem = structurizr.workspace.findElementById(element.softwareSystemId);
+                    if (softwareSystem.perspectives) {
+                        softwareSystem.perspectives.forEach(function(p) {
+                            if (p.name === perspective) {
+                                perspectiveDetails = p;
+                            }
+                        });
+                    }
+                } else if (element.type === 'ContainerInstance') {
+                    var container = structurizr.workspace.findElementById(element.containerId);
+                    if (container.perspectives) {
+                        container.perspectives.forEach(function(p) {
+                            if (p.name === perspective) {
+                                perspectiveDetails = p;
+                            }
+                        });
+                    }
                 }
             }
-        });
-        tagsHtml += '</div>';
-        tooltipTags.html(tagsHtml);
 
-        renderProperties(structurizr.workspace.getAllPropertiesForElement(element));
+            if (perspectiveDetails !== undefined) {
+                var perspectiveDescription = perspectiveDetails.description;
+                if (perspectiveDescription === undefined) {
+                    perspectiveDescription = '';
+                }
+                perspectiveDescription = structurizr.util.escapeHtml(perspectiveDescription).replaceAll('\n', '<br />');
 
-        var urlHtml = '';
-        var url = element.url;
-        if (url && url.trim().length > 0) {
-            urlHtml += '<div class="smaller">';
-            urlHtml += '<p>URL: ';
-            urlHtml += '<a href="' + structurizr.util.escapeHtml(url) + '" target="_blank">' + structurizr.util.escapeHtml(url) + '</a>';
-            urlHtml += '</p>';
-            urlHtml += '</div>';
-        }
-        tooltipUrl.html(urlHtml);
+                additionalContent = '';
+                additionalContent += '<p><b>Perspective: ';
+                additionalContent += structurizr.util.escapeHtml(perspectiveDetails.name);
+                additionalContent += '</b></p>';
+                additionalContent += '<p>';
+                additionalContent += perspectiveDescription;
+                additionalContent += '</p>';
+            }
 
-        if (additionalContent !== undefined) {
             tooltipAdditionalContent.html(additionalContent);
-        } else {
-            tooltipAdditionalContent.html('');
         }
 
         show();
@@ -153,7 +212,7 @@ structurizr.ui.Tooltip = function() {
         }
     };
 
-    this.showTooltipForRelationship = function(relationship, relationshipInView, style, x, y, additionalContent, darkMode) {
+    this.showTooltipForRelationship = function(relationship, relationshipInView, style, x, y, header, perspective) {
         if (relationship === undefined) {
             return;
         }
@@ -162,74 +221,119 @@ structurizr.ui.Tooltip = function() {
             relationshipInView = {};
         }
 
-        var relationshipSummary = relationshipInView.description;
-        if (relationshipSummary === undefined) {
-            relationshipSummary = relationship.description;
-        }
-        if (relationshipSummary === undefined || relationshipSummary.length === 0) {
-            relationshipSummary = '';
+        const darkMode = structurizr.ui.isDarkMode();
+        tooltip.css("background", (darkMode === true ? structurizr.ui.DARK_MODE_DEFAULTS.background : structurizr.ui.LIGHT_MODE_DEFAULTS.background));
+
+        if (header) {
+            var relationshipSummary = relationshipInView.description;
+            if (relationshipSummary === undefined) {
+                relationshipSummary = relationship.description;
+            }
+            if (relationshipSummary === undefined || relationshipSummary.length === 0) {
+                relationshipSummary = '';
+            }
+
+            tooltipName.text((relationshipInView.order ? relationshipInView.order + ': ' : '') + relationshipSummary);
+            tooltipParent.html('');
+            tooltipMetadata.text('[' + structurizr.workspace.getTerminologyFor(relationship) + ']');
+
+            var description = '';
+            description += '<p style="font-weight: bold">';
+            description += structurizr.util.escapeHtml(structurizr.workspace.findElementById(relationship.sourceId).name);
+            description += ' <span style="color: gray;">--</span> ';
+            description += structurizr.util.escapeHtml(relationshipSummary);
+            description += ' <span style="color: gray;">-&gt;</span> ';
+            description += structurizr.util.escapeHtml(structurizr.workspace.findElementById(relationship.destinationId).name);
+            description += '</p>';
+            tooltipDescription.html(description);
+
+            tooltipHeader.removeClass('hidden');
+        } else {
+            tooltipHeader.addClass('hidden');
         }
 
-        tooltipName.text((relationshipInView.order ? relationshipInView.order + ': ' : '') + relationshipSummary);
-        tooltipParent.html('');
-        tooltipMetadata.text('[' + structurizr.workspace.getTerminologyFor(relationship) + ']');
+        if (perspective === undefined) {
+            var tagsHtml = '';
+            var tags = structurizr.workspace.getAllTagsForRelationship(relationship);
+            tagsHtml += '<div class="smaller">';
+            tags.forEach(function (tag) {
+                if (tag !== undefined) {
+                    tag = tag.trim();
+                    if (tag.length > 0) {
+                        tagsHtml += '<span class="tag">';
+                        tagsHtml += structurizr.util.escapeHtml(tag);
+                        tagsHtml += '</span>';
+                    }
+                }
+            });
+            tagsHtml += '</div>';
+            tooltipTags.html(tagsHtml);
 
-        if (darkMode === undefined) {
-            darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        }
+            renderProperties(structurizr.workspace.getAllPropertiesForRelationship(relationship));
 
-        tooltip.css("background", (darkMode === true ? '#111111' : '#ffffff'));
-        var color = style.color;
-        if (color === undefined) {
-            color = (darkMode === true ? '#eeeeee' : '#777777');
-        }
-        var description = '';
-        description += '<p style="font-weight: bold">';
-        description += structurizr.util.escapeHtml(structurizr.workspace.findElementById(relationship.sourceId).name);
-        description += ' <span style="color: gray;">--</span> ';
-        description += structurizr.util.escapeHtml(relationshipSummary);
-        description += ' <span style="color: gray;">-&gt;</span> ';
-        description += structurizr.util.escapeHtml(structurizr.workspace.findElementById(relationship.destinationId).name);
-        description += '</p>';
-        tooltipDescription.html(description);
+            var urlHtml = '';
+            var url = relationship.url;
+            if (url && url.trim().length > 0) {
+                urlHtml += '<div class="smaller">';
+                urlHtml += '<p>URL: ';
+                urlHtml += '<a href="' + structurizr.util.escapeHtml(url) + '" target="_blank">' + structurizr.util.escapeHtml(url) + '</a>';
+                urlHtml += '</p>';
+                urlHtml += '</div>';
+            }
+            tooltipUrl.html(urlHtml);
+            tooltipAdditionalContent.html('');
+        } else {
+            var additionalContent = '';
+            if (perspective !== undefined) {
+                var perspectiveDetails = undefined;
 
-        var tagsHtml = '';
-        var tags = structurizr.workspace.getAllTagsForRelationship(relationship);
-        tagsHtml += '<div class="smaller">';
-        tags.forEach(function(tag) {
-            if (tag !== undefined) {
-                tag = tag.trim();
-                if (tag.length > 0) {
-                    tagsHtml += '<span class="tag">';
-                    tagsHtml += structurizr.util.escapeHtml(tag);
-                    tagsHtml += '</span>';
+                if (relationship.perspectives) {
+                    relationship.perspectives.forEach(function(p) {
+                        if (p.name === perspective) {
+                            perspectiveDetails = p;
+                        }
+                    });
+                }
+
+                if (perspectiveDetails === undefined) {
+                    if (relationship.linkedRelationshipId) {
+                        var linkedRelationship = structurizr.workspace.findRelationshipById(relationship.linkedRelationshipId);
+                        if (linkedRelationship && linkedRelationship.perspectives) {
+                            linkedRelationship.perspectives.forEach(function(p) {
+                                if (p.name === perspective) {
+                                    perspectiveDetails = p;
+                                }
+                            });
+                        }
+                    }
+                }
+
+                if (perspectiveDetails !== undefined) {
+                    var perspectiveDescription = perspectiveDetails.description;
+                    if (perspectiveDescription === undefined) {
+                        perspectiveDescription = '';
+                    }
+                    perspectiveDescription = structurizr.util.escapeHtml(perspectiveDescription).replaceAll('\n', '<br />');
+
+                    additionalContent += '<p><b>Perspective: ';
+                    additionalContent += structurizr.util.escapeHtml(perspectiveDetails.name);
+                    additionalContent += '</b></p>';
+                    additionalContent += '<p>';
+                    additionalContent += perspectiveDescription;
+                    additionalContent += '</p>';
                 }
             }
-        });
-        tagsHtml += '</div>';
-        tooltipTags.html(tagsHtml);
 
-        renderProperties(structurizr.workspace.getAllPropertiesForRelationship(relationship));
-
-        var urlHtml = '';
-        var url = relationship.url;
-        if (url && url.trim().length > 0) {
-            urlHtml += '<div class="smaller">';
-            urlHtml += '<p>URL: ';
-            urlHtml += '<a href="' + structurizr.util.escapeHtml(url) + '" target="_blank">' + structurizr.util.escapeHtml(url) + '</a>';
-            urlHtml += '</p>';
-            urlHtml += '</div>';
-        }
-        tooltipUrl.html(urlHtml);
-
-        if (additionalContent !== undefined) {
             tooltipAdditionalContent.html(additionalContent);
-        } else {
-            tooltipAdditionalContent.html('');
         }
 
         show();
         this.reposition(x, y);
+
+        var color = style.color;
+        if (color === undefined) {
+            color = (darkMode === true ? structurizr.ui.DARK_MODE_DEFAULTS.color : structurizr.io.LIGHT_MODE_DEFAULTS.color);
+        }
 
         tooltip.css("border-color", color);
         tooltip.css("color", color);
