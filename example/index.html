@@ -16,8 +16,8 @@
     <link href="./css/bootstrap-5.3.7.min.css" rel="stylesheet" media="screen" />
     <link href="./css/joint-3.6.5.css" rel="stylesheet" media="screen" />
     <link href="./css/structurizr-static.css" rel="stylesheet" media="screen" />
-    <link href="./css/structurizr-diagram.css" rel="stylesheet" media="screen" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
+    <link href="./css/structurizr.css" rel="stylesheet" media="screen" />
+    <link href="./css/open-sans.css" rel="preload" as="style" />
 
     <style>
         .structurizrDiagramViewport {
@@ -135,7 +135,6 @@
     function init() {
         structurizr.ui.initDarkMode('./css/structurizr-static-dark.css');
         structurizr.ui.DEFAULT_FONT_NAME = "Open Sans";
-        structurizr.ui.DEFAULT_FONT_URL = 'https://fonts.googleapis.com/css?family=Open+Sans:400,700';
 
         $('#diagram').height($(window).innerHeight());
 
@@ -177,7 +176,7 @@
 
         const perspective = getParameter('perspective');
         if (perspective) {
-            structurizr.diagram.changePerspective(perspective);
+            structurizr.diagram.setPerspective(perspective);
             tooltip.disable();
             toggleTooltip();
         }
@@ -578,15 +577,13 @@
                 };
             }));
 
-            openNavigationModal(options, function(perspective) {
+            openNavigationModal(options, structurizr.diagram.getPerspective(), function(perspective) {
                 if (perspective.length > 0) {
-                    structurizr.diagram.changePerspective(perspective);
-                    structurizr.diagram.renderPerspectiveOrTagsFilter();
+                    structurizr.diagram.showPerspective(perspective);
                     tooltip.disable();
                     toggleTooltip();
                 } else {
                     structurizr.diagram.clearPerspective();
-                    structurizr.diagram.renderPerspectiveOrTagsFilter();
                     tooltip.enable();
                     toggleTooltip();
                 }

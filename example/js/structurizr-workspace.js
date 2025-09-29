@@ -417,6 +417,26 @@ structurizr.Workspace = class Workspace {
         return tags;
     };
 
+    getUserDefinedTags() {
+        if (this.views.configuration && this.views.configuration.properties) {
+            const tagsAsString = this.views.configuration.properties['structurizr.filter.tags'];
+            if (tagsAsString) {
+                return tagsAsString.split(',');
+            }
+        }
+
+        const tags = this.getTags();
+
+        structurizr.constants.DEFAULT_TAGS.forEach(function(tag) {
+            const index = tags.indexOf(tag);
+            if (index > -1) {
+                tags.splice(index, 1);
+            }
+        });
+
+        return tags;
+    }
+
     getAllTagsForElement(element) {
         var tags = (element.tags ? element.tags : '');
 

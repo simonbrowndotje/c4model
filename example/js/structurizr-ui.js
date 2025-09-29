@@ -546,7 +546,7 @@ structurizr.ui.getDefaultViewName = function(view) {
 
     } else if (view.type === structurizr.constants.SYSTEM_LANDSCAPE_VIEW_TYPE) {
         const enterprise = structurizr.workspace.model.enterprise;
-        return 'System Landscape View' + (enterprise ? ' :' + enterprise.name : '');
+        return 'System Landscape View' + (enterprise ? ': ' + enterprise.name : '');
 
     } else if (view.type === structurizr.constants.SYSTEM_CONTEXT_VIEW_TYPE) {
         const softwareSystem = structurizr.workspace.findElementById(view.softwareSystemId);

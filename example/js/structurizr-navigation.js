@@ -1,16 +1,32 @@
-function openNavigationModal(options, handler) {
+function openNavigationModal(options, selected, handler) {
     const navigationList = $('#navigationList');
     navigationList.empty();
 
     if (options.length > 0) {
         options.forEach(function(option) {
-            navigationList.append(
-                $('<option></option>').val(option.value).html(option.label)
-            );
+            if (selected !== undefined && option.value === selected) {
+                navigationList.append(
+                    $('<option>', {
+                        value: option.value,
+                        text: option.label,
+                        selected: true
+                    })
+                );
+            } else {
+                navigationList.append(
+                    $('<option>', {
+                        value: option.value,
+                        text: option.label
+                    })
+                );
+            }
         });
 
         navigationList.attr('size', Math.min(8, options.length));
-        navigationList.val(options[0].value);
+
+        if (selected === undefined) {
+            navigationList.val(options[0].value);
+        }
 
         if (handler === undefined) {
             handler = navigateTo;

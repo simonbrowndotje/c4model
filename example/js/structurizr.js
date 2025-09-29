@@ -36,7 +36,19 @@ var structurizr = structurizr || {
         INTRA_WORKSPACE_URL_PREFIX: '{workspace}',
         INTER_WORKSPACE_URL_PREFIX: '{workspace:',
         INTER_WORKSPACE_URL_SEPARATOR: ':',
-        INTER_WORKSPACE_URL_SUFFIX: '}'
+        INTER_WORKSPACE_URL_SUFFIX: '}',
 
+        DEFAULT_TAGS: [
+            'Element',
+            'Relationship',
+            'Person',
+            'Software System',
+            'Container',
+            'Component',
+            'Deployment Node',
+            'Infrastructure Node',
+            'Software System Instance',
+            'Container Instance'
+        ]
     }
 };
