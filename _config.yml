@@ -8,14 +8,14 @@ url: https://c4model.com
 nav_external_links:
   - title: Interactive example
     url: /example
-  - title: Patreon
-    url: https://www.patreon.com/c4model
-  - title: Discord
-    url: https://www.patreon.com/c4model
   - title: Book
-    url: https://leanpub.com/visualising-software-architecture
+    url: https://www.oreilly.com/library/view/the-c4-model/9798341660113/
+  - title: Video
+    url: https://www.youtube.com/watch?v=x2-rSnhpw0g
   - title: Training & workshops
     url: https://simonbrown.je/#workshops
+  - title: Patreon & Discord
+    url: https://www.patreon.com/c4model
 
 gh_edit_link: false
 gh_edit_link_text: "Edit this page on GitHub."

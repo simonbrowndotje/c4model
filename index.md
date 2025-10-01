@@ -8,7 +8,7 @@ permalink: /
 
 # The C4 model for visualising software architecture
 
-The C4 model is:
+The C4 model is an easy to learn, developer friendly approach to software architecture diagramming:
 
 1. A set of [hierarchical abstractions](/abstractions) - [software systems](/abstractions/software-system), [containers](/abstractions/container), [components](/abstractions/component), and [code](/abstractions/code).
 2. A set of [hierarchical diagrams](/diagrams) - [system context](/diagrams/system-context), [containers](/diagrams/container), [components](/diagrams/component), and [code](/diagrams/code).
@@ -16,28 +16,19 @@ The C4 model is:
 4. [Notation independent](/diagrams/notation).
 5. [Tooling independent](/tooling).
 
-[![C4 model - static structure diagrams](/images/c4-static.png)](/images/c4-static.png)
-
-## Uses and benefits
-
-The C4 model is an easy to learn, developer friendly approach to software architecture diagramming.
-Good software architecture diagrams assist with communication inside and outside of software development/product teams,
-efficient onboarding of new staff, architecture reviews/evaluations, risk identification (e.g. [risk-storming](https://riskstorming.com)),
-threat modelling, etc.
-
 <table style="text-align: center">
 <tr>
-<td>
+<td width="50%">
 <iframe src="https://www.youtube-nocookie.com/embed/x2-rSnhpw0g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <br />
 <b>Visualising software architecture with the C4 model</b>
 <br />
 Recorded at "Agile on the Beach 2019", July 2019
 </td>
-<td>
-<a href="https://leanpub.com/visualising-software-architecture"><img src="/images/book-small.png" width="150px" /></a>
+<td width="50%">
+<a href="https://www.oreilly.com/library/view/the-c4-model/9798341660113/"><img src="/images/book.jpg" /></a>
 <br />
-<b>The C4 model for visualising software architecture</b>
+<b>The C4 model</b>
 <br />Simon Brown
 </td>
 </tr>
