@@ -29,7 +29,7 @@ that container is executed. For example, a single Java EE server like Apache Tom
 applications inside a single Java Virtual Machine, although each of those web applications is essentially isolated
 from the others. At development time I might have three web applications running on a single Apache Tomcat server,
 while each web application may be deployed onto a dedicated Apache Tomcat server in a live environment.
-In this situation, each web application is a "C4 container", with the deployment being a seperate concern.
+In this situation, each web application is a "C4 container", with the deployment being a separate concern.
 
 ## FAQ
 
