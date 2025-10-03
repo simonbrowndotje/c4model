@@ -5110,7 +5110,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
     };
 
     this.currentViewIsDynamic = function() {
-        return currentView.type === "Dynamic";
+        return currentView.type === structurizr.constants.DYNAMIC_VIEW_TYPE;
     };
 
     this.currentViewHasAnimation = function() {
@@ -5251,11 +5251,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     }
                 } else {
                     this.stopAnimation();
-                    const viewOrFilter = (currentFilter !== undefined ? currentFilter : currentView);
-                    const animate = getViewOrViewSetProperty(viewOrFilter, 'structurizr.zoomOnAnimation', 'false') === 'true';
-                    if (animate) {
-                        this.zoomToWidthOrHeight();
-                    }
                 }
             }
         } else if (this.currentViewHasAnimation()) {
@@ -5537,11 +5532,20 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         hideAllLines('1.0');
         hideAllElements('1.0');
         unfadeAllElements();
+        runFilter();
 
         if (this.currentViewIsDynamic()) {
             linesToAnimate = undefined;
         } else if (this.currentViewHasAnimation()) {
             animationSteps = undefined;
+        }
+
+        if (this.currentViewIsDynamic()) {
+            const viewOrFilter = (currentFilter !== undefined ? currentFilter : currentView);
+            const animate = getViewOrViewSetProperty(viewOrFilter, 'structurizr.zoomOnAnimation', 'false') === 'true';
+            if (animate) {
+                this.zoomToWidthOrHeight();
+            }
         }
     };
 
