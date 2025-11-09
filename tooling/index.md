@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Tooling
-nav_order: 6
+nav_order: 50
 has_children: true
 permalink: /tooling
 has_toc: false
@@ -31,8 +31,7 @@ the C4 model. Here are some of the questions you should ask yourself when lookin
 
 The [diagramming](/tooling/diagramming#tools) and [modelling](/tooling/modelling#tools) pages both have lists of tools
 that support the C4 model. Please
-[get in touch](mailto:hello@architectis.je?subject=C4%20model%20-%20tool%20addition) to ask about adding
-your tool to these lists, with the following information:
+[get in touch](mailto:hello@architectis.je?subject=C4%20model%20-%20tooling) to ask about adding your open source tool or advertising your closed source tool to these lists, with the following information:
 
 - Name
 - Short description
