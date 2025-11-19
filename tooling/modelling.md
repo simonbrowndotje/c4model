@@ -12,7 +12,7 @@ The C4 model can be used irrespective of whether you use a diagramming or modell
 interesting opportunities when you progress from diagramming to modelling. With a modelling tool,
 you're building up a non-visual model of your software architecture
 (a single definition of all elements and the relationships between them), and then creating different views
-(that become diagrams) on top of that model. This requires a little more rigour, but the problems can be resolved -
+(that become diagrams) on top of that model. This requires a little more rigour, but the problems associated with diagramming tools can be resolved -
 modelling tools can understand the semantics of what you're trying to do, provide additional assistance,
 and renaming elements/relationships is easy.
 
