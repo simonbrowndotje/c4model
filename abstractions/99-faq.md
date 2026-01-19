@@ -42,7 +42,7 @@ meaning of the following statement:
 > "microservices shouldn't share a database"
 
 As an industry, we need to be more precise with the terminology that we use. Debating whether a database is a 
-container or a component forces you understand exactly what you mean by the word "database", before mapping it 
+container or a component forces you to understand exactly what you mean by the word "database", before mapping it 
 onto the abstraction levels provided by the C4 model. The power of the C4 model is the small set of fixed/named 
 hierarchical abstractions that help teams reason about their software systems in a structured and more precise way,
 both within and across engineering teams.
@@ -57,7 +57,7 @@ of the following reasons:
 
 Although the C4 model provides enough for most software development teams, you should certainly feel that you can add
 more abstraction levels if you have a genuine need. After all, the agile mindset tells us to "inspect and adapt" in 
-order to improve the way that we work. This should be seen an advanced manoeuvre though, and you should only consider 
+order to improve the way that we work. This should be seen as an advanced manoeuvre though, and you should only consider 
 doing it if you're willing to put the effort into precisely defining those additional levels of abstraction.
 Failure to do so will ultimately lead you back to where we are today, with diagrams showing ad hoc abstractions 
 caused by an impreciseness of terminology.
