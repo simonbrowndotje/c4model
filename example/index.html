@@ -309,7 +309,8 @@
         modal.addEventListener('hidden.bs.modal', function (event) {
             const checked = $('#hideIntroductionModalCheckbox').is(':checked');
             if (checked) {
-                document.cookie = INTRODUCTION_MODAL_COOKIE_NAME + '=false'
+                const maxAge = 60 * 60 * 24 * 365; // 1 year
+                document.cookie = INTRODUCTION_MODAL_COOKIE_NAME + '=false; max-age=' + maxAge;
             }
         })
 
