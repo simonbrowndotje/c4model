@@ -3,9 +3,10 @@
 <head>
     <script src="./js/jquery-3.7.1.min.js"></script>
     <script src="./js/bootstrap-5.3.7.min.js"></script>
-    <script type="text/javascript" src="./js/lodash-4.17.21.js"></script>
-    <script type="text/javascript" src="./js/backbone-1.4.1.js"></script>
-    <script type="text/javascript" src="./js/joint-3.6.5.js"></script>
+    <script type="text/javascript" src="./js/jointjs-Core-4.1.3.js"></script>
+    <script type="text/javascript" src="./js/dagre-1.1.8.min.js"></script>
+    <script type="text/javascript" src="./js/graphlib-2.2.4.min.js"></script>
+    <script type="text/javascript" src="./js/jointjs-DirectedGraph-4.1.3.min.js"></script>
     <script type="text/javascript" src="./js/structurizr.js"></script>
     <script type="text/javascript" src="./js/structurizr-util.js"></script>
     <script type="text/javascript" src="./js/structurizr-ui.js"></script>
@@ -13,31 +14,25 @@
     <script type="text/javascript" src="./js/structurizr-diagram.js"></script>
     <script type="text/javascript" src="./workspace.js"></script>
 
-    <link href="./css/open-sans.css" rel="stylesheet" />
     <link href="./css/bootstrap-5.3.7.min.css" rel="stylesheet" media="screen" />
-    <link href="./css/joint-3.6.5.css" rel="stylesheet" media="screen" />
     <link href="./css/structurizr-static.css" rel="stylesheet" media="screen" />
     <link href="./css/structurizr.css" rel="stylesheet" media="screen" />
-
-    <style>
-        .structurizrDiagramViewport {
-            background: #ffffff;
-        }
-    </style>
 </head>
 <body>
-    <span style="font-family: 'Open Sans',sans-serif; opacity: 0;"></span>
+    <span style="font-family: Tahoma, Verdana, Arial, sans-serif; opacity: 0;"></span>
     <div id="diagram">
         <div class="modal fade" id="introductionModal" tabindex="-1">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <img src="./img/structurizr-banner-light.png" width="200" class="img-light" />
-                        <img src="./img/structurizr-banner-dark.png" width="200" class="img-dark" />
+                        <img src="./img/structurizr-banner-light.png" class="img-light img-responsive workspaceLogo" />
+                        <img src="./img/structurizr-banner-dark.png" class="img-dark img-responsive workspaceLogo" />
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
                         <p>
-                            The following features are provided by this <a href="https://docs.structurizr.com/static" target="_blank">interactive diagram viewer</a>:
+                            The following features are provided by this interactive diagram viewer:
                         </p>
                         <ul>
                             <li>Double-click to "zoom-in" (look for the magnifying glass icon inside elements).</li>
@@ -48,20 +43,17 @@
                             <li>Tooltips (<code>t</code>).</li>
                             <li>Perspective (<code>p</code>).</li>
                             <li>Animation (<code>,</code> and <code>.</code>).</li>
-                            <li>Toggle element descriptions (<code>d</code>).</li>
-                            <li>Toggle element metadata (<code>m</code>).</li>
+                            <li>Toggle element/relationship descriptions (<code>d</code>).</li>
+                            <li>Toggle element/relationship metadata (<code>m</code>).</li>
                             <li>Quick navigation (<code>Space</code>).</li>
                             <li>Full screen (<code>f</code>).</li>
+                            <li>Show this information (<code>?</code>).</li>
                         </ul>
-                    </div>
-                    <div class="modal-footer">
+
                         <div>
                             <input class="form-check-input" type="checkbox" id="hideIntroductionModalCheckbox">
-                            <label class="form-check-label" for="hideIntroductionModalCheckbox">
-                                Don't show again
-                            </label>
+                            <label class="form-check-label" for="hideIntroductionModalCheckbox">Don't show again</label>
                         </div>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -128,23 +120,16 @@
     const INTRODUCTION_MODAL_COOKIE_NAME = 'structurizr.static.introductionModal';
 
     structurizr.workspace = new structurizr.Workspace(JSON.parse(decodeBase64(jsonAsString)));
-    structurizr.ui.applyBranding();
-    structurizr.ui.loadThemes('https://static.structurizr.com/themes/', function() {
+    structurizr.ui.loadThemes(function() {
         init();
     });
 
     function init() {
+        const embed = getParameter('embed');
         structurizr.ui.initDarkMode('./css/structurizr-static-dark.css');
-        structurizr.ui.DEFAULT_FONT_NAME = "Open Sans";
-
-        $('#diagram').height($(window).innerHeight());
 
         structurizr.diagram = new structurizr.ui.Diagram('diagram', false, function () {
             structurizr.diagram.setDarkMode(structurizr.ui.isDarkMode());
-
-            window.onhashchange = function () {
-                hashChanged();
-            };
 
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
                 if (structurizr.ui.getRenderingMode() === structurizr.ui.RENDERING_MODE_SYSTEM) {
@@ -152,22 +137,45 @@
                 }
             });
 
-            const hash = window.location.hash;
-            if (hash && hash.length > 1) {
-                const diagramIdentifier = decodeURIComponent(hash.substring(1)); // remove the # symbol
-                structurizr.diagram.changeView(diagramIdentifier);
-            } else {
-                var diagramIdentifier = structurizr.workspace.views.configuration.defaultView;
+            var diagramIdentifier = getParameter('diagram');
+            if (!diagramIdentifier || diagramIdentifier.length === 0) {
+                diagramIdentifier = structurizr.workspace.views.configuration.defaultView;
 
-                if (diagramIdentifier === undefined || diagramIdentifier === '') {
+                if (!diagramIdentifier || diagramIdentifier.length === 0) {
                     diagramIdentifier = structurizr.workspace.getViews()[0].key;
                 }
-
-                window.location.hash = '#' + diagramIdentifier;
             }
+
+            window.location.hash = diagramIdentifier;
+            hashChanged();
+
+            window.onhashchange = function () {
+                hashChanged();
+            };
         });
 
-        structurizr.diagram.resize();
+        structurizr.diagram.setEmbedded(embed);
+
+        structurizr.diagram.getPossibleViewportWidth = function() {
+            if (structurizr.ui.isFullScreen()) {
+                return screen.width;
+            } else {
+                if (embed) {
+                    return window.innerWidth;
+                } else {
+                    return $('#diagram').innerWidth();
+                }
+            }
+        };
+
+        structurizr.diagram.getPossibleViewportHeight = function() {
+            if (structurizr.ui.isFullScreen()) {
+                return screen.availHeight;
+            } else {
+                return window.innerHeight;
+            }
+        };
+
         structurizr.diagram.zoomToWidthOrHeight();
         structurizr.diagram.setNavigationEnabled(true);
         structurizr.diagram.onElementDoubleClicked(elementDoubleClicked);
@@ -207,6 +215,7 @@
             const minus = 45;
             const comma = 44;
             const dot = 46;
+            const questionMark = 63;
             const c = 99;
             const d = 100;
             const f = 102;
@@ -260,6 +269,8 @@
                 toggleTooltip();
             } else if (e.which === f) {
                 structurizr.ui.enterFullScreen('diagram');
+            } else if (e.which === questionMark) {
+                $('#introductionModal').modal('show');
             }
         });
 
@@ -280,41 +291,42 @@
             });
 
         $(window).resize(function () {
-            $('#diagram').height($(window).innerHeight());
             structurizr.diagram.resize();
             structurizr.diagram.zoomToWidthOrHeight();
 
-            postDiagramAspectRatioToParentWindow();
+            if (embed) {
+                postDiagramAspectRatioToParentWindow();
+            }
         });
 
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
             structurizr.diagram.setDarkMode(structurizr.ui.isDarkMode());
         });
 
-        const hideIntroductionModal = document.cookie.indexOf(INTRODUCTION_MODAL_COOKIE_NAME + '=false') > -1;
-        if (!hideIntroductionModal) {
-            $('#introductionModal').modal('show');
+        structurizr.ui.applyWorkspaceLogo();
 
-            var modal = document.getElementById('introductionModal')
-            modal.addEventListener('hidden.bs.modal', function (event) {
-                const checked = $('#hideIntroductionModalCheckbox').is(':checked');
-                if (checked) {
-                    document.cookie = INTRODUCTION_MODAL_COOKIE_NAME + '=false'
-                }
-            })
+        const modal = document.getElementById('introductionModal')
+        modal.addEventListener('hidden.bs.modal', function (event) {
+            const checked = $('#hideIntroductionModalCheckbox').is(':checked');
+            if (checked) {
+                document.cookie = INTRODUCTION_MODAL_COOKIE_NAME + '=false'
+            }
+        })
+
+        if (structurizr.workspace.getProperty('structurizr.introduction') !== 'false') {
+            const hideIntroductionModal = document.cookie.indexOf(INTRODUCTION_MODAL_COOKIE_NAME + '=false') > -1;
+            if (!hideIntroductionModal) {
+                $('#introductionModal').modal('show');
+            }
         }
     }
 
     function postDiagramAspectRatioToParentWindow() {
-        const diagramAspectRatio = (structurizr.diagram.getWidth() / structurizr.diagram.getHeight());
-        const iframe = getParameter('iframe');
-
-        parent.postMessage({
-            iframe: iframe,
-            aspectRatio: diagramAspectRatio,
-            controlsHeight: 0,
-            type: 'diagram',
-            view: structurizr.diagram.getCurrentViewOrFilter().key
+        window.parent.postMessage({
+            src: window.location.toString(),
+            context: 'iframe.resize',
+            aspectRatio: structurizr.diagram.getAspectRatio(),
+            toolbarHeight: 0
         }, '*');
     }
 

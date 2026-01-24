@@ -1,5 +1,5 @@
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 14px;
     padding-left: 0;
     padding-right: 0;
@@ -150,4 +150,8 @@ code {
 }
 .img-dark {
     display: none;
+}
+
+.structurizrDiagramViewport {
+    background: #ffffff;
 }
