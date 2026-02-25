@@ -87,9 +87,6 @@
         <div class="modal fade" id="keyModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
                     <div class="modal-body centered">
                         <div id="diagramKey"></div>
                     </div>
@@ -139,10 +136,14 @@
 
             var diagramIdentifier = getParameter('diagram');
             if (!diagramIdentifier || diagramIdentifier.length === 0) {
-                diagramIdentifier = structurizr.workspace.views.configuration.defaultView;
+                diagramIdentifier = window.location.hash;
 
                 if (!diagramIdentifier || diagramIdentifier.length === 0) {
-                    diagramIdentifier = structurizr.workspace.getViews()[0].key;
+                    diagramIdentifier = structurizr.workspace.views.configuration.defaultView;
+
+                    if (!diagramIdentifier || diagramIdentifier.length === 0) {
+                        diagramIdentifier = structurizr.workspace.getViews()[0].key;
+                    }
                 }
             }
 
@@ -314,7 +315,7 @@
             }
         })
 
-        if (structurizr.workspace.getProperty('structurizr.introduction') !== 'false') {
+        if (structurizr.workspace.getProperty('structurizr.introduction') !== 'false' && getParameter('introduction') !== 'false') {
             const hideIntroductionModal = document.cookie.indexOf(INTRODUCTION_MODAL_COOKIE_NAME + '=false') > -1;
             if (!hideIntroductionModal) {
                 $('#introductionModal').modal('show');
