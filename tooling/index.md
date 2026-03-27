@@ -252,7 +252,7 @@ A model is just data! And we, as software developers, have an endless supply of 
         html += tool.url;
         html += '" target="_blank">';
         if (tool.logo) {
-            html += '<img src="./logos/';
+            html += '<img src="/tooling/logos/';
             html += tool.logo;
             html += '" class="toolingLogo" />';
         } else {
