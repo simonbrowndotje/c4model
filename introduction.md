@@ -7,19 +7,32 @@ permalink: /introduction
 
 # Introduction
 
-Ask somebody in the building industry to visually communicate the architecture of a building and you'll be presented
-with site plans, floor plans, elevation views, cross-section views and detail drawings. In contrast, ask a software
-developer to communicate the software architecture of a software system using diagrams and you'll likely get a
-confused mess of boxes and lines ... inconsistent notation (colour coding, shapes, line styles, etc), ambiguous naming,
-unlabelled relationships, generic terminology, missing technology choices, mixed abstractions, etc.
+Ask somebody in the building industry to visually communicate the architecture of a building and you'll be presented with site plans, floor plans, elevation views, cross-section views and detail drawings. In contrast, ask a software developer to communicate the software architecture of a software system using diagrams and you'll likely get a confused mess of boxes and lines.
+
+## Common diagramming problems
+
+Common problems with such ad hoc diagrams include:
+
+- Notation (e.g. colour coding, shapes, element sizes, line styles, etc) is not explained or is inconsistent.
+- The purpose and meaning of elements is ambiguous.
+- Relationships between elements are missing.
+- Relationships between elements are unlabelled.
+- Generic terms such as "business logic" are used.
+- Acronyms and abbreviations are not explained.
+- Technology choices are missing.
+- Levels of abstraction are mixed.
+
+Furthermore, the problems associated with a single diagram are often exacerbated when a collection of diagrams is created:
+
+- The notation (shapes, colour coding, line styles, etc) is not consistent between diagrams.
+- The naming of elements is not consistent between diagrams.
+- The logical order in which to read the diagrams isn't clear.
+- There is no clear transition between one diagram and the next.
 
 | [![A software architecture sketch](/images/sketch-1.jpg)](/images/sketch-1.jpg) | [![A software architecture sketch](/images/sketch-2.jpg)](/images/sketch-2.jpg) |
 | [![A software architecture sketch](/images/sketch-3.jpg)](/images/sketch-3.jpg) | [![A software architecture sketch](/images/sketch-4.jpg)](/images/sketch-4.jpg) |
 
-As an industry, we do have the Unified Modeling Language (UML), ArchiMate and SysML, but asking whether these provide
-an effective way to communicate software architecture is often irrelevant because many teams have already thrown them
-out in favour of much simpler "boxes and lines" diagrams. Abandoning these modelling languages is one thing but,
-perhaps in the race for agility, many software development teams have lost the ability to communicate visually.
+As an industry, we do have the Unified Modeling Language (UML), ArchiMate and SysML, but asking whether these provide an effective way to communicate software architecture is often irrelevant because many teams have already thrown them out in favour of much simpler "boxes and lines" diagrams. Abandoning these modelling languages is one thing but, perhaps in the race for agility, many software development teams have lost the ability to communicate visually.
 
 ## Maps of your code
 
