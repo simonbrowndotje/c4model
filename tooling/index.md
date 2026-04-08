@@ -10,7 +10,7 @@ has_toc: false
 # Tooling
 
 For design sessions, you might find a whiteboard or flip chart paper better for collaboration, and iterating quickly.
-For long-lived documentation, there are a number of tools can help create software architecture diagrams based upon
+For long-lived documentation, there are a number of tools that can help create software architecture diagrams based upon
 the C4 model. Here are some of the questions you should ask yourself when looking at tooling:
 
 - Who are the diagram authors, and how technical are they?
