@@ -78,23 +78,31 @@ A model is just data! And we, as software developers, have an endless supply of 
     .toolingLogo {
         width: 200px;
     }
+    .toolingName {
+        font-size: 120%;
+    }
+    .toolingSource {
+        font-size: 80%;
+    }
     .hidden {
         display: none;
     }
 </style>
-
+    
 <script>
     const tools = [
         {
             name: 'Archi',
             url: 'https://www.archimatetool.com/blog/2020/04/18/c4-model-architecture-viewpoint-and-archi-4-7/',
+            source: 'https://github.com/archimatetool/archi',
             description: 'The Open Source modelling toolkit for creating ArchiMate models and sketches. Used by Enterprise Architects everywhere.',
             logo: undefined,
             modelling: true
         },
         {
             name: 'C4InterFlow',
-            url: 'https://github.com/SlavaVedernikov/C4InterFlow',
+            url: 'https://www.c4interflow.com',
+            source: 'https://github.com/SlavaVedernikov/C4InterFlow',
             description: 'Architecture as Code (AaC) framework that generates diagrams and lets you analyse Application Architecture. Inspired by C4 Model.',
             logo: undefined,
             modelling: true
@@ -102,6 +110,7 @@ A model is just data! And we, as software developers, have an endless supply of 
         {
             name: 'Gaphor',
             url: 'https://gaphor.org',
+            source: 'https://github.com/gaphor/gaphor',
             description: 'A picture is worth a thousand words. Describe and document your applications and systems with Gaphor to enhance knowledge sharing.',
             logo: undefined,
             modelling: true
@@ -115,14 +124,14 @@ A model is just data! And we, as software developers, have an endless supply of 
         },
         {
             name: 'Model',
-            url: 'https://github.com/goadesign/model',
+            source: 'https://github.com/goadesign/model',
             description: 'Create your software architecture models and diagrams in Go.',
             logo: undefined,
             modelling: true
         },
         {
             name: 'Overarch',
-            url: 'https://github.com/soulspace-org/overarch',
+            source: 'https://github.com/soulspace-org/overarch',
             description: 'Overarch provides a data model for the holistic description of a software system, opening multiple use cases on the model data. Supports C4 and UML diagram generation with PlantUML.',
             logo: undefined,
             modelling: true
@@ -130,13 +139,14 @@ A model is just data! And we, as software developers, have an endless supply of 
         {
             name: 'pumla',
             url: 'https://github.com/DrMarkusVoss/pumla/blob/main/test/examples/C4example/pumlaC4Example.md',
+            source: 'https://github.com/DrMarkusVoss/pumla',
             description: 'pumla - systematic re-use of model elements described with PlantUML.',
             logo: undefined,
             modelling: true
         },
         {
             name: 'PyStructurizr',
-            url: 'https://github.com/nielsvanspauwen/pystructurizr',
+            source: 'https://github.com/nielsvanspauwen/pystructurizr',
             description: 'A Python DSL inspired by Structurizr, intended for generating C4 diagrams.',
             logo: undefined,
             modelling: true
@@ -144,6 +154,7 @@ A model is just data! And we, as software developers, have an endless supply of 
         {
             name: 'RDB modeling',
             url: 'https://rdbmodel.github.io',
+            source: 'https://github.com/RDBModel/rdbmodel.github.io',
             description: 'Create and visualize software architecture using a simplified version of the C4 model and YAML.',
             logo: undefined,
             modelling: true
@@ -151,13 +162,15 @@ A model is just data! And we, as software developers, have an endless supply of 
         {
             name: 'Structurizr',
             url: 'https://docs.structurizr.com',
+            source: 'https://github.com/structurizr/structurizr',
             description: 'The original tool designed to support the C4 model - models as code, manual layout, AI friendly.',
             logo: 'structurizr.png',
             modelling: true
         },
         {
             name: 'Archinsight',
-            url: 'https://github.com/lonely-lockley/archinsight',
+            url: 'https://archinsight.org',
+            source: 'https://github.com/lonely-lockley/archinsight',
             description: 'Archinsight implements an architecture-as-code approach, following the principles based on the C4 model. Its core feature is the Insight language, which simplifies architectural descriptions and frees architects from excessive visualization details. Insight emphasizes clarity, conciseness, and simplicity tailored to C4 diagrams.',
             logo: undefined,
             modelling: false
@@ -171,7 +184,7 @@ A model is just data! And we, as software developers, have an endless supply of 
         },
         {
             name: 'C4-PlantUML',
-            url: 'https://github.com/plantuml-stdlib/C4-PlantUML',
+            source: 'https://github.com/plantuml-stdlib/C4-PlantUML',
             description: 'C4-PlantUML combines the benefits of PlantUML and the C4 model for providing a simple way of describing and communicate software architectures.',
             logo: undefined,
             modelling: false
@@ -179,20 +192,22 @@ A model is just data! And we, as software developers, have an endless supply of 
         {
             name: 'c4builder',
             url: 'https://adrianvlupu.github.io/C4-Builder',
+            source: 'https://github.com/adrianvlupu/C4-Builder',
             description: 'A lightweight Node.js CLI tool for building, maintaining and sharing a software architecture project using only text.',
             logo: undefined,
             modelling: false
         },
         {
             name: 'C4 Modelizer',
-            url: 'https://github.com/archivisio/c4_modelizer',
+            url: 'https://archivisio.github.io/c4_modelizer',
+            source: 'https://github.com/archivisio/c4_modelizer',
             description: 'Visual tool to design and edit C4 system-level architecture diagrams using a modern React interface.',
             logo: undefined,
             modelling: false
         },
         {
             name: 'C4Sharp',
-            url: 'https://github.com/8T4/c4sharp',
+            source: 'https://github.com/8T4/c4sharp',
             description: 'C4Sharp (C4S) is a .NET library for building C4 Model diagrams.',
             logo: undefined,
             modelling: false
@@ -200,6 +215,7 @@ A model is just data! And we, as software developers, have an endless supply of 
         {
             name: 'CUE4Puml4C4',
             url: 'https://owulveryck.github.io/cue4puml4c4/',
+            source: 'https://github.com/owulveryck/cue4puml4c4',
             description: 'Describe your C4 model as data (not as code) thanks to the CUE language. Transpile it and render it thanks to PlantUML.',
             logo: undefined,
             modelling: false
@@ -207,6 +223,7 @@ A model is just data! And we, as software developers, have an endless supply of 
         {
             name: 'Diagrams',
             url: 'https://diagrams.mingrammer.com/docs/nodes/c4',
+            source: 'https://github.com/mingrammer/diagrams',
             description: 'Diagrams lets you draw the cloud system architecture in Python code.',
             logo: undefined,
             modelling: false
@@ -214,6 +231,7 @@ A model is just data! And we, as software developers, have an endless supply of 
         {
             name: 'draw.io',
             url: 'https://www.drawio.com/blog/c4-modelling',
+            source: 'https://github.com/jgraph/drawio',
             description: 'draw.io is a JavaScript, client-side editor for general diagramming.',
             logo: undefined,
             modelling: false
@@ -221,6 +239,7 @@ A model is just data! And we, as software developers, have an endless supply of 
         {
             name: 'Keadex Mina',
             url: 'https://keadex.dev/en/projects/keadex-mina',
+            source: 'https://github.com/keadex/keadex',
             description: 'Open Source, serverless IDE to easily code and organize at a scale C4 model diagrams.',
             logo: undefined,
             modelling: false
@@ -228,13 +247,15 @@ A model is just data! And we, as software developers, have an endless supply of 
         {
             name: 'Mermaid',
             url: 'https://mermaid.js.org/syntax/c4.html',
+            source: 'https://github.com/mermaid-js/mermaid',
             description: 'JavaScript based diagramming and charting tool that renders Markdown-inspired text definitions to create and modify diagrams dynamically.',
             logo: undefined,
             modelling: false
         },
         {
             name: 'EasyC4 Diagram Creator',
-            url: 'https://github.com/wtx-labs/easy-c4-diagrams-creator',
+            url: 'https://c4.wtx.pl',
+            source: 'https://github.com/wtx-labs/easy-c4-diagrams-creator',
             description: 'Convert PlantUML C4 or Mermaid C4 text into .drawio diagrams.',
             logo: undefined,
             modelling: false
@@ -253,24 +274,43 @@ A model is just data! And we, as software developers, have an endless supply of 
     });
 
     tools.forEach(function(tool) {
-        html += '<tr class="toolingOption ';
+    html += '<tr class="toolingOption ';
         html += (tool.modelling ? 'toolingOptionModelling' : 'toolingOptionDiagramming' );
         html += '"><td><a href="';
-        html += tool.url;
+
+        if (tool.url) {
+            html += tool.url;
+        } else if (tool.source) {
+            html += tool.source;
+        }
+
         html += '" target="_blank">';
+    
         if (tool.logo) {
             html += '<img src="/tooling/logos/';
             html += tool.logo;
             html += '" class="toolingLogo" />';
         } else {
+            html += '<div class="toolingName">';
             html += tool.name;
+            html += '</div>';
         }
-        html += '</a></td>';
+
+        html += '</a>';
+        
+        if (tool.source) {
+            html += '<div class="toolingSource"><a href="';
+            html += tool.source;
+            html += '" target="_blank">Source code</a>';
+            html += '</div>';
+        }
+        
+        html += '</td>';
         html += '<td>';
         html += tool.description;
         html += '</td>';
         html += '</tr>';
-    });
+        });
 
     toolsTable.innerHTML = html;
 
