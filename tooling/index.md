@@ -76,7 +76,7 @@ A model is just data! And we, as software developers, have an endless supply of 
 
 <style>
     .toolingLogo {
-        width: 200px;
+        max-height: 30px;
     }
     .toolingName {
         font-size: 120%;
