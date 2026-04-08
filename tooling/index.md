@@ -231,6 +231,13 @@ A model is just data! And we, as software developers, have an endless supply of 
             description: 'JavaScript based diagramming and charting tool that renders Markdown-inspired text definitions to create and modify diagrams dynamically.',
             logo: undefined,
             modelling: false
+        },
+        {
+            name: 'EasyC4 Diagram Creator',
+            url: 'https://github.com/wtx-labs/easy-c4-diagrams-creator',
+            description: 'Convert PlantUML C4 or Mermaid C4 text into .drawio diagrams.',
+            logo: undefined,
+            modelling: false
         }
     ];
 
