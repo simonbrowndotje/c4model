@@ -511,7 +511,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             domElement.attr('style', 'cursor: default !important');
 
             view.dimensions = {
-                width: imageWidth,
+                width: Math.max(imageWidth, diagramMetadataWidth),
                 height: imageHeight + (diagramMetadataHeight * 1.5)
             }
 
@@ -3049,6 +3049,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         const showTitle = getViewOrViewSetProperty(viewOrFilter, 'structurizr.title', 'true') === 'true';
         const showDescription = getViewOrViewSetProperty(viewOrFilter, 'structurizr.description', 'true') === 'true';
         const showMetadata = getViewOrViewSetProperty(viewOrFilter, 'structurizr.metadata', 'true') === 'true';
+        const horizontalPadding = 40;
 
         diagramTitle = '';
         diagramDescription = '';
@@ -3071,7 +3072,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             }});
         graph.addCell(diagramTitleElement);
         diagramTitleElement.toBack();
-        diagramMetadataWidth = Math.max(diagramMetadataWidth, calculateWidth(diagramTitle, elementStyleForDiagramTitle.fontSize));
+        diagramMetadataWidth = Math.max(diagramMetadataWidth, horizontalPadding + calculateWidth(diagramTitle, font.name, elementStyleForDiagramTitle.fontSize));
 
         if (showDescription) {
             if (currentFilter && currentFilter.description) {
@@ -3096,7 +3097,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
             graph.addCell(diagramDescriptionElement);
             diagramDescriptionElement.toBack();
-            diagramMetadataWidth = Math.max(diagramMetadataWidth, calculateWidth(diagramDescription, elementStyleForDiagramDescription.fontSize));
+            diagramMetadataWidth = Math.max(diagramMetadataWidth, horizontalPadding + calculateWidth(diagramDescription, font.name, elementStyleForDiagramDescription.fontSize));
         } else {
             diagramDescriptionElement = undefined;
         }
@@ -3148,7 +3149,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             }});
         graph.addCell(diagramMetadataElement);
         diagramMetadataElement.toBack();
-        diagramMetadataWidth = Math.max(diagramMetadataWidth, calculateWidth(diagramMetadata, elementStyleForDiagramMetadata.fontSize));
+        diagramMetadataWidth = Math.max(diagramMetadataWidth, horizontalPadding + calculateWidth(diagramMetadata, font.name, elementStyleForDiagramMetadata.fontSize));
 
         const padding = 10;
         const titleHeight = calculateHeight(diagramTitle, elementStyleForDiagramTitle.fontSize, 0) + padding;
@@ -3268,20 +3269,14 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         }
     }
 
-    function calculateWidth(text, fontSize) {
+    function calculateWidth(text, fontName, fontSize) {
         if (text) {
             text = text.trim();
 
-            if (text.length === 0) {
-                return 0;
-            } else {
-                var length = 0;
-                text.split('\n').forEach(function(line) {
-                    length = Math.max(length, line.length * (0.6 * fontSize));
-                });
-
-                return length;
-            }
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            context.font = fontSize + 'px ' + fontName;
+            return context.measureText(text).width;
         } else {
             return 0;
         }
@@ -4664,12 +4659,25 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
     function selectElement(cellView) {
         cellView.selected = true;
-        var structurizrBox = $('#' + cellView.el.id + ' .structurizrHighlightableElement');
-        var classes = structurizrBox.attr('class');
-        structurizrBox.attr('class', classes + ' highlightedElement');
+
+        const structurizrBox = $('#' + cellView.el.id + ' .structurizrHighlightableElement');
+        structurizrBox.addClass('highlightedElement');
 
         selectedElements.push(cellView);
+
+        highlightFirstSelectedElement();
+
         fireElementsSelectedEvent();
+    }
+
+    function highlightFirstSelectedElement() {
+        $('.structurizrHighlightableElement').removeClass('firstHighlightedElement');
+
+        if (selectedElements.length > 1) {
+            const firstCellView = selectedElements[0];
+            const structurizrBox = $('#' + firstCellView.el.id + ' .structurizrHighlightableElement');
+            structurizrBox.addClass('firstHighlightedElement');
+        }
     }
 
     this.selectElementsWithName = function(regex) {
@@ -4705,18 +4713,17 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
     function deselectElement(cellView) {
         cellView.selected = false;
-        var structurizrBox = $('#' + cellView.el.id + ' .structurizrHighlightableElement');
-        var classes = structurizrBox.attr('class');
 
-        var highlightedElement = classes.indexOf(' highlightedElement');
-        if (highlightedElement > -1) {
-            structurizrBox.attr('class', classes.substring(0, highlightedElement));
-        }
+        const structurizrBox = $('#' + cellView.el.id + ' .structurizrHighlightableElement');
+        structurizrBox.removeClass('firstHighlightedElement');
+        structurizrBox.removeClass('highlightedElement');
 
         var index = selectedElements.indexOf(cellView);
         if (index > -1) {
             selectedElements.splice(index, 1);
         }
+
+        highlightFirstSelectedElement();
 
         fireElementsSelectedEvent();
     }
@@ -5195,7 +5202,12 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         if (options === undefined) {
             options = {
                 metadata: true,
-                crop: false
+                crop: false,
+                dimensions: true
+            }
+        } else {
+            if (options.dimensions === undefined) {
+                options.dimensions = true;
             }
         }
 
@@ -5237,37 +5249,41 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         $(".structurizrNavigation").attr('display', 'block');
         $(".structurizrMetadata>tspan").attr('display', 'block');
 
-        if (crop) {
-            var contentArea;
-            if (crop === true) {
-                contentArea = findContentArea(true, 50);
-            } else {
-                contentArea = {
-                    minX: 0,
-                    minY: 0,
-                    maxX: diagramWidth,
-                    maxY: diagramHeight
-                }
+        var contentArea;
+        if (crop === true) {
+            contentArea = findContentArea(true, 50);
+        } else {
+            contentArea = {
+                minX: 0,
+                minY: 0,
+                maxX: diagramWidth,
+                maxY: diagramHeight
             }
-
-            width = contentArea.maxX - contentArea.minX;
-            height = contentArea.maxY - contentArea.minY;
-
-            const viewbox = ' viewBox="' + contentArea.minX + " " + contentArea.minY + " " + width + " " + height + '"';
-            const svgOpeningTag = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="' + width +'" height="' + height + '" style="width: ' + width + 'px; height: ' + height + 'px; background: ' + canvasColor + '"' + viewbox + '>';
-
-            // replace opening tag with dimensions (some browsers seem to require this)
-            svgMarkup = svgOpeningTag + svgMarkup.substring(svgMarkup.indexOf('>') + 1, svgMarkup.length);
-
-            // this hides the handles used to change vertices
-            svgMarkup = svgMarkup.replace(/class="marker-vertices"/g, 'class="marker-vertices" display="none"');
-
-            // and remove the &nbsp; added by JointJS (otherwise you get a blank PNG file)
-            svgMarkup = svgMarkup.replace(/&nbsp;/g, ' ');
-
-            // remove any control characters (these shouldn't be there anyway, but...)
-            svgMarkup = svgMarkup.replace(/[\x00-\x19]+/g, "");
         }
+
+        width = contentArea.maxX - contentArea.minX;
+        height = contentArea.maxY - contentArea.minY;
+
+        const viewbox = ' viewBox="' + contentArea.minX + " " + contentArea.minY + " " + width + " " + height + '"';
+        var svgOpeningTag;
+
+        if (options.dimensions) {
+            svgOpeningTag = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="' + width +'" height="' + height + '" style="width: ' + width + 'px; height: ' + height + 'px; background: ' + canvasColor + '"' + viewbox + '>';
+        } else {
+            svgOpeningTag = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="background: ' + canvasColor + '"' + viewbox + '>';
+        }
+
+        // replace opening tag with dimensions (some browsers seem to require this)
+        svgMarkup = svgOpeningTag + svgMarkup.substring(svgMarkup.indexOf('>') + 1, svgMarkup.length);
+
+        // this hides the handles used to change vertices
+        svgMarkup = svgMarkup.replace(/class="marker-vertices"/g, 'class="marker-vertices" display="none"');
+
+        // and remove the &nbsp; added by JointJS (otherwise you get a blank PNG file)
+        svgMarkup = svgMarkup.replace(/&nbsp;/g, ' ');
+
+        // remove any control characters (these shouldn't be there anyway, but...)
+        svgMarkup = svgMarkup.replace(/[\x00-\x19]+/g, "");
 
         const result = {
             markup: svgMarkup,
@@ -5360,6 +5376,109 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             });
         } catch (err) {
             console.log(err);
+        }
+    };
+
+    this.exportViews = function(viewsToExport, options, viewCallback, finishedCallback) {
+        const format = options.format;
+        const includeDiagramAnimations = options.animation;
+
+        const colorScheme = structurizr.ui.isDarkMode() ? '-dark' : '';
+        structurizr.diagram.onViewChanged(undefined);
+
+        if (viewsToExport && viewsToExport.length > 0) {
+            const viewToExport = structurizr.workspace.findViewByKey(viewsToExport[0]);
+
+            structurizr.diagram.changeView(viewToExport.key, function () {
+                if (includeDiagramAnimations === true && !structurizr.diagram.currentViewIsImage() && structurizr.diagram.currentViewHasAnimation()) {
+                    structurizr.diagram.exportCurrentDiagramKey(options, function(diagramKeyContent) {
+
+                        var stepNumber = 1;
+                        structurizr.diagram.startAnimation(false);
+
+                        const f = function () {
+                            structurizr.diagram.exportCurrentDiagram(options, function(diagramContent) {
+
+                                var paddedStepNumber = ("00" + stepNumber);
+                                paddedStepNumber = paddedStepNumber.substr(paddedStepNumber.length-3);
+
+                                const diagramFilename = options.prefix + viewToExport.key + colorScheme + '-' + paddedStepNumber + '.' + format;
+
+                                if (format === 'svg') {
+                                    diagramContent = 'data:image/svg+xml;base64,' + structurizr.util.btoa(diagramContent);
+                                }
+
+                                viewCallback(
+                                    viewToExport,
+                                    { filename: diagramFilename, content: diagramContent },
+                                    undefined
+                                );
+
+                                structurizr.diagram.stepForwardInAnimation();
+                                stepNumber++;
+
+                                if (structurizr.diagram.animationStarted() === false) {
+                                    structurizr.diagram.exportCurrentDiagram(options, function(diagramContent) {
+                                        var paddedStepNumber = ("00" + stepNumber);
+                                        paddedStepNumber = paddedStepNumber.substr(paddedStepNumber.length-3);
+
+                                        const diagramFilename = options.prefix + viewToExport.key + colorScheme + '-' + paddedStepNumber + '.' + format;
+                                        const diagramKeyFilename = options.prefix + viewToExport.key + colorScheme + '-key.' + format;
+
+                                        if (format === 'svg') {
+                                            diagramContent = 'data:image/svg+xml;base64,' + structurizr.util.btoa(diagramContent);
+                                            if (diagramKeyContent !== undefined) {
+                                                diagramKeyContent = 'data:image/svg+xml;base64,' + structurizr.util.btoa(diagramKeyContent);
+                                            }
+                                        }
+
+                                        viewCallback(
+                                            viewToExport,
+                                            { filename: diagramFilename, content: diagramContent },
+                                            { filename: diagramKeyFilename, content: diagramKeyContent }
+                                        );
+
+                                        viewsToExport.splice(0, 1);
+                                        structurizr.diagram.exportViews(viewsToExport, options, viewCallback, finishedCallback);
+                                    });
+                                } else {
+                                    f();
+                                }
+                            });
+                        }
+
+                        f();
+                    });
+                } else {
+                    structurizr.diagram.exportCurrentDiagram(options, function(diagramContent) {
+                        structurizr.diagram.exportCurrentDiagramKey(options, function(diagramKeyContent) {
+                            const diagramFileName = options.prefix + viewToExport.key + colorScheme + '.' + format;
+                            const diagramKeyFilename = options.prefix + viewToExport.key + colorScheme + '-key.' + format;
+
+                            if (format === 'svg') {
+                                diagramContent = 'data:image/svg+xml;base64,' + structurizr.util.btoa(diagramContent);
+                                if (diagramKeyContent !== undefined) {
+                                    diagramKeyContent = 'data:image/svg+xml;base64,' + structurizr.util.btoa(diagramKeyContent);
+                                }
+                            }
+
+                            viewCallback(
+                                viewToExport,
+                                { filename: diagramFileName, content: diagramContent },
+                                { filename: diagramKeyFilename, content: diagramKeyContent }
+                            );
+
+                            viewsToExport.splice(0, 1);
+                            structurizr.diagram.exportViews(viewsToExport, options, viewCallback, finishedCallback);
+                        });
+                    });
+                }
+            });
+        } else {
+            setTimeout(function() {
+                structurizr.diagram.onViewChanged(viewChanged);
+                finishedCallback();
+            }, 1000);
         }
     };
 
@@ -5915,6 +6034,10 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         return selectedElements.length > 0;
     };
 
+    this.hasMultipleElementsSelected = function() {
+        return selectedElements.length > 1;
+    };
+
     this.hasElementHighlighted = function() {
         return highlightedElement !== undefined;
     };
@@ -6092,7 +6215,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         }
     };
 
-    this.alignSelectedElementsVerticalCentre = function() {
+    this.alignSelectedElementsCentre = function() {
         if (this.hasElementsSelected()) {
             addToUndoBuffer(getCurrentElementPositions(selectedElements));
 
@@ -6139,7 +6262,7 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
         }
     };
 
-    this.alignSelectedElementsHorizontalCentre = function() {
+    this.alignSelectedElementsMiddle = function() {
         if (this.hasElementsSelected()) {
             addToUndoBuffer(getCurrentElementPositions(selectedElements));
 
@@ -6305,9 +6428,11 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
             bottom: Math.max(lassoStart.y, lassoEnd.y)
         };
 
+        const elementsLassoed = [];
+
         graph.getElements().forEach(function(cell) {
             if (cell.elementInView && cell.positionCalculated === false) {
-                var elementBoundingBox = cell.getBBox();
+                const elementBoundingBox = cell.getBBox();
                 elementBoundingBox.left = elementBoundingBox.x;
                 elementBoundingBox.top = elementBoundingBox.y;
                 elementBoundingBox.right = elementBoundingBox.left + elementBoundingBox.width;
@@ -6320,9 +6445,26 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
                     lassoBoundingBox.bottom < elementBoundingBox.top) {
                     // do nothing
                 } else {
-                    selectElement(paper.findViewByModel(cell));
+                    elementsLassoed.push(cell);
                 }
             }
+        });
+
+        // sort elements - closest to lasso start point to furthest away from it
+        const lassoPoint = new g.Point(lassoStart.x, lassoStart.y);
+        elementsLassoed.sort(function(a, b) {
+            const centerA = a.getBBox().center();
+            const distanceA = lassoPoint.distance(centerA);
+
+            const centerB = b.getBBox().center();
+            const distanceB = lassoPoint.distance(centerB);
+
+            return distanceA - distanceB;
+        });
+
+        // and select all elements
+        elementsLassoed.forEach(function(cell) {
+            selectElement(paper.findViewByModel(cell));
         });
 
         lassoStart = undefined;
@@ -7002,24 +7144,6 @@ structurizr.ui.Diagram = function(id, diagramIsEditable, constructionCompleteCal
 
     $(document).keypress(function(e) {
         if (self.areKeyboardShortcutsEnabled()) {
-            var plus = 43;
-            var equals = 61;
-            var minus = 45;
-            var comma = 44;
-            var dot = 46;
-            var a = 97;
-            var c = 99;
-            var d = 100;
-            var f = 102;
-            var h = 104;
-            var m = 109;
-            var n = 110;
-            var r = 114;
-            var u = 117;
-            var v = 118;
-            var w = 119;
-
-            // if we got this far, now run the provided handler
             if (onKeyPressEventHandler) {
                 onKeyPressEventHandler(e);
             }
