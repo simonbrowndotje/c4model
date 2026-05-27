@@ -30,7 +30,7 @@ permalink: /diagrams/checklist
 
 ## Relationships
 
-| Does every line have a label describing the intent of that relationship? | Yes | No |
+| Does every arrow have a label describing the intent of that relationship? | Yes | No |
 | Does the description match the relationship direction? | Yes | No |
 | Where applicable, do you understand the technology choices associated with every relationship? (e.g. protocols for inter-process communication) | Yes | No |
 | Do you understand the meaning of all acronyms and abbreviations used? | Yes | No |
