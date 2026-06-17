@@ -26,7 +26,7 @@ The C4 model is an easy to learn, developer friendly approach to software archit
 Recorded at "Agile on the Beach 2019", July 2019
 </td>
 <td width="50%">
-<a href="https://www.oreilly.com/library/view/the-c4-model/9798341660113/"><img src="/images/book.jpg" /></a>
+<a href="https://www.oreilly.com/library/view/the-c4-model/9798341660113/"><img src="/images/book.png" /></a>
 <br />
 <b>The C4 model</b>
 <br />Simon Brown
