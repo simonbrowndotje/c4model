@@ -120,7 +120,8 @@ A model is just data! And we, as software developers, have an endless supply of 
             url: 'https://isoflow.io',
             description: 'Create interactive diagrams. In minutes.',
             logo: 'isoflow.webp',
-            modelling: true
+            modelling: true,
+            boost: true
         },
         {
             name: 'Model',
@@ -165,7 +166,8 @@ A model is just data! And we, as software developers, have an endless supply of 
             source: 'https://github.com/structurizr/structurizr',
             description: 'The original tool designed to support the C4 model - models as code, manual layout, AI friendly.',
             logo: 'structurizr.png',
-            modelling: true
+            modelling: true,
+            boost: true
         },
         {
             name: 'Archinsight',
@@ -259,6 +261,14 @@ A model is just data! And we, as software developers, have an endless supply of 
             description: 'Convert PlantUML C4 or Mermaid C4 text into .drawio diagrams.',
             logo: undefined,
             modelling: false
+        },
+        {
+            name: 'IcePanel',
+            url: 'https://icepanel.io/?utm_source=c4model&utm_medium=website',
+            description: 'Collaborative diagramming and modelling for software architecture. Easy-to-use UI with API/SDK and MCP integrations to automate updating.',
+            logo: undefined,
+            modelling: true,
+            boost: true
         }
     ];
 
@@ -267,8 +277,8 @@ A model is just data! And we, as software developers, have an endless supply of 
     var html = '<table width="100%"><tr><th>Name</th><th>Description</th></tr>';
 
     tools.sort(function(a, b) {
-        const aString = (a.logo ? '_' : '') + a.name;
-        const bString = (b.logo ? '_' : '') + b.name;
+        const aString = (a.boost ? '1' : '2') + (a.logo ? '1' : '2') + a.name;
+        const bString = (b.boost ? '1' : '2') + (b.logo ? '1' : '2') + b.name;
 
         return aString.localeCompare(bString);
     });
