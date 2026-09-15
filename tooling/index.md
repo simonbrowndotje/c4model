@@ -269,6 +269,14 @@ A model is just data! And we, as software developers, have an endless supply of 
             logo: undefined,
             modelling: true,
             boost: true
+        },
+        {
+            name: 'Viaduct Community',
+            url: 'https://github.com/quietgridlabs/viaduct',
+            source: 'https://github.com/quietgridlabs/viaduct',
+            description: 'Local C4 architecture editor with Magic flows, docs & API contracts.',
+            logo: undefined,
+            modelling: true
         }
     ];
 
