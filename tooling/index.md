@@ -277,6 +277,14 @@ A model is just data! And we, as software developers, have an endless supply of 
             description: 'Local C4 architecture editor with Magic flows, docs & API contracts.',
             logo: undefined,
             modelling: true
+        },
+        {
+            name: 'radical.tools',
+            url: 'https://radical.tools/',
+            source: 'https://github.com/radicaltools/radical.tools',
+            description: 'Open-source (MIT) modelling studio for the C4 model. Diagrams, tables and a wiki are views of one model, with ADRs, requirements and fitness functions linked to its elements. It runs in the browser with no account, stores models as Markdown files in git, and imports Structurizr DSL.',
+            logo: undefined,
+            modelling: true
         }
     ];
 
