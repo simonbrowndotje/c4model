@@ -285,6 +285,15 @@ A model is just data! And we, as software developers, have an endless supply of 
             description: 'Open-source (MIT) modelling studio for the C4 model. Diagrams, tables and a wiki are views of one model, with ADRs, requirements and fitness functions linked to its elements. It runs in the browser with no account, stores models as Markdown files in git, and imports Structurizr DSL.',
             logo: undefined,
             modelling: true
+        },
+        {
+            name: 'Lyster',
+            url: 'https://lyster.io/?utm_source=c4model&utm_medium=website',
+            source: undefined,
+            description: 'AI-native enterprise architecture modeling with real-time multiplayer. Connect C4, ArchiMate®, BPMN and more in one version-controlled model with MCP.',
+            logo: undefined,
+            modelling: true,
+            boost: true
         }
     ];
 
