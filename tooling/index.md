@@ -294,6 +294,15 @@ A model is just data! And we, as software developers, have an endless supply of 
             logo: undefined,
             modelling: true,
             boost: true
+        },
+        {
+            name: 'Eraser',
+            url: 'https://www.eraser.io',
+            source: 'https://github.com/eraserlabs/eraser-diagrams',
+            description: 'Architecture harness for teams and agents. Create models and interactive maps from data sources in seconds using AI.',
+            logo: undefined,
+            modelling: false,
+            boost: true
         }
     ];
 
