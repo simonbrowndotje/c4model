@@ -293,6 +293,24 @@ Please [get in touch](mailto:hello@architectis.je?subject=[C4%20model]%20Paid%20
             logo: undefined,
             modelling: false,
             boost: true
+        },
+        {
+            name: 'c4-diagrams',
+            url: 'https://sidorov-as.github.io/c4-diagrams/',
+            source: 'https://github.com/sidorov-as/c4-diagrams',
+            description: 'A Python DSL for defining C4 model architecture diagrams as code.',
+            logo: undefined,
+            modelling: true,
+            boost: false
+        },
+        {
+            name: 'Excalidraw C4 Model for Obsidian',
+            url: 'https://community.obsidian.md/plugins/excalidraw-c-four-model',
+            source: 'https://github.com/Dzoukr/ExcalidrawC4ObsidianPlugin',
+            description: 'Obsidian plugin that adds C4 model diagrams to Excalidraw drawings.',
+            logo: undefined,
+            modelling: false,
+            boost: false
         }
     ];
 
