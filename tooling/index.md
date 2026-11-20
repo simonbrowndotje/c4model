@@ -66,6 +66,7 @@ Please [get in touch](mailto:hello@architectis.je?subject=[C4%20model]%20Paid%20
 <style>
     .toolingLogo {
         max-height: 30px;
+        max-width: 120px;
     }
     .toolingName {
         font-size: 120%;
