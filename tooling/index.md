@@ -29,8 +29,8 @@ For design sessions, you might find a whiteboard or flip chart paper better for 
     <table style="width: 100%">
         <thead>
             <tr>
-                <th style="width: 20%">Name</th>
-                <th style="width: 80%">
+                <th style="width: 25%">Name</th>
+                <th style="width: 75%">
                     Description
                     <span style="font-size: 80%; margin-left: 20px;">
                         <input type="checkbox" id="toolingTypeModellingCheckbox" value="Modelling" checked />
