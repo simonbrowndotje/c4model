@@ -25,13 +25,27 @@ For design sessions, you might find a whiteboard or flip chart paper better for 
 - Short-lived or long-lived documentation?
 - Team only diagramming or enterprise-wide modelling?
 
-## Diagramming
-
-<div id="diagrammingToolsTable"></div>
-
-## Modelling
-
-<div id="modellingToolsTable"></div>
+<div>
+    <table style="width: 100%">
+        <thead>
+            <tr>
+                <th style="width: 20%">Name</th>
+                <th style="width: 80%">
+                    Description
+                    <span style="font-size: 80%; margin-left: 20px;">
+                        <input type="checkbox" id="toolingTypeModellingCheckbox" value="Modelling" checked />
+                        <label for="toolingTypeModelling">Modelling</label>
+                        &nbsp;
+                        <input type="checkbox" id="toolingTypeDiagrammingCheckbox" value="Diagramming" checked />
+                        <label for="toolingTypeDiagramming">Diagramming</label>
+                    </span>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="toolsTableBody">
+        </tbody>
+    </table>
+</div>
 
 ## Tool missing?
 
@@ -41,16 +55,13 @@ Open source tools can be added to this list for free. Please [get in touch](mail
 
 - Name of tool
 - Short description
-- URL
+- Link to source code
+- Website (optional)
 
 ### Paid/closed source tools
 
-Please [get in touch](mailto:hello@architectis.je?subject=[C4%20model]%20Paid%20tooling) with the following information to discuss pricing options to advertise your tool:
+Please [get in touch](mailto:hello@architectis.je?subject=[C4%20model]%20Paid%20tooling) with the following information to discuss pricing options to advertise your tool.
 
-- Name of tool
-- Short description
-- URL
-- Logo
 
 <style>
     .toolingLogo {
@@ -291,55 +302,77 @@ Please [get in touch](mailto:hello@architectis.je?subject=[C4%20model]%20Paid%20
         return aString.localeCompare(bString);
     });
 
-    showTooling(true, 'modellingToolsTable');
-    showTooling(false, 'diagrammingToolsTable');
+    showTooling();
 
-    function showTooling(modelling, toolsTableId) {
-        const toolsTable = document.getElementById(toolsTableId);
+    function showTooling() {
+        const toolsTable = document.getElementById('toolsTableBody');
 
-        var html = '<table width="100%"><tr><th>Name</th><th>Description</th></tr>';
+        var html = '';
 
         tools.forEach(function(tool) {
-            if (tool.modelling === modelling) {
-                html += '<tr class="toolingOption ';
-                html += (tool.modelling ? 'toolingOptionModelling' : 'toolingOptionDiagramming' );
-                html += '"><td><a href="';
+            html += '<tr class="toolingOption ';
+            html += (tool.modelling ? 'toolingOptionModelling' : 'toolingOptionDiagramming' );
+            html += '"><td><a href="';
 
-                if (tool.url) {
-                    html += tool.url;
-                } else if (tool.source) {
-                    html += tool.source;
-                }
-
-                html += '" target="_blank">';
-    
-                if (tool.logo) {
-                    html += '<img src="/tooling/logos/';
-                    html += tool.logo;
-                    html += '" class="toolingLogo" />';
-                } else {
-                    html += '<div class="toolingName">';
-                    html += tool.name;
-                    html += '</div>';
-                }
-
-                html += '</a>';
-        
-                if (tool.source) {
-                    html += '<div class="toolingSource"><a href="';
-                    html += tool.source;
-                    html += '" target="_blank">Source code</a>';
-                    html += '</div>';
-                }
-                
-                html += '</td>';
-                html += '<td>';
-                html += tool.description;
-                html += '</td>';
-                html += '</tr>';
+            if (tool.url) {
+                html += tool.url;
+            } else if (tool.source) {
+                html += tool.source;
             }
+
+            html += '" target="_blank">';
+
+            if (tool.logo) {
+                html += '<img src="/tooling/logos/';
+                html += tool.logo;
+                html += '" class="toolingLogo" />';
+            } else {
+                html += '<div class="toolingName">';
+                html += tool.name;
+                html += '</div>';
+            }
+
+            html += '</a>';
+    
+            if (tool.source) {
+                html += '<div class="toolingSource"><a href="';
+                html += tool.source;
+                html += '" target="_blank">Source code</a>';
+                html += '</div>';
+            }
+            
+            html += '</td>';
+
+            html += '<td>';
+            html += tool.description;
+            html += '</td>';
+            html += '</tr>';
         });
 
-    toolsTable.innerHTML = html;
+        toolsTable.innerHTML = html;
+
+        document.getElementById('toolingTypeModellingCheckbox').addEventListener('change', function() {
+            if (this.checked) {
+                document.querySelectorAll('.toolingOptionModelling').forEach(function(row) {
+                    row.classList.remove('hidden');
+                });
+            } else {
+                document.querySelectorAll('.toolingOptionModelling').forEach(function(row) {
+                    row.classList.add('hidden');
+                });
+            }
+        });   
+
+        document.getElementById('toolingTypeDiagrammingCheckbox').addEventListener('change', function() {
+            if (this.checked) {
+                document.querySelectorAll('.toolingOptionDiagramming').forEach(function(row) {
+                    row.classList.remove('hidden');
+                });
+            } else {
+                document.querySelectorAll('.toolingOptionDiagramming').forEach(function(row) {
+                    row.classList.add('hidden');
+                });
+            }
+        });
    }
 </script>
